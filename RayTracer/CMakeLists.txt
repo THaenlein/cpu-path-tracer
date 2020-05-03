@@ -5,22 +5,26 @@ project("RayTracer")
 
 set(CMAKE_CXX_STANDARD 17) # TODO: Verify version
 set(CMAKE_CXX_FLAGS ${CMAKE_CXX_FLAGS})
+set(SDL2_INCLUDE_DIR ${CMAKE_CURRENT_LIST_DIR}/lib/sdl2/include)
+set(SDL2_DIR ${CMAKE_CURRENT_LIST_DIR}/lib/sdl2)
 enable_testing()
 
 ###############################################################################
 ## Add subdirectories
 INCLUDE("${CMAKE_CURRENT_LIST_DIR}/src/CMakeLists.txt")
-#add_subdirectory(src)
 add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/lib/googletest)
 
 add_library(core ${HEADERFILES} ${SOURCEFILES})
-target_include_directories(core PUBLIC ${HEADERFILES}) # TODO: Check use of list instead of dir is ok. 
+target_include_directories(core PUBLIC ${HEADERFILES}) # TODO: Check use of list instead of dir is ok.
 
+find_package(SDL2 REQUIRED)
+include_directories("${PROJECT_NAME}" ${SDL2_INCLUDE_DIR})
 
 ###############################################################################
 ## Add executable
 add_executable("${PROJECT_NAME}" ${SOURCEFILES})
 target_link_libraries("${PROJECT_NAME}" core)
+target_link_libraries("${PROJECT_NAME}" ${SDL2_LIBRARIES})
 
 ###############################################################################
 ## Add tests
