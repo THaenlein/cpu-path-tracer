@@ -3,6 +3,7 @@
 
 LIST(APPEND HEADERFILES
   "${CMAKE_CURRENT_LIST_DIR}/main.hpp"
+  "${CMAKE_CURRENT_LIST_DIR}/Application.hpp"
 )
 
 ###############################################################################
@@ -10,4 +11,5 @@ LIST(APPEND HEADERFILES
 
 LIST(APPEND SOURCEFILES
   "${CMAKE_CURRENT_LIST_DIR}/main.cpp"
+  "${CMAKE_CURRENT_LIST_DIR}/Application.cpp"
 )
