@@ -6,6 +6,7 @@
 
 /*--------------------------------< Includes >-------------------------------------------*/
 #include <string>
+#include <boost/log/trivial.hpp>
 #include <exception>
 
 #include "exceptions.hpp"
@@ -24,9 +25,29 @@ namespace raytracer
 	public:
 		static ErrorHandler& getInstance();
 
-		void reportCritical(const char* message, const char* additional = "");
+		inline void reportTrace(const char* message, const char* additional = "")
+		{
+			BOOST_LOG_TRIVIAL(trace) << message << " " << additional;
+		}
+
+		inline void reportDebug(const char* message, const char* additional = "")
+		{
+			BOOST_LOG_TRIVIAL(debug) << message << " " << additional;
+		}
+
+		inline void reportInfo(const char* message, const char* additional = "")
+		{
+			BOOST_LOG_TRIVIAL(info) << message << " " << additional;
+		}
+
+		inline void reportWarning(const char* message, const char* additional = "")
+		{
+			BOOST_LOG_TRIVIAL(warning) << message << " " << additional;
+		}
+
+		void reportError(const char* message, const char* additional = "");
 		
-		void reportCritical(const char* message, SdlException& exception);
+		void reportError(SdlException& exception);
 
 	
 	/*--------------------------------< Protected methods >---------------------------------*/

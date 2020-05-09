@@ -5,6 +5,7 @@
 /*--------------------------------< Includes >-------------------------------------------*/
 #include <iostream>
 
+
 #include "ErrorHandler.hpp"
 
 
@@ -24,17 +25,17 @@ namespace raytracer
 		return instance;
 	}
 
-	void ErrorHandler::reportCritical(const char* message, const char* additional)
+	void ErrorHandler::reportError(const char* message, const char* additional)
 	{
 		// TODO: Use boost/log
-		std::cout << message << " " << additional << std::endl;
+		BOOST_LOG_TRIVIAL(error) << message << " " << additional;
 		std::cin.get();
 	}
 
-	void ErrorHandler::reportCritical(const char* message, SdlException& exception)
+	void ErrorHandler::reportError(SdlException& exception)
 	{
 		// TODO: Use boost/log
-		std::cout << exception.what() << " " << exception.getSdlError() << std::endl;
+		BOOST_LOG_TRIVIAL(error) << exception.what() << " " << exception.getSdlError();
 		std::cin.get();
 	}
 		

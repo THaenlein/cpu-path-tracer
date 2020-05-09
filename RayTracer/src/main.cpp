@@ -1,7 +1,7 @@
 #include <iostream>
 #include <memory>
 #include <exception>
-
+//#include <boost/log/trivial.hpp>
 
 //#include "SDL.h"
 
@@ -28,17 +28,17 @@ int main(int argc, char* argv[])
 	}
 	catch(raytracer::SdlException& exception)
 	{
-		raytracer::ErrorHandler::getInstance().reportCritical("Some error message.", exception);
+		raytracer::ErrorHandler::getInstance().reportError(exception);
 		app.cleanUp();
 		return 0;
 	}
 
-	std::cout << "Success. Press Enter to exit SDL..." << std::endl;
+	raytracer::ErrorHandler::getInstance().reportInfo("Success. Press Enter to exit SDL...");
 	std::cin.get();
 
 	app.cleanUp();
 
-	std::cout << "Press Enter to quit..." << std::endl;
+	raytracer::ErrorHandler::getInstance().reportInfo("Press Enter to quit...");
 	std::cin.get();
 
 	return 0;

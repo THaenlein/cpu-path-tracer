@@ -39,7 +39,7 @@ namespace raytracer
 		{
 			throw Initialization(SDL_GetError());
 		}
-		std::cout << "SDL initialized!\n" << std::endl;
+		ErrorHandler::getInstance().reportInfo("SDL initialized!");
 	}
 	
 	void Application::setUpSdl()
@@ -51,7 +51,7 @@ namespace raytracer
 		{
 			throw WindowCreation(SDL_GetError());
 		}
-		std::cout << "Window created!\n" << std::endl;
+		ErrorHandler::getInstance().reportInfo("Window created!");
 	
 		// Create SDL renderer
 		this->sdlRenderer.reset(
@@ -60,7 +60,7 @@ namespace raytracer
 		{
 			throw RendererCreation(SDL_GetError());
 		}
-		std::cout << "Renderer created!\n" << std::endl;
+		ErrorHandler::getInstance().reportInfo("Renderer created!");
 	}
 
 	std::unique_ptr<SDL_Texture, decltype(&SDL_DestroyTexture)> 
@@ -72,7 +72,7 @@ namespace raytracer
 		{
 			throw BitmapLoad(SDL_GetError());
 		}
-		std::cout << "Bitmap laoded!\n" << std::endl;
+		ErrorHandler::getInstance().reportInfo("Bitmap loaded!");
 		
 		// Create texture of bitmap
 		std::unique_ptr<SDL_Texture, decltype(&SDL_DestroyTexture)> texture{
@@ -83,7 +83,7 @@ namespace raytracer
 		{
 			throw TextureCreation(SDL_GetError());
 		}
-		std::cout << "Texture created!\n" << std::endl;
+		ErrorHandler::getInstance().reportInfo("Texture created!");
 
 		return texture;
 	}
