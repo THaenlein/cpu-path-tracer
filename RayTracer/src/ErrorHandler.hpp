@@ -1,16 +1,14 @@
 /*
- * Application.hpp
+ * ErrorHandler.hpp
  */
 
 #pragma once
 
 /*--------------------------------< Includes >-------------------------------------------*/
-#include <iostream>
 #include <string>
-#include <memory>
+#include <exception>
 
-#define SDL_MAIN_HANDLED
-#include "SDL.h"
+#include "exceptions.hpp"
 
 namespace raytracer
 {
@@ -19,31 +17,29 @@ namespace raytracer
 	/*--------------------------------< Typedefs >------------------------------------------*/
 
 	/*--------------------------------< Constants >-----------------------------------------*/
-	
-	class Application
+
+	class ErrorHandler
 	{
 	/*--------------------------------< Public methods >------------------------------------*/
 	public:
-	
-		Application();
-	
-		void initialize();
-	
-		void setUpSdl();
+		static ErrorHandler& getInstance();
 
-		std::unique_ptr<SDL_Texture, decltype(&SDL_DestroyTexture)> 
-			loadTexture(const std::string& filePath);
+		void reportCritical(const char* message, const char* additional = "");
+		
+		void reportCritical(const char* message, SdlException& exception);
 
-		void render(SDL_Texture* texture);
-
-		void cleanUp();
 	
 	/*--------------------------------< Protected methods >---------------------------------*/
 	protected:
 	
 	/*--------------------------------< Private methods >-----------------------------------*/
 	private:
+		ErrorHandler();
 
+		ErrorHandler(ErrorHandler const&) = delete;
+
+		void operator=(ErrorHandler const&) = delete;
+	
 	/*--------------------------------< Public members >------------------------------------*/
 	public:
 	
@@ -52,10 +48,7 @@ namespace raytracer
 	
 	/*--------------------------------< Private members >-----------------------------------*/
 	public:
-		std::unique_ptr<SDL_Window, decltype(&SDL_DestroyWindow)> mainWindow;
-	
-		std::unique_ptr<SDL_Renderer, decltype(&SDL_DestroyRenderer)> sdlRenderer;
-	
+
 	};
 	
 } // end of namespace raytracer

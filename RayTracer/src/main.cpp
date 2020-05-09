@@ -1,28 +1,39 @@
 #include <iostream>
 #include <memory>
+#include <exception>
 
 
 //#include "SDL.h"
 
 #include "main.hpp"
 #include "Application.hpp"
-
-
+#include "exceptions.hpp"
+#include "ErrorHandler.hpp"
 
 int main(int argc, char* argv[])
 {
 	raytracer::Application app;
 
-	app.initialize();
-
-	app.setUpApplication();
-
 	std::string imagePath("F:/Dokumente/GitHub/ray-tracer/RayTracer/res/texture.bmp");
-	std::unique_ptr<SDL_Texture, decltype(&SDL_DestroyTexture)> texture(app.loadTexture(imagePath));
+	std::unique_ptr<SDL_Texture, decltype(&SDL_DestroyTexture)> texture(nullptr, SDL_DestroyTexture);
 
-	app.render(texture.get());
+	try
+	{
+		app.initialize();
+		app.setUpSdl();
 
-	std::cout << "Press Enter to exit SDL..." << std::endl;
+		texture = app.loadTexture(imagePath);
+		
+		app.render(texture.get());
+	}
+	catch(raytracer::SdlException& exception)
+	{
+		raytracer::ErrorHandler::getInstance().reportCritical("Some error message.", exception);
+		app.cleanUp();
+		return 0;
+	}
+
+	std::cout << "Success. Press Enter to exit SDL..." << std::endl;
 	std::cin.get();
 
 	app.cleanUp();
