@@ -6,7 +6,7 @@
 #include "<template>.hpp"
 
 
-namespace Application
+namespace raytracer
 {
 	/*--------------------------------< Defines >--------------------------------------------*/
 
@@ -20,4 +20,4 @@ namespace Application
 		
 	/*--------------------------------< Private members >------------------------------------*/
 	
-} // end of namespace Application
+} // end of namespace raytracer
