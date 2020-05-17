@@ -3,27 +3,24 @@
 #include <exception>
 //#include <boost/log/trivial.hpp>
 
-//#include "SDL.h"
 #include "assimp/Importer.hpp"
 
 #include "main.hpp"
 #include "Application.hpp"
 #include "exceptions.hpp"
 #include "ErrorHandler.hpp"
+#include "RayTracer.hpp"
 
 int main(int argc, char* argv[])
 {
 	raytracer::Application app;
-
-	std::string imagePath("F:/Dokumente/GitHub/ray-tracer/RayTracer/res/texture.bmp");
-	std::unique_ptr<SDL_Texture, decltype(&SDL_DestroyTexture)> texture(nullptr, SDL_DestroyTexture);
+	raytracer::RayTracer rayTracer;
 
 	try
 	{
 		app.initialize();
 		app.setUpSdl();
-
-		texture = app.loadTexture(imagePath);
+		app.createScreenTexture();
 	}
 	catch(raytracer::SdlException& exception)
 	{
@@ -39,9 +36,6 @@ int main(int argc, char* argv[])
 	{
 		while (SDL_PollEvent(&sdlEvent))
 		{
-			// Do something about this
-			//BOOST_LOG_TRIVIAL(debug) << "Event received:" << sdlEvent.type;
-
 			switch (sdlEvent.type)
 			{
 			case SDL_QUIT:
@@ -52,14 +46,23 @@ int main(int argc, char* argv[])
 				switch (sdlEvent.window.event)
 				{
 				case SDL_WINDOWEVENT_MOVED:
-					SDL_SetWindowPosition(app.mainWindow.get(), sdlEvent.window.data1, sdlEvent.window.data2);
+					SDL_SetWindowPosition(app.getWindow(), sdlEvent.window.data1, sdlEvent.window.data2);
 					break;
 				}
 				break;
 			}
 		}
 
-		app.render(texture.get());
+		try
+		{
+			rayTracer.render(app);
+		}
+		catch (raytracer::SdlException& exception)
+		{
+			raytracer::ErrorHandler::getInstance().reportError(exception);
+			app.cleanUp();
+			return 0;
+		}
 	}
 
 	raytracer::ErrorHandler::getInstance().reportInfo("Success. Press Enter to exit SDL...");

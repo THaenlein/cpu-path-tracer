@@ -4,7 +4,7 @@
 
 /*--------------------------------< Includes >-------------------------------------------*/
 #include "Application.hpp"
-#include "exceptions.hpp"
+
 #include "ErrorHandler.hpp"
 
 
@@ -15,15 +15,12 @@ namespace raytracer
 	/*--------------------------------< Typedefs >-------------------------------------------*/
 
 	/*--------------------------------< Constants >------------------------------------------*/
-	
-	static const int WINDOW_DIMENSION_X = 1024;
-
-	static const int WINDOW_DIMENSION_Y = 1024;
 
 	/*--------------------------------< Public members >-------------------------------------*/
 	Application::Application():
 		mainWindow(nullptr, SDL_DestroyWindow),
-		sdlRenderer(nullptr, SDL_DestroyRenderer)
+		sdlRenderer(nullptr, SDL_DestroyRenderer),
+		screenTexture(nullptr, SDL_DestroyTexture)
 	{
 		
 	}
@@ -46,7 +43,7 @@ namespace raytracer
 	{
 		// Create SDL window
 		this->mainWindow.reset(
-			SDL_CreateWindow("RayTracer", 0, 25, WINDOW_DIMENSION_X, WINDOW_DIMENSION_Y, SDL_WINDOW_SHOWN));
+			SDL_CreateWindow("RayTracer", 0, 25, this->WINDOW_DIMENSION_X, this->WINDOW_DIMENSION_Y, SDL_WINDOW_SHOWN));
 		if (!this->mainWindow)
 		{
 			throw WindowCreation(SDL_GetError());
@@ -88,6 +85,18 @@ namespace raytracer
 		return texture;
 	}
 
+	void Application::createScreenTexture()
+	{
+		// Maybe change static flag to streaming in the future
+		this->screenTexture.reset(SDL_CreateTexture(this->sdlRenderer.get(),
+			SDL_PIXELFORMAT_RGB888, SDL_TEXTUREACCESS_STATIC, this->WINDOW_DIMENSION_X, this->WINDOW_DIMENSION_Y));
+		if (!this->screenTexture)
+		{
+			throw TextureCreation(SDL_GetError());
+		}
+		ErrorHandler::getInstance().reportInfo("Screen texture created!");
+	}
+
 	void Application::render(SDL_Texture* texture)
 	{
 		// Draw the texture
@@ -101,6 +110,16 @@ namespace raytracer
 		SDL_DestroyRenderer(this->sdlRenderer.get());
 		SDL_DestroyWindow(this->mainWindow.get());
 		SDL_Quit();
+	}
+
+	void Application::presentRender(Uint24* pixels)
+	{
+		int result = SDL_UpdateTexture(this->screenTexture.get(), NULL, pixels, this->WINDOW_DIMENSION_X * sizeof(Uint24));
+		if (result)
+		{
+			throw TextureUpdate(SDL_GetError());
+		}
+		this->render(this->screenTexture.get());
 	}
 
 	/*--------------------------------< Protected members >----------------------------------*/

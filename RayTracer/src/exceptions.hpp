@@ -117,6 +117,30 @@ namespace raytracer
 		}
 	};
 
+	struct TextureUpdate : public SdlException
+	{
+	public:
+
+		TextureUpdate(const char* message = "") :
+			SdlException(message)
+		{
+
+		}
+
+		const char* what() const throw ()
+		{
+			return "Error on texture update!";
+		}
+	};
+
+// Force packing of struct to avoid padding bytes
+#pragma pack(push, 1)
+	struct Uint24
+	{
+		unsigned int color : 24;
+	};
+#pragma pack(pop)
+
 	/*--------------------------------< Constants >-----------------------------------------*/
 
 	/*--------------------------------< Public methods >------------------------------------*/
