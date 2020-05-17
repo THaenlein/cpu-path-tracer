@@ -1,0 +1,1859 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\Common\Assimp.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\CApi\CInterfaceIOWrapper.cpp">
+      <Filter>CApi</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\Common\BaseImporter.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\Common\BaseProcess.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\Common\PostStepRegistry.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\Common\ImporterRegistry.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\Common\DefaultIOStream.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\Common\DefaultIOSystem.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\Common\ZipArchiveIOSystem.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\Common\Importer.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\Common\SGSpatialSort.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\Common\VertexTriangleAdjacency.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\Common\SpatialSort.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\Common\SceneCombiner.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\Common\ScenePreprocessor.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\Common\SkeletonMeshBuilder.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\Common\SplitByBoneCountProcess.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\Common\StandardShapes.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\Common\TargetAnimation.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\Common\RemoveComments.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\Common\Subdivision.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\Common\scene.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\Common\Bitmap.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\Common\Version.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\Common\CreateAnimMesh.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\Common\simd.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\Common\DefaultLogger.cpp">
+      <Filter>Logging</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\Common\Exporter.cpp">
+      <Filter>Exporter</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\CApi\AssimpCExport.cpp">
+      <Filter>Exporter</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\PostProcessing\CalcTangentsProcess.cpp">
+      <Filter>PostProcessing</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\PostProcessing\ComputeUVMappingProcess.cpp">
+      <Filter>PostProcessing</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\PostProcessing\ConvertToLHProcess.cpp">
+      <Filter>PostProcessing</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\PostProcessing\EmbedTexturesProcess.cpp">
+      <Filter>PostProcessing</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\PostProcessing\FindDegenerates.cpp">
+      <Filter>PostProcessing</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\PostProcessing\FindInstancesProcess.cpp">
+      <Filter>PostProcessing</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\PostProcessing\FindInvalidDataProcess.cpp">
+      <Filter>PostProcessing</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\PostProcessing\FixNormalsStep.cpp">
+      <Filter>PostProcessing</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\PostProcessing\DropFaceNormalsProcess.cpp">
+      <Filter>PostProcessing</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\PostProcessing\GenFaceNormalsProcess.cpp">
+      <Filter>PostProcessing</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\PostProcessing\GenVertexNormalsProcess.cpp">
+      <Filter>PostProcessing</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\PostProcessing\PretransformVertices.cpp">
+      <Filter>PostProcessing</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\PostProcessing\ImproveCacheLocality.cpp">
+      <Filter>PostProcessing</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\PostProcessing\JoinVerticesProcess.cpp">
+      <Filter>PostProcessing</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\PostProcessing\LimitBoneWeightsProcess.cpp">
+      <Filter>PostProcessing</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\PostProcessing\RemoveRedundantMaterials.cpp">
+      <Filter>PostProcessing</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\PostProcessing\RemoveVCProcess.cpp">
+      <Filter>PostProcessing</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\PostProcessing\SortByPTypeProcess.cpp">
+      <Filter>PostProcessing</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\PostProcessing\SplitLargeMeshes.cpp">
+      <Filter>PostProcessing</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\PostProcessing\TextureTransform.cpp">
+      <Filter>PostProcessing</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\PostProcessing\TriangulateProcess.cpp">
+      <Filter>PostProcessing</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\PostProcessing\ValidateDataStructure.cpp">
+      <Filter>PostProcessing</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\PostProcessing\OptimizeGraph.cpp">
+      <Filter>PostProcessing</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\PostProcessing\OptimizeMeshes.cpp">
+      <Filter>PostProcessing</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\PostProcessing\DeboneProcess.cpp">
+      <Filter>PostProcessing</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\PostProcessing\ProcessHelper.cpp">
+      <Filter>PostProcessing</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\PostProcessing\MakeVerboseFormat.cpp">
+      <Filter>PostProcessing</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\PostProcessing\ScaleProcess.cpp">
+      <Filter>PostProcessing</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\PostProcessing\GenBoundingBoxesProcess.cpp">
+      <Filter>PostProcessing</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\Material\MaterialSystem.cpp">
+      <Filter>MaterialSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\Importer\STEPParser\STEPFileReader.cpp">
+      <Filter>STEPParser</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\Importer\STEPParser\STEPFileEncoding.cpp">
+      <Filter>STEPParser</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\AMF\AMFImporter.cpp">
+      <Filter>AMF</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\AMF\AMFImporter_Geometry.cpp">
+      <Filter>AMF</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\AMF\AMFImporter_Material.cpp">
+      <Filter>AMF</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\AMF\AMFImporter_Postprocess.cpp">
+      <Filter>AMF</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\3DS\3DSConverter.cpp">
+      <Filter>3DS</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\3DS\3DSLoader.cpp">
+      <Filter>3DS</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\AC\ACLoader.cpp">
+      <Filter>AC</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\ASE\ASELoader.cpp">
+      <Filter>ASE</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\ASE\ASEParser.cpp">
+      <Filter>ASE</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\Assbin\AssbinLoader.cpp">
+      <Filter>ASSBIN</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\B3D\B3DImporter.cpp">
+      <Filter>B3D</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\BVH\BVHLoader.cpp">
+      <Filter>BVH</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\Collada\ColladaLoader.cpp">
+      <Filter>COLLADA</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\Collada\ColladaParser.cpp">
+      <Filter>COLLADA</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\DXF\DXFLoader.cpp">
+      <Filter>DXF</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\CSM\CSMLoader.cpp">
+      <Filter>CSM</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\HMP\HMPLoader.cpp">
+      <Filter>HMP</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\Irr\IRRMeshLoader.cpp">
+      <Filter>IRRMESH</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\Irr\IRRShared.cpp">
+      <Filter>IRR</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\Irr\IRRLoader.cpp">
+      <Filter>IRR</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\LWO\LWOAnimation.cpp">
+      <Filter>LWO</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\LWO\LWOBLoader.cpp">
+      <Filter>LWO</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\LWO\LWOLoader.cpp">
+      <Filter>LWO</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\LWO\LWOMaterial.cpp">
+      <Filter>LWO</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\LWS\LWSLoader.cpp">
+      <Filter>LWS</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\MD2\MD2Loader.cpp">
+      <Filter>MD2</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\MD3\MD3Loader.cpp">
+      <Filter>MD3</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\MD5\MD5Loader.cpp">
+      <Filter>MD5</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\MD5\MD5Parser.cpp">
+      <Filter>MD5</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\MDC\MDCLoader.cpp">
+      <Filter>MDC</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\MDL\MDLLoader.cpp">
+      <Filter>MDL</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\MDL\MDLMaterialLoader.cpp">
+      <Filter>MDL</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\NFF\NFFLoader.cpp">
+      <Filter>NFF</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\NDO\NDOLoader.cpp">
+      <Filter>NDO</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\OFF\OFFLoader.cpp">
+      <Filter>OFF</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\Obj\ObjFileImporter.cpp">
+      <Filter>OBJ</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\Obj\ObjFileMtlImporter.cpp">
+      <Filter>OBJ</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\Obj\ObjFileParser.cpp">
+      <Filter>OBJ</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\Ogre\OgreImporter.cpp">
+      <Filter>OGRE</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\Ogre\OgreStructs.cpp">
+      <Filter>OGRE</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\Ogre\OgreBinarySerializer.cpp">
+      <Filter>OGRE</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\Ogre\OgreXmlSerializer.cpp">
+      <Filter>OGRE</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\Ogre\OgreMaterial.cpp">
+      <Filter>OGRE</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\OpenGEX\OpenGEXImporter.cpp">
+      <Filter>OPENGEX</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\Ply\PlyLoader.cpp">
+      <Filter>PLY</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\Ply\PlyParser.cpp">
+      <Filter>PLY</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\MS3D\MS3DLoader.cpp">
+      <Filter>MS3D</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\COB\COBLoader.cpp">
+      <Filter>COB</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\Blender\BlenderLoader.cpp">
+      <Filter>BLEND</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\Blender\BlenderDNA.cpp">
+      <Filter>BLEND</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\Blender\BlenderScene.cpp">
+      <Filter>BLEND</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\Blender\BlenderModifier.cpp">
+      <Filter>BLEND</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\Blender\BlenderBMesh.cpp">
+      <Filter>BLEND</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\Blender\BlenderTessellator.cpp">
+      <Filter>BLEND</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\Blender\BlenderCustomData.cpp">
+      <Filter>BLEND</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\Importer\IFC\IFCLoader.cpp">
+      <Filter>IFC</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\Importer\IFC\IFCReaderGen1_2x3.cpp">
+      <Filter>IFC</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\Importer\IFC\IFCReaderGen2_2x3.cpp">
+      <Filter>IFC</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\Importer\IFC\IFCUtil.cpp">
+      <Filter>IFC</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\Importer\IFC\IFCGeometry.cpp">
+      <Filter>IFC</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\Importer\IFC\IFCMaterial.cpp">
+      <Filter>IFC</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\Importer\IFC\IFCProfile.cpp">
+      <Filter>IFC</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\Importer\IFC\IFCCurve.cpp">
+      <Filter>IFC</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\Importer\IFC\IFCBoolean.cpp">
+      <Filter>IFC</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\Importer\IFC\IFCOpenings.cpp">
+      <Filter>IFC</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\XGL\XGLLoader.cpp">
+      <Filter>XGL</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\FBX\FBXImporter.cpp">
+      <Filter>FBX</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\FBX\FBXParser.cpp">
+      <Filter>FBX</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\FBX\FBXTokenizer.cpp">
+      <Filter>FBX</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\FBX\FBXConverter.cpp">
+      <Filter>FBX</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\FBX\FBXUtil.cpp">
+      <Filter>FBX</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\FBX\FBXDocument.cpp">
+      <Filter>FBX</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\FBX\FBXProperties.cpp">
+      <Filter>FBX</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\FBX\FBXMeshGeometry.cpp">
+      <Filter>FBX</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\FBX\FBXMaterial.cpp">
+      <Filter>FBX</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\FBX\FBXModel.cpp">
+      <Filter>FBX</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\FBX\FBXAnimation.cpp">
+      <Filter>FBX</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\FBX\FBXNodeAttribute.cpp">
+      <Filter>FBX</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\FBX\FBXDeformer.cpp">
+      <Filter>FBX</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\FBX\FBXBinaryTokenizer.cpp">
+      <Filter>FBX</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\FBX\FBXDocumentUtil.cpp">
+      <Filter>FBX</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\Q3D\Q3DLoader.cpp">
+      <Filter>Q3D</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\Q3BSP\Q3BSPFileParser.cpp">
+      <Filter>Q3BSP</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\Q3BSP\Q3BSPFileImporter.cpp">
+      <Filter>Q3BSP</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\Raw\RawLoader.cpp">
+      <Filter>RAW</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\SIB\SIBImporter.cpp">
+      <Filter>SIB</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\SMD\SMDLoader.cpp">
+      <Filter>SMD</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\STL\STLLoader.cpp">
+      <Filter>STL</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\Terragen\TerragenLoader.cpp">
+      <Filter>TERRAGEN</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\Unreal\UnrealLoader.cpp">
+      <Filter>3D</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\X\XFileImporter.cpp">
+      <Filter>X</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\X\XFileParser.cpp">
+      <Filter>X</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\X3D\X3DImporter.cpp">
+      <Filter>X3D</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\X3D\X3DImporter_Geometry2D.cpp">
+      <Filter>X3D</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\X3D\X3DImporter_Geometry3D.cpp">
+      <Filter>X3D</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\X3D\X3DImporter_Group.cpp">
+      <Filter>X3D</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\X3D\X3DImporter_Light.cpp">
+      <Filter>X3D</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\X3D\X3DImporter_Metadata.cpp">
+      <Filter>X3D</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\X3D\X3DImporter_Networking.cpp">
+      <Filter>X3D</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\X3D\X3DImporter_Postprocess.cpp">
+      <Filter>X3D</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\X3D\X3DImporter_Rendering.cpp">
+      <Filter>X3D</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\X3D\X3DImporter_Shape.cpp">
+      <Filter>X3D</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\X3D\X3DImporter_Texturing.cpp">
+      <Filter>X3D</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\X3D\FIReader.cpp">
+      <Filter>X3D</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\X3D\X3DVocabulary.cpp">
+      <Filter>X3D</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\glTF\glTFCommon.cpp">
+      <Filter>GLTF</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\glTF\glTFImporter.cpp">
+      <Filter>GLTF</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\glTF2\glTF2Importer.cpp">
+      <Filter>GLTF</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\3MF\D3MFImporter.cpp">
+      <Filter>3MF</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\3MF\D3MFOpcPackage.cpp">
+      <Filter>3MF</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\MMD\MMDImporter.cpp">
+      <Filter>MMD</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\MMD\MMDPmxParser.cpp">
+      <Filter>MMD</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\Importer\StepFile\StepFileImporter.cpp">
+      <Filter>STEP</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\Importer\StepFile\StepFileGen1.cpp">
+      <Filter>STEP</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\Importer\StepFile\StepFileGen2.cpp">
+      <Filter>STEP</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\Importer\StepFile\StepFileGen3.cpp">
+      <Filter>STEP</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\3DS\3DSExporter.cpp">
+      <Filter>3DS_EXPORTER</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\Assbin\AssbinExporter.cpp">
+      <Filter>ASSBIN_EXPORTER</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\Assxml\AssxmlExporter.cpp">
+      <Filter>ASSXML_EXPORTER</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\Collada\ColladaExporter.cpp">
+      <Filter>COLLADA_EXPORTER</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\Obj\ObjExporter.cpp">
+      <Filter>OBJ_EXPORTER</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\OpenGEX\OpenGEXExporter.cpp">
+      <Filter>OPENGEX_EXPORTER</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\Ply\PlyExporter.cpp">
+      <Filter>PLY_EXPORTER</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\FBX\FBXExporter.cpp">
+      <Filter>FBX_EXPORTER</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\FBX\FBXExportNode.cpp">
+      <Filter>FBX_EXPORTER</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\FBX\FBXExportProperty.cpp">
+      <Filter>FBX_EXPORTER</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\STL\STLExporter.cpp">
+      <Filter>STL_EXPORTER</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\X\XFileExporter.cpp">
+      <Filter>X_EXPORTER</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\X3D\X3DExporter.cpp">
+      <Filter>X3D_EXPORTER</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\glTF\glTFExporter.cpp">
+      <Filter>GLTF_EXPORTER</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\glTF2\glTF2Exporter.cpp">
+      <Filter>GLTF_EXPORTER</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\3MF\D3MFExporter.cpp">
+      <Filter>3MF_EXPORTER</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\Assjson\cencode.c">
+      <Filter>ASSJSON_EXPORTER</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\Assjson\json_exporter.cpp">
+      <Filter>ASSJSON_EXPORTER</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\Assjson\mesh_splitter.cpp">
+      <Filter>ASSJSON_EXPORTER</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\Step\StepExporter.cpp">
+      <Filter>STEP_EXPORTER</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\contrib\unzip\ioapi.c">
+      <Filter>Contrib\unzip</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\contrib\unzip\unzip.c">
+      <Filter>Contrib\unzip</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\contrib\poly2tri\poly2tri\common\shapes.cc">
+      <Filter>Contrib\Poly2Tri</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\contrib\poly2tri\poly2tri\sweep\advancing_front.cc">
+      <Filter>Contrib\Poly2Tri</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\contrib\poly2tri\poly2tri\sweep\cdt.cc">
+      <Filter>Contrib\Poly2Tri</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\contrib\poly2tri\poly2tri\sweep\sweep.cc">
+      <Filter>Contrib\Poly2Tri</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\contrib\poly2tri\poly2tri\sweep\sweep_context.cc">
+      <Filter>Contrib\Poly2Tri</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\contrib\clipper\clipper.cpp">
+      <Filter>Contrib\Clipper</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\contrib\openddlparser\code\OpenDDLParser.cpp">
+      <Filter>Contrib\openddl_parser</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\contrib\openddlparser\code\DDLNode.cpp">
+      <Filter>Contrib\openddl_parser</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\contrib\openddlparser\code\OpenDDLCommon.cpp">
+      <Filter>Contrib\openddl_parser</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\contrib\openddlparser\code\OpenDDLExport.cpp">
+      <Filter>Contrib\openddl_parser</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\contrib\openddlparser\code\Value.cpp">
+      <Filter>Contrib\openddl_parser</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\contrib\openddlparser\code\OpenDDLStream.cpp">
+      <Filter>Contrib\openddl_parser</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\contrib\Open3DGC\o3dgcArithmeticCodec.cpp">
+      <Filter>Contrib\open3dgc</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\contrib\Open3DGC\o3dgcDynamicVectorDecoder.cpp">
+      <Filter>Contrib\open3dgc</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\contrib\Open3DGC\o3dgcDynamicVectorEncoder.cpp">
+      <Filter>Contrib\open3dgc</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\contrib\Open3DGC\o3dgcTools.cpp">
+      <Filter>Contrib\open3dgc</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\contrib\Open3DGC\o3dgcTriangleFans.cpp">
+      <Filter>Contrib\open3dgc</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\contrib\zip\src\zip.c">
+      <Filter>ziplib</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\CApi\CInterfaceIOWrapper.h">
+      <Filter>CApi</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\Common\BaseProcess.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\Common\Importer.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\Common\ScenePrivate.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\Common\DefaultProgressHandler.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\Common\PolyTools.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\Common\IFF.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\Common\VertexTriangleAdjacency.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\Common\ScenePreprocessor.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\Common\SplitByBoneCountProcess.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\Common\TargetAnimation.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\Common\simd.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\include\assimp\DefaultLogger.hpp">
+      <Filter>Logging</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\include\assimp\LogStream.hpp">
+      <Filter>Logging</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\include\assimp\Logger.hpp">
+      <Filter>Logging</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\include\assimp\NullLogger.hpp">
+      <Filter>Logging</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\Common\Win32DebugLogStream.h">
+      <Filter>Logging</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\Common\FileLogStream.h">
+      <Filter>Logging</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\Common\StdOStreamLogStream.h">
+      <Filter>Logging</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\include\assimp\BlobIOSystem.h">
+      <Filter>Exporter</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\PostProcessing\CalcTangentsProcess.h">
+      <Filter>PostProcessing</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\PostProcessing\ComputeUVMappingProcess.h">
+      <Filter>PostProcessing</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\PostProcessing\ConvertToLHProcess.h">
+      <Filter>PostProcessing</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\PostProcessing\EmbedTexturesProcess.h">
+      <Filter>PostProcessing</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\PostProcessing\FindDegenerates.h">
+      <Filter>PostProcessing</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\PostProcessing\FindInstancesProcess.h">
+      <Filter>PostProcessing</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\PostProcessing\FindInvalidDataProcess.h">
+      <Filter>PostProcessing</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\PostProcessing\FixNormalsStep.h">
+      <Filter>PostProcessing</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\PostProcessing\DropFaceNormalsProcess.h">
+      <Filter>PostProcessing</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\PostProcessing\GenFaceNormalsProcess.h">
+      <Filter>PostProcessing</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\PostProcessing\GenVertexNormalsProcess.h">
+      <Filter>PostProcessing</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\PostProcessing\PretransformVertices.h">
+      <Filter>PostProcessing</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\PostProcessing\ImproveCacheLocality.h">
+      <Filter>PostProcessing</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\PostProcessing\JoinVerticesProcess.h">
+      <Filter>PostProcessing</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\PostProcessing\LimitBoneWeightsProcess.h">
+      <Filter>PostProcessing</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\PostProcessing\RemoveRedundantMaterials.h">
+      <Filter>PostProcessing</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\PostProcessing\RemoveVCProcess.h">
+      <Filter>PostProcessing</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\PostProcessing\SortByPTypeProcess.h">
+      <Filter>PostProcessing</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\PostProcessing\SplitLargeMeshes.h">
+      <Filter>PostProcessing</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\PostProcessing\TextureTransform.h">
+      <Filter>PostProcessing</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\PostProcessing\TriangulateProcess.h">
+      <Filter>PostProcessing</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\PostProcessing\ValidateDataStructure.h">
+      <Filter>PostProcessing</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\PostProcessing\OptimizeGraph.h">
+      <Filter>PostProcessing</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\PostProcessing\OptimizeMeshes.h">
+      <Filter>PostProcessing</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\PostProcessing\DeboneProcess.h">
+      <Filter>PostProcessing</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\PostProcessing\ProcessHelper.h">
+      <Filter>PostProcessing</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\PostProcessing\MakeVerboseFormat.h">
+      <Filter>PostProcessing</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\PostProcessing\ScaleProcess.h">
+      <Filter>PostProcessing</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\PostProcessing\GenBoundingBoxesProcess.h">
+      <Filter>PostProcessing</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\Material\MaterialSystem.h">
+      <Filter>MaterialSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\Importer\STEPParser\STEPFileReader.h">
+      <Filter>STEPParser</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\Importer\STEPParser\STEPFileEncoding.h">
+      <Filter>STEPParser</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\AMF\AMFImporter.hpp">
+      <Filter>AMF</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\AMF\AMFImporter_Macro.hpp">
+      <Filter>AMF</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\AMF\AMFImporter_Node.hpp">
+      <Filter>AMF</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\3DS\3DSHelper.h">
+      <Filter>3DS</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\3DS\3DSLoader.h">
+      <Filter>3DS</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\AC\ACLoader.h">
+      <Filter>AC</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\ASE\ASELoader.h">
+      <Filter>ASE</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\ASE\ASEParser.h">
+      <Filter>ASE</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\Assbin\AssbinLoader.h">
+      <Filter>ASSBIN</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\B3D\B3DImporter.h">
+      <Filter>B3D</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\BVH\BVHLoader.h">
+      <Filter>BVH</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\Collada\ColladaHelper.h">
+      <Filter>COLLADA</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\Collada\ColladaLoader.h">
+      <Filter>COLLADA</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\Collada\ColladaParser.h">
+      <Filter>COLLADA</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\DXF\DXFLoader.h">
+      <Filter>DXF</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\DXF\DXFHelper.h">
+      <Filter>DXF</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\CSM\CSMLoader.h">
+      <Filter>CSM</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\HMP\HMPFileData.h">
+      <Filter>HMP</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\HMP\HMPLoader.h">
+      <Filter>HMP</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\HMP\HalfLifeFileData.h">
+      <Filter>HMP</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\Irr\IRRMeshLoader.h">
+      <Filter>IRRMESH</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\Irr\IRRShared.h">
+      <Filter>IRR</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\Irr\IRRLoader.h">
+      <Filter>IRR</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\LWO\LWOAnimation.h">
+      <Filter>LWO</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\LWO\LWOFileData.h">
+      <Filter>LWO</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\LWO\LWOLoader.h">
+      <Filter>LWO</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\LWS\LWSLoader.h">
+      <Filter>LWS</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\MD2\MD2FileData.h">
+      <Filter>MD2</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\MD2\MD2Loader.h">
+      <Filter>MD2</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\MD2\MD2NormalTable.h">
+      <Filter>MD2</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\MD3\MD3FileData.h">
+      <Filter>MD3</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\MD3\MD3Loader.h">
+      <Filter>MD3</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\MD5\MD5Loader.h">
+      <Filter>MD5</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\MD5\MD5Parser.h">
+      <Filter>MD5</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\MDC\MDCFileData.h">
+      <Filter>MDC</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\MDC\MDCLoader.h">
+      <Filter>MDC</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\MDC\MDCNormalTable.h">
+      <Filter>MDC</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\MDL\MDLDefaultColorMap.h">
+      <Filter>MDL</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\MDL\MDLFileData.h">
+      <Filter>MDL</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\MDL\MDLLoader.h">
+      <Filter>MDL</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\NFF\NFFLoader.h">
+      <Filter>NFF</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\NDO\NDOLoader.h">
+      <Filter>NDO</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\OFF\OFFLoader.h">
+      <Filter>OFF</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\Obj\ObjFileData.h">
+      <Filter>OBJ</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\Obj\ObjFileImporter.h">
+      <Filter>OBJ</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\Obj\ObjFileMtlImporter.h">
+      <Filter>OBJ</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\Obj\ObjFileParser.h">
+      <Filter>OBJ</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\Obj\ObjTools.h">
+      <Filter>OBJ</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\Ogre\OgreImporter.h">
+      <Filter>OGRE</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\Ogre\OgreStructs.h">
+      <Filter>OGRE</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\Ogre\OgreParsingUtils.h">
+      <Filter>OGRE</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\Ogre\OgreBinarySerializer.h">
+      <Filter>OGRE</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\Ogre\OgreXmlSerializer.h">
+      <Filter>OGRE</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\OpenGEX\OpenGEXImporter.h">
+      <Filter>OPENGEX</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\OpenGEX\OpenGEXStructs.h">
+      <Filter>OPENGEX</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\Ply\PlyLoader.h">
+      <Filter>PLY</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\Ply\PlyParser.h">
+      <Filter>PLY</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\MS3D\MS3DLoader.h">
+      <Filter>MS3D</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\COB\COBLoader.h">
+      <Filter>COB</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\COB\COBScene.h">
+      <Filter>COB</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\Blender\BlenderLoader.h">
+      <Filter>BLEND</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\Blender\BlenderDNA.h">
+      <Filter>BLEND</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\Blender\BlenderDNA.inl">
+      <Filter>BLEND</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\Blender\BlenderScene.h">
+      <Filter>BLEND</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\Blender\BlenderSceneGen.h">
+      <Filter>BLEND</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\Blender\BlenderIntermediate.h">
+      <Filter>BLEND</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\Blender\BlenderModifier.h">
+      <Filter>BLEND</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\Blender\BlenderBMesh.h">
+      <Filter>BLEND</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\Blender\BlenderTessellator.h">
+      <Filter>BLEND</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\Blender\BlenderCustomData.h">
+      <Filter>BLEND</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\Importer\IFC\IFCLoader.h">
+      <Filter>IFC</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\Importer\IFC\IFCReaderGen_2x3.h">
+      <Filter>IFC</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\Importer\IFC\IFCUtil.h">
+      <Filter>IFC</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\XGL\XGLLoader.h">
+      <Filter>XGL</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\FBX\FBXCompileConfig.h">
+      <Filter>FBX</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\FBX\FBXImporter.h">
+      <Filter>FBX</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\FBX\FBXParser.h">
+      <Filter>FBX</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\FBX\FBXTokenizer.h">
+      <Filter>FBX</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\FBX\FBXImportSettings.h">
+      <Filter>FBX</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\FBX\FBXConverter.h">
+      <Filter>FBX</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\FBX\FBXUtil.h">
+      <Filter>FBX</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\FBX\FBXDocument.h">
+      <Filter>FBX</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\FBX\FBXProperties.h">
+      <Filter>FBX</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\FBX\FBXMeshGeometry.h">
+      <Filter>FBX</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\FBX\FBXCommon.h">
+      <Filter>FBX</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\Q3D\Q3DLoader.h">
+      <Filter>Q3D</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\Q3BSP\Q3BSPFileData.h">
+      <Filter>Q3BSP</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\Q3BSP\Q3BSPFileParser.h">
+      <Filter>Q3BSP</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\Q3BSP\Q3BSPFileImporter.h">
+      <Filter>Q3BSP</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\Raw\RawLoader.h">
+      <Filter>RAW</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\SIB\SIBImporter.h">
+      <Filter>SIB</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\SMD\SMDLoader.h">
+      <Filter>SMD</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\STL\STLLoader.h">
+      <Filter>STL</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\Terragen\TerragenLoader.h">
+      <Filter>TERRAGEN</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\Unreal\UnrealLoader.h">
+      <Filter>3D</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\X\XFileHelper.h">
+      <Filter>X</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\X\XFileImporter.h">
+      <Filter>X</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\X\XFileParser.h">
+      <Filter>X</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\X3D\X3DImporter.hpp">
+      <Filter>X3D</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\X3D\X3DImporter_Macro.hpp">
+      <Filter>X3D</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\X3D\X3DImporter_Node.hpp">
+      <Filter>X3D</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\X3D\FIReader.hpp">
+      <Filter>X3D</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\glTF\glTFCommon.h">
+      <Filter>GLTF</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\glTF\glTFAsset.h">
+      <Filter>GLTF</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\glTF\glTFAsset.inl">
+      <Filter>GLTF</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\glTF\glTFAssetWriter.h">
+      <Filter>GLTF</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\glTF\glTFAssetWriter.inl">
+      <Filter>GLTF</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\glTF\glTFImporter.h">
+      <Filter>GLTF</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\glTF2\glTF2Asset.h">
+      <Filter>GLTF</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\glTF2\glTF2Asset.inl">
+      <Filter>GLTF</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\glTF2\glTF2AssetWriter.h">
+      <Filter>GLTF</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\glTF2\glTF2AssetWriter.inl">
+      <Filter>GLTF</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\glTF2\glTF2Importer.h">
+      <Filter>GLTF</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\3MF\D3MFImporter.h">
+      <Filter>3MF</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\3MF\D3MFOpcPackage.h">
+      <Filter>3MF</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\3MF\3MFXmlTags.h">
+      <Filter>3MF</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\MMD\MMDCpp14.h">
+      <Filter>MMD</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\MMD\MMDImporter.h">
+      <Filter>MMD</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\MMD\MMDPmdParser.h">
+      <Filter>MMD</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\MMD\MMDPmxParser.h">
+      <Filter>MMD</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\MMD\MMDVmdParser.h">
+      <Filter>MMD</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\Step\STEPFile.h">
+      <Filter>STEP</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\Importer\StepFile\StepFileImporter.h">
+      <Filter>STEP</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\Importer\StepFile\StepReaderGen.h">
+      <Filter>STEP</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\3DS\3DSExporter.h">
+      <Filter>3DS_EXPORTER</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\Assbin\AssbinExporter.h">
+      <Filter>ASSBIN_EXPORTER</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\Assxml\AssxmlExporter.h">
+      <Filter>ASSXML_EXPORTER</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\Collada\ColladaExporter.h">
+      <Filter>COLLADA_EXPORTER</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\Obj\ObjExporter.h">
+      <Filter>OBJ_EXPORTER</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\OpenGEX\OpenGEXExporter.h">
+      <Filter>OPENGEX_EXPORTER</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\Ply\PlyExporter.h">
+      <Filter>PLY_EXPORTER</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\FBX\FBXExporter.h">
+      <Filter>FBX_EXPORTER</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\FBX\FBXExportNode.h">
+      <Filter>FBX_EXPORTER</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\FBX\FBXExportProperty.h">
+      <Filter>FBX_EXPORTER</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\STL\STLExporter.h">
+      <Filter>STL_EXPORTER</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\X\XFileExporter.h">
+      <Filter>X_EXPORTER</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\X3D\X3DExporter.hpp">
+      <Filter>X3D_EXPORTER</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\glTF\glTFExporter.h">
+      <Filter>GLTF_EXPORTER</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\glTF2\glTF2Exporter.h">
+      <Filter>GLTF_EXPORTER</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\3MF\D3MFExporter.h">
+      <Filter>3MF_EXPORTER</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\Assjson\cencode.h">
+      <Filter>ASSJSON_EXPORTER</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\Assjson\mesh_splitter.h">
+      <Filter>ASSJSON_EXPORTER</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\Step\StepExporter.h">
+      <Filter>STEP_EXPORTER</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\include\assimp\irrXMLWrapper.h">
+      <Filter>IrrXML</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\contrib\unzip\crypt.h">
+      <Filter>Contrib\unzip</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\contrib\unzip\ioapi.h">
+      <Filter>Contrib\unzip</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\contrib\unzip\unzip.h">
+      <Filter>Contrib\unzip</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\contrib\poly2tri\poly2tri\common\shapes.h">
+      <Filter>Contrib\Poly2Tri</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\contrib\poly2tri\poly2tri\common\utils.h">
+      <Filter>Contrib\Poly2Tri</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\contrib\poly2tri\poly2tri\sweep\advancing_front.h">
+      <Filter>Contrib\Poly2Tri</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\contrib\poly2tri\poly2tri\sweep\cdt.h">
+      <Filter>Contrib\Poly2Tri</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\contrib\poly2tri\poly2tri\sweep\sweep.h">
+      <Filter>Contrib\Poly2Tri</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\contrib\poly2tri\poly2tri\sweep\sweep_context.h">
+      <Filter>Contrib\Poly2Tri</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\contrib\clipper\clipper.hpp">
+      <Filter>Contrib\Clipper</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\contrib\openddlparser\include\openddlparser\OpenDDLParser.h">
+      <Filter>Contrib\openddl_parser</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\contrib\openddlparser\include\openddlparser\OpenDDLParserUtils.h">
+      <Filter>Contrib\openddl_parser</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\contrib\openddlparser\include\openddlparser\OpenDDLCommon.h">
+      <Filter>Contrib\openddl_parser</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\contrib\openddlparser\include\openddlparser\OpenDDLExport.h">
+      <Filter>Contrib\openddl_parser</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\contrib\openddlparser\include\openddlparser\OpenDDLStream.h">
+      <Filter>Contrib\openddl_parser</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\contrib\openddlparser\include\openddlparser\DDLNode.h">
+      <Filter>Contrib\openddl_parser</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\contrib\openddlparser\include\openddlparser\Value.h">
+      <Filter>Contrib\openddl_parser</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\contrib\Open3DGC\o3dgcAdjacencyInfo.h">
+      <Filter>Contrib\open3dgc</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\contrib\Open3DGC\o3dgcArithmeticCodec.h">
+      <Filter>Contrib\open3dgc</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\contrib\Open3DGC\o3dgcBinaryStream.h">
+      <Filter>Contrib\open3dgc</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\contrib\Open3DGC\o3dgcCommon.h">
+      <Filter>Contrib\open3dgc</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\contrib\Open3DGC\o3dgcDVEncodeParams.h">
+      <Filter>Contrib\open3dgc</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\contrib\Open3DGC\o3dgcDynamicVectorDecoder.h">
+      <Filter>Contrib\open3dgc</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\contrib\Open3DGC\o3dgcDynamicVectorEncoder.h">
+      <Filter>Contrib\open3dgc</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\contrib\Open3DGC\o3dgcDynamicVector.h">
+      <Filter>Contrib\open3dgc</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\contrib\Open3DGC\o3dgcFIFO.h">
+      <Filter>Contrib\open3dgc</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\contrib\Open3DGC\o3dgcIndexedFaceSet.h">
+      <Filter>Contrib\open3dgc</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\contrib\Open3DGC\o3dgcIndexedFaceSet.inl">
+      <Filter>Contrib\open3dgc</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\contrib\Open3DGC\o3dgcSC3DMCDecoder.h">
+      <Filter>Contrib\open3dgc</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\contrib\Open3DGC\o3dgcSC3DMCDecoder.inl">
+      <Filter>Contrib\open3dgc</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\contrib\Open3DGC\o3dgcSC3DMCEncodeParams.h">
+      <Filter>Contrib\open3dgc</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\contrib\Open3DGC\o3dgcSC3DMCEncoder.h">
+      <Filter>Contrib\open3dgc</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\contrib\Open3DGC\o3dgcSC3DMCEncoder.inl">
+      <Filter>Contrib\open3dgc</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\contrib\Open3DGC\o3dgcTimer.h">
+      <Filter>Contrib\open3dgc</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\contrib\Open3DGC\o3dgcTriangleFans.h">
+      <Filter>Contrib\open3dgc</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\contrib\Open3DGC\o3dgcTriangleListDecoder.h">
+      <Filter>Contrib\open3dgc</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\contrib\Open3DGC\o3dgcTriangleListDecoder.inl">
+      <Filter>Contrib\open3dgc</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\contrib\Open3DGC\o3dgcTriangleListEncoder.h">
+      <Filter>Contrib\open3dgc</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\contrib\Open3DGC\o3dgcTriangleListEncoder.inl">
+      <Filter>Contrib\open3dgc</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\contrib\Open3DGC\o3dgcVector.h">
+      <Filter>Contrib\open3dgc</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\contrib\Open3DGC\o3dgcVector.inl">
+      <Filter>Contrib\open3dgc</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\contrib\zip\src\miniz.h">
+      <Filter>ziplib</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\contrib\zip\src\zip.h">
+      <Filter>ziplib</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\include\assimp\anim.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\include\assimp\aabb.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\include\assimp\ai_assert.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\include\assimp\camera.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\include\assimp\color4.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\include\assimp\color4.inl">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\BINARIES\Win32\include\assimp\config.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\include\assimp\defs.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\include\assimp\Defines.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\include\assimp\cfileio.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\include\assimp\light.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\include\assimp\material.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\include\assimp\material.inl">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\include\assimp\matrix3x3.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\include\assimp\matrix3x3.inl">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\include\assimp\matrix4x4.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\include\assimp\matrix4x4.inl">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\include\assimp\mesh.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\include\assimp\pbrmaterial.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\include\assimp\postprocess.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\include\assimp\quaternion.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\include\assimp\quaternion.inl">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\include\assimp\scene.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\include\assimp\metadata.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\include\assimp\texture.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\include\assimp\types.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\include\assimp\vector2.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\include\assimp\vector2.inl">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\include\assimp\vector3.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\include\assimp\vector3.inl">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\include\assimp\version.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\include\assimp\cimport.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\include\assimp\importerdesc.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\include\assimp\Importer.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\include\assimp\ProgressHandler.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\include\assimp\IOStream.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\include\assimp\IOSystem.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\include\assimp\cexport.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\include\assimp\Exporter.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\include\assimp\DefaultIOStream.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\include\assimp\DefaultIOSystem.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\include\assimp\ZipArchiveIOSystem.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\include\assimp\SceneCombiner.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\include\assimp\fast_atof.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\include\assimp\qnan.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\include\assimp\BaseImporter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\include\assimp\Hash.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\include\assimp\MemoryIOWrapper.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\include\assimp\ParsingUtils.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\include\assimp\StreamReader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\include\assimp\StreamWriter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\include\assimp\StringComparison.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\include\assimp\StringUtils.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\include\assimp\SGSpatialSort.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\include\assimp\GenericProperty.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\include\assimp\SpatialSort.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\include\assimp\SkeletonMeshBuilder.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\include\assimp\SmoothingGroups.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\include\assimp\SmoothingGroups.inl">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\include\assimp\StandardShapes.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\include\assimp\RemoveComments.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\include\assimp\Subdivision.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\include\assimp\Vertex.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\include\assimp\LineSplitter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\include\assimp\TinyFormatter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\include\assimp\Profiler.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\include\assimp\LogAux.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\include\assimp\Bitmap.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\include\assimp\XMLTools.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\include\assimp\IOStreamBuffer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\include\assimp\CreateAnimMesh.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\include\assimp\MathFunctions.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\include\assimp\Macros.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\include\assimp\Exceptional.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\include\assimp\ByteSwapper.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\include\assimp\Compiler\pushpack1.h">
+      <Filter>Compiler</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\include\assimp\Compiler\poppack1.h">
+      <Filter>Compiler</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\include\assimp\Compiler\pstdint.h">
+      <Filter>Compiler</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\code\res\assimp.rc">
+      <Filter>Source Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="3D">
+      <UniqueIdentifier>{5647BF38-AA55-3D87-B187-B1CF6CE06267}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="3DS">
+      <UniqueIdentifier>{13DAAB95-B5C1-3108-B0A0-882668653183}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="3DS_EXPORTER">
+      <UniqueIdentifier>{0AFB9547-9576-3058-B389-8E353BBB3C2E}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="3MF">
+      <UniqueIdentifier>{2162A783-F365-3E55-B3CC-E5B8A9744EDE}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="3MF_EXPORTER">
+      <UniqueIdentifier>{00AE0236-02CA-3413-801B-EDA7E79C7F44}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="AC">
+      <UniqueIdentifier>{EC143FA8-A429-3325-808F-8E5777DAE644}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="AMF">
+      <UniqueIdentifier>{EB7C49C5-5EB7-338C-A666-B62BE0B4BE08}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ASE">
+      <UniqueIdentifier>{4E542AC5-1531-313E-8969-31FA3889FA8A}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ASSBIN">
+      <UniqueIdentifier>{03510E01-3D55-3C4C-BCB4-E7BBCBC3EF5F}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ASSBIN_EXPORTER">
+      <UniqueIdentifier>{9F3DB099-8B27-3445-8429-24026950337A}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ASSJSON_EXPORTER">
+      <UniqueIdentifier>{66C1926A-555E-3294-85D1-427CA1E046F1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ASSXML_EXPORTER">
+      <UniqueIdentifier>{99038A75-B21E-3EF0-8884-37533A630957}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="B3D">
+      <UniqueIdentifier>{BD08D163-9CA4-3703-B017-08A4B0E22136}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="BLEND">
+      <UniqueIdentifier>{ADC18457-568E-3F62-A5DC-5D581E134E87}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="BVH">
+      <UniqueIdentifier>{D91EC5D3-CF7F-37A4-92B9-F2E8EA9A6E0C}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CApi">
+      <UniqueIdentifier>{A4A8B365-9BF8-324C-8B09-313564A4F75C}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="COB">
+      <UniqueIdentifier>{1831D9F4-D06E-3CD6-9DF5-EE118CE75A68}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="COLLADA">
+      <UniqueIdentifier>{11A3CA1C-D3AA-3DAD-948F-892676E68D4C}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="COLLADA_EXPORTER">
+      <UniqueIdentifier>{3669DF3A-F1AC-3FFE-85BB-1FF899BFF164}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CSM">
+      <UniqueIdentifier>{9B0790CD-FB1A-3F4F-A1B4-8AE23F790102}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Common">
+      <UniqueIdentifier>{D71834EF-B6CB-3E08-87C7-3C149A9FE537}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Compiler">
+      <UniqueIdentifier>{8BCFDF10-B889-315A-AA07-69E62F57235F}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contrib">
+      <UniqueIdentifier>{30D6BCE4-1420-3096-BE6A-EC9E061C249B}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contrib\Clipper">
+      <UniqueIdentifier>{EA24FB38-06EF-3E69-A866-CA38D529DE26}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contrib\Poly2Tri">
+      <UniqueIdentifier>{A847A83A-244B-3B7A-890A-B7944F91737C}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contrib\open3dgc">
+      <UniqueIdentifier>{00CDA55D-01B3-3FBB-AC9B-3FA61D7B3810}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contrib\openddl_parser">
+      <UniqueIdentifier>{D0D6BB39-181B-3919-8827-34504358FAE8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contrib\unzip">
+      <UniqueIdentifier>{44E70F9D-AD01-3CC1-A738-74E6514E82E3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DXF">
+      <UniqueIdentifier>{8FF29F92-C02A-35D5-9960-A1D6412D43B1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Exporter">
+      <UniqueIdentifier>{66A0BC44-1AD5-353C-AF04-636F48716978}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FBX">
+      <UniqueIdentifier>{A6169467-7C5D-364B-9BD3-99BCAFE425E1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FBX_EXPORTER">
+      <UniqueIdentifier>{531B0408-49CC-31A6-A3EE-FC6AF625C774}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GLTF">
+      <UniqueIdentifier>{496F6D36-243B-355E-94E7-46070E36652C}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GLTF_EXPORTER">
+      <UniqueIdentifier>{72660CD8-059B-3D53-B6C3-2CB360581A19}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="HMP">
+      <UniqueIdentifier>{A84BCDF7-FE34-33F7-995A-7F324E9DB7E8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{D29A6725-AE28-38E2-A9F0-5A048B4531BE}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="IFC">
+      <UniqueIdentifier>{02664BD7-47A8-34BA-8A3B-92DB068B1DD1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="IRR">
+      <UniqueIdentifier>{8DDF1C28-3134-382A-8DD4-DBF35FE8BE4A}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="IRRMESH">
+      <UniqueIdentifier>{32864D89-1C63-313A-BFA5-9EBD61522526}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="IrrXML">
+      <UniqueIdentifier>{56F8ED7B-AE0A-3B03-B19E-2DACF06B1735}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="LWO">
+      <UniqueIdentifier>{CC2768F7-85BC-3FA8-B1EE-092F93E9E19F}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="LWS">
+      <UniqueIdentifier>{BB7D99A3-C3D0-3228-837A-ACDB4F22C92D}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Logging">
+      <UniqueIdentifier>{217BCA52-A5F9-34F1-89BA-91FB8DBEDB05}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MD2">
+      <UniqueIdentifier>{5A9F70C2-4D0E-3671-AA6E-1E1091AD07B1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MD3">
+      <UniqueIdentifier>{B7964D4B-FCD5-3743-8F6C-5DE4F29BB260}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MD5">
+      <UniqueIdentifier>{B97A67E1-31D4-32C1-B32C-EBA960DBD25C}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MDC">
+      <UniqueIdentifier>{89FCF300-EE11-3C48-8AC8-86F1ADCC152C}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MDL">
+      <UniqueIdentifier>{9065354A-E24C-3ED5-8157-C5E604D04A6C}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MMD">
+      <UniqueIdentifier>{EB146D87-FD5E-3A79-8DD9-33C42D85B166}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MS3D">
+      <UniqueIdentifier>{7D97047F-1D4D-3557-9590-9B64DC034707}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MaterialSystem">
+      <UniqueIdentifier>{8C8A9139-203C-3DFF-A7C7-CB26203F4577}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="NDO">
+      <UniqueIdentifier>{6E8F5BDE-BA3D-38AD-AB39-FC43201ABF86}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="NFF">
+      <UniqueIdentifier>{1F055CC5-9F70-3D63-BE1D-D19FC554EAAD}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="OBJ">
+      <UniqueIdentifier>{D414BC10-7051-3F3C-8A5B-A666CD7E720C}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="OBJ_EXPORTER">
+      <UniqueIdentifier>{A40C273E-4DA0-3FA2-BF1C-B5814F08212C}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="OFF">
+      <UniqueIdentifier>{B3FAEEEB-09BD-3B1B-B8CE-92AC76C5580E}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="OGRE">
+      <UniqueIdentifier>{7C4A5BE0-D6E5-3453-AC63-F7A865CFF145}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="OPENGEX">
+      <UniqueIdentifier>{6BB245CC-2150-3E9E-9F5B-6DC9D5F6C59E}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="OPENGEX_EXPORTER">
+      <UniqueIdentifier>{3FEE926C-1E7A-3D65-AF70-5225612E94DB}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="PLY">
+      <UniqueIdentifier>{B5E41BDE-64E8-3E10-8B18-78EAA65C0687}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="PLY_EXPORTER">
+      <UniqueIdentifier>{85C8A328-20EB-3564-A293-6950FAE172DF}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="PostProcessing">
+      <UniqueIdentifier>{88601ED2-EB67-39E2-AA80-EAB3BF5F042E}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Q3BSP">
+      <UniqueIdentifier>{478BB9B0-6F06-3854-AF4F-87ED412AE529}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Q3D">
+      <UniqueIdentifier>{312EDCBE-AF4B-38E7-A73A-674B3D6A895E}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="RAW">
+      <UniqueIdentifier>{7941F57F-DFCC-34A5-A248-824F0BA3EA80}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SIB">
+      <UniqueIdentifier>{991CD3E4-01C7-387F-9E6A-2C65E90ADD76}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SMD">
+      <UniqueIdentifier>{D3C51E56-87CB-36C9-95B1-02A9D0C976BF}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="STEP">
+      <UniqueIdentifier>{9C45988B-C35E-337D-8837-0748ABC72992}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="STEPParser">
+      <UniqueIdentifier>{4F541E89-A24E-3533-B706-F5E3D776992A}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="STEP_EXPORTER">
+      <UniqueIdentifier>{FE6F1C50-6C80-38BF-8DDC-5197D5B05EC6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="STL">
+      <UniqueIdentifier>{D282E337-3516-390B-B2A5-D18C8DD6ED42}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="STL_EXPORTER">
+      <UniqueIdentifier>{5B129112-D648-328B-B270-986445DD3143}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{859A30A6-636A-3129-8634-0165968ACC85}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TERRAGEN">
+      <UniqueIdentifier>{54EE0969-77CD-3492-AB65-B2128D39C2E3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="X">
+      <UniqueIdentifier>{3521E7F4-37FD-375D-93DD-DB63EB04C2B5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="X3D">
+      <UniqueIdentifier>{D301157A-4F75-32DD-B85B-0FBAC89ACAF0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="X3D_EXPORTER">
+      <UniqueIdentifier>{00E8864F-85A3-3EA6-9C13-55B7232F53B4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="XGL">
+      <UniqueIdentifier>{BD193F82-E2BC-350E-A169-E54699C1FF74}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="X_EXPORTER">
+      <UniqueIdentifier>{8AC8CB44-2F6F-341E-A92F-9FD6FD33AEF5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ziplib">
+      <UniqueIdentifier>{02B0A5B4-4C39-3287-991E-F13AA5BFBF3D}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\contrib\irrXML\irrXML.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\contrib\irrXML\CXMLReaderImpl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\contrib\irrXML\heapsort.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\contrib\irrXML\irrArray.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\contrib\irrXML\irrString.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\contrib\irrXML\irrTypes.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\contrib\irrXML\irrXML.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\contrib\irrXML\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{D29A6725-AE28-38E2-A9F0-5A048B4531BE}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{859A30A6-636A-3129-8634-0165968ACC85}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

@@ -4,6 +4,7 @@
 //#include <boost/log/trivial.hpp>
 
 //#include "SDL.h"
+#include "assimp/Importer.hpp"
 
 #include "main.hpp"
 #include "Application.hpp"

@@ -1,0 +1,2074 @@
+Info,  T4908: Load daedae
+Debug, T4908: Assimp 5.0.2455634966 amd64 msvc shared singlethreaded
+Debug, T4908: Found positive match for header keyword: <collada
+Info,  T4908: Found a matching importer for this file format: Collada Importer.
+Info,  T4908: Import root directory is '.\'
+Debug, T4908: Collada schema version is 1.4.n
+Debug, T4908: UpdateImporterScale scale set: %f1
+Debug, T4908: ValidateDataStructureProcess begin
+Debug, T4908: ValidateDataStructureProcess end
+Debug, T4908: START `t1`
+Debug, T4908: END   `t1`, dt= 9.86e-05 s
+Info,  T4908: Load F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/LWS/move_x.lws
+Debug, T4908: Assimp 5.0.2455634966 amd64 msvc shared singlethreaded
+Info,  T4908: Found a matching importer for this file format: LightWave Scene Importer.
+Info,  T4908: Import root directory is 'F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/LWS\'
+Debug, T4908: LWS: Skipping over plugin-specific data
+Skipping one or more lines with the same contents
+Info,  T4908: LWS file format version is 5
+Info,  T4908: %%% BEGIN EXTERNAL FILE %%%
+Info,  T4908: File: simple_cube.lwo
+Info,  T4908: Load simple_cube.lwo
+Debug, T4908: Assimp 5.0.2455634966 amd64 msvc shared singlethreaded
+Info,  T4908: Found a matching importer for this file format: LightWave/Modo Object Importer.
+Info,  T4908: Import root directory is '.\'
+Info,  T4908: LWO file format: LWO2 (>= LightWave 6)
+Debug, T4908: MakeLeftHandedProcess begin
+Debug, T4908: MakeLeftHandedProcess finished
+Debug, T4908: FlipWindingOrderProcess begin
+Debug, T4908: FlipWindingOrderProcess finished
+Debug, T4908: UpdateImporterScale scale set: %f1
+Info,  T4908: %%% END EXTERNAL FILE %%%
+Debug, T4908: MakeLeftHandedProcess begin
+Debug, T4908: MakeLeftHandedProcess finished
+Debug, T4908: FlipWindingOrderProcess begin
+Debug, T4908: FlipWindingOrderProcess finished
+Debug, T4908: UpdateImporterScale scale set: %f1
+Debug, T4908: ValidateDataStructureProcess begin
+Debug, T4908: ValidateDataStructureProcess end
+Debug, T4908: ScenePreprocessor: Dummy rotation track has been generated
+Debug, T4908: ScenePreprocessor: Dummy scaling track has been generated
+Info,  T4908: Load F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/LWS/move_x_post_linear.lws
+Debug, T4908: Assimp 5.0.2455634966 amd64 msvc shared singlethreaded
+Info,  T4908: Found a matching importer for this file format: LightWave Scene Importer.
+Info,  T4908: Import root directory is 'F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/LWS\'
+Debug, T4908: LWS: Skipping over plugin-specific data
+Skipping one or more lines with the same contents
+Info,  T4908: LWS file format version is 5
+Info,  T4908: %%% BEGIN EXTERNAL FILE %%%
+Info,  T4908: File: simple_cube.lwo
+Info,  T4908: Load simple_cube.lwo
+Debug, T4908: Assimp 5.0.2455634966 amd64 msvc shared singlethreaded
+Info,  T4908: Found a matching importer for this file format: LightWave/Modo Object Importer.
+Info,  T4908: Import root directory is '.\'
+Info,  T4908: LWO file format: LWO2 (>= LightWave 6)
+Debug, T4908: MakeLeftHandedProcess begin
+Debug, T4908: MakeLeftHandedProcess finished
+Debug, T4908: FlipWindingOrderProcess begin
+Debug, T4908: FlipWindingOrderProcess finished
+Debug, T4908: UpdateImporterScale scale set: %f1
+Info,  T4908: %%% END EXTERNAL FILE %%%
+Debug, T4908: MakeLeftHandedProcess begin
+Debug, T4908: MakeLeftHandedProcess finished
+Debug, T4908: FlipWindingOrderProcess begin
+Debug, T4908: FlipWindingOrderProcess finished
+Debug, T4908: UpdateImporterScale scale set: %f1
+Debug, T4908: ValidateDataStructureProcess begin
+Debug, T4908: ValidateDataStructureProcess end
+Debug, T4908: ScenePreprocessor: Dummy rotation track has been generated
+Debug, T4908: ScenePreprocessor: Dummy scaling track has been generated
+Info,  T4908: Load F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/LWS/move_xz_bezier.lws
+Debug, T4908: Assimp 5.0.2455634966 amd64 msvc shared singlethreaded
+Info,  T4908: Found a matching importer for this file format: LightWave Scene Importer.
+Info,  T4908: Import root directory is 'F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/LWS\'
+Debug, T4908: LWS: Skipping over plugin-specific data
+Skipping one or more lines with the same contents
+Info,  T4908: LWS file format version is 5
+Info,  T4908: %%% BEGIN EXTERNAL FILE %%%
+Info,  T4908: File: simple_cube.lwo
+Info,  T4908: Load simple_cube.lwo
+Debug, T4908: Assimp 5.0.2455634966 amd64 msvc shared singlethreaded
+Info,  T4908: Found a matching importer for this file format: LightWave/Modo Object Importer.
+Info,  T4908: Import root directory is '.\'
+Info,  T4908: LWO file format: LWO2 (>= LightWave 6)
+Debug, T4908: MakeLeftHandedProcess begin
+Debug, T4908: MakeLeftHandedProcess finished
+Debug, T4908: FlipWindingOrderProcess begin
+Debug, T4908: FlipWindingOrderProcess finished
+Debug, T4908: UpdateImporterScale scale set: %f1
+Info,  T4908: %%% END EXTERNAL FILE %%%
+Debug, T4908: MakeLeftHandedProcess begin
+Debug, T4908: MakeLeftHandedProcess finished
+Debug, T4908: FlipWindingOrderProcess begin
+Debug, T4908: FlipWindingOrderProcess finished
+Debug, T4908: UpdateImporterScale scale set: %f1
+Debug, T4908: ValidateDataStructureProcess begin
+Debug, T4908: ValidateDataStructureProcess end
+Debug, T4908: ScenePreprocessor: Dummy rotation track has been generated
+Debug, T4908: ScenePreprocessor: Dummy scaling track has been generated
+Info,  T4908: Load F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/LWS/move_xz_stepped.lws
+Debug, T4908: Assimp 5.0.2455634966 amd64 msvc shared singlethreaded
+Info,  T4908: Found a matching importer for this file format: LightWave Scene Importer.
+Info,  T4908: Import root directory is 'F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/LWS\'
+Debug, T4908: LWS: Skipping over plugin-specific data
+Skipping one or more lines with the same contents
+Info,  T4908: LWS file format version is 5
+Info,  T4908: %%% BEGIN EXTERNAL FILE %%%
+Info,  T4908: File: simple_cube.lwo
+Info,  T4908: Load simple_cube.lwo
+Debug, T4908: Assimp 5.0.2455634966 amd64 msvc shared singlethreaded
+Info,  T4908: Found a matching importer for this file format: LightWave/Modo Object Importer.
+Info,  T4908: Import root directory is '.\'
+Info,  T4908: LWO file format: LWO2 (>= LightWave 6)
+Debug, T4908: MakeLeftHandedProcess begin
+Debug, T4908: MakeLeftHandedProcess finished
+Debug, T4908: FlipWindingOrderProcess begin
+Debug, T4908: FlipWindingOrderProcess finished
+Debug, T4908: UpdateImporterScale scale set: %f1
+Info,  T4908: %%% END EXTERNAL FILE %%%
+Debug, T4908: MakeLeftHandedProcess begin
+Debug, T4908: MakeLeftHandedProcess finished
+Debug, T4908: FlipWindingOrderProcess begin
+Debug, T4908: FlipWindingOrderProcess finished
+Debug, T4908: UpdateImporterScale scale set: %f1
+Debug, T4908: ValidateDataStructureProcess begin
+Debug, T4908: ValidateDataStructureProcess end
+Debug, T4908: ScenePreprocessor: Dummy rotation track has been generated
+Debug, T4908: ScenePreprocessor: Dummy scaling track has been generated
+Info,  T4908: Load F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/LWS/move_x_oldformat_56.lws
+Debug, T4908: Assimp 5.0.2455634966 amd64 msvc shared singlethreaded
+Info,  T4908: Found a matching importer for this file format: LightWave Scene Importer.
+Info,  T4908: Import root directory is 'F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/LWS\'
+Debug, T4908: LWS: Skipping over plugin-specific data
+Skipping one or more lines with the same contents
+Info,  T4908: LWS file format version is 2
+Info,  T4908: %%% BEGIN EXTERNAL FILE %%%
+Info,  T4908: File: simple_cube.lwo
+Info,  T4908: Load simple_cube.lwo
+Debug, T4908: Assimp 5.0.2455634966 amd64 msvc shared singlethreaded
+Info,  T4908: Found a matching importer for this file format: LightWave/Modo Object Importer.
+Info,  T4908: Import root directory is '.\'
+Info,  T4908: LWO file format: LWO2 (>= LightWave 6)
+Debug, T4908: MakeLeftHandedProcess begin
+Debug, T4908: MakeLeftHandedProcess finished
+Debug, T4908: FlipWindingOrderProcess begin
+Debug, T4908: FlipWindingOrderProcess finished
+Debug, T4908: UpdateImporterScale scale set: %f1
+Info,  T4908: %%% END EXTERNAL FILE %%%
+Debug, T4908: MakeLeftHandedProcess begin
+Debug, T4908: MakeLeftHandedProcess finished
+Debug, T4908: FlipWindingOrderProcess begin
+Debug, T4908: FlipWindingOrderProcess finished
+Debug, T4908: UpdateImporterScale scale set: %f1
+Debug, T4908: ValidateDataStructureProcess begin
+Debug, T4908: ValidateDataStructureProcess end
+Debug, T4908: ScenePreprocessor: Dummy rotation track has been generated
+Debug, T4908: ScenePreprocessor: Dummy scaling track has been generated
+Info,  T4908: Load F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/LWS/move_x_post_offset_repeat.lws
+Debug, T4908: Assimp 5.0.2455634966 amd64 msvc shared singlethreaded
+Info,  T4908: Found a matching importer for this file format: LightWave Scene Importer.
+Info,  T4908: Import root directory is 'F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/LWS\'
+Debug, T4908: LWS: Skipping over plugin-specific data
+Skipping one or more lines with the same contents
+Info,  T4908: LWS file format version is 5
+Info,  T4908: %%% BEGIN EXTERNAL FILE %%%
+Info,  T4908: File: simple_cube.lwo
+Info,  T4908: Load simple_cube.lwo
+Debug, T4908: Assimp 5.0.2455634966 amd64 msvc shared singlethreaded
+Info,  T4908: Found a matching importer for this file format: LightWave/Modo Object Importer.
+Info,  T4908: Import root directory is '.\'
+Info,  T4908: LWO file format: LWO2 (>= LightWave 6)
+Debug, T4908: MakeLeftHandedProcess begin
+Debug, T4908: MakeLeftHandedProcess finished
+Debug, T4908: FlipWindingOrderProcess begin
+Debug, T4908: FlipWindingOrderProcess finished
+Debug, T4908: UpdateImporterScale scale set: %f1
+Info,  T4908: %%% END EXTERNAL FILE %%%
+Debug, T4908: MakeLeftHandedProcess begin
+Debug, T4908: MakeLeftHandedProcess finished
+Debug, T4908: FlipWindingOrderProcess begin
+Debug, T4908: FlipWindingOrderProcess finished
+Debug, T4908: UpdateImporterScale scale set: %f1
+Debug, T4908: ValidateDataStructureProcess begin
+Debug, T4908: ValidateDataStructureProcess end
+Debug, T4908: ScenePreprocessor: Dummy rotation track has been generated
+Debug, T4908: ScenePreprocessor: Dummy scaling track has been generated
+Info,  T4908: Load F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/LWS/move_xz_hermite.lws
+Debug, T4908: Assimp 5.0.2455634966 amd64 msvc shared singlethreaded
+Info,  T4908: Found a matching importer for this file format: LightWave Scene Importer.
+Info,  T4908: Import root directory is 'F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/LWS\'
+Debug, T4908: LWS: Skipping over plugin-specific data
+Skipping one or more lines with the same contents
+Info,  T4908: LWS file format version is 5
+Info,  T4908: %%% BEGIN EXTERNAL FILE %%%
+Info,  T4908: File: simple_cube.lwo
+Info,  T4908: Load simple_cube.lwo
+Debug, T4908: Assimp 5.0.2455634966 amd64 msvc shared singlethreaded
+Info,  T4908: Found a matching importer for this file format: LightWave/Modo Object Importer.
+Info,  T4908: Import root directory is '.\'
+Info,  T4908: LWO file format: LWO2 (>= LightWave 6)
+Debug, T4908: MakeLeftHandedProcess begin
+Debug, T4908: MakeLeftHandedProcess finished
+Debug, T4908: FlipWindingOrderProcess begin
+Debug, T4908: FlipWindingOrderProcess finished
+Debug, T4908: UpdateImporterScale scale set: %f1
+Info,  T4908: %%% END EXTERNAL FILE %%%
+Debug, T4908: MakeLeftHandedProcess begin
+Debug, T4908: MakeLeftHandedProcess finished
+Debug, T4908: FlipWindingOrderProcess begin
+Debug, T4908: FlipWindingOrderProcess finished
+Debug, T4908: UpdateImporterScale scale set: %f1
+Debug, T4908: ValidateDataStructureProcess begin
+Debug, T4908: ValidateDataStructureProcess end
+Debug, T4908: ScenePreprocessor: Dummy rotation track has been generated
+Debug, T4908: ScenePreprocessor: Dummy scaling track has been generated
+Info,  T4908: Load F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/LWS/move_y_pre_ofrep_post_osc.lws
+Debug, T4908: Assimp 5.0.2455634966 amd64 msvc shared singlethreaded
+Info,  T4908: Found a matching importer for this file format: LightWave Scene Importer.
+Info,  T4908: Import root directory is 'F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/LWS\'
+Debug, T4908: LWS: Skipping over plugin-specific data
+Skipping one or more lines with the same contents
+Info,  T4908: LWS file format version is 5
+Info,  T4908: %%% BEGIN EXTERNAL FILE %%%
+Info,  T4908: File: simple_cube.lwo
+Info,  T4908: Load simple_cube.lwo
+Debug, T4908: Assimp 5.0.2455634966 amd64 msvc shared singlethreaded
+Info,  T4908: Found a matching importer for this file format: LightWave/Modo Object Importer.
+Info,  T4908: Import root directory is '.\'
+Info,  T4908: LWO file format: LWO2 (>= LightWave 6)
+Debug, T4908: MakeLeftHandedProcess begin
+Debug, T4908: MakeLeftHandedProcess finished
+Debug, T4908: FlipWindingOrderProcess begin
+Debug, T4908: FlipWindingOrderProcess finished
+Debug, T4908: UpdateImporterScale scale set: %f1
+Info,  T4908: %%% END EXTERNAL FILE %%%
+Debug, T4908: MakeLeftHandedProcess begin
+Debug, T4908: MakeLeftHandedProcess finished
+Debug, T4908: FlipWindingOrderProcess begin
+Debug, T4908: FlipWindingOrderProcess finished
+Debug, T4908: UpdateImporterScale scale set: %f1
+Debug, T4908: ValidateDataStructureProcess begin
+Warn,  T4908: Validation warning: aiNodeAnim::mPositionKeys[1].mTime (-71.00000) is smaller than aiAnimation::mPositionKeys[0] (which is 1.00000)
+Warn,  T4908: Validation warning: aiNodeAnim::mPositionKeys[5].mTime (-20.00000) is smaller than aiAnimation::mPositionKeys[4] (which is 1.00000)
+Debug, T4908: ValidateDataStructureProcess end
+Info,  T4908: Load F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/LWS/move_x_oldformat_6.lws
+Debug, T4908: Assimp 5.0.2455634966 amd64 msvc shared singlethreaded
+Info,  T4908: Found a matching importer for this file format: LightWave Scene Importer.
+Info,  T4908: Import root directory is 'F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/LWS\'
+Debug, T4908: LWS: Skipping over plugin-specific data
+Skipping one or more lines with the same contents
+Info,  T4908: LWS file format version is 3
+Info,  T4908: %%% BEGIN EXTERNAL FILE %%%
+Info,  T4908: File: simple_cube.lwo
+Info,  T4908: Load simple_cube.lwo
+Debug, T4908: Assimp 5.0.2455634966 amd64 msvc shared singlethreaded
+Info,  T4908: Found a matching importer for this file format: LightWave/Modo Object Importer.
+Info,  T4908: Import root directory is '.\'
+Info,  T4908: LWO file format: LWO2 (>= LightWave 6)
+Debug, T4908: MakeLeftHandedProcess begin
+Debug, T4908: MakeLeftHandedProcess finished
+Debug, T4908: FlipWindingOrderProcess begin
+Debug, T4908: FlipWindingOrderProcess finished
+Debug, T4908: UpdateImporterScale scale set: %f1
+Info,  T4908: %%% END EXTERNAL FILE %%%
+Debug, T4908: MakeLeftHandedProcess begin
+Debug, T4908: MakeLeftHandedProcess finished
+Debug, T4908: FlipWindingOrderProcess begin
+Debug, T4908: FlipWindingOrderProcess finished
+Debug, T4908: UpdateImporterScale scale set: %f1
+Debug, T4908: ValidateDataStructureProcess begin
+Debug, T4908: ValidateDataStructureProcess end
+Debug, T4908: ScenePreprocessor: Dummy rotation track has been generated
+Debug, T4908: ScenePreprocessor: Dummy scaling track has been generated
+Info,  T4908: Load F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/LWS/move_x_post_repeat.lws
+Debug, T4908: Assimp 5.0.2455634966 amd64 msvc shared singlethreaded
+Info,  T4908: Found a matching importer for this file format: LightWave Scene Importer.
+Info,  T4908: Import root directory is 'F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/LWS\'
+Debug, T4908: LWS: Skipping over plugin-specific data
+Skipping one or more lines with the same contents
+Info,  T4908: LWS file format version is 5
+Info,  T4908: %%% BEGIN EXTERNAL FILE %%%
+Info,  T4908: File: simple_cube.lwo
+Info,  T4908: Load simple_cube.lwo
+Debug, T4908: Assimp 5.0.2455634966 amd64 msvc shared singlethreaded
+Info,  T4908: Found a matching importer for this file format: LightWave/Modo Object Importer.
+Info,  T4908: Import root directory is '.\'
+Info,  T4908: LWO file format: LWO2 (>= LightWave 6)
+Debug, T4908: MakeLeftHandedProcess begin
+Debug, T4908: MakeLeftHandedProcess finished
+Debug, T4908: FlipWindingOrderProcess begin
+Debug, T4908: FlipWindingOrderProcess finished
+Debug, T4908: UpdateImporterScale scale set: %f1
+Info,  T4908: %%% END EXTERNAL FILE %%%
+Debug, T4908: MakeLeftHandedProcess begin
+Debug, T4908: MakeLeftHandedProcess finished
+Debug, T4908: FlipWindingOrderProcess begin
+Debug, T4908: FlipWindingOrderProcess finished
+Debug, T4908: UpdateImporterScale scale set: %f1
+Debug, T4908: ValidateDataStructureProcess begin
+Debug, T4908: ValidateDataStructureProcess end
+Debug, T4908: ScenePreprocessor: Dummy rotation track has been generated
+Debug, T4908: ScenePreprocessor: Dummy scaling track has been generated
+Info,  T4908: Load F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/LWS/move_xz_linear.lws
+Debug, T4908: Assimp 5.0.2455634966 amd64 msvc shared singlethreaded
+Info,  T4908: Found a matching importer for this file format: LightWave Scene Importer.
+Info,  T4908: Import root directory is 'F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/LWS\'
+Debug, T4908: LWS: Skipping over plugin-specific data
+Skipping one or more lines with the same contents
+Info,  T4908: LWS file format version is 5
+Info,  T4908: %%% BEGIN EXTERNAL FILE %%%
+Info,  T4908: File: simple_cube.lwo
+Info,  T4908: Load simple_cube.lwo
+Debug, T4908: Assimp 5.0.2455634966 amd64 msvc shared singlethreaded
+Info,  T4908: Found a matching importer for this file format: LightWave/Modo Object Importer.
+Info,  T4908: Import root directory is '.\'
+Info,  T4908: LWO file format: LWO2 (>= LightWave 6)
+Debug, T4908: MakeLeftHandedProcess begin
+Debug, T4908: MakeLeftHandedProcess finished
+Debug, T4908: FlipWindingOrderProcess begin
+Debug, T4908: FlipWindingOrderProcess finished
+Debug, T4908: UpdateImporterScale scale set: %f1
+Info,  T4908: %%% END EXTERNAL FILE %%%
+Debug, T4908: MakeLeftHandedProcess begin
+Debug, T4908: MakeLeftHandedProcess finished
+Debug, T4908: FlipWindingOrderProcess begin
+Debug, T4908: FlipWindingOrderProcess finished
+Debug, T4908: UpdateImporterScale scale set: %f1
+Debug, T4908: ValidateDataStructureProcess begin
+Debug, T4908: ValidateDataStructureProcess end
+Debug, T4908: ScenePreprocessor: Dummy rotation track has been generated
+Debug, T4908: ScenePreprocessor: Dummy scaling track has been generated
+Info,  T4908: Load F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/LWS/move_x_post_constant.lws
+Debug, T4908: Assimp 5.0.2455634966 amd64 msvc shared singlethreaded
+Info,  T4908: Found a matching importer for this file format: LightWave Scene Importer.
+Info,  T4908: Import root directory is 'F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/LWS\'
+Debug, T4908: LWS: Skipping over plugin-specific data
+Skipping one or more lines with the same contents
+Info,  T4908: LWS file format version is 5
+Info,  T4908: %%% BEGIN EXTERNAL FILE %%%
+Info,  T4908: File: simple_cube.lwo
+Info,  T4908: Load simple_cube.lwo
+Debug, T4908: Assimp 5.0.2455634966 amd64 msvc shared singlethreaded
+Info,  T4908: Found a matching importer for this file format: LightWave/Modo Object Importer.
+Info,  T4908: Import root directory is '.\'
+Info,  T4908: LWO file format: LWO2 (>= LightWave 6)
+Debug, T4908: MakeLeftHandedProcess begin
+Debug, T4908: MakeLeftHandedProcess finished
+Debug, T4908: FlipWindingOrderProcess begin
+Debug, T4908: FlipWindingOrderProcess finished
+Debug, T4908: UpdateImporterScale scale set: %f1
+Info,  T4908: %%% END EXTERNAL FILE %%%
+Debug, T4908: MakeLeftHandedProcess begin
+Debug, T4908: MakeLeftHandedProcess finished
+Debug, T4908: FlipWindingOrderProcess begin
+Debug, T4908: FlipWindingOrderProcess finished
+Debug, T4908: UpdateImporterScale scale set: %f1
+Debug, T4908: ValidateDataStructureProcess begin
+Debug, T4908: ValidateDataStructureProcess end
+Debug, T4908: ScenePreprocessor: Dummy rotation track has been generated
+Debug, T4908: ScenePreprocessor: Dummy scaling track has been generated
+Info,  T4908: Load F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/LWS/move_x_post_reset.lws
+Debug, T4908: Assimp 5.0.2455634966 amd64 msvc shared singlethreaded
+Info,  T4908: Found a matching importer for this file format: LightWave Scene Importer.
+Info,  T4908: Import root directory is 'F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/LWS\'
+Debug, T4908: LWS: Skipping over plugin-specific data
+Skipping one or more lines with the same contents
+Info,  T4908: LWS file format version is 5
+Info,  T4908: %%% BEGIN EXTERNAL FILE %%%
+Info,  T4908: File: simple_cube.lwo
+Info,  T4908: Load simple_cube.lwo
+Debug, T4908: Assimp 5.0.2455634966 amd64 msvc shared singlethreaded
+Info,  T4908: Found a matching importer for this file format: LightWave/Modo Object Importer.
+Info,  T4908: Import root directory is '.\'
+Info,  T4908: LWO file format: LWO2 (>= LightWave 6)
+Debug, T4908: MakeLeftHandedProcess begin
+Debug, T4908: MakeLeftHandedProcess finished
+Debug, T4908: FlipWindingOrderProcess begin
+Debug, T4908: FlipWindingOrderProcess finished
+Debug, T4908: UpdateImporterScale scale set: %f1
+Info,  T4908: %%% END EXTERNAL FILE %%%
+Debug, T4908: MakeLeftHandedProcess begin
+Debug, T4908: MakeLeftHandedProcess finished
+Debug, T4908: FlipWindingOrderProcess begin
+Debug, T4908: FlipWindingOrderProcess finished
+Debug, T4908: UpdateImporterScale scale set: %f1
+Debug, T4908: ValidateDataStructureProcess begin
+Debug, T4908: ValidateDataStructureProcess end
+Debug, T4908: ScenePreprocessor: Dummy rotation track has been generated
+Debug, T4908: ScenePreprocessor: Dummy scaling track has been generated
+Info,  T4908: Load F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/LWS/move_xz_spline.lws
+Debug, T4908: Assimp 5.0.2455634966 amd64 msvc shared singlethreaded
+Info,  T4908: Found a matching importer for this file format: LightWave Scene Importer.
+Info,  T4908: Import root directory is 'F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/LWS\'
+Debug, T4908: LWS: Skipping over plugin-specific data
+Skipping one or more lines with the same contents
+Info,  T4908: LWS file format version is 5
+Info,  T4908: %%% BEGIN EXTERNAL FILE %%%
+Info,  T4908: File: simple_cube.lwo
+Info,  T4908: Load simple_cube.lwo
+Debug, T4908: Assimp 5.0.2455634966 amd64 msvc shared singlethreaded
+Info,  T4908: Found a matching importer for this file format: LightWave/Modo Object Importer.
+Info,  T4908: Import root directory is '.\'
+Info,  T4908: LWO file format: LWO2 (>= LightWave 6)
+Debug, T4908: MakeLeftHandedProcess begin
+Debug, T4908: MakeLeftHandedProcess finished
+Debug, T4908: FlipWindingOrderProcess begin
+Debug, T4908: FlipWindingOrderProcess finished
+Debug, T4908: UpdateImporterScale scale set: %f1
+Info,  T4908: %%% END EXTERNAL FILE %%%
+Debug, T4908: MakeLeftHandedProcess begin
+Debug, T4908: MakeLeftHandedProcess finished
+Debug, T4908: FlipWindingOrderProcess begin
+Debug, T4908: FlipWindingOrderProcess finished
+Debug, T4908: UpdateImporterScale scale set: %f1
+Debug, T4908: ValidateDataStructureProcess begin
+Debug, T4908: ValidateDataStructureProcess end
+Debug, T4908: ScenePreprocessor: Dummy rotation track has been generated
+Debug, T4908: ScenePreprocessor: Dummy scaling track has been generated
+Info,  T4908: Load F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/LWO/LWO2/boxuv.lwo
+Debug, T4908: Assimp 5.0.2455634966 amd64 msvc shared singlethreaded
+Info,  T4908: Found a matching importer for this file format: LightWave/Modo Object Importer.
+Info,  T4908: Import root directory is 'F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/LWO/LWO2\'
+Info,  T4908: LWO file format: LWO2 (>= LightWave 6)
+Debug, T4908: MakeLeftHandedProcess begin
+Debug, T4908: MakeLeftHandedProcess finished
+Debug, T4908: FlipWindingOrderProcess begin
+Debug, T4908: FlipWindingOrderProcess finished
+Debug, T4908: UpdateImporterScale scale set: %f1
+Debug, T4908: ValidateDataStructureProcess begin
+Debug, T4908: ValidateDataStructureProcess end
+Info,  T4908: Load F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/LWO/LWO2/formatDetection
+Debug, T4908: Assimp 5.0.2455634966 amd64 msvc shared singlethreaded
+Info,  T4908: File extension not known, trying signature-based detection
+Info,  T4908: Found a matching importer for this file format: LightWave/Modo Object Importer.
+Info,  T4908: Import root directory is 'F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/LWO/LWO2\'
+Info,  T4908: LWO file format: LWO2 (>= LightWave 6)
+Debug, T4908: MakeLeftHandedProcess begin
+Debug, T4908: MakeLeftHandedProcess finished
+Debug, T4908: FlipWindingOrderProcess begin
+Debug, T4908: FlipWindingOrderProcess finished
+Debug, T4908: UpdateImporterScale scale set: %f1
+Debug, T4908: ValidateDataStructureProcess begin
+Debug, T4908: ValidateDataStructureProcess end
+Info,  T4908: Load F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/SMD/triangle.smd
+Debug, T4908: Assimp 5.0.2455634966 amd64 msvc shared singlethreaded
+Info,  T4908: Found a matching importer for this file format: Valve SMD Importer.
+Info,  T4908: Import root directory is 'F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/SMD\'
+Debug, T4908: UpdateImporterScale scale set: %f1
+Debug, T4908: ValidateDataStructureProcess begin
+Debug, T4908: ValidateDataStructureProcess end
+Debug, T4908: ScenePreprocessor: Dummy scaling track has been generated
+Info,  T4908: Load F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/SMD/holy_grailref.smd
+Debug, T4908: Assimp 5.0.2455634966 amd64 msvc shared singlethreaded
+Info,  T4908: Found a matching importer for this file format: Valve SMD Importer.
+Info,  T4908: Import root directory is 'F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/SMD\'
+Error, T4908: [SMD/VTA] Bone index overflow. The bone index will be ignored, the weight will be assigned to the vertex' parent node
+Skipping one or more lines with the same contents
+Debug, T4908: UpdateImporterScale scale set: %f1
+Debug, T4908: ValidateDataStructureProcess begin
+Debug, T4908: ValidateDataStructureProcess end
+Debug, T4908: ScenePreprocessor: Dummy scaling track has been generated
+Info,  T4908: Load F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/glTF/TwoBoxes/TwoBoxes.gltf
+Debug, T4908: Assimp 5.0.2455634966 amd64 msvc shared singlethreaded
+Info,  T4908: Found a matching importer for this file format: glTF Importer.
+Info,  T4908: Import root directory is 'F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/glTF/TwoBoxes\'
+Debug, T4908: UpdateImporterScale scale set: %f1
+Debug, T4908: ValidateDataStructureProcess begin
+Debug, T4908: ValidateDataStructureProcess end
+Info,  T4908: Load F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/glTF2/BoxTextured-glTF/BoxTextured.gltf
+Debug, T4908: Assimp 5.0.2455634966 amd64 msvc shared singlethreaded
+Info,  T4908: Found a matching importer for this file format: glTF2 Importer.
+Info,  T4908: Import root directory is 'F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/glTF2/BoxTextured-glTF\'
+Debug, T4908: UpdateImporterScale scale set: %f1
+Debug, T4908: ValidateDataStructureProcess begin
+Debug, T4908: ValidateDataStructureProcess end
+Info,  T4908: Load F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/glTF2/2CylinderEngine-glTF-Binary/2CylinderEngine.glb
+Debug, T4908: Assimp 5.0.2455634966 amd64 msvc shared singlethreaded
+Info,  T4908: Found a matching importer for this file format: glTF2 Importer.
+Info,  T4908: Import root directory is 'F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/glTF2/2CylinderEngine-glTF-Binary\'
+Debug, T4908: UpdateImporterScale scale set: %f1
+Debug, T4908: ValidateDataStructureProcess begin
+Debug, T4908: ValidateDataStructureProcess end
+Info,  T4908: Load F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/glTF2/BoxTextured-glTF/BoxTextured.gltf
+Debug, T4908: Assimp 5.0.2455634966 amd64 msvc shared singlethreaded
+Info,  T4908: Found a matching importer for this file format: glTF2 Importer.
+Info,  T4908: Import root directory is 'F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/glTF2/BoxTextured-glTF\'
+Debug, T4908: UpdateImporterScale scale set: %f1
+Debug, T4908: ValidateDataStructureProcess begin
+Debug, T4908: ValidateDataStructureProcess end
+Debug, T4908: GenVertexNormalsProcess begin
+Debug, T4908: GenVertexNormalsProcess finished. Normals are already there
+Info,  T4908: Load F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/glTF2/BoxTextured-glTF-Embedded/BoxTextured.gltf
+Debug, T4908: Assimp 5.0.2455634966 amd64 msvc shared singlethreaded
+Info,  T4908: Found a matching importer for this file format: glTF2 Importer.
+Info,  T4908: Import root directory is 'F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/glTF2/BoxTextured-glTF-Embedded\'
+Debug, T4908: UpdateImporterScale scale set: %f1
+Debug, T4908: ValidateDataStructureProcess begin
+Debug, T4908: ValidateDataStructureProcess end
+Debug, T4908: GenVertexNormalsProcess begin
+Debug, T4908: GenVertexNormalsProcess finished. Normals are already there
+Info,  T4908: Load F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/glTF2/glTF-Asset-Generator/Mesh_PrimitiveMode/Mesh_PrimitiveMode_00.gltf
+Debug, T4908: Assimp 5.0.2455634966 amd64 msvc shared singlethreaded
+Info,  T4908: Found a matching importer for this file format: glTF2 Importer.
+Info,  T4908: Import root directory is 'F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/glTF2/glTF-Asset-Generator/Mesh_PrimitiveMode\'
+Debug, T4908: UpdateImporterScale scale set: %f1
+Debug, T4908: ValidateDataStructureProcess begin
+Debug, T4908: ValidateDataStructureProcess end
+Info,  T4908: Load F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/glTF2/glTF-Asset-Generator/Mesh_PrimitiveMode/Mesh_PrimitiveMode_01.gltf
+Debug, T4908: Assimp 5.0.2455634966 amd64 msvc shared singlethreaded
+Info,  T4908: Found a matching importer for this file format: glTF2 Importer.
+Info,  T4908: Import root directory is 'F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/glTF2/glTF-Asset-Generator/Mesh_PrimitiveMode\'
+Debug, T4908: UpdateImporterScale scale set: %f1
+Debug, T4908: ValidateDataStructureProcess begin
+Debug, T4908: ValidateDataStructureProcess end
+Info,  T4908: Load F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/glTF2/glTF-Asset-Generator/Mesh_PrimitiveMode/Mesh_PrimitiveMode_02.gltf
+Debug, T4908: Assimp 5.0.2455634966 amd64 msvc shared singlethreaded
+Info,  T4908: Found a matching importer for this file format: glTF2 Importer.
+Info,  T4908: Import root directory is 'F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/glTF2/glTF-Asset-Generator/Mesh_PrimitiveMode\'
+Debug, T4908: UpdateImporterScale scale set: %f1
+Debug, T4908: ValidateDataStructureProcess begin
+Debug, T4908: ValidateDataStructureProcess end
+Info,  T4908: Load F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/glTF2/glTF-Asset-Generator/Mesh_PrimitiveMode/Mesh_PrimitiveMode_03.gltf
+Debug, T4908: Assimp 5.0.2455634966 amd64 msvc shared singlethreaded
+Info,  T4908: Found a matching importer for this file format: glTF2 Importer.
+Info,  T4908: Import root directory is 'F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/glTF2/glTF-Asset-Generator/Mesh_PrimitiveMode\'
+Debug, T4908: UpdateImporterScale scale set: %f1
+Debug, T4908: ValidateDataStructureProcess begin
+Debug, T4908: ValidateDataStructureProcess end
+Info,  T4908: Load F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/glTF2/glTF-Asset-Generator/Mesh_PrimitiveMode/Mesh_PrimitiveMode_04.gltf
+Debug, T4908: Assimp 5.0.2455634966 amd64 msvc shared singlethreaded
+Info,  T4908: Found a matching importer for this file format: glTF2 Importer.
+Info,  T4908: Import root directory is 'F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/glTF2/glTF-Asset-Generator/Mesh_PrimitiveMode\'
+Debug, T4908: UpdateImporterScale scale set: %f1
+Debug, T4908: ValidateDataStructureProcess begin
+Debug, T4908: ValidateDataStructureProcess end
+Info,  T4908: Load F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/glTF2/glTF-Asset-Generator/Mesh_PrimitiveMode/Mesh_PrimitiveMode_05.gltf
+Debug, T4908: Assimp 5.0.2455634966 amd64 msvc shared singlethreaded
+Info,  T4908: Found a matching importer for this file format: glTF2 Importer.
+Info,  T4908: Import root directory is 'F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/glTF2/glTF-Asset-Generator/Mesh_PrimitiveMode\'
+Debug, T4908: UpdateImporterScale scale set: %f1
+Debug, T4908: ValidateDataStructureProcess begin
+Debug, T4908: ValidateDataStructureProcess end
+Info,  T4908: Load F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/glTF2/glTF-Asset-Generator/Mesh_PrimitiveMode/Mesh_PrimitiveMode_06.gltf
+Debug, T4908: Assimp 5.0.2455634966 amd64 msvc shared singlethreaded
+Info,  T4908: Found a matching importer for this file format: glTF2 Importer.
+Info,  T4908: Import root directory is 'F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/glTF2/glTF-Asset-Generator/Mesh_PrimitiveMode\'
+Debug, T4908: UpdateImporterScale scale set: %f1
+Debug, T4908: ValidateDataStructureProcess begin
+Debug, T4908: ValidateDataStructureProcess end
+Info,  T4908: Load F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/glTF2/glTF-Asset-Generator/Mesh_PrimitiveMode/Mesh_PrimitiveMode_07.gltf
+Debug, T4908: Assimp 5.0.2455634966 amd64 msvc shared singlethreaded
+Info,  T4908: Found a matching importer for this file format: glTF2 Importer.
+Info,  T4908: Import root directory is 'F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/glTF2/glTF-Asset-Generator/Mesh_PrimitiveMode\'
+Debug, T4908: UpdateImporterScale scale set: %f1
+Debug, T4908: ValidateDataStructureProcess begin
+Debug, T4908: ValidateDataStructureProcess end
+Info,  T4908: Load F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/glTF2/glTF-Asset-Generator/Mesh_PrimitiveMode/Mesh_PrimitiveMode_08.gltf
+Debug, T4908: Assimp 5.0.2455634966 amd64 msvc shared singlethreaded
+Info,  T4908: Found a matching importer for this file format: glTF2 Importer.
+Info,  T4908: Import root directory is 'F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/glTF2/glTF-Asset-Generator/Mesh_PrimitiveMode\'
+Debug, T4908: UpdateImporterScale scale set: %f1
+Debug, T4908: ValidateDataStructureProcess begin
+Debug, T4908: ValidateDataStructureProcess end
+Info,  T4908: Load F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/glTF2/glTF-Asset-Generator/Mesh_PrimitiveMode/Mesh_PrimitiveMode_09.gltf
+Debug, T4908: Assimp 5.0.2455634966 amd64 msvc shared singlethreaded
+Info,  T4908: Found a matching importer for this file format: glTF2 Importer.
+Info,  T4908: Import root directory is 'F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/glTF2/glTF-Asset-Generator/Mesh_PrimitiveMode\'
+Debug, T4908: UpdateImporterScale scale set: %f1
+Debug, T4908: ValidateDataStructureProcess begin
+Debug, T4908: ValidateDataStructureProcess end
+Info,  T4908: Load F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/glTF2/glTF-Asset-Generator/Mesh_PrimitiveMode/Mesh_PrimitiveMode_10.gltf
+Debug, T4908: Assimp 5.0.2455634966 amd64 msvc shared singlethreaded
+Info,  T4908: Found a matching importer for this file format: glTF2 Importer.
+Info,  T4908: Import root directory is 'F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/glTF2/glTF-Asset-Generator/Mesh_PrimitiveMode\'
+Debug, T4908: UpdateImporterScale scale set: %f1
+Debug, T4908: ValidateDataStructureProcess begin
+Debug, T4908: ValidateDataStructureProcess end
+Info,  T4908: Load F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/glTF2/glTF-Asset-Generator/Mesh_PrimitiveMode/Mesh_PrimitiveMode_11.gltf
+Debug, T4908: Assimp 5.0.2455634966 amd64 msvc shared singlethreaded
+Info,  T4908: Found a matching importer for this file format: glTF2 Importer.
+Info,  T4908: Import root directory is 'F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/glTF2/glTF-Asset-Generator/Mesh_PrimitiveMode\'
+Debug, T4908: UpdateImporterScale scale set: %f1
+Debug, T4908: ValidateDataStructureProcess begin
+Debug, T4908: ValidateDataStructureProcess end
+Info,  T4908: Load F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/glTF2/glTF-Asset-Generator/Mesh_PrimitiveMode/Mesh_PrimitiveMode_12.gltf
+Debug, T4908: Assimp 5.0.2455634966 amd64 msvc shared singlethreaded
+Info,  T4908: Found a matching importer for this file format: glTF2 Importer.
+Info,  T4908: Import root directory is 'F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/glTF2/glTF-Asset-Generator/Mesh_PrimitiveMode\'
+Debug, T4908: UpdateImporterScale scale set: %f1
+Debug, T4908: ValidateDataStructureProcess begin
+Debug, T4908: ValidateDataStructureProcess end
+Info,  T4908: Load F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/glTF2/simple_skin/simple_skin.gltf
+Debug, T4908: Assimp 5.0.2455634966 amd64 msvc shared singlethreaded
+Info,  T4908: Found a matching importer for this file format: glTF2 Importer.
+Info,  T4908: Import root directory is 'F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/glTF2/simple_skin\'
+Debug, T4908: UpdateImporterScale scale set: %f1
+Debug, T4908: ValidateDataStructureProcess begin
+Debug, T4908: ValidateDataStructureProcess end
+Debug, T4908: ScenePreprocessor: Dummy scaling track has been generated
+Debug, T4908: ScenePreprocessor: Dummy position track has been generated
+Info,  T4908: Load F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/glTF2/cameras/Cameras.gltf
+Debug, T4908: Assimp 5.0.2455634966 amd64 msvc shared singlethreaded
+Info,  T4908: Found a matching importer for this file format: glTF2 Importer.
+Info,  T4908: Import root directory is 'F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/glTF2/cameras\'
+Debug, T4908: UpdateImporterScale scale set: %f1
+Debug, T4908: ValidateDataStructureProcess begin
+Warn,  T4908: Validation warning: 0.000000 is not a valid value for aiCamera::mHorizontalFOV
+Debug, T4908: ValidateDataStructureProcess end
+Info,  T4908: Load F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/glTF2/BoxTextured-glTF/BoxTextured.gltf
+Debug, T4908: Assimp 5.0.2455634966 amd64 msvc shared singlethreaded
+Info,  T4908: Found a matching importer for this file format: glTF2 Importer.
+Info,  T4908: Import root directory is 'F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/glTF2/BoxTextured-glTF\'
+Debug, T4908: UpdateImporterScale scale set: %f1
+Debug, T4908: ValidateDataStructureProcess begin
+Debug, T4908: ValidateDataStructureProcess end
+Debug, T4908: TriangulateProcess begin
+Debug, T4908: TriangulateProcess finished. There was nothing to be done.
+Debug, T4908: SortByPTypeProcess begin
+Info,  T4908: Points: 0, Lines: 0, Triangles: 1, Polygons: 0 (Meshes, X = removed)
+Debug, T4908: SortByPTypeProcess finished
+Debug, T4908: JoinVerticesProcess begin
+Debug, T4908: Mesh 0 (Mesh) | Verts in: 24 out: 24 | ~0%
+Debug, T4908: JoinVerticesProcess finished 
+Info,  T4908: Load F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/glTF2/glTF-Sample-Models/AnimatedMorphCube-glTF/AnimatedMorphCube.gltf
+Debug, T4908: Assimp 5.0.2455634966 amd64 msvc shared singlethreaded
+Info,  T4908: Found a matching importer for this file format: glTF2 Importer.
+Info,  T4908: Import root directory is 'F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/glTF2/glTF-Sample-Models/AnimatedMorphCube-glTF\'
+Debug, T4908: UpdateImporterScale scale set: %f1
+Debug, T4908: ValidateDataStructureProcess begin
+Debug, T4908: ValidateDataStructureProcess end
+Debug, T4908: ScenePreprocessor: Dummy position track has been generated
+Debug, T4908: TriangulateProcess begin
+Debug, T4908: TriangulateProcess finished. There was nothing to be done.
+Debug, T4908: SortByPTypeProcess begin
+Info,  T4908: Points: 0, Lines: 0, Triangles: 1, Polygons: 0 (Meshes, X = removed)
+Debug, T4908: SortByPTypeProcess finished
+Debug, T4908: JoinVerticesProcess begin
+Debug, T4908: Mesh 0 (Cube) | Verts in: 24 out: 24 | ~0%
+Debug, T4908: JoinVerticesProcess finished 
+Info,  T4908: Load F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/HMP/terrain.hmp
+Debug, T4908: Assimp 5.0.2455634966 amd64 msvc shared singlethreaded
+Info,  T4908: Found a matching importer for this file format: 3D GameStudio Heightmap (HMP) Importer.
+Info,  T4908: Import root directory is 'F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/HMP\'
+Debug, T4908: HMP subtype: 3D GameStudio A7, magic word is HMP7
+Debug, T4908: UpdateImporterScale scale set: %f1
+Debug, T4908: ValidateDataStructureProcess begin
+Debug, T4908: ValidateDataStructureProcess end
+Info,  T4908: Load F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/IFC/AC14-FZK-Haus.ifc
+Debug, T4908: Assimp 5.0.2455634966 amd64 msvc shared singlethreaded
+Info,  T4908: Found a matching importer for this file format: Industry Foundation Classes (IFC) Importer.
+Info,  T4908: Import root directory is 'F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/IFC\'
+Debug, T4908: IFC: File schema is 'IFC2X3'
+Debug, T4908: STEP: got 82226 object records with 5788 inverse index entries
+Debug, T4908: IFC: got units used for lengths
+Debug, T4908: IFC: got units used for angles
+Debug, T4908: IFC: got world coordinate system
+Debug, T4908: IFC: looking at spatial structure `Gelände`
+Debug, T4908: IFC: selecting this spatial structure as root structure
+Debug, T4908: IFC: generate mesh procedurally by extrusion (IfcExtrudedAreaSolid)
+Skipping one or more lines with the same contents
+Warn,  T4908: IFC: skipping unknown IfcGeometricRepresentationItem entity, type is IfcPolyline
+Debug, T4908: IFC: removing duplicate vertices
+Error, T4908: IFC: failed to generate all window caps
+Skipping one or more lines with the same contents
+Debug, T4908: IFC: generate mesh procedurally by extrusion (IfcExtrudedAreaSolid)
+Debug, T4908: IFC: removing duplicate vertices
+Debug, T4908: IFC: removing degenerate faces
+Debug, T4908: IFC: generate mesh procedurally by extrusion (IfcExtrudedAreaSolid)
+Skipping one or more lines with the same contents
+Warn,  T4908: IFC: skipping unknown IfcGeometricRepresentationItem entity, type is IfcPolyline
+Debug, T4908: IFC: removing duplicate vertices
+Error, T4908: IFC: failed to generate all window caps
+Skipping one or more lines with the same contents
+Debug, T4908: IFC: generate mesh procedurally by extrusion (IfcExtrudedAreaSolid)
+Debug, T4908: IFC: removing duplicate vertices
+Debug, T4908: IFC: removing degenerate faces
+Debug, T4908: IFC: generate mesh procedurally by extrusion (IfcExtrudedAreaSolid)
+Skipping one or more lines with the same contents
+Warn,  T4908: IFC: skipping unknown IfcGeometricRepresentationItem entity, type is IfcPolyline
+Debug, T4908: IFC: removing duplicate vertices
+Error, T4908: IFC: failed to generate all window caps
+Skipping one or more lines with the same contents
+Debug, T4908: IFC: generate mesh procedurally by extrusion (IfcExtrudedAreaSolid)
+Skipping one or more lines with the same contents
+Warn,  T4908: IFC: skipping unknown IfcGeometricRepresentationItem entity, type is IfcPolyline
+Debug, T4908: IFC: removing duplicate vertices
+Error, T4908: IFC: failed to generate all window caps
+Skipping one or more lines with the same contents
+Debug, T4908: IFC: generate mesh procedurally by extrusion (IfcExtrudedAreaSolid)
+Warn,  T4908: IFC: skipping unknown IfcGeometricRepresentationItem entity, type is IfcPolyline
+Debug, T4908: IFC: removing duplicate vertices
+Debug, T4908: IFC: generate mesh procedurally by extrusion (IfcExtrudedAreaSolid)
+Warn,  T4908: IFC: skipping unknown IfcGeometricRepresentationItem entity, type is IfcPolyline
+Debug, T4908: IFC: removing duplicate vertices
+Debug, T4908: IFC: generate mesh procedurally by extrusion (IfcExtrudedAreaSolid)
+Warn,  T4908: IFC: skipping unknown IfcGeometricRepresentationItem entity, type is IfcPolyline
+Debug, T4908: IFC: removing duplicate vertices
+Debug, T4908: IFC: generate mesh procedurally by extrusion (IfcExtrudedAreaSolid)
+Skipping one or more lines with the same contents
+Warn,  T4908: IFC: skipping unknown IfcGeometricRepresentationItem entity, type is IfcPolyline
+Debug, T4908: IFC: removing duplicate vertices
+Error, T4908: IFC: failed to generate all window caps
+Skipping one or more lines with the same contents
+Debug, T4908: IFC: generate mesh procedurally by extrusion (IfcExtrudedAreaSolid)
+Skipping one or more lines with the same contents
+Warn,  T4908: IFC: skipping unknown IfcGeometricRepresentationItem entity, type is IfcPolyline
+Debug, T4908: IFC: removing duplicate vertices
+Error, T4908: IFC: failed to generate all window caps
+Debug, T4908: IFC: generate mesh procedurally by extrusion (IfcExtrudedAreaSolid)
+Debug, T4908: IFC: removing degenerate faces
+Skipping one or more lines with the same contents
+Debug, T4908: IFC: removing duplicate vertices
+Debug, T4908: IFC: removing degenerate faces
+Skipping one or more lines with the same contents
+Debug, T4908: IFC: generate mesh procedurally by extrusion (IfcExtrudedAreaSolid)
+Debug, T4908: IFC: removing duplicate vertices
+Debug, T4908: IFC: generate mesh procedurally by extrusion (IfcExtrudedAreaSolid)
+Debug, T4908: IFC: skipping IfcAnnotation entity due to importer settings
+Skipping one or more lines with the same contents
+Debug, T4908: IFC: skipping IfcSpace entity due to importer settings
+Skipping one or more lines with the same contents
+Warn,  T4908: IFC: skipping unknown IfcGeometricRepresentationItem entity, type is IfcPolyline
+Debug, T4908: IFC: removing duplicate vertices
+Debug, T4908: IFC: generate mesh procedurally by extrusion (IfcExtrudedAreaSolid)
+Debug, T4908: IFC: generating CSG geometry by plane clipping (IfcBooleanClippingResult)
+Debug, T4908: IFC: generate mesh procedurally by extrusion (IfcExtrudedAreaSolid)
+Warn,  T4908: IFC: skipping unknown IfcGeometricRepresentationItem entity, type is IfcPolyline
+Debug, T4908: IFC: removing duplicate vertices
+Error, T4908: IFC: failed to generate all window caps
+Debug, T4908: IFC: generate mesh procedurally by extrusion (IfcExtrudedAreaSolid)
+Debug, T4908: IFC: generating CSG geometry by plane clipping with polygonal bounding (IfcBooleanClippingResult)
+Skipping one or more lines with the same contents
+Debug, T4908: IFC: removing duplicate vertices
+Debug, T4908: IFC: removing degenerate faces
+Debug, T4908: IFC: removing duplicate vertices
+Debug, T4908: IFC: removing degenerate faces
+Warn,  T4908: IFC: skipping unknown IfcGeometricRepresentationItem entity, type is IfcPolyline
+Debug, T4908: IFC: removing duplicate vertices
+Debug, T4908: IFC: generate mesh procedurally by extrusion (IfcExtrudedAreaSolid)
+Debug, T4908: IFC: generating CSG geometry by plane clipping (IfcBooleanClippingResult)
+Debug, T4908: IFC: generate mesh procedurally by extrusion (IfcExtrudedAreaSolid)
+Warn,  T4908: IFC: skipping unknown IfcGeometricRepresentationItem entity, type is IfcPolyline
+Debug, T4908: IFC: removing duplicate vertices
+Error, T4908: IFC: failed to generate all window caps
+Debug, T4908: IFC: generate mesh procedurally by extrusion (IfcExtrudedAreaSolid)
+Debug, T4908: IFC: generating CSG geometry by plane clipping with polygonal bounding (IfcBooleanClippingResult)
+Skipping one or more lines with the same contents
+Debug, T4908: IFC: removing duplicate vertices
+Debug, T4908: IFC: removing degenerate faces
+Debug, T4908: IFC: generate mesh procedurally by extrusion (IfcExtrudedAreaSolid)
+Debug, T4908: IFC: generating CSG geometry by plane clipping (IfcBooleanClippingResult)
+Debug, T4908: IFC: generate mesh procedurally by extrusion (IfcExtrudedAreaSolid)
+Debug, T4908: IFC: generating CSG geometry by plane clipping (IfcBooleanClippingResult)
+Debug, T4908: IFC: generate mesh procedurally by extrusion (IfcExtrudedAreaSolid)
+Skipping one or more lines with the same contents
+Debug, T4908: IFC: generating CSG geometry by plane clipping (IfcBooleanClippingResult)
+Debug, T4908: IFC: generate mesh procedurally by extrusion (IfcExtrudedAreaSolid)
+Debug, T4908: IFC: generating CSG geometry by plane clipping (IfcBooleanClippingResult)
+Debug, T4908: IFC: generate mesh procedurally by extrusion (IfcExtrudedAreaSolid)
+Debug, T4908: IFC: removing duplicate vertices
+Debug, T4908: IFC: generate mesh procedurally by extrusion (IfcExtrudedAreaSolid)
+Debug, T4908: IFC: removing duplicate vertices
+Warn,  T4908: IFC: failed to resolve all openings, presumably their topology is not supported by Assimp
+Debug, T4908: IFC: generate mesh procedurally by extrusion (IfcExtrudedAreaSolid)
+Debug, T4908: IFC: removing duplicate vertices
+Debug, T4908: IFC: removing degenerate faces
+Debug, T4908: IFC: removing duplicate vertices
+Debug, T4908: IFC: generate mesh procedurally by extrusion (IfcExtrudedAreaSolid)
+Debug, T4908: IFC: removing duplicate vertices
+Debug, T4908: IFC: generate mesh procedurally by extrusion (IfcExtrudedAreaSolid)
+Debug, T4908: IFC: skipping IfcAnnotation entity due to importer settings
+Skipping one or more lines with the same contents
+Debug, T4908: IFC: skipping IfcSpace entity due to importer settings
+Debug, T4908: IFC: STEP: evaluated 70094 object records
+Debug, T4908: UpdateImporterScale scale set: %f1
+Debug, T4908: ValidateDataStructureProcess begin
+Debug, T4908: ValidateDataStructureProcess end
+Info,  T4908: Load $$$___magic___$$$.
+Debug, T4908: Assimp 5.0.2455634966 amd64 msvc shared singlethreaded
+Debug, T4908: Found positive match for header keyword: HEADER
+Info,  T4908: Found a matching importer for this file format: Drawing Interchange Format (DXF) Importer.
+Info,  T4908: Import root directory is '.\'
+Warn,  T4908: DXF: EOF reached, but did not encounter DXF EOF marker
+Debug, T4908: DXF: Unexpanded polycount is 0, vertex count is 0
+Error, T4908: DXF: no data blocks loaded
+Info,  T4908: Load F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/FBX/spider.fbx
+Debug, T4908: Assimp 5.0.2455634966 amd64 msvc shared singlethreaded
+Info,  T4908: Found a matching importer for this file format: Autodesk FBX Importer.
+Info,  T4908: Import root directory is 'F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/FBX\'
+Debug, T4908: UpdateImporterScale scale set: %f0.01
+Debug, T4908: ValidateDataStructureProcess begin
+Debug, T4908: ValidateDataStructureProcess end
+Info,  T4908: Load F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/FBX/box.fbx
+Debug, T4908: Assimp 5.0.2455634966 amd64 msvc shared singlethreaded
+Info,  T4908: Found a matching importer for this file format: Autodesk FBX Importer.
+Info,  T4908: Import root directory is 'F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/FBX\'
+Info,  T4908: FBX: generating full transformation chain for node: root
+Debug, T4908: UpdateImporterScale scale set: %f1
+Debug, T4908: ValidateDataStructureProcess begin
+Debug, T4908: ValidateDataStructureProcess end
+Info,  T4908: Load F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/FBX/cubes_nonames.fbx
+Debug, T4908: Assimp 5.0.2455634966 amd64 msvc shared singlethreaded
+Info,  T4908: Found a matching importer for this file format: Autodesk FBX Importer.
+Info,  T4908: Import root directory is 'F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/FBX\'
+Warn,  T4908: FBX-DOM: unsupported, newer format version, supported are only FBX 2011, FBX 2012 and FBX 2013, trying to read it nevertheless
+Info,  T4908: FBX: ignoring empty AnimationStack (using IK?): Take 001
+Debug, T4908: UpdateImporterScale scale set: %f0.01
+Debug, T4908: ValidateDataStructureProcess begin
+Debug, T4908: ValidateDataStructureProcess end
+Info,  T4908: Load F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/FBX/cubes_with_names.fbx
+Debug, T4908: Assimp 5.0.2455634966 amd64 msvc shared singlethreaded
+Info,  T4908: Found a matching importer for this file format: Autodesk FBX Importer.
+Info,  T4908: Import root directory is 'F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/FBX\'
+Warn,  T4908: FBX-DOM: unsupported, newer format version, supported are only FBX 2011, FBX 2012 and FBX 2013, trying to read it nevertheless
+Info,  T4908: FBX: ignoring empty AnimationStack (using IK?): Take 001
+Debug, T4908: UpdateImporterScale scale set: %f0.01
+Debug, T4908: ValidateDataStructureProcess begin
+Debug, T4908: ValidateDataStructureProcess end
+Info,  T4908: Load F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/FBX/cubes_with_mirroring_and_pivot.fbx
+Debug, T4908: Assimp 5.0.2455634966 amd64 msvc shared singlethreaded
+Info,  T4908: Found a matching importer for this file format: Autodesk FBX Importer.
+Info,  T4908: Import root directory is 'F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/FBX\'
+Warn,  T4908: FBX-DOM: unsupported, newer format version, supported are only FBX 2011, FBX 2012 and FBX 2013, trying to read it nevertheless
+Info,  T4908: FBX: ignoring empty AnimationStack (using IK?): Take 001
+Info,  T4908: FBX: generating full transformation chain for node: Cube1001
+Debug, T4908: UpdateImporterScale scale set: %f1
+Debug, T4908: ValidateDataStructureProcess begin
+Debug, T4908: ValidateDataStructureProcess end
+Info,  T4908: Load F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/FBX/close_to_identity_transforms.fbx
+Debug, T4908: Assimp 5.0.2455634966 amd64 msvc shared singlethreaded
+Info,  T4908: Found a matching importer for this file format: Autodesk FBX Importer.
+Info,  T4908: Import root directory is 'F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/FBX\'
+Warn,  T4908: FBX-DOM: unsupported, newer format version, supported are only FBX 2011, FBX 2012 and FBX 2013, trying to read it nevertheless
+Info,  T4908: FBX: ignoring empty AnimationStack (using IK?): Take 001
+Info,  T4908: FBX: generating full transformation chain for node: Cube1001
+Debug, T4908: UpdateImporterScale scale set: %f1
+Debug, T4908: ValidateDataStructureProcess begin
+Debug, T4908: ValidateDataStructureProcess end
+Info,  T4908: Load F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/FBX/phong_cube.fbx
+Debug, T4908: Assimp 5.0.2455634966 amd64 msvc shared singlethreaded
+Info,  T4908: Found a matching importer for this file format: Autodesk FBX Importer.
+Info,  T4908: Import root directory is 'F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/FBX\'
+Warn,  T4908: FBX-DOM (TOK_KEY, offset 0x4190) source object for connection does not exist
+Debug, T4908: UpdateImporterScale scale set: %f0.01
+Debug, T4908: ValidateDataStructureProcess begin
+Debug, T4908: ValidateDataStructureProcess end
+Info,  T4908: Load F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/FBX/global_settings.fbx
+Debug, T4908: Assimp 5.0.2455634966 amd64 msvc shared singlethreaded
+Info,  T4908: Found a matching importer for this file format: Autodesk FBX Importer.
+Info,  T4908: Import root directory is 'F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/FBX\'
+Error, T4908: FBX: no material assigned to mesh, setting default material
+Debug, T4908: UpdateImporterScale scale set: %f5
+Debug, T4908: ValidateDataStructureProcess begin
+Debug, T4908: ValidateDataStructureProcess end
+Info,  T4908: Load F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/FBX/embedded_ascii/box.FBX
+Debug, T4908: Assimp 5.0.2455634966 amd64 msvc shared singlethreaded
+Info,  T4908: Found a matching importer for this file format: Autodesk FBX Importer.
+Info,  T4908: Import root directory is 'F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/FBX/embedded_ascii\'
+Debug, T4908: UpdateImporterScale scale set: %f1
+Debug, T4908: ValidateDataStructureProcess begin
+Warn,  T4908: Validation warning: A specular shading model is specified but the value of the AI_MATKEY_SHININESS_STRENGTH key is 0.0
+Debug, T4908: ValidateDataStructureProcess end
+Info,  T4908: Load F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/FBX/embedded_ascii/box_embedded_texture_fragmented.fbx
+Debug, T4908: Assimp 5.0.2455634966 amd64 msvc shared singlethreaded
+Info,  T4908: Found a matching importer for this file format: Autodesk FBX Importer.
+Info,  T4908: Import root directory is 'F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/FBX/embedded_ascii\'
+Warn,  T4908: FBX-DOM: unsupported, newer format version, supported are only FBX 2011, FBX 2012 and FBX 2013, trying to read it nevertheless
+Error, T4908: FBX: ignoring additional binormal layer
+Error, T4908: FBX: ignoring additional tangent layer
+Info,  T4908: FBX: ignoring empty AnimationStack (using IK?): Take 001
+Debug, T4908: UpdateImporterScale scale set: %f1
+Debug, T4908: ValidateDataStructureProcess begin
+Debug, T4908: ValidateDataStructureProcess end
+Info,  T4908: Load $$$___magic___$$$.3ds
+Debug, T4908: Assimp 5.0.2455634966 amd64 msvc shared singlethreaded
+Info,  T4908: Found a matching importer for this file format: Discreet 3DS Importer.
+Info,  T4908: Import root directory is '.\'
+Info,  T4908: 3DS file format version: 3
+Warn,  T4908: 3DS: Skipping TCB animation info
+Skipping one or more lines with the same contents
+Error, T4908: 3DS: Skipping FOV animation track. This is not supported
+Warn,  T4908: 3DS: Skipping TCB animation info
+Skipping one or more lines with the same contents
+Info,  T4908: 3DS: Generating default material
+Debug, T4908: 3DS: Converting camera roll track ...
+Debug, T4908: UpdateImporterScale scale set: %f1
+Debug, T4908: ScenePreprocessor: Dummy scaling track has been generated
+Debug, T4908: ScenePreprocessor: Setting animation duration
+Info,  T4908: Entering post processing pipeline
+Debug, T4908: RemoveRedundantMatsProcess begin
+Debug, T4908: RemoveRedundantMatsProcess finished 
+Debug, T4908: GenUVCoordsProcess begin
+Debug, T4908: GenUVCoordsProcess finished
+Debug, T4908: TriangulateProcess begin
+Debug, T4908: TriangulateProcess finished. There was nothing to be done.
+Debug, T4908: FindDegeneratesProcess begin
+Debug, T4908: FindDegeneratesProcess finished
+Debug, T4908: SortByPTypeProcess begin
+Info,  T4908: Points: 0, Lines: 0, Triangles: 1, Polygons: 0 (Meshes, X = removed)
+Debug, T4908: SortByPTypeProcess finished
+Debug, T4908: FindInvalidDataProcess begin
+Debug, T4908: FindInvalidDataProcess finished. Everything seems to be OK.
+Debug, T4908: SplitLargeMeshesProcess_Triangle begin
+Debug, T4908: SplitLargeMeshesProcess_Triangle finished. There was nothing to do
+Debug, T4908: Generate spatially-sorted vertex cache
+Debug, T4908: GenVertexNormalsProcess begin
+Debug, T4908: GenVertexNormalsProcess finished. Normals are already there
+Debug, T4908: CalcTangentsProcess begin
+Info,  T4908: CalcTangentsProcess finished. Tangents have been calculated
+Debug, T4908: JoinVerticesProcess begin
+Debug, T4908: Mesh 0 (0) | Verts in: 36 out: 24 | ~33.3333%
+Info,  T4908: JoinVerticesProcess finished | Verts in: 36 out: 24 | ~33.3333
+Debug, T4908: SplitLargeMeshesProcess_Vertex begin
+Debug, T4908: SplitLargeMeshesProcess_Vertex finished. There was nothing to do
+Debug, T4908: LimitBoneWeightsProcess begin
+Debug, T4908: LimitBoneWeightsProcess end
+Debug, T4908: ImproveCacheLocalityProcess begin
+Debug, T4908: Mesh %u | ACMR in: 0 out: 2 | ~20
+Info,  T4908: Cache relevant are 1 meshes (12 faces). Average output ACMR is 2
+Debug, T4908: ImproveCacheLocalityProcess finished. 
+Info,  T4908: Leaving post processing pipeline
+Info,  T4908: Registering custom importer for these file extensions: applelinuxmacwindows
+Info,  T4908: Unregistering custom importer: 
+Info,  T4908: Load F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/X/test.x
+Debug, T4908: Assimp 5.0.2455634966 amd64 msvc shared singlethreaded
+Info,  T4908: Found a matching importer for this file format: Direct3D XFile Importer.
+Info,  T4908: Import root directory is 'F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/X\'
+Warn,  T4908: Unknown data object in mesh in x file
+Debug, T4908: MakeLeftHandedProcess begin
+Debug, T4908: MakeLeftHandedProcess finished
+Debug, T4908: FlipWindingOrderProcess begin
+Debug, T4908: FlipWindingOrderProcess finished
+Debug, T4908: UpdateImporterScale scale set: %f1
+Debug, T4908: ValidateDataStructureProcess begin
+Debug, T4908: ValidateDataStructureProcess end
+Info,  T4908: Entering post processing pipeline
+Debug, T4908: RemoveRedundantMatsProcess begin
+Debug, T4908: RemoveRedundantMatsProcess finished 
+Debug, T4908: OptimizeGraphProcess begin
+Debug, T4908: OptimizeGraphProcess finished
+Debug, T4908: GenUVCoordsProcess begin
+Debug, T4908: GenUVCoordsProcess finished
+Debug, T4908: TriangulateProcess begin
+Debug, T4908: TriangulateProcess finished. There was nothing to be done.
+Debug, T4908: FindDegeneratesProcess begin
+Debug, T4908: FindDegeneratesProcess finished
+Debug, T4908: SortByPTypeProcess begin
+Info,  T4908: Points: 0, Lines: 0, Triangles: 1, Polygons: 0 (Meshes, X = removed)
+Debug, T4908: SortByPTypeProcess finished
+Debug, T4908: FindInvalidDataProcess begin
+Debug, T4908: FindInvalidDataProcess finished. Everything seems to be OK.
+Debug, T4908: Skipping OptimizeMeshesProcess
+Debug, T4908: Generate spatially-sorted vertex cache
+Debug, T4908: GenVertexNormalsProcess begin
+Debug, T4908: GenVertexNormalsProcess finished. Normals are already there
+Debug, T4908: JoinVerticesProcess begin
+Debug, T4908: Mesh 0 (pCube1) | Verts in: 36 out: 24 | ~33.3333%
+Info,  T4908: JoinVerticesProcess finished | Verts in: 36 out: 24 | ~33.3333
+Info,  T4908: Leaving post processing pipeline
+Info,  T4908: Load F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/X/Testwuson.X
+Debug, T4908: Assimp 5.0.2455634966 amd64 msvc shared singlethreaded
+Debug, T4908: (Deleting previous scene)
+Info,  T4908: Found a matching importer for this file format: Direct3D XFile Importer.
+Info,  T4908: Import root directory is 'F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/X\'
+Warn,  T4908: Unknown data object in animation of .x file
+Skipping one or more lines with the same contents
+Warn,  T4908: Unknown data object in frame in x file
+Skipping one or more lines with the same contents
+Debug, T4908: MakeLeftHandedProcess begin
+Debug, T4908: MakeLeftHandedProcess finished
+Debug, T4908: FlipWindingOrderProcess begin
+Debug, T4908: FlipWindingOrderProcess finished
+Debug, T4908: UpdateImporterScale scale set: %f1
+Debug, T4908: ValidateDataStructureProcess begin
+Debug, T4908: ValidateDataStructureProcess end
+Info,  T4908: Entering post processing pipeline
+Debug, T4908: RemoveRedundantMatsProcess begin
+Debug, T4908: RemoveRedundantMatsProcess finished 
+Debug, T4908: OptimizeGraphProcess begin
+Debug, T4908: OptimizeGraphProcess finished
+Debug, T4908: GenUVCoordsProcess begin
+Debug, T4908: GenUVCoordsProcess finished
+Debug, T4908: TriangulateProcess begin
+Debug, T4908: TriangulateProcess finished. There was nothing to be done.
+Debug, T4908: FindDegeneratesProcess begin
+Debug, T4908: FindDegeneratesProcess finished
+Debug, T4908: SortByPTypeProcess begin
+Info,  T4908: Points: 0, Lines: 0, Triangles: 1, Polygons: 0 (Meshes, X = removed)
+Debug, T4908: SortByPTypeProcess finished
+Debug, T4908: FindInvalidDataProcess begin
+Debug, T4908: FindInvalidDataProcess finished. Everything seems to be OK.
+Debug, T4908: Skipping OptimizeMeshesProcess
+Debug, T4908: Generate spatially-sorted vertex cache
+Debug, T4908: GenVertexNormalsProcess begin
+Debug, T4908: GenVertexNormalsProcess finished. Normals are already there
+Debug, T4908: JoinVerticesProcess begin
+Debug, T4908: Mesh 0 (Wuson) | Verts in: 11196 out: 3205 | ~71.3737%
+Info,  T4908: JoinVerticesProcess finished | Verts in: 11196 out: 3205 | ~71.3737
+Info,  T4908: Leaving post processing pipeline
+Info,  T4908: Load F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/X/anim_test.x
+Debug, T4908: Assimp 5.0.2455634966 amd64 msvc shared singlethreaded
+Debug, T4908: (Deleting previous scene)
+Info,  T4908: Found a matching importer for this file format: Direct3D XFile Importer.
+Info,  T4908: Import root directory is 'F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/X\'
+Warn,  T4908: Length of texture file name is zero. Skipping this texture.
+Warn,  T4908: Unknown data object in mesh in x file
+Debug, T4908: MakeLeftHandedProcess begin
+Debug, T4908: MakeLeftHandedProcess finished
+Debug, T4908: FlipWindingOrderProcess begin
+Debug, T4908: FlipWindingOrderProcess finished
+Debug, T4908: UpdateImporterScale scale set: %f1
+Debug, T4908: ValidateDataStructureProcess begin
+Debug, T4908: ValidateDataStructureProcess end
+Info,  T4908: Entering post processing pipeline
+Debug, T4908: RemoveRedundantMatsProcess begin
+Debug, T4908: RemoveRedundantMatsProcess finished 
+Debug, T4908: OptimizeGraphProcess begin
+Debug, T4908: OptimizeGraphProcess finished
+Debug, T4908: GenUVCoordsProcess begin
+Debug, T4908: GenUVCoordsProcess finished
+Debug, T4908: TriangulateProcess begin
+Debug, T4908: TriangulateProcess finished. There was nothing to be done.
+Debug, T4908: FindDegeneratesProcess begin
+Debug, T4908: FindDegeneratesProcess finished
+Debug, T4908: SortByPTypeProcess begin
+Info,  T4908: Points: 0, Lines: 0, Triangles: 1, Polygons: 0 (Meshes, X = removed)
+Debug, T4908: SortByPTypeProcess finished
+Debug, T4908: FindInvalidDataProcess begin
+Warn,  T4908: Simplified dummy tracks with just one key
+Skipping one or more lines with the same contents
+Debug, T4908: FindInvalidDataProcess finished. Everything seems to be OK.
+Debug, T4908: Skipping OptimizeMeshesProcess
+Debug, T4908: Generate spatially-sorted vertex cache
+Debug, T4908: GenVertexNormalsProcess begin
+Debug, T4908: GenVertexNormalsProcess finished. Normals are already there
+Debug, T4908: JoinVerticesProcess begin
+Debug, T4908: Mesh 0 (pCylinder1) | Verts in: 2520 out: 485 | ~80.754%
+Info,  T4908: JoinVerticesProcess finished | Verts in: 2520 out: 485 | ~80.754
+Info,  T4908: Leaving post processing pipeline
+Info,  T4908: Load F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/X/anim_test.x
+Debug, T4908: Assimp 5.0.2455634966 amd64 msvc shared singlethreaded
+Debug, T4908: (Deleting previous scene)
+Info,  T4908: Found a matching importer for this file format: Direct3D XFile Importer.
+Info,  T4908: Import root directory is 'F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/X\'
+Warn,  T4908: Length of texture file name is zero. Skipping this texture.
+Warn,  T4908: Unknown data object in mesh in x file
+Debug, T4908: MakeLeftHandedProcess begin
+Debug, T4908: MakeLeftHandedProcess finished
+Debug, T4908: FlipWindingOrderProcess begin
+Debug, T4908: FlipWindingOrderProcess finished
+Debug, T4908: UpdateImporterScale scale set: %f1
+Debug, T4908: ValidateDataStructureProcess begin
+Debug, T4908: ValidateDataStructureProcess end
+Info,  T4908: Entering post processing pipeline
+Debug, T4908: RemoveRedundantMatsProcess begin
+Debug, T4908: RemoveRedundantMatsProcess finished 
+Debug, T4908: OptimizeGraphProcess begin
+Debug, T4908: OptimizeGraphProcess finished
+Debug, T4908: GenUVCoordsProcess begin
+Debug, T4908: GenUVCoordsProcess finished
+Debug, T4908: TriangulateProcess begin
+Debug, T4908: TriangulateProcess finished. There was nothing to be done.
+Debug, T4908: FindDegeneratesProcess begin
+Debug, T4908: FindDegeneratesProcess finished
+Debug, T4908: SortByPTypeProcess begin
+Info,  T4908: Points: 0, Lines: 0, Triangles: 1, Polygons: 0 (Meshes, X = removed)
+Debug, T4908: SortByPTypeProcess finished
+Debug, T4908: FindInvalidDataProcess begin
+Warn,  T4908: Simplified dummy tracks with just one key
+Skipping one or more lines with the same contents
+Debug, T4908: FindInvalidDataProcess finished. Everything seems to be OK.
+Debug, T4908: Skipping OptimizeMeshesProcess
+Debug, T4908: Generate spatially-sorted vertex cache
+Debug, T4908: GenVertexNormalsProcess begin
+Debug, T4908: GenVertexNormalsProcess finished. Normals are already there
+Debug, T4908: JoinVerticesProcess begin
+Debug, T4908: Mesh 0 (pCylinder1) | Verts in: 2520 out: 485 | ~80.754%
+Info,  T4908: JoinVerticesProcess finished | Verts in: 2520 out: 485 | ~80.754
+Info,  T4908: Leaving post processing pipeline
+Info,  T4908: Load F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/X/BCN_Epileptic.X
+Debug, T4908: Assimp 5.0.2455634966 amd64 msvc shared singlethreaded
+Debug, T4908: (Deleting previous scene)
+Info,  T4908: Found a matching importer for this file format: Direct3D XFile Importer.
+Info,  T4908: Import root directory is 'F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/X\'
+Warn,  T4908: Unknown data object in animation of .x file
+Skipping one or more lines with the same contents
+Warn,  T4908: Unknown data object in frame in x file
+Skipping one or more lines with the same contents
+Debug, T4908: MakeLeftHandedProcess begin
+Debug, T4908: MakeLeftHandedProcess finished
+Debug, T4908: FlipWindingOrderProcess begin
+Debug, T4908: FlipWindingOrderProcess finished
+Debug, T4908: UpdateImporterScale scale set: %f1
+Debug, T4908: ValidateDataStructureProcess begin
+Debug, T4908: ValidateDataStructureProcess end
+Info,  T4908: Entering post processing pipeline
+Debug, T4908: RemoveRedundantMatsProcess begin
+Debug, T4908: RemoveRedundantMatsProcess finished 
+Debug, T4908: OptimizeGraphProcess begin
+Debug, T4908: OptimizeGraphProcess finished
+Debug, T4908: GenUVCoordsProcess begin
+Debug, T4908: GenUVCoordsProcess finished
+Debug, T4908: TriangulateProcess begin
+Debug, T4908: TriangulateProcess finished. There was nothing to be done.
+Debug, T4908: FindDegeneratesProcess begin
+Debug, T4908: FindDegeneratesProcess finished
+Debug, T4908: SortByPTypeProcess begin
+Info,  T4908: Points: 0, Lines: 0, Triangles: 3, Polygons: 0 (Meshes, X = removed)
+Debug, T4908: SortByPTypeProcess finished
+Debug, T4908: FindInvalidDataProcess begin
+Debug, T4908: FindInvalidDataProcess finished. Everything seems to be OK.
+Debug, T4908: OptimizeMeshesProcess begin
+Debug, T4908: OptimizeMeshesProcess finished
+Debug, T4908: Generate spatially-sorted vertex cache
+Debug, T4908: GenVertexNormalsProcess begin
+Debug, T4908: GenVertexNormalsProcess finished. Normals are already there
+Debug, T4908: JoinVerticesProcess begin
+Debug, T4908: Mesh 0 (Torso) | Verts in: 5898 out: 1170 | ~80.1628%
+Debug, T4908: Mesh 1 (Head) | Verts in: 6108 out: 1196 | ~80.4191%
+Debug, T4908: Mesh 2 (Legs) | Verts in: 3372 out: 648 | ~80.7829%
+Info,  T4908: JoinVerticesProcess finished | Verts in: 15378 out: 3014 | ~80.4006
+Info,  T4908: Leaving post processing pipeline
+Info,  T4908: Load F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/3D/box_a.3d
+Debug, T4908: Assimp 5.0.2455634966 amd64 msvc shared singlethreaded
+Info,  T4908: Found a matching importer for this file format: Unreal Mesh Importer.
+Info,  T4908: Import root directory is 'F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/3D\'
+Debug, T4908: UNREAL: data file is F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/3D/box_d.3d
+Debug, T4908: UNREAL: aniv file is F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/3D/box_a.3d
+Debug, T4908: UNREAL: uc file is F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/3D/box.uc
+Debug, T4908: MakeLeftHandedProcess begin
+Debug, T4908: MakeLeftHandedProcess finished
+Debug, T4908: FlipWindingOrderProcess begin
+Debug, T4908: FlipWindingOrderProcess finished
+Debug, T4908: UpdateImporterScale scale set: %f1
+Debug, T4908: ValidateDataStructureProcess begin
+Debug, T4908: ValidateDataStructureProcess end
+Info,  T4908: Load F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/3DS/fels.3ds
+Debug, T4908: Assimp 5.0.2455634966 amd64 msvc shared singlethreaded
+Info,  T4908: Found a matching importer for this file format: Discreet 3DS Importer.
+Info,  T4908: Import root directory is 'F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/3DS\'
+Info,  T4908: 3DS file format version: 3
+Warn,  T4908: No hierarchy information has been found in the file. 
+Debug, T4908: UpdateImporterScale scale set: %f1
+Debug, T4908: ValidateDataStructureProcess begin
+Debug, T4908: ValidateDataStructureProcess end
+Info,  T4908: Load F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/3DS/testFormatDetection
+Debug, T4908: Assimp 5.0.2455634966 amd64 msvc shared singlethreaded
+Info,  T4908: File extension not known, trying signature-based detection
+Info,  T4908: Found a matching importer for this file format: Discreet 3DS Importer.
+Info,  T4908: Import root directory is 'F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/3DS\'
+Info,  T4908: 3DS file format version: 3
+Warn,  T4908: 3DS: Skipping TCB animation info
+Skipping one or more lines with the same contents
+Debug, T4908: UpdateImporterScale scale set: %f1
+Debug, T4908: ValidateDataStructureProcess begin
+Debug, T4908: ValidateDataStructureProcess end
+Info,  T4908: Load F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/AC/Wuson.ac
+Debug, T4908: Assimp 5.0.2455634966 amd64 msvc shared singlethreaded
+Info,  T4908: Found a matching importer for this file format: AC3D Importer.
+Info,  T4908: Import root directory is 'F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/AC\'
+Info,  T4908: AC3D file format version: 11
+Debug, T4908: UpdateImporterScale scale set: %f1
+Debug, T4908: ValidateDataStructureProcess begin
+Debug, T4908: ValidateDataStructureProcess end
+Info,  T4908: Load F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/AMF/test1.amf
+Debug, T4908: Assimp 5.0.2455634966 amd64 msvc shared singlethreaded
+Info,  T4908: Found a matching importer for this file format: Additive manufacturing file format(AMF) Importer.
+Info,  T4908: Import root directory is 'F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/AMF\'
+Debug, T4908: UpdateImporterScale scale set: %f1
+Debug, T4908: ValidateDataStructureProcess begin
+Debug, T4908: ValidateDataStructureProcess end
+Debug, T4908: ScenePreprocessor: Adding default material 'DefaultMaterial'
+Info,  T4908: Load F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/AMF/test_with_mat.amf
+Debug, T4908: Assimp 5.0.2455634966 amd64 msvc shared singlethreaded
+Info,  T4908: Found a matching importer for this file format: Additive manufacturing file format(AMF) Importer.
+Info,  T4908: Import root directory is 'F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/AMF\'
+Debug, T4908: UpdateImporterScale scale set: %f1
+Debug, T4908: ValidateDataStructureProcess begin
+Debug, T4908: ValidateDataStructureProcess end
+Debug, T4908: ScenePreprocessor: Adding default material 'DefaultMaterial'
+Info,  T4908: Load F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/ASE/ThreeCubesGreen.ASE
+Debug, T4908: Assimp 5.0.2455634966 amd64 msvc shared singlethreaded
+Info,  T4908: Found a matching importer for this file format: ASE Importer.
+Info,  T4908: Import root directory is 'F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/ASE\'
+Info,  T4908: Line 1: Comment: AsciiExport-Version  2,00 - Tue May 06 17:21:38 2008
+Debug, T4908: UpdateImporterScale scale set: %f1
+Debug, T4908: ValidateDataStructureProcess begin
+Debug, T4908: ValidateDataStructureProcess end
+Info,  T4908: Load F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/3MF/box.3mf
+Debug, T4908: Assimp 5.0.2455634966 amd64 msvc shared singlethreaded
+Info,  T4908: Found a matching importer for this file format: 3mf Importer.
+Info,  T4908: Import root directory is 'F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/3MF\'
+Warn,  T4908: Ignored file of unknown type: 3D/3dmodel.model
+Warn,  T4908: Ignored file of unsupported type CONTENT_TYPES_ARCHIVES[Content_Types].xml
+Debug, T4908: 3D/3dmodel.model
+Debug, T4908: UpdateImporterScale scale set: %f1
+Debug, T4908: ValidateDataStructureProcess begin
+Debug, T4908: ValidateDataStructureProcess end
+Debug, T4908: ScenePreprocessor: Adding default material 'DefaultMaterial'
+Info,  T4908: Load F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/3MF/box.3mf
+Debug, T4908: Assimp 5.0.2455634966 amd64 msvc shared singlethreaded
+Info,  T4908: Found a matching importer for this file format: 3mf Importer.
+Info,  T4908: Import root directory is 'F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/3MF\'
+Warn,  T4908: Ignored file of unknown type: 3D/3dmodel.model
+Warn,  T4908: Ignored file of unsupported type CONTENT_TYPES_ARCHIVES[Content_Types].xml
+Debug, T4908: 3D/3dmodel.model
+Debug, T4908: UpdateImporterScale scale set: %f1
+Debug, T4908: ScenePreprocessor: Adding default material 'DefaultMaterial'
+Info,  T4908: Load F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/3MF/box.3mf
+Debug, T4908: Assimp 5.0.2455634966 amd64 msvc shared singlethreaded
+Info,  T4908: Found a matching importer for this file format: 3mf Importer.
+Info,  T4908: Import root directory is 'F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/3MF\'
+Warn,  T4908: Ignored file of unknown type: 3D/3dmodel.model
+Warn,  T4908: Ignored file of unsupported type CONTENT_TYPES_ARCHIVES[Content_Types].xml
+Debug, T4908: 3D/3dmodel.model
+Debug, T4908: UpdateImporterScale scale set: %f1
+Debug, T4908: ScenePreprocessor: Adding default material 'DefaultMaterial'
+Info,  T4908: Load test.3mf
+Debug, T4908: Assimp 5.0.2455634966 amd64 msvc shared singlethreaded
+Info,  T4908: Found a matching importer for this file format: 3mf Importer.
+Info,  T4908: Import root directory is '.\'
+Warn,  T4908: Ignored file of unknown type: 3D/3DModel.model
+Warn,  T4908: Ignored file of unsupported type CONTENT_TYPES_ARCHIVES[Content_Types].xml
+Debug, T4908: 3D/3DModel.model
+Debug, T4908: UpdateImporterScale scale set: %f1
+Info,  T4908: Load F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/Q3D/earth.q3o
+Debug, T4908: Assimp 5.0.2455634966 amd64 msvc shared singlethreaded
+Info,  T4908: Found a matching importer for this file format: Quick3D Importer.
+Info,  T4908: Import root directory is 'F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/Q3D\'
+Info,  T4908: Quick3D File format version: 30
+Debug, T4908: UpdateImporterScale scale set: %f1
+Debug, T4908: ValidateDataStructureProcess begin
+Debug, T4908: ValidateDataStructureProcess end
+Info,  T4908: Load F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/STL/Spider_ascii.stl
+Debug, T4908: Assimp 5.0.2455634966 amd64 msvc shared singlethreaded
+Info,  T4908: Found a matching importer for this file format: Stereolithography (STL) Importer.
+Info,  T4908: Import root directory is 'F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/STL\'
+Debug, T4908: UpdateImporterScale scale set: %f1
+Debug, T4908: ValidateDataStructureProcess begin
+Debug, T4908: ValidateDataStructureProcess end
+Info,  T4908: Load F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/STL/Spider_ascii.stl
+Debug, T4908: Assimp 5.0.2455634966 amd64 msvc shared singlethreaded
+Info,  T4908: Found a matching importer for this file format: Stereolithography (STL) Importer.
+Info,  T4908: Import root directory is 'F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/STL\'
+Debug, T4908: UpdateImporterScale scale set: %f1
+Debug, T4908: ValidateDataStructureProcess begin
+Debug, T4908: ValidateDataStructureProcess end
+Info,  T4908: Load F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/STL/Spider_ascii.stl
+Debug, T4908: Assimp 5.0.2455634966 amd64 msvc shared singlethreaded
+Info,  T4908: Found a matching importer for this file format: Stereolithography (STL) Importer.
+Info,  T4908: Import root directory is 'F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/STL\'
+Debug, T4908: UpdateImporterScale scale set: %f1
+Debug, T4908: ValidateDataStructureProcess begin
+Debug, T4908: ValidateDataStructureProcess end
+Info,  T4908: Load F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/STL/formatDetection
+Debug, T4908: Assimp 5.0.2455634966 amd64 msvc shared singlethreaded
+Info,  T4908: File extension not known, trying signature-based detection
+Debug, T4908: Found positive match for header keyword: solid
+Info,  T4908: Found a matching importer for this file format: Stereolithography (STL) Importer.
+Info,  T4908: Import root directory is 'F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/STL\'
+Debug, T4908: UpdateImporterScale scale set: %f1
+Debug, T4908: ValidateDataStructureProcess begin
+Debug, T4908: ValidateDataStructureProcess end
+Info,  T4908: Load F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/STL/triangle_with_two_solids.stl
+Debug, T4908: Assimp 5.0.2455634966 amd64 msvc shared singlethreaded
+Info,  T4908: Found a matching importer for this file format: Stereolithography (STL) Importer.
+Info,  T4908: Import root directory is 'F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/STL\'
+Debug, T4908: UpdateImporterScale scale set: %f1
+Debug, T4908: ValidateDataStructureProcess begin
+Debug, T4908: ValidateDataStructureProcess end
+Info,  T4908: Load F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/STL/triangle_with_empty_solid.stl
+Debug, T4908: Assimp 5.0.2455634966 amd64 msvc shared singlethreaded
+Info,  T4908: Found a matching importer for this file format: Stereolithography (STL) Importer.
+Info,  T4908: Import root directory is 'F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/STL\'
+Warn,  T4908: STL: mesh is empty or invalid; no data loaded
+Debug, T4908: UpdateImporterScale scale set: %f1
+Info,  T4908: Load F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/STL/triangle_with_empty_solid.stl
+Debug, T4908: Assimp 5.0.2455634966 amd64 msvc shared singlethreaded
+Debug, T4908: (Deleting previous scene)
+Info,  T4908: Found a matching importer for this file format: Stereolithography (STL) Importer.
+Info,  T4908: Import root directory is 'F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/STL\'
+Warn,  T4908: STL: mesh is empty or invalid; no data loaded
+Debug, T4908: UpdateImporterScale scale set: %f1
+Debug, T4908: ValidateDataStructureProcess begin
+Error, T4908: Validation failed: The mesh emptySolid contains no vertices
+Info,  T4908: Load F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/STL/Spider_ascii.stl
+Debug, T4908: Assimp 5.0.2455634966 amd64 msvc shared singlethreaded
+Info,  T4908: Found a matching importer for this file format: Stereolithography (STL) Importer.
+Info,  T4908: Import root directory is 'F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/STL\'
+Debug, T4908: UpdateImporterScale scale set: %f1
+Debug, T4908: ValidateDataStructureProcess begin
+Debug, T4908: ValidateDataStructureProcess end
+Debug, T4908: PretransformVerticesProcess begin
+Debug, T4908: PretransformVerticesProcess finished
+Info,  T4908: Removed 2 nodes and 0 animation channels (1 output nodes)
+Info,  T4908: Kept 0 lights and 0 cameras.
+Info,  T4908: Moved 1 meshes to WCS (number of output meshes: 1)
+Debug, T4908: TriangulateProcess begin
+Debug, T4908: TriangulateProcess finished. There was nothing to be done.
+Debug, T4908: GenFaceNormalsProcess begin
+Debug, T4908: GenFaceNormalsProcess finished. Normals are already there
+Info,  T4908: Load spiderExport.stl
+Debug, T4908: Assimp 5.0.2455634966 amd64 msvc shared singlethreaded
+Debug, T4908: (Deleting previous scene)
+Info,  T4908: Found a matching importer for this file format: Stereolithography (STL) Importer.
+Info,  T4908: Import root directory is '.\'
+Debug, T4908: UpdateImporterScale scale set: %f1
+Debug, T4908: ValidateDataStructureProcess begin
+Debug, T4908: ValidateDataStructureProcess end
+Debug, T4908: TriangulateProcess begin
+Debug, T4908: TriangulateProcess finished. There was nothing to be done.
+Debug, T4908: GenFaceNormalsProcess begin
+Info,  T4908: Normal vectors are undefined for line and point meshes
+Debug, T4908: GenFaceNormalsProcess finished. Normals are already there
+Info,  T4908: Load F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/X/test.x
+Debug, T4908: Assimp 5.0.2455634966 amd64 msvc shared singlethreaded
+Info,  T4908: Found a matching importer for this file format: Direct3D XFile Importer.
+Info,  T4908: Import root directory is 'F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/X\'
+Warn,  T4908: Unknown data object in mesh in x file
+Debug, T4908: MakeLeftHandedProcess begin
+Debug, T4908: MakeLeftHandedProcess finished
+Debug, T4908: FlipWindingOrderProcess begin
+Debug, T4908: FlipWindingOrderProcess finished
+Debug, T4908: UpdateImporterScale scale set: %f1
+Debug, T4908: ValidateDataStructureProcess begin
+Debug, T4908: ValidateDataStructureProcess end
+Info,  T4908: Load F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/X/OV_GetNextToken
+Debug, T4908: Assimp 5.0.2455634966 amd64 msvc shared singlethreaded
+Info,  T4908: File extension not known, trying signature-based detection
+Info,  T4908: Found a matching importer for this file format: Direct3D XFile Importer.
+Info,  T4908: Import root directory is 'F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/X\'
+Info,  T4908: Successfully decompressed MSZIP-compressed file
+Error, T4908: Opening brace expected.
+Info,  T4908: Load F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/X3D/ComputerKeyboard.x3d
+Debug, T4908: Assimp 5.0.2455634966 amd64 msvc shared singlethreaded
+Info,  T4908: Found a matching importer for this file format: Extensible 3D(X3D) Importer.
+Info,  T4908: Import root directory is 'F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/X3D\'
+Info,  T4908: Skipping node "Viewpoint" in Scene.
+Info,  T4908: Skipping node "TouchSensor" in Scene.
+Info,  T4908: Skipping node "TimeSensor" in Scene.
+Info,  T4908: Skipping node "PositionInterpolator" in Scene.
+Info,  T4908: Skipping node "ROUTE" in Scene.
+Skipping one or more lines with the same contents
+Debug, T4908: UpdateImporterScale scale set: %f1
+Debug, T4908: ValidateDataStructureProcess begin
+Debug, T4908: ValidateDataStructureProcess end
+Info,  T4908: Load F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/DXF/PinkEggFromLW.dxf
+Debug, T4908: Assimp 5.0.2455634966 amd64 msvc shared singlethreaded
+Info,  T4908: Found a matching importer for this file format: Drawing Interchange Format (DXF) Importer.
+Info,  T4908: Import root directory is 'F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/DXF\'
+Debug, T4908: DXF: got 0 entries in BLOCKS
+Debug, T4908: DXF: got 288 polylines and 0 inserted blocks in ENTITIES
+Debug, T4908: DXF: Unexpanded polycount is 288, vertex count is 1152
+Debug, T4908: UpdateImporterScale scale set: %f1
+Debug, T4908: ValidateDataStructureProcess begin
+Debug, T4908: ValidateDataStructureProcess end
+Info,  T4908: Load F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/DXF/lineTest
+Debug, T4908: Assimp 5.0.2455634966 amd64 msvc shared singlethreaded
+Info,  T4908: File extension not known, trying signature-based detection
+Debug, T4908: Found positive match for header keyword: SECTION
+Info,  T4908: Found a matching importer for this file format: Drawing Interchange Format (DXF) Importer.
+Info,  T4908: Import root directory is 'F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/DXF\'
+Info,  T4908: DXF Comment: VISION3D DXF
+Debug, T4908: DXF: got 0 entries in BLOCKS
+Debug, T4908: DXF: got 3 polylines and 0 inserted blocks in ENTITIES
+Debug, T4908: DXF: Unexpanded polycount is 3, vertex count is 9
+Debug, T4908: UpdateImporterScale scale set: %f1
+Debug, T4908: ValidateDataStructureProcess begin
+Debug, T4908: ValidateDataStructureProcess end
+Info,  T4908: Load F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/DXF/issue_2229.dxf
+Debug, T4908: Assimp 5.0.2455634966 amd64 msvc shared singlethreaded
+Info,  T4908: Found a matching importer for this file format: Drawing Interchange Format (DXF) Importer.
+Info,  T4908: Import root directory is 'F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/DXF\'
+Debug, T4908: DXF: skipped over control group (273 lines)
+Debug, T4908: DXF: got 2 entries in BLOCKS
+Warn,  T4908: DXF: invalid vertex index, indices are one-based.
+Skipping one or more lines with the same contents
+Warn,  T4908: DXF: unexpected face count in polymesh: 1173, expected 1174
+Warn,  T4908: DXF: invalid vertex index, indices are one-based.
+Skipping one or more lines with the same contents
+Debug, T4908: DXF: got 4 polylines and 0 inserted blocks in ENTITIES
+Debug, T4908: DXF: skipped over control group (3 lines)
+Skipping one or more lines with the same contents
+Debug, T4908: DXF: Unexpanded polycount is 1289, vertex count is 768
+Debug, T4908: UpdateImporterScale scale set: %f1
+Debug, T4908: ValidateDataStructureProcess begin
+Debug, T4908: ValidateDataStructureProcess end
+Info,  T4908: Load F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/PLY/cube.ply
+Debug, T4908: Assimp 5.0.2455634966 amd64 msvc shared singlethreaded
+Info,  T4908: Found a matching importer for this file format: Stanford Polygon Library (PLY) Importer.
+Info,  T4908: Import root directory is 'F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/PLY\'
+Debug, T4908: PLY::DOM::ParseInstance() begin
+Debug, T4908: PLY::DOM::ParseHeader() begin
+Debug, T4908: PLY::DOM::ParseHeader() succeeded
+Debug, T4908: PLY::DOM::ParseElementInstanceLists() begin
+Debug, T4908: PLY::DOM::ParseElementInstanceLists() succeeded
+Debug, T4908: PLY::DOM::ParseInstance() succeeded
+Debug, T4908: UpdateImporterScale scale set: %f1
+Debug, T4908: ValidateDataStructureProcess begin
+Debug, T4908: ValidateDataStructureProcess end
+Info,  T4908: Load F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/PLY/cube.ply
+Debug, T4908: Assimp 5.0.2455634966 amd64 msvc shared singlethreaded
+Info,  T4908: Found a matching importer for this file format: Stanford Polygon Library (PLY) Importer.
+Info,  T4908: Import root directory is 'F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/PLY\'
+Debug, T4908: PLY::DOM::ParseInstance() begin
+Debug, T4908: PLY::DOM::ParseHeader() begin
+Debug, T4908: PLY::DOM::ParseHeader() succeeded
+Debug, T4908: PLY::DOM::ParseElementInstanceLists() begin
+Debug, T4908: PLY::DOM::ParseElementInstanceLists() succeeded
+Debug, T4908: PLY::DOM::ParseInstance() succeeded
+Debug, T4908: UpdateImporterScale scale set: %f1
+Debug, T4908: ValidateDataStructureProcess begin
+Debug, T4908: ValidateDataStructureProcess end
+Debug, T4908: PretransformVerticesProcess begin
+Debug, T4908: PretransformVerticesProcess finished
+Info,  T4908: Removed 1 nodes and 0 animation channels (1 output nodes)
+Info,  T4908: Kept 0 lights and 0 cameras.
+Info,  T4908: Moved 1 meshes to WCS (number of output meshes: 1)
+Info,  T4908: Load F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/PLY/cube.ply
+Debug, T4908: Assimp 5.0.2455634966 amd64 msvc shared singlethreaded
+Info,  T4908: Found a matching importer for this file format: Stanford Polygon Library (PLY) Importer.
+Info,  T4908: Import root directory is 'F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/PLY\'
+Debug, T4908: PLY::DOM::ParseInstance() begin
+Debug, T4908: PLY::DOM::ParseHeader() begin
+Debug, T4908: PLY::DOM::ParseHeader() succeeded
+Debug, T4908: PLY::DOM::ParseElementInstanceLists() begin
+Debug, T4908: PLY::DOM::ParseElementInstanceLists() succeeded
+Debug, T4908: PLY::DOM::ParseInstance() succeeded
+Debug, T4908: UpdateImporterScale scale set: %f1
+Debug, T4908: ValidateDataStructureProcess begin
+Debug, T4908: ValidateDataStructureProcess end
+Info,  T4908: Load F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/PLY/cube.ply
+Debug, T4908: Assimp 5.0.2455634966 amd64 msvc shared singlethreaded
+Debug, T4908: (Deleting previous scene)
+Info,  T4908: Found a matching importer for this file format: Stanford Polygon Library (PLY) Importer.
+Info,  T4908: Import root directory is 'F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/PLY\'
+Debug, T4908: PLY::DOM::ParseInstance() begin
+Debug, T4908: PLY::DOM::ParseHeader() begin
+Debug, T4908: PLY::DOM::ParseHeader() succeeded
+Debug, T4908: PLY::DOM::ParseElementInstanceLists() begin
+Debug, T4908: PLY::DOM::ParseElementInstanceLists() succeeded
+Debug, T4908: PLY::DOM::ParseInstance() succeeded
+Debug, T4908: UpdateImporterScale scale set: %f1
+Debug, T4908: ValidateDataStructureProcess begin
+Debug, T4908: ValidateDataStructureProcess end
+Info,  T4908: Load F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/PLY/cube_uv.ply
+Debug, T4908: Assimp 5.0.2455634966 amd64 msvc shared singlethreaded
+Info,  T4908: Found a matching importer for this file format: Stanford Polygon Library (PLY) Importer.
+Info,  T4908: Import root directory is 'F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/PLY\'
+Debug, T4908: PLY::DOM::ParseInstance() begin
+Debug, T4908: PLY::DOM::ParseHeader() begin
+Debug, T4908: PLY::DOM::ParseHeader() succeeded
+Debug, T4908: PLY::DOM::ParseElementInstanceLists() begin
+Debug, T4908: PLY::DOM::ParseElementInstanceLists() succeeded
+Debug, T4908: PLY::DOM::ParseInstance() succeeded
+Debug, T4908: UpdateImporterScale scale set: %f1
+Debug, T4908: ValidateDataStructureProcess begin
+Debug, T4908: ValidateDataStructureProcess end
+Info,  T4908: Load F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/PLY/cube_binary.ply
+Debug, T4908: Assimp 5.0.2455634966 amd64 msvc shared singlethreaded
+Info,  T4908: Found a matching importer for this file format: Stanford Polygon Library (PLY) Importer.
+Info,  T4908: Import root directory is 'F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/PLY\'
+Debug, T4908: PLY::DOM::ParseInstanceBinary() begin
+Debug, T4908: PLY::DOM::ParseHeader() begin
+Debug, T4908: PLY::DOM::ParseHeader() succeeded
+Debug, T4908: PLY::DOM::ParseElementInstanceListsBinary() begin
+Debug, T4908: PLY::DOM::ParseElementInstanceListsBinary() succeeded
+Debug, T4908: PLY::DOM::ParseInstanceBinary() succeeded
+Debug, T4908: UpdateImporterScale scale set: %f1
+Debug, T4908: ValidateDataStructureProcess begin
+Debug, T4908: ValidateDataStructureProcess end
+Info,  T4908: Load F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/PLY/float-color.ply
+Debug, T4908: Assimp 5.0.2455634966 amd64 msvc shared singlethreaded
+Info,  T4908: Found a matching importer for this file format: Stanford Polygon Library (PLY) Importer.
+Info,  T4908: Import root directory is 'F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/PLY\'
+Debug, T4908: PLY::DOM::ParseInstance() begin
+Debug, T4908: PLY::DOM::ParseHeader() begin
+Debug, T4908: PLY::DOM::ParseHeader() succeeded
+Debug, T4908: PLY::DOM::ParseElementInstanceLists() begin
+Debug, T4908: PLY::DOM::ParseElementInstanceLists() succeeded
+Debug, T4908: PLY::DOM::ParseInstance() succeeded
+Debug, T4908: UpdateImporterScale scale set: %f1
+Debug, T4908: ValidateDataStructureProcess begin
+Debug, T4908: ValidateDataStructureProcess end
+Info,  T4908: Load F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/PLY/issue623.ply
+Debug, T4908: Assimp 5.0.2455634966 amd64 msvc shared singlethreaded
+Info,  T4908: Found a matching importer for this file format: Stanford Polygon Library (PLY) Importer.
+Info,  T4908: Import root directory is 'F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/PLY\'
+Debug, T4908: PLY::DOM::ParseInstance() begin
+Debug, T4908: PLY::DOM::ParseHeader() begin
+Debug, T4908: PLY::DOM::ParseHeader() succeeded
+Debug, T4908: PLY::DOM::ParseElementInstanceLists() begin
+Warn,  T4908: Unable to parse property instance. Skipping this element instance
+Skipping one or more lines with the same contents
+Debug, T4908: PLY::DOM::ParseElementInstanceLists() succeeded
+Debug, T4908: PLY::DOM::ParseInstance() succeeded
+Debug, T4908: UpdateImporterScale scale set: %f1
+Info,  T4908: Load $$$___magic___$$$.
+Debug, T4908: Assimp 5.0.2455634966 amd64 msvc shared singlethreaded
+Debug, T4908: Found positive match for header keyword: ply
+Info,  T4908: Found a matching importer for this file format: Stanford Polygon Library (PLY) Importer.
+Info,  T4908: Import root directory is '.\'
+Debug, T4908: PLY::DOM::ParseInstance() begin
+Debug, T4908: PLY::DOM::ParseHeader() begin
+Debug, T4908: PLY::DOM::ParseHeader() succeeded
+Debug, T4908: PLY::DOM::ParseElementInstanceLists() begin
+Debug, T4908: PLY::DOM::ParseElementInstanceLists() succeeded
+Debug, T4908: PLY::DOM::ParseInstance() succeeded
+Debug, T4908: UpdateImporterScale scale set: %f1
+Info,  T4908: Load F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/OBJ/spider.obj
+Debug, T4908: Assimp 5.0.2455634966 amd64 msvc shared singlethreaded
+Info,  T4908: Found a matching importer for this file format: Wavefront Object Importer.
+Info,  T4908: Import root directory is 'F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/OBJ\'
+Debug, T4908: UpdateImporterScale scale set: %f1
+Debug, T4908: ValidateDataStructureProcess begin
+Debug, T4908: ValidateDataStructureProcess end
+Info,  T4908: Load F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/OBJ/spider.obj
+Debug, T4908: Assimp 5.0.2455634966 amd64 msvc shared singlethreaded
+Info,  T4908: Found a matching importer for this file format: Wavefront Object Importer.
+Info,  T4908: Import root directory is 'F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/OBJ\'
+Debug, T4908: UpdateImporterScale scale set: %f1
+Debug, T4908: ValidateDataStructureProcess begin
+Debug, T4908: ValidateDataStructureProcess end
+Debug, T4908: GenVertexNormalsProcess begin
+Debug, T4908: GenVertexNormalsProcess finished. Normals are already there
+Debug, T4908: GenVertexNormalsProcess begin
+Debug, T4908: GenVertexNormalsProcess finished. Normals are already there
+Info,  T4908: Load $$$___magic___$$$.
+Debug, T4908: Assimp 5.0.2455634966 amd64 msvc shared singlethreaded
+Info,  T4908: File extension not known, trying signature-based detection
+Debug, T4908: Found positive match for header keyword: usemtl
+Info,  T4908: Found a matching importer for this file format: Wavefront Object Importer.
+Info,  T4908: Import root directory is '.\'
+Error, T4908: OBJ: failed to locate material Default, creating new material
+Debug, T4908: UpdateImporterScale scale set: %f1
+Info,  T4908: Load $$$___magic___$$$.
+Debug, T4908: Assimp 5.0.2455634966 amd64 msvc shared singlethreaded
+Info,  T4908: File extension not known, trying signature-based detection
+Debug, T4908: Found positive match for header keyword: usemtl
+Info,  T4908: Found a matching importer for this file format: Wavefront Object Importer.
+Info,  T4908: Import root directory is '.\'
+Debug, T4908: UpdateImporterScale scale set: %f1
+Info,  T4908: Load F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/OBJ/cube_with_vertexcolors.obj
+Debug, T4908: Assimp 5.0.2455634966 amd64 msvc shared singlethreaded
+Info,  T4908: Found a matching importer for this file format: Wavefront Object Importer.
+Info,  T4908: Import root directory is 'F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/OBJ\'
+Debug, T4908: UpdateImporterScale scale set: %f1
+Debug, T4908: ValidateDataStructureProcess begin
+Debug, T4908: ValidateDataStructureProcess end
+Debug, T4908: GenVertexNormalsProcess begin
+Debug, T4908: GenVertexNormalsProcess finished. Normals are already there
+Info,  T4908: Load F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/OBJ/cube_with_vertexcolors_uni.obj
+Debug, T4908: Assimp 5.0.2455634966 amd64 msvc shared singlethreaded
+Info,  T4908: Found a matching importer for this file format: Wavefront Object Importer.
+Info,  T4908: Import root directory is 'F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/OBJ\'
+Debug, T4908: UpdateImporterScale scale set: %f1
+Debug, T4908: ValidateDataStructureProcess begin
+Debug, T4908: ValidateDataStructureProcess end
+Debug, T4908: GenVertexNormalsProcess begin
+Debug, T4908: GenVertexNormalsProcess finished. Normals are already there
+Info,  T4908: Load $$$___magic___$$$.
+Debug, T4908: Assimp 5.0.2455634966 amd64 msvc shared singlethreaded
+Info,  T4908: File extension not known, trying signature-based detection
+Debug, T4908: Found positive match for header keyword: mtllib
+Info,  T4908: Found a matching importer for this file format: Wavefront Object Importer.
+Info,  T4908: Import root directory is '.\'
+Error, T4908: OBJ: Unable to locate material file $blobfile.mtl
+Info,  T4908: OBJ: Opening fallback material file $$$___magic___$mtl
+Error, T4908: OBJ: Unable to locate fallback material file $$$___magic___$mtl
+Debug, T4908: UpdateImporterScale scale set: %f1
+Debug, T4908: ValidateDataStructureProcess begin
+Debug, T4908: ValidateDataStructureProcess end
+Info,  T4908: Load $$$___magic___$$$.
+Debug, T4908: Assimp 5.0.2455634966 amd64 msvc shared singlethreaded
+Info,  T4908: File extension not known, trying signature-based detection
+Debug, T4908: Found positive match for header keyword: v 
+Info,  T4908: Found a matching importer for this file format: Wavefront Object Importer.
+Info,  T4908: Import root directory is '.\'
+Debug, T4908: UpdateImporterScale scale set: %f1
+Debug, T4908: ValidateDataStructureProcess begin
+Error, T4908: Validation failed: Mesh  contains no faces
+Info,  T4908: Load $$$___magic___$$$.
+Debug, T4908: Assimp 5.0.2455634966 amd64 msvc shared singlethreaded
+Info,  T4908: File extension not known, trying signature-based detection
+Debug, T4908: Found positive match for header keyword: v 
+Info,  T4908: Found a matching importer for this file format: Wavefront Object Importer.
+Info,  T4908: Import root directory is '.\'
+Debug, T4908: UpdateImporterScale scale set: %f1
+Debug, T4908: ValidateDataStructureProcess begin
+Debug, T4908: ValidateDataStructureProcess end
+Info,  T4908: Load $$$___magic___$$$.
+Debug, T4908: Assimp 5.0.2455634966 amd64 msvc shared singlethreaded
+Info,  T4908: File extension not known, trying signature-based detection
+Debug, T4908: Found positive match for header keyword: v 
+Info,  T4908: Found a matching importer for this file format: Wavefront Object Importer.
+Info,  T4908: Import root directory is '.\'
+Debug, T4908: UpdateImporterScale scale set: %f1
+Debug, T4908: ValidateDataStructureProcess begin
+Debug, T4908: ValidateDataStructureProcess end
+Info,  T4908: Load $$$___magic___$$$.
+Debug, T4908: Assimp 5.0.2455634966 amd64 msvc shared singlethreaded
+Info,  T4908: File extension not known, trying signature-based detection
+Debug, T4908: Found positive match for header keyword: v 
+Info,  T4908: Found a matching importer for this file format: Wavefront Object Importer.
+Info,  T4908: Import root directory is '.\'
+Error, T4908: OBJ: Invalid component in homogeneous vector (Division by zero)
+Info,  T4908: Load $$$___magic___$$$.
+Debug, T4908: Assimp 5.0.2455634966 amd64 msvc shared singlethreaded
+Info,  T4908: File extension not known, trying signature-based detection
+Debug, T4908: Found positive match for header keyword: v 
+Info,  T4908: Found a matching importer for this file format: Wavefront Object Importer.
+Info,  T4908: Import root directory is '.\'
+Error, T4908: OBJ: Invalid face indice
+Info,  T4908: Load $$$___magic___$$$.
+Debug, T4908: Assimp 5.0.2455634966 amd64 msvc shared singlethreaded
+Info,  T4908: File extension not known, trying signature-based detection
+Debug, T4908: Found positive match for header keyword: v 
+Info,  T4908: Found a matching importer for this file format: Wavefront Object Importer.
+Info,  T4908: Import root directory is '.\'
+Debug, T4908: UpdateImporterScale scale set: %f1
+Info,  T4908: Load $$$___magic___$$$.
+Debug, T4908: Assimp 5.0.2455634966 amd64 msvc shared singlethreaded
+Info,  T4908: File extension not known, trying signature-based detection
+Debug, T4908: Found positive match for header keyword: v 
+Info,  T4908: Found a matching importer for this file format: Wavefront Object Importer.
+Info,  T4908: Import root directory is '.\'
+Debug, T4908: UpdateImporterScale scale set: %f1
+Info,  T4908: Load F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/OBJ/cube_mtllib_after_g.obj
+Debug, T4908: Assimp 5.0.2455634966 amd64 msvc shared singlethreaded
+Info,  T4908: Found a matching importer for this file format: Wavefront Object Importer.
+Info,  T4908: Import root directory is 'F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/OBJ\'
+Error, T4908: OBJ: Unable to locate material file cube_mtllib_after_g.mat
+Info,  T4908: OBJ: Opening fallback material file F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/OBJ/cube_mtllib_after_g.mtl
+Debug, T4908: UpdateImporterScale scale set: %f1
+Debug, T4908: ValidateDataStructureProcess begin
+Debug, T4908: ValidateDataStructureProcess end
+Info,  T4908: Load F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/OBJ/point_cloud.obj
+Debug, T4908: Assimp 5.0.2455634966 amd64 msvc shared singlethreaded
+Info,  T4908: Found a matching importer for this file format: Wavefront Object Importer.
+Info,  T4908: Import root directory is 'F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/OBJ\'
+Debug, T4908: UpdateImporterScale scale set: %f1
+Debug, T4908: ScenePreprocessor: Adding default material 'DefaultMaterial'
+Info,  T4908: Load F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/OBJ/box_without_lineending.obj
+Debug, T4908: Assimp 5.0.2455634966 amd64 msvc shared singlethreaded
+Info,  T4908: Found a matching importer for this file format: Wavefront Object Importer.
+Info,  T4908: Import root directory is 'F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/OBJ\'
+Error, T4908: OBJ: failed to locate material Default, creating new material
+Debug, T4908: UpdateImporterScale scale set: %f1
+Info,  T4908: Load $$$___magic___$$$.
+Debug, T4908: Assimp 5.0.2455634966 amd64 msvc shared singlethreaded
+Info,  T4908: File extension not known, trying signature-based detection
+Debug, T4908: Found positive match for header keyword: v 
+Info,  T4908: Found a matching importer for this file format: Wavefront Object Importer.
+Info,  T4908: Import root directory is '.\'
+Debug, T4908: UpdateImporterScale scale set: %f1
+Info,  T4908: Load F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/OpenGEX/Example.ogex
+Debug, T4908: Assimp 5.0.2455634966 amd64 msvc shared singlethreaded
+Info,  T4908: Found a matching importer for this file format: Open Game Engine Exchange.
+Info,  T4908: Import root directory is 'F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/OpenGEX\'
+Debug, T4908: UpdateImporterScale scale set: %f1
+Info,  T4908: Load F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/OpenGEX/light_issue1262.ogex
+Debug, T4908: Assimp 5.0.2455634966 amd64 msvc shared singlethreaded
+Info,  T4908: Found a matching importer for this file format: Open Game Engine Exchange.
+Info,  T4908: Import root directory is 'F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/OpenGEX\'
+Debug, T4908: UpdateImporterScale scale set: %f1
+Info,  T4908: Load F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/OpenGEX/empty_camera.ogex
+Debug, T4908: Assimp 5.0.2455634966 amd64 msvc shared singlethreaded
+Info,  T4908: Found a matching importer for this file format: Open Game Engine Exchange.
+Info,  T4908: Import root directory is 'F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/OpenGEX\'
+Debug, T4908: UpdateImporterScale scale set: %f1
+Info,  T4908: Load F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/SIB/heffalump.sib
+Debug, T4908: Assimp 5.0.2455634966 amd64 msvc shared singlethreaded
+Info,  T4908: Found a matching importer for this file format: Silo SIB Importer.
+Info,  T4908: Import root directory is 'F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/SIB\'
+Debug, T4908: UpdateImporterScale scale set: %f1
+Debug, T4908: ValidateDataStructureProcess begin
+Debug, T4908: ValidateDataStructureProcess end
+Info,  T4908: Load F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/BLEND/AreaLight_269.blend
+Debug, T4908: Assimp 5.0.2455634966 amd64 msvc shared singlethreaded
+Info,  T4908: Found a matching importer for this file format: Blender 3D Importer 
+http://www.blender3d.org.
+Info,  T4908: Import root directory is 'F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/BLEND\'
+Info,  T4908: BLEND: Blender version is 2.69 (64bit: true, little endian: true)
+Debug, T4908: BlenderDNA: Got 551 structures with totally 6353 fields
+Warn,  T4908: BlendDNA: Did not find a field named `coeff_const` in structure `Lamp`
+Warn,  T4908: BlendDNA: Did not find a field named `coeff_lin` in structure `Lamp`
+Warn,  T4908: BlendDNA: Did not find a field named `coeff_quad` in structure `Lamp`
+Warn,  T4908: BlendDNA: Did not find a field named `coeff_const` in structure `Lamp`
+Warn,  T4908: BlendDNA: Did not find a field named `coeff_lin` in structure `Lamp`
+Warn,  T4908: BlendDNA: Did not find a field named `coeff_quad` in structure `Lamp`
+Warn,  T4908: BlendDNA: Did not find a field named `coeff_const` in structure `Lamp`
+Warn,  T4908: BlendDNA: Did not find a field named `coeff_lin` in structure `Lamp`
+Warn,  T4908: BlendDNA: Did not find a field named `coeff_quad` in structure `Lamp`
+Info,  T4908: (Stats) Fields read: 918, pointers resolved: 23, cache hits: 3, cached objects: 19
+Debug, T4908: UpdateImporterScale scale set: %f1
+Debug, T4908: ValidateDataStructureProcess begin
+Warn,  T4908: Validation warning: aiLight::mAttenuationXXX - all are zero
+Skipping one or more lines with the same contents
+Debug, T4908: ValidateDataStructureProcess end
+Info,  T4908: Load F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/BLEND/box.blend
+Debug, T4908: Assimp 5.0.2455634966 amd64 msvc shared singlethreaded
+Info,  T4908: Found a matching importer for this file format: Blender 3D Importer 
+http://www.blender3d.org.
+Info,  T4908: Import root directory is 'F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/BLEND\'
+Info,  T4908: BLEND: Blender version is 2.76 (64bit: true, little endian: true)
+Debug, T4908: BlenderDNA: Got 604 structures with totally 6955 fields
+Warn,  T4908: BlendDNA: Did not find a field named `coeff_const` in structure `Lamp`
+Warn,  T4908: BlendDNA: Did not find a field named `coeff_lin` in structure `Lamp`
+Warn,  T4908: BlendDNA: Did not find a field named `coeff_quad` in structure `Lamp`
+Info,  T4908: (Stats) Fields read: 668, pointers resolved: 17, cache hits: 3, cached objects: 13
+Debug, T4908: UpdateImporterScale scale set: %f1
+Debug, T4908: ValidateDataStructureProcess begin
+Warn,  T4908: Validation warning: aiLight::mAttenuationXXX - all are zero
+Debug, T4908: ValidateDataStructureProcess end
+Info,  T4908: Load F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/BLEND/BlenderMaterial_269.blend
+Debug, T4908: Assimp 5.0.2455634966 amd64 msvc shared singlethreaded
+Info,  T4908: Found a matching importer for this file format: Blender 3D Importer 
+http://www.blender3d.org.
+Info,  T4908: Import root directory is 'F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/BLEND\'
+Info,  T4908: BLEND: Blender version is 2.69 (64bit: true, little endian: true)
+Debug, T4908: BlenderDNA: Got 551 structures with totally 6353 fields
+Warn,  T4908: BlendDNA: Did not find a field named `coeff_const` in structure `Lamp`
+Warn,  T4908: BlendDNA: Did not find a field named `coeff_lin` in structure `Lamp`
+Warn,  T4908: BlendDNA: Did not find a field named `coeff_quad` in structure `Lamp`
+Info,  T4908: (Stats) Fields read: 828, pointers resolved: 17, cache hits: 3, cached objects: 13
+Debug, T4908: UpdateImporterScale scale set: %f1
+Debug, T4908: ValidateDataStructureProcess begin
+Warn,  T4908: Validation warning: aiLight::mAttenuationXXX - all are zero
+Debug, T4908: ValidateDataStructureProcess end
+Info,  T4908: Load F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/BLEND/plane_2_textures_2_texcoords_279.blend
+Debug, T4908: Assimp 5.0.2455634966 amd64 msvc shared singlethreaded
+Info,  T4908: Found a matching importer for this file format: Blender 3D Importer 
+http://www.blender3d.org.
+Info,  T4908: Import root directory is 'F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/BLEND\'
+Info,  T4908: BLEND: Blender version is 2.79 (64bit: true, little endian: true)
+Debug, T4908: BlenderDNA: Got 621 structures with totally 7225 fields
+Info,  T4908: (Stats) Fields read: 597, pointers resolved: 23, cache hits: 6, cached objects: 17
+Debug, T4908: UpdateImporterScale scale set: %f1
+Debug, T4908: ValidateDataStructureProcess begin
+Warn,  T4908: Validation warning: aiLight::mAttenuationXXX - all are zero
+Debug, T4908: ValidateDataStructureProcess end
+Info,  T4908: Load F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/BLEND/test_279.blend
+Debug, T4908: Assimp 5.0.2455634966 amd64 msvc shared singlethreaded
+Info,  T4908: Found a matching importer for this file format: Blender 3D Importer 
+http://www.blender3d.org.
+Info,  T4908: Import root directory is 'F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/BLEND\'
+Info,  T4908: BLEND: Blender version is 2.79 (64bit: true, little endian: true)
+Debug, T4908: BlenderDNA: Got 621 structures with totally 7224 fields
+Info,  T4908: (Stats) Fields read: 4103, pointers resolved: 22, cache hits: 91, cached objects: 16
+Debug, T4908: UpdateImporterScale scale set: %f1
+Debug, T4908: ValidateDataStructureProcess begin
+Warn,  T4908: Validation warning: aiLight::mAttenuationXXX - all are zero
+Debug, T4908: ValidateDataStructureProcess end
+Info,  T4908: Load F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/BVH/01_01.bvh
+Debug, T4908: Assimp 5.0.2455634966 amd64 msvc shared singlethreaded
+Info,  T4908: Found a matching importer for this file format: BVH Importer (MoCap).
+Info,  T4908: Import root directory is 'F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/BVH\'
+Debug, T4908: UpdateImporterScale scale set: %f1
+Debug, T4908: ValidateDataStructureProcess begin
+Debug, T4908: ValidateDataStructureProcess end
+Info,  T4908: Load F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/Collada/cameras.dae
+Debug, T4908: Assimp 5.0.2455634966 amd64 msvc shared singlethreaded
+Info,  T4908: Found a matching importer for this file format: Collada Importer.
+Info,  T4908: Import root directory is 'F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/Collada\'
+Debug, T4908: Collada schema version is 1.4.n
+Warn,  T4908: Collada: Orthographic cameras are not supported.
+Debug, T4908: UpdateImporterScale scale set: %f1
+Debug, T4908: ValidateDataStructureProcess begin
+Debug, T4908: ValidateDataStructureProcess end
+Info,  T4908: Load cameraExp.dae
+Debug, T4908: Assimp 5.0.2455634966 amd64 msvc shared singlethreaded
+Debug, T4908: (Deleting previous scene)
+Info,  T4908: Found a matching importer for this file format: Collada Importer.
+Info,  T4908: Import root directory is '.\'
+Debug, T4908: Collada schema version is 1.4.n
+Debug, T4908: UpdateImporterScale scale set: %f1
+Debug, T4908: ValidateDataStructureProcess begin
+Debug, T4908: ValidateDataStructureProcess end
+Info,  T4908: Load F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/Collada/lights.dae
+Debug, T4908: Assimp 5.0.2455634966 amd64 msvc shared singlethreaded
+Info,  T4908: Found a matching importer for this file format: Collada Importer.
+Info,  T4908: Import root directory is 'F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/Collada\'
+Debug, T4908: Collada schema version is 1.4.n
+Debug, T4908: UpdateImporterScale scale set: %f1
+Debug, T4908: ValidateDataStructureProcess begin
+Debug, T4908: ValidateDataStructureProcess end
+Info,  T4908: Load lightsExp.dae
+Debug, T4908: Assimp 5.0.2455634966 amd64 msvc shared singlethreaded
+Debug, T4908: (Deleting previous scene)
+Info,  T4908: Found a matching importer for this file format: Collada Importer.
+Info,  T4908: Import root directory is '.\'
+Debug, T4908: Collada schema version is 1.4.n
+Debug, T4908: UpdateImporterScale scale set: %f1
+Debug, T4908: ValidateDataStructureProcess begin
+Debug, T4908: ValidateDataStructureProcess end
+Info,  T4908: Load F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/Collada/duck.dae
+Debug, T4908: Assimp 5.0.2455634966 amd64 msvc shared singlethreaded
+Info,  T4908: Found a matching importer for this file format: Collada Importer.
+Info,  T4908: Import root directory is 'F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/Collada\'
+Debug, T4908: Collada schema version is 1.4.n
+Debug, T4908: UpdateImporterScale scale set: %f1
+Debug, T4908: ValidateDataStructureProcess begin
+Debug, T4908: ValidateDataStructureProcess end
+Info,  T4908: Load F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/Collada/duck.zae
+Debug, T4908: Assimp 5.0.2455634966 amd64 msvc shared singlethreaded
+Info,  T4908: Found a matching importer for this file format: Collada Importer.
+Info,  T4908: Import root directory is 'F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/Collada\'
+Debug, T4908: Collada schema version is 1.4.n
+Debug, T4908: UpdateImporterScale scale set: %f1
+Debug, T4908: ValidateDataStructureProcess begin
+Debug, T4908: ValidateDataStructureProcess end
+Info,  T4908: Load F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/CSM/ThomasFechten.csm
+Debug, T4908: Assimp 5.0.2455634966 amd64 msvc shared singlethreaded
+Info,  T4908: Found a matching importer for this file format: CharacterStudio Motion Importer (MoCap).
+Info,  T4908: Import root directory is 'F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/CSM\'
+Debug, T4908: UpdateImporterScale scale set: %f1
+Debug, T4908: ValidateDataStructureProcess begin
+Debug, T4908: ValidateDataStructureProcess end
+Debug, T4908: ScenePreprocessor: Dummy rotation track has been generated
+Debug, T4908: ScenePreprocessor: Dummy scaling track has been generated
+Debug, T4908: ScenePreprocessor: Dummy rotation track has been generated
+Debug, T4908: ScenePreprocessor: Dummy scaling track has been generated
+Debug, T4908: ScenePreprocessor: Dummy rotation track has been generated
+Debug, T4908: ScenePreprocessor: Dummy scaling track has been generated
+Debug, T4908: ScenePreprocessor: Dummy rotation track has been generated
+Debug, T4908: ScenePreprocessor: Dummy scaling track has been generated
+Debug, T4908: ScenePreprocessor: Dummy rotation track has been generated
+Debug, T4908: ScenePreprocessor: Dummy scaling track has been generated
+Debug, T4908: ScenePreprocessor: Dummy rotation track has been generated
+Debug, T4908: ScenePreprocessor: Dummy scaling track has been generated
+Debug, T4908: ScenePreprocessor: Dummy rotation track has been generated
+Debug, T4908: ScenePreprocessor: Dummy scaling track has been generated
+Debug, T4908: ScenePreprocessor: Dummy rotation track has been generated
+Debug, T4908: ScenePreprocessor: Dummy scaling track has been generated
+Debug, T4908: ScenePreprocessor: Dummy rotation track has been generated
+Debug, T4908: ScenePreprocessor: Dummy scaling track has been generated
+Debug, T4908: ScenePreprocessor: Dummy rotation track has been generated
+Debug, T4908: ScenePreprocessor: Dummy scaling track has been generated
+Debug, T4908: ScenePreprocessor: Dummy rotation track has been generated
+Debug, T4908: ScenePreprocessor: Dummy scaling track has been generated
+Debug, T4908: ScenePreprocessor: Dummy rotation track has been generated
+Debug, T4908: ScenePreprocessor: Dummy scaling track has been generated
+Debug, T4908: ScenePreprocessor: Dummy rotation track has been generated
+Debug, T4908: ScenePreprocessor: Dummy scaling track has been generated
+Debug, T4908: ScenePreprocessor: Dummy rotation track has been generated
+Debug, T4908: ScenePreprocessor: Dummy scaling track has been generated
+Debug, T4908: ScenePreprocessor: Dummy rotation track has been generated
+Debug, T4908: ScenePreprocessor: Dummy scaling track has been generated
+Debug, T4908: ScenePreprocessor: Dummy rotation track has been generated
+Debug, T4908: ScenePreprocessor: Dummy scaling track has been generated
+Debug, T4908: ScenePreprocessor: Dummy rotation track has been generated
+Debug, T4908: ScenePreprocessor: Dummy scaling track has been generated
+Debug, T4908: ScenePreprocessor: Dummy rotation track has been generated
+Debug, T4908: ScenePreprocessor: Dummy scaling track has been generated
+Debug, T4908: ScenePreprocessor: Dummy rotation track has been generated
+Debug, T4908: ScenePreprocessor: Dummy scaling track has been generated
+Debug, T4908: ScenePreprocessor: Dummy rotation track has been generated
+Debug, T4908: ScenePreprocessor: Dummy scaling track has been generated
+Debug, T4908: ScenePreprocessor: Dummy rotation track has been generated
+Debug, T4908: ScenePreprocessor: Dummy scaling track has been generated
+Debug, T4908: ScenePreprocessor: Dummy rotation track has been generated
+Debug, T4908: ScenePreprocessor: Dummy scaling track has been generated
+Debug, T4908: ScenePreprocessor: Dummy rotation track has been generated
+Debug, T4908: ScenePreprocessor: Dummy scaling track has been generated
+Debug, T4908: ScenePreprocessor: Dummy rotation track has been generated
+Debug, T4908: ScenePreprocessor: Dummy scaling track has been generated
+Debug, T4908: ScenePreprocessor: Dummy rotation track has been generated
+Debug, T4908: ScenePreprocessor: Dummy scaling track has been generated
+Debug, T4908: ScenePreprocessor: Dummy rotation track has been generated
+Debug, T4908: ScenePreprocessor: Dummy scaling track has been generated
+Debug, T4908: ScenePreprocessor: Dummy rotation track has been generated
+Debug, T4908: ScenePreprocessor: Dummy scaling track has been generated
+Debug, T4908: ScenePreprocessor: Dummy rotation track has been generated
+Debug, T4908: ScenePreprocessor: Dummy scaling track has been generated
+Debug, T4908: ScenePreprocessor: Dummy rotation track has been generated
+Debug, T4908: ScenePreprocessor: Dummy scaling track has been generated
+Debug, T4908: ScenePreprocessor: Dummy rotation track has been generated
+Debug, T4908: ScenePreprocessor: Dummy scaling track has been generated
+Debug, T4908: ScenePreprocessor: Dummy rotation track has been generated
+Debug, T4908: ScenePreprocessor: Dummy scaling track has been generated
+Debug, T4908: ScenePreprocessor: Dummy rotation track has been generated
+Debug, T4908: ScenePreprocessor: Dummy scaling track has been generated
+Debug, T4908: ScenePreprocessor: Dummy rotation track has been generated
+Debug, T4908: ScenePreprocessor: Dummy scaling track has been generated
+Debug, T4908: ScenePreprocessor: Dummy rotation track has been generated
+Debug, T4908: ScenePreprocessor: Dummy scaling track has been generated
+Debug, T4908: ScenePreprocessor: Dummy rotation track has been generated
+Debug, T4908: ScenePreprocessor: Dummy scaling track has been generated
+Debug, T4908: ScenePreprocessor: Dummy rotation track has been generated
+Debug, T4908: ScenePreprocessor: Dummy scaling track has been generated
+Debug, T4908: ScenePreprocessor: Dummy rotation track has been generated
+Debug, T4908: ScenePreprocessor: Dummy scaling track has been generated
+Debug, T4908: ScenePreprocessor: Dummy rotation track has been generated
+Debug, T4908: ScenePreprocessor: Dummy scaling track has been generated
+Debug, T4908: ScenePreprocessor: Dummy rotation track has been generated
+Debug, T4908: ScenePreprocessor: Dummy scaling track has been generated
+Debug, T4908: ScenePreprocessor: Dummy rotation track has been generated
+Debug, T4908: ScenePreprocessor: Dummy scaling track has been generated
+Debug, T4908: ScenePreprocessor: Dummy rotation track has been generated
+Debug, T4908: ScenePreprocessor: Dummy scaling track has been generated
+Debug, T4908: ScenePreprocessor: Dummy rotation track has been generated
+Debug, T4908: ScenePreprocessor: Dummy scaling track has been generated
+Debug, T4908: ScenePreprocessor: Dummy rotation track has been generated
+Debug, T4908: ScenePreprocessor: Dummy scaling track has been generated
+Info,  T4908: Load F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/B3D/WusonBlitz.b3d
+Debug, T4908: Assimp 5.0.2455634966 amd64 msvc shared singlethreaded
+Info,  T4908: Found a matching importer for this file format: BlitzBasic 3D Importer.
+Info,  T4908: Import root directory is 'F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/B3D\'
+Info,  T4908: B3D file format version: 1
+Debug, T4908: MakeLeftHandedProcess begin
+Debug, T4908: MakeLeftHandedProcess finished
+Debug, T4908: FlipWindingOrderProcess begin
+Debug, T4908: FlipWindingOrderProcess finished
+Debug, T4908: UpdateImporterScale scale set: %f1
+Debug, T4908: ValidateDataStructureProcess begin
+Debug, T4908: ValidateDataStructureProcess end
+Info,  T4908: Load F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/MDC/spider.mdc
+Debug, T4908: Assimp 5.0.2455634966 amd64 msvc shared singlethreaded
+Info,  T4908: Found a matching importer for this file format: Return To Castle Wolfenstein Mesh Importer.
+Info,  T4908: Import root directory is 'F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/MDC\'
+Error, T4908: Invalid MDC file: File contains no valid mesh
+Info,  T4908: Load F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/OBJ/spider.obj
+Debug, T4908: Assimp 5.0.2455634966 amd64 msvc shared singlethreaded
+Info,  T4908: Found a matching importer for this file format: Wavefront Object Importer.
+Info,  T4908: Import root directory is 'F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/OBJ\'
+Debug, T4908: UpdateImporterScale scale set: %f1
+Debug, T4908: ValidateDataStructureProcess begin
+Debug, T4908: ValidateDataStructureProcess end
+Info,  T4908: Load F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/OBJ/spider.obj
+Debug, T4908: Assimp 5.0.2455634966 amd64 msvc shared singlethreaded
+Info,  T4908: Found a matching importer for this file format: Wavefront Object Importer.
+Info,  T4908: Import root directory is 'F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/OBJ\'
+Debug, T4908: UpdateImporterScale scale set: %f1
+Debug, T4908: ValidateDataStructureProcess begin
+Debug, T4908: ValidateDataStructureProcess end
+Info,  T4908: Load F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/OBJ/spider_out.assbin
+Debug, T4908: Assimp 5.0.2455634966 amd64 msvc shared singlethreaded
+Debug, T4908: (Deleting previous scene)
+Info,  T4908: Found a matching importer for this file format: Assimp Binary Importer.
+Info,  T4908: Import root directory is 'F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/OBJ\'
+Debug, T4908: UpdateImporterScale scale set: %f1
+Debug, T4908: ValidateDataStructureProcess begin
+Debug, T4908: ValidateDataStructureProcess end
+Info,  T4908: Load F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/OBJ/spider.obj
+Debug, T4908: Assimp 5.0.2455634966 amd64 msvc shared singlethreaded
+Info,  T4908: Found a matching importer for this file format: Wavefront Object Importer.
+Info,  T4908: Import root directory is 'F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/OBJ\'
+Debug, T4908: UpdateImporterScale scale set: %f1
+Debug, T4908: ValidateDataStructureProcess begin
+Debug, T4908: ValidateDataStructureProcess end
+Info,  T4908: Load F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/COB/molecule.cob
+Debug, T4908: Assimp 5.0.2455634966 amd64 msvc shared singlethreaded
+Info,  T4908: Found a matching importer for this file format: TrueSpace Object Importer.
+Info,  T4908: Import root directory is 'F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/COB\'
+Info,  T4908: File format tag: V00.01
+Error, T4908: Encountered unsupported chunk: ObRQ [version: 1, size: 8]
+Error, T4908: Encountered unsupported chunk: ShBx [version: 4, size: 283]
+Error, T4908: Encountered unsupported chunk: ObRQ [version: 1, size: 8]
+Error, T4908: Encountered unsupported chunk: ShBx [version: 4, size: 283]
+Error, T4908: Encountered unsupported chunk: ObRQ [version: 1, size: 8]
+Error, T4908: Encountered unsupported chunk: ShBx [version: 4, size: 283]
+Error, T4908: Encountered unsupported chunk: ObRQ [version: 1, size: 8]
+Error, T4908: Encountered unsupported chunk: ShBx [version: 4, size: 283]
+Error, T4908: Encountered unsupported chunk: PhAn [version: 7, size: 124]
+Debug, T4908: FlipWindingOrderProcess begin
+Debug, T4908: FlipWindingOrderProcess finished
+Debug, T4908: UpdateImporterScale scale set: %f1
+Debug, T4908: ValidateDataStructureProcess begin
+Debug, T4908: ValidateDataStructureProcess end
+Info,  T4908: Load F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/Ogre/TheThing/Mesh.mesh.xml
+Debug, T4908: Assimp 5.0.2455634966 amd64 msvc shared singlethreaded
+Info,  T4908: Found a matching importer for this file format: Ogre3D Mesh Importer.
+Info,  T4908: Import root directory is 'F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/Ogre/TheThing\'
+Debug, T4908: Reading Mesh
+Debug, T4908:   - Reading geometry of 1406 vertices
+Debug, T4908:     - Contains positions
+Debug, T4908:     - Contains normals
+Debug, T4908:     - Contains 1 texture coords
+Debug, T4908: Reading SubMesh 0
+Debug, T4908:   - Material: 'BlockMat'
+Debug, T4908:   - Uses shared geometry: true
+Debug, T4908:   - Faces 2656
+Debug, T4908: Reading material 'BlockMat'
+Debug, T4908: material 'BlockMat'
+Debug, T4908:  technique 'b2ogre_1331419912.514'
+Debug, T4908:   pass 'b2ogre_1331419912.514'
+Debug, T4908:    ambient 0.8 0.8 0.8
+Debug, T4908:    diffuse 0.64 0.64 0.64
+Debug, T4908:    specular 0.5 0.5 0.5
+Debug, T4908:    emissive 0 0 0
+Debug, T4908:    texture_unit 'b2ogre_1331419912.514'
+Debug, T4908:     texture 'Wrinkles.jpg' type 1 index 0 UV 0
+Debug, T4908: UpdateImporterScale scale set: %f1
+Debug, T4908: ValidateDataStructureProcess begin
+Debug, T4908: ValidateDataStructureProcess end
+Info,  T4908: Load F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models-nonbsd/PK3/SGDTT3.pk3
+Debug, T4908: Assimp 5.0.2455634966 amd64 msvc shared singlethreaded
+Info,  T4908: Found a matching importer for this file format: Quake III BSP Importer.
+Info,  T4908: Import root directory is 'F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models-nonbsd/PK3\'
+Debug, T4908: UpdateImporterScale scale set: %f1
+Info,  T4908: Load F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/OFF/Cube.off
+Debug, T4908: Assimp 5.0.2455634966 amd64 msvc shared singlethreaded
+Info,  T4908: Found a matching importer for this file format: OFF Importer.
+Info,  T4908: Import root directory is 'F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/OFF\'
+Debug, T4908: UpdateImporterScale scale set: %f1
+Debug, T4908: ValidateDataStructureProcess begin
+Debug, T4908: ValidateDataStructureProcess end
+Info,  T4908: Load F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/NFF/NFF/ManyEarthsNotJustOne.nff
+Debug, T4908: Assimp 5.0.2455634966 amd64 msvc shared singlethreaded
+Info,  T4908: Found a matching importer for this file format: Neutral File Format Importer.
+Info,  T4908: Import root directory is 'F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/NFF/NFF\'
+Debug, T4908: UpdateImporterScale scale set: %f1
+Info,  T4908: Load F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/XGL/sample_official.xgl
+Debug, T4908: Assimp 5.0.2455634966 amd64 msvc shared singlethreaded
+Info,  T4908: Found a matching importer for this file format: XGL Importer.
+Info,  T4908: Import root directory is 'F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/test/models/XGL\'
+Warn,  T4908: XGL: ignoring <ambient> tag
+Debug, T4908: UpdateImporterScale scale set: %f1
+Debug, T4908: RemoveRedundantMatsProcess begin
+Info,  T4908: RemoveRedundantMatsProcess finished. Removed 2 redundant and 0 unused materials.
+Debug, T4908: RemoveRedundantMatsProcess begin
+Debug, T4908: Found positive match in exclusion list: 'Unique Mat2'
+Debug, T4908: Found positive match in exclusion list: 'Complex material name'
+Info,  T4908: RemoveRedundantMatsProcess finished. Removed 1 redundant and 0 unused materials.
+Debug, T4908: RemoveVCProcess begin
+Debug, T4908: Setting AI_SCENE_FLAGS_INCOMPLETE flag
+Debug, T4908: RemoveVCProcess finished. Nothing to be done ...
+Debug, T4908: Mesh 0 (unnamed) | Verts in: 900 out: 300 | ~66.6667%
+Debug, T4908: RemoveVCProcess begin
+Debug, T4908: Setting AI_SCENE_FLAGS_INCOMPLETE flag
+Info,  T4908: RemoveVCProcess finished. Data structure cleanup has been done.
+Debug, T4908: RemoveVCProcess begin
+Info,  T4908: RemoveVCProcess finished. Data structure cleanup has been done.
+Debug, T4908: RemoveVCProcess begin
+Info,  T4908: RemoveVCProcess finished. Data structure cleanup has been done.
+Debug, T4908: RemoveVCProcess begin
+Info,  T4908: RemoveVCProcess finished. Data structure cleanup has been done.
+Debug, T4908: RemoveVCProcess begin
+Info,  T4908: RemoveVCProcess finished. Data structure cleanup has been done.
+Debug, T4908: RemoveVCProcess begin
+Info,  T4908: RemoveVCProcess finished. Data structure cleanup has been done.
+Debug, T4908: RemoveVCProcess begin
+Info,  T4908: RemoveVCProcess finished. Data structure cleanup has been done.
+Debug, T4908: RemoveVCProcess begin
+Info,  T4908: RemoveVCProcess finished. Data structure cleanup has been done.
+Debug, T4908: RemoveVCProcess begin
+Debug, T4908: Setting AI_SCENE_FLAGS_INCOMPLETE flag
+Info,  T4908: RemoveVCProcess finished. Data structure cleanup has been done.
+Info,  T4908: Mesh exceeds the triangle limit. It will be split ...
+Warn,  T4908: Found 300 degenerated primitives
+Skipping one or more lines with the same contents
+Warn,  T4908: Found 400 degenerated primitives
+Error, T4908: FindInvalidDataProcess fails on mesh uvcoords: INF/NAN was found in a vector component
+Error, T4908: FindInvalidDataProcess fails on mesh normals: Found zero-length vector
+Error, T4908: FindInvalidDataProcess fails on mesh bitangents: All vectors are identical
+Info,  T4908: Removed 5500 weights. Input bones: 30. Output bones: 8
+Debug, T4908: PretransformVerticesProcess begin
+Debug, T4908: PretransformVerticesProcess finished
+Info,  T4908: Removed 31 nodes and 0 animation channels (11 output nodes)
+Info,  T4908: Kept 0 lights and 0 cameras.
+Info,  T4908: Moved 25 meshes to WCS (number of output meshes: 10)
+Debug, T4908: PretransformVerticesProcess begin
+Info,  T4908: PretransformVertices: Copying mesh due to mismatching transforms
+Skipping one or more lines with the same contents
+Debug, T4908: PretransformVerticesProcess finished
+Info,  T4908: Removed 31 nodes and 0 animation channels (31 output nodes)
+Info,  T4908: Kept 0 lights and 0 cameras.
+Info,  T4908: Moved 25 meshes to WCS (number of output meshes: 49)
+Debug, T4908: ScenePreprocessor: Dummy rotation track has been generated
+Debug, T4908: ScenePreprocessor: Dummy position track has been generated
+Debug, T4908: ScenePreprocessor: Setting animation duration
+Debug, T4908: ScenePreprocessor: Adding default material 'DefaultMaterial'
+Debug, T4908: SortByPTypeProcess begin
+Info,  T4908: Points: 5, Lines: 6, Triangles: 5, Polygons: 5 (Meshes, X = removed)
+Debug, T4908: SortByPTypeProcess finished

@@ -16,7 +16,7 @@ LIST(APPEND TEST_SOURCEFILES
 
 ###############################################################################
 ## Add executable
-add_executable("${PROJECT_TEST_NAME}" ${TEST_SOURCEFILES})
+add_executable("${PROJECT_TEST_NAME}" ${TEST_SOURCEFILES} ${TEST_HEADERFILES})
 target_link_libraries("${PROJECT_TEST_NAME}" PUBLIC gtest_main core)
 
 add_test(

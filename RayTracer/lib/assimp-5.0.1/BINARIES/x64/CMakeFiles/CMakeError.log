@@ -1,0 +1,101 @@
+Determining size of off64_t failed with the following output:
+Change Dir: F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/BINARIES/x64/CMakeFiles/CMakeTmp
+
+Run Build Command(s):F:/Program Files (x86)/Microsoft Visual Studio/MSBuild/15.0/Bin/MSBuild.exe cmTC_75602.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=15.0 /v:m && Microsoft (R)-Buildmodul, Version 15.6.82.30579 für .NET Framework
+Copyright (C) Microsoft Corporation. Alle Rechte vorbehalten.
+
+  Microsoft (R) C/C++-Optimierungscompiler Version 19.13.26129 für x64
+  Copyright (C) Microsoft Corporation. Alle Rechte vorbehalten.
+  
+  OFF64_T.c
+  cl /c /Zi /W3 /WX- /diagnostics:classic /Od /Ob0 /D WIN32 /D _WINDOWS /D _LARGEFILE64_SOURCE=1 /D HAVE_SYS_TYPES_H /D HAVE_STDINT_H /D HAVE_STDDEF_H /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_75602.dir\Debug\\" /Fd"cmTC_75602.dir\Debug\vc141.pdb" /Gd /TC /errorReport:queue "F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\BINARIES\x64\CMakeFiles\CheckTypeSize\OFF64_T.c"
+  
+F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\BINARIES\x64\CMakeFiles\CheckTypeSize\OFF64_T.c(25): error C2065: "off64_t": nichtdeklarierter Bezeichner [F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\BINARIES\x64\CMakeFiles\CMakeTmp\cmTC_75602.vcxproj]
+F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\BINARIES\x64\CMakeFiles\CheckTypeSize\OFF64_T.c(26): error C2065: "off64_t": nichtdeklarierter Bezeichner [F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\BINARIES\x64\CMakeFiles\CMakeTmp\cmTC_75602.vcxproj]
+F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\BINARIES\x64\CMakeFiles\CheckTypeSize\OFF64_T.c(27): error C2065: "off64_t": nichtdeklarierter Bezeichner [F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\BINARIES\x64\CMakeFiles\CMakeTmp\cmTC_75602.vcxproj]
+F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\BINARIES\x64\CMakeFiles\CheckTypeSize\OFF64_T.c(28): error C2065: "off64_t": nichtdeklarierter Bezeichner [F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\BINARIES\x64\CMakeFiles\CMakeTmp\cmTC_75602.vcxproj]
+F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\BINARIES\x64\CMakeFiles\CheckTypeSize\OFF64_T.c(29): error C2065: "off64_t": nichtdeklarierter Bezeichner [F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\BINARIES\x64\CMakeFiles\CMakeTmp\cmTC_75602.vcxproj]
+
+
+F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/BINARIES/x64/CMakeFiles/CheckTypeSize/OFF64_T.c:
+#include <sys/types.h>
+#include <stdint.h>
+#include <stddef.h>
+
+
+#undef KEY
+#if defined(__i386)
+# define KEY '_','_','i','3','8','6'
+#elif defined(__x86_64)
+# define KEY '_','_','x','8','6','_','6','4'
+#elif defined(__ppc__)
+# define KEY '_','_','p','p','c','_','_'
+#elif defined(__ppc64__)
+# define KEY '_','_','p','p','c','6','4','_','_'
+#elif defined(__aarch64__)
+# define KEY '_','_','a','a','r','c','h','6','4','_','_'
+#elif defined(__ARM_ARCH_7A__)
+# define KEY '_','_','A','R','M','_','A','R','C','H','_','7','A','_','_'
+#elif defined(__ARM_ARCH_7S__)
+# define KEY '_','_','A','R','M','_','A','R','C','H','_','7','S','_','_'
+#endif
+
+#define SIZE (sizeof(off64_t))
+static char info_size[] =  {'I', 'N', 'F', 'O', ':', 's','i','z','e','[',
+  ('0' + ((SIZE / 10000)%10)),
+  ('0' + ((SIZE / 1000)%10)),
+  ('0' + ((SIZE / 100)%10)),
+  ('0' + ((SIZE / 10)%10)),
+  ('0' +  (SIZE    % 10)),
+  ']',
+#ifdef KEY
+  ' ','k','e','y','[', KEY, ']',
+#endif
+  '\0'};
+
+#ifdef __CLASSIC_C__
+int main(argc, argv) int argc; char *argv[];
+#else
+int main(int argc, char *argv[])
+#endif
+{
+  int require = 0;
+  require += info_size[argc];
+  (void)argv;
+  return require;
+}
+
+
+Determining if the function fseeko exists failed with the following output:
+Change Dir: F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/BINARIES/x64/CMakeFiles/CMakeTmp
+
+Run Build Command(s):F:/Program Files (x86)/Microsoft Visual Studio/MSBuild/15.0/Bin/MSBuild.exe cmTC_b2d17.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=15.0 /v:m && Microsoft (R)-Buildmodul, Version 15.6.82.30579 für .NET Framework
+Copyright (C) Microsoft Corporation. Alle Rechte vorbehalten.
+
+  Microsoft (R) C/C++-Optimierungscompiler Version 19.13.26129 für x64
+  Copyright (C) Microsoft Corporation. Alle Rechte vorbehalten.
+  
+  CheckFunctionExists.c
+  cl /c /Zi /W3 /WX- /diagnostics:classic /Od /Ob0 /D WIN32 /D _WINDOWS /D CHECK_FUNCTION_EXISTS=fseeko /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_b2d17.dir\Debug\\" /Fd"cmTC_b2d17.dir\Debug\vc141.pdb" /Gd /TC /errorReport:queue "C:\Program Files\CMake\share\cmake-3.17\Modules\CheckFunctionExists.c"
+  
+CheckFunctionExists.obj : error LNK2019: Verweis auf nicht aufgel÷stes externes Symbol "fseeko" in Funktion "main". [F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\BINARIES\x64\CMakeFiles\CMakeTmp\cmTC_b2d17.vcxproj]
+F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\BINARIES\x64\CMakeFiles\CMakeTmp\Debug\cmTC_b2d17.exe : fatal error LNK1120: 1 nicht aufgel÷ste Externe [F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\BINARIES\x64\CMakeFiles\CMakeTmp\cmTC_b2d17.vcxproj]
+
+
+
+Determining if the include file unistd.h exists failed with the following output:
+Change Dir: F:/Dokumente/GitHub/ray-tracer/RayTracer/lib/assimp-5.0.1/BINARIES/x64/CMakeFiles/CMakeTmp
+
+Run Build Command(s):F:/Program Files (x86)/Microsoft Visual Studio/MSBuild/15.0/Bin/MSBuild.exe cmTC_c162e.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=15.0 /v:m && Microsoft (R)-Buildmodul, Version 15.6.82.30579 für .NET Framework
+Copyright (C) Microsoft Corporation. Alle Rechte vorbehalten.
+
+  Microsoft (R) C/C++-Optimierungscompiler Version 19.13.26129 für x64
+  Copyright (C) Microsoft Corporation. Alle Rechte vorbehalten.
+  
+  cl /c /Zi /W3 /WX- /diagnostics:classic /Od /Ob0 /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_c162e.dir\Debug\\" /Fd"cmTC_c162e.dir\Debug\vc141.pdb" /Gd /TC /errorReport:queue "F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\BINARIES\x64\CMakeFiles\CMakeTmp\CheckIncludeFile.c"
+  CheckIncludeFile.c
+  
+F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\BINARIES\x64\CMakeFiles\CMakeTmp\CheckIncludeFile.c(1): fatal error C1083: Datei (Include) kann nicht geöffnet werden: "unistd.h": No such file or directory [F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\BINARIES\x64\CMakeFiles\CMakeTmp\cmTC_c162e.vcxproj]
+
+
+

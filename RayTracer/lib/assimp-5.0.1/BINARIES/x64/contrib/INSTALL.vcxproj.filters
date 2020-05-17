@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\BINARIES\x64\CMakeFiles\b5c525d7998595a49a01291a431a319d\INSTALL_force.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{F0A15FCF-ADF5-3EDB-8CC5-E43DCCBCE130}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
