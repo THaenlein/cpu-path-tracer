@@ -7,6 +7,8 @@
 /*--------------------------------< Includes >-------------------------------------------*/
 #include <exception>
 
+#include "assimp\types.h"
+
 namespace raytracer
 {
 	/*--------------------------------< Defines >-------------------------------------------*/
@@ -137,6 +139,22 @@ namespace raytracer
 #pragma pack(push, 1)
 	struct Uint24
 	{
+		Uint24():
+			color(0x000000)
+		{}
+
+		Uint24(int value) :
+			color(value)
+		{}
+
+		Uint24(aiColor3D value)
+		{
+			uint8_t red = static_cast<uint8_t>(value.r * 255);
+			uint8_t green = static_cast<uint8_t>(value.g * 255);
+			uint8_t blue = static_cast<uint8_t>(value.b * 255);
+			this->color = (red << 16) | (green << 8) | (blue << 0);
+		}
+
 		unsigned int color : 24;
 	};
 #pragma pack(pop)
