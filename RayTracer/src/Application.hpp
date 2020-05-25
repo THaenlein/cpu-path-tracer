@@ -33,12 +33,12 @@ namespace raytracer
 	
 		void setUpSdl();
 
-		uint16_t getRenderWidth()
+		const uint16_t getRenderWidth()
 		{
 			return this->WINDOW_DIMENSION_X;
 		}
 
-		uint16_t getRenderHeight()
+		const uint16_t getRenderHeight()
 		{
 			return this->WINDOW_DIMENSION_Y;
 		}
@@ -79,9 +79,9 @@ namespace raytracer
 
 		std::unique_ptr<SDL_Texture, decltype(&SDL_DestroyTexture)> screenTexture;
 
-		static const uint16_t WINDOW_DIMENSION_X = 1024;
+		static const uint16_t WINDOW_DIMENSION_X = 512;
 
-		static const uint16_t WINDOW_DIMENSION_Y = 1024;
+		static const uint16_t WINDOW_DIMENSION_Y = 512;
 	
 	};
 	
