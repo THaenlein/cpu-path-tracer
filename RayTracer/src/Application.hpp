@@ -13,8 +13,9 @@
 #include "SDL.h"
 
 #include "exceptions.hpp"
+#include "raytracing.hpp"
 
-namespace raytracer
+namespace raytracing
 {
 	/*--------------------------------< Defines >-------------------------------------------*/
 
@@ -33,12 +34,12 @@ namespace raytracer
 	
 		void setUpSdl();
 
-		const uint16_t getRenderWidth()
+		inline const uint16_t getRenderWidth()
 		{
 			return this->WINDOW_DIMENSION_X;
 		}
 
-		const uint16_t getRenderHeight()
+		inline const uint16_t getRenderHeight()
 		{
 			return this->WINDOW_DIMENSION_Y;
 		}
@@ -85,4 +86,4 @@ namespace raytracer
 	
 	};
 	
-} // end of namespace raytracer
+} // end of namespace raytracing

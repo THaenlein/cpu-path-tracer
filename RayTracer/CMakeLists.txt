@@ -40,6 +40,7 @@ link_directories(${ASSIMP_LIBRARIES_DIR_X64})
 ###############################################################################
 ## Add executable
 add_executable("${PROJECT_NAME}" ${SOURCEFILES} ${HEADERFILES})
+set_property(DIRECTORY ${CMAKE_CURRENT_LIST_DIR} PROPERTY VS_STARTUP_PROJECT "${PROJECT_NAME}")
 target_link_libraries("${PROJECT_NAME}" ${SDL2_LIBRARIES})
 target_link_libraries("${PROJECT_NAME}" ${Boost_LOG_DIR})
 target_link_libraries("${PROJECT_NAME}" ${ASSIMP_LIBRARIES_X86})

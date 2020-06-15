@@ -33,7 +33,7 @@ namespace raytracer
 	protected:
 	
 	/*--------------------------------< Private members >-----------------------------------*/
-	public:
+	private:
 
 	};
 	

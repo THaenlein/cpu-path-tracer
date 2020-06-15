@@ -8,7 +8,7 @@
 #include "ErrorHandler.hpp"
 
 
-namespace raytracer
+namespace raytracing
 {
 	/*--------------------------------< Defines >--------------------------------------------*/
 
@@ -126,4 +126,4 @@ namespace raytracer
 
 	/*--------------------------------< Private members >------------------------------------*/
 
-} // end of namespace raytracer
+} // end of namespace raytracing

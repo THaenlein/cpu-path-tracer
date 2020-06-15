@@ -3,6 +3,7 @@
 #include <exception>
 #include <thread>
 #include <chrono>
+#include <Windows.h>
 
 #include "assimp/Importer.hpp"
 #include "assimp/postprocess.h"
@@ -16,7 +17,7 @@
 #include "ErrorHandler.hpp"
 #include "RayTracer.hpp"
 
-void handleEvents(raytracer::Application& app)
+void handleEvents(raytracing::Application& app)
 {
 	SDL_Event sdlEvent;
 	bool continueRendering{ true };
@@ -45,10 +46,24 @@ void handleEvents(raytracer::Application& app)
 	}
 }
 
+
+double get_wall_time() {
+	LARGE_INTEGER time, freq;
+	if (!QueryPerformanceFrequency(&freq)) {
+		//  Handle error
+		return 0;
+	}
+	if (!QueryPerformanceCounter(&time)) {
+		//  Handle error
+		return 0;
+	}
+	return (double)time.QuadPart / freq.QuadPart;
+}
+
+
 int main(int argc, char* argv[])
 {
-	raytracer::Application app;
-	raytracer::RayTracer rayTracer;
+	raytracing::Application app;
 
 	try
 	{
@@ -56,9 +71,9 @@ int main(int argc, char* argv[])
 		app.setUpSdl();
 		app.createScreenTexture();
 	}
-	catch(raytracer::SdlException& exception)
+	catch(raytracing::SdlException& exception)
 	{
-		raytracer::ErrorHandler::getInstance().reportError(exception);
+		raytracing::ErrorHandler::getInstance().reportError(exception);
 		app.cleanUp();
 		return 0;
 	}
@@ -68,7 +83,7 @@ int main(int argc, char* argv[])
 	const aiScene* scene = assetImporter.ReadFile(sceneFilePath, 0);
 	if (!scene)
 	{
-		raytracer::ErrorHandler::getInstance().reportError("Import of 3D scene failed: ", assetImporter.GetErrorString());
+		raytracing::ErrorHandler::getInstance().reportError("Import of 3D scene failed: ", assetImporter.GetErrorString());
 		app.cleanUp();
 		return 0;
 	}
@@ -83,27 +98,6 @@ int main(int argc, char* argv[])
 		aiProcess_FindDegenerates |
 		aiProcess_SortByPType);
 
-	//aiMatrix4x4 rot180X
-	//{
-	//	1.f, 0.f, 0.f, 0.f,
-	//	0.f, static_cast<ai_real>(std::cos(M_PI)), static_cast<ai_real>(-std::sin(M_PI)), 0.f,
-	//	0.f, static_cast<ai_real>(std::sin(M_PI)), static_cast<ai_real>(std::cos(M_PI)), 0.f,
-	//	0.f, 0.f, 0.f, 1.f
-	//};
-	//aiMatrix4x4 rot180Y
-	//{
-	//	static_cast<ai_real>(std::cos(M_PI)), 0.f, static_cast<ai_real>(std::sin(M_PI)), 0.f,
-	//	0.f, 1.f, 0.f, 0.f,
-	//	static_cast<ai_real>(std::sin(M_PI*-1)), 0.f, static_cast<ai_real>(std::cos(M_PI)), 0.f,
-	//	0.f, 0.f, 0.f, 1.f
-	//};
-	//aiMatrix4x4 rot180Z
-	//{
-	//	static_cast<ai_real>(std::cos(M_PI)), static_cast<ai_real>(-std::sin(M_PI)), 0.f, 0.f,
-	//	static_cast<ai_real>(std::sin(M_PI)), static_cast<ai_real>(std::cos(M_PI)), 0.f, 0.f,
-	//	0.f, 0.f, 1.f, 0.f,
-	//	0.f, 0.f, 0.f, 1.f
-	//};
 	for (unsigned int currentCamera = 0; currentCamera < scene->mNumCameras; currentCamera++)
 	{
 		aiMatrix4x4 transMatrix;
@@ -166,7 +160,7 @@ int main(int argc, char* argv[])
 				//std::cout << "Face: " << mesh->mVertices[face->mIndices[0]].x << ", " << mesh->mVertices[face->mIndices[0]].y << ", " << mesh->mVertices[face->mIndices[0]].z << std::endl;
 				//std::cout << "Face: " << mesh->mVertices[face->mIndices[1]].x << ", " << mesh->mVertices[face->mIndices[1]].y << ", " << mesh->mVertices[face->mIndices[1]].z << std::endl;
 				//std::cout << "Face: " << mesh->mVertices[face->mIndices[2]].x << ", " << mesh->mVertices[face->mIndices[2]].y << ", " << mesh->mVertices[face->mIndices[2]].z << std::endl;
-				//std::wcout << std::endl;
+				//std::cout << std::endl;
 			}
 		}
 
@@ -183,10 +177,10 @@ int main(int argc, char* argv[])
 			aiVector3D right = (camera->mUp ^ camera->mLookAt).Normalize();
 			aiVector3D lookAt = camera->mLookAt;
 			std::cout << "Name of Camera " << currentCamera << ": " << name.C_Str() << std::endl;
-			std::cout << "Position: " << pos.x << ", " << pos.y << ", " << pos.z << std::endl;
-			std::cout << "Up: " << up.x << ", " << up.y << ", " << up.z << std::endl;
-			std::cout << "Right: " << right.x << ", " << right.y << ", " << right.z << std::endl;
-			std::cout << "Look at: " << lookAt.x << ", " << lookAt.y << ", " << lookAt.z << std::endl;
+			std::cout << '\t' << "Position: " << pos.x << ", " << pos.y << ", " << pos.z << std::endl;
+			std::cout << '\t' << "Up: " << up.x << ", " << up.y << ", " << up.z << std::endl;
+			std::cout << '\t' << "Right: " << right.x << ", " << right.y << ", " << right.z << std::endl;
+			std::cout << '\t' << "Look at: " << lookAt.x << ", " << lookAt.y << ", " << lookAt.z << std::endl;
 		}
 
 		std::cout << std::endl;
@@ -199,9 +193,11 @@ int main(int argc, char* argv[])
 			aiString name = light->mName;
 			aiColor3D color = light->mColorDiffuse;
 			aiVector3D pos = light->mPosition;
+			aiVector3D dir = light->mDirection;
 			std::cout << "Name of Light " << currentLight << ": " << name.C_Str() << std::endl;
-			std::cout << "Diffuse color: " << color.r << ", " << color.g << ", " << color.b << std::endl;
-			std::cout << "Position: " << pos.x << ", " << pos.y << ", " << pos.z << std::endl;
+			std::cout << '\t' << "Diffuse color: " << color.r << ", " << color.g << ", " << color.b << std::endl;
+			std::cout << '\t' << "Position: " << pos.x << ", " << pos.y << ", " << pos.z << std::endl;
+			std::cout << '\t' << "Direction: " << dir.x << ", " << dir.y << ", " << dir.z << std::endl;
 		}
 
 		std::cout << std::endl;
@@ -221,23 +217,39 @@ int main(int argc, char* argv[])
 			aiColor3D colorSpecular;
 			material->Get(AI_MATKEY_COLOR_SPECULAR, colorSpecular);
 			std::cout << "Name of Material " << currentMaterial << ": " << name.C_Str() << std::endl;
-			std::cout << "Diffuse color: " << colorDiffuse.r << ", " << colorDiffuse.g << ", " << colorDiffuse.b << std::endl;
-			std::cout << "Reflective color: " << colorReflective.r << ", " << colorReflective.g << ", " << colorReflective.b << std::endl;
-			std::cout << "Specular color: " << colorSpecular.r << ", " << colorSpecular.g << ", " << colorSpecular.b << std::endl;
+			std::cout << '\t' << "Diffuse color: " << colorDiffuse.r << ", " << colorDiffuse.g << ", " << colorDiffuse.b << std::endl;
+			std::cout << '\t' << "Reflective color: " << colorReflective.r << ", " << colorReflective.g << ", " << colorReflective.b << std::endl;
+			std::cout << '\t' << "Specular color: " << colorSpecular.r << ", " << colorSpecular.g << ", " << colorSpecular.b << std::endl;
 		}
 	}
 	
+	raytracing::RayTracer rayTracer(app, scene);
+	rayTracer.initialize();
+	// 4 threads render this scene fastet on my Intel Xeon X5675 system
+	unsigned int numberOfThreads(4/*std::thread::hardware_concurrency()*/);
+	std::vector<std::thread> threads;
+	double start = get_wall_time();
+	for (int i = 0; i < numberOfThreads; i++)
+	{
+		threads.push_back(rayTracer.renderThread());
+	}
+	//handleEvents(app);
+	for (unsigned int threadToJoin = 0; threadToJoin < threads.size(); threadToJoin++)
+	{
+		threads[threadToJoin].join();
+	}
+	double end = get_wall_time();
+	double elapsedTimeInSec = end - start;
+	BOOST_LOG_TRIVIAL(info) << "Elapsed time for rendering scene: " << elapsedTimeInSec << " seconds.";
+	app.presentRender(rayTracer.getViewport());
 
-	std::thread rayTracing = rayTracer.renderThread(&app, scene);
-	handleEvents(app);
-	rayTracing.join();
-
-	raytracer::ErrorHandler::getInstance().reportInfo("Success. Press Enter to exit SDL...");
+	raytracing::ErrorHandler::getInstance().reportInfo("Success. Press Enter to exit SDL...");
 	std::cin.get();
 
 	app.cleanUp();
+	assetImporter.FreeScene();
 
-	raytracer::ErrorHandler::getInstance().reportInfo("Press Enter to quit...");
+	raytracing::ErrorHandler::getInstance().reportInfo("Press Enter to quit...");
 	std::cin.get();
 
 	return 0;

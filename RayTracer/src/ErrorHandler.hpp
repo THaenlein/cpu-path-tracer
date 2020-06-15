@@ -11,7 +11,7 @@
 
 #include "exceptions.hpp"
 
-namespace raytracer
+namespace raytracing
 {
 	/*--------------------------------< Defines >-------------------------------------------*/
 
@@ -72,4 +72,4 @@ namespace raytracer
 
 	};
 	
-} // end of namespace raytracer
+} // end of namespace raytracing
