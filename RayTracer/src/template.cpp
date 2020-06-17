@@ -6,7 +6,7 @@
 #include "<template>.hpp"
 
 
-namespace raytracer
+namespace raytracing
 {
 	/*--------------------------------< Defines >--------------------------------------------*/
 
