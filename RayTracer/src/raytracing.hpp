@@ -14,6 +14,7 @@ namespace raytracing
 {
 	/*--------------------------------< Defines >-------------------------------------------*/
 
+#define ANTI_ALIASING 1
 	/*--------------------------------< Typedefs >------------------------------------------*/
 
 	// Force packing of struct to avoid padding bytes
@@ -30,10 +31,33 @@ namespace raytracing
 
 		Uint24(aiColor3D value)
 		{
-			uint8_t red = static_cast<uint8_t>(value.r * 255);
-			uint8_t green = static_cast<uint8_t>(value.g * 255);
-			uint8_t blue = static_cast<uint8_t>(value.b * 255);
+			uint8_t red = static_cast<uint8_t>(value.r * 255U);
+			uint8_t green = static_cast<uint8_t>(value.g * 255U);
+			uint8_t blue = static_cast<uint8_t>(value.b * 255U);
 			this->color = (red << 16) | (green << 8) | (blue << 0);
+		}
+
+		Uint24(aiVector3D value)
+		{
+			uint8_t red = static_cast<uint8_t>(value.x * 255U);
+			uint8_t green = static_cast<uint8_t>(value.y * 255U);
+			uint8_t blue = static_cast<uint8_t>(value.z * 255U);
+			this->color = (red << 16) | (green << 8) | (blue << 0);
+		}
+
+		// Adding up colors in Uint24 should not be done, because risk of overflow!
+		Uint24& operator+=(const Uint24& other)
+		{
+			unsigned int newColor{ this->color + other.color};
+			this->color = newColor;
+			return *this;
+		}
+
+		// Adding up colors in Uint24 should not be done, because risk of overflow!
+		friend Uint24& operator+(Uint24 left, const Uint24& right)
+		{
+			left += right;
+			return left;
 		}
 
 		unsigned int color : 24;
@@ -64,6 +88,14 @@ namespace raytracing
 
 		uint32_t index;
 	};
+
+
+	static const struct RenderSettings
+	{
+		// Defines the anti aliasing resolution. This number splits every pixel into n^2 subpixel.
+		// Increasing this number smoothes edges of the rendered image, but increases render time.
+		static const unsigned int antiAliasingResolution = 4;
+	}renderSettings;
 
 	/*--------------------------------< Constants >-----------------------------------------*/
 
