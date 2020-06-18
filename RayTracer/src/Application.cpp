@@ -112,7 +112,7 @@ namespace raytracing
 		SDL_Quit();
 	}
 
-	void Application::presentRender(Uint24* pixels)
+	void Application::updateRender(Uint24* pixels)
 	{
 		int result = SDL_UpdateTexture(this->screenTexture.get(), NULL, pixels, this->WINDOW_DIMENSION_X * sizeof(Uint24));
 		if (result)

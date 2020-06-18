@@ -14,6 +14,8 @@
 
 #include "exceptions.hpp"
 #include "raytracing.hpp"
+#include "Types\RenderJob.hpp"
+#include "Types\SynchronizedQueue.hpp"
 
 namespace raytracing
 {
@@ -58,8 +60,8 @@ namespace raytracing
 
 		void cleanUp();
 
-		void presentRender(Uint24* pixels);
-	
+		void updateRender(Uint24* pixels);
+
 	/*--------------------------------< Protected methods >---------------------------------*/
 	protected:
 	

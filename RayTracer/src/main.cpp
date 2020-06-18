@@ -3,61 +3,75 @@
 #include <exception>
 #include <thread>
 #include <chrono>
-#include <Windows.h>
 
 #include "assimp/Importer.hpp"
 #include "assimp/postprocess.h"
 #include "assimp/scene.h"
 
 #include "SDL.h"
+//#include "SDL_Log.h"
 
 #include "main.hpp"
 #include "Application.hpp"
 #include "exceptions.hpp"
-#include "ErrorHandler.hpp"
 #include "RayTracer.hpp"
+#include "Timer.hpp"
 
-void handleEvents(raytracing::Application& app)
+void handleEvents(raytracing::Application& app, raytracing::RayTracer& rayTracer, std::vector<std::thread>& threadPool, std::atomic<uint8_t>& threadsTerminated)
 {
 	SDL_Event sdlEvent;
-	bool continueRendering{ true };
+	bool doneRendering{ false };
+	bool quitApplication{ false };
 
-	while (continueRendering)
+	while (!quitApplication)
 	{
-		while (SDL_PollEvent(&sdlEvent))
-		{
-			switch (sdlEvent.type)
+			while (SDL_PollEvent(&sdlEvent))
 			{
-			case SDL_QUIT:
-				continueRendering = false;
-				break;
-
-			case SDL_WINDOWEVENT:
-				switch (sdlEvent.window.event)
+				switch (sdlEvent.type)
 				{
-				case SDL_WINDOWEVENT_MOVED:
-					SDL_SetWindowPosition(app.getWindow(), sdlEvent.window.data1, sdlEvent.window.data2);
+				case SDL_QUIT:
+					quitApplication = true;
+					if (!doneRendering)
+					{
+						doneRendering = true;
+						SDL_LogWarn(SDL_LOG_CATEGORY_APPLICATION, "Terminated application before finishing render! Waiting for render threads to finish...");
+						SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_INFORMATION,
+							"Still running.",
+							"Waiting for render threads to finish...",
+							app.getWindow());
+						// TODO: Evaluate if threads can safely be terminated instead of joining them
+					}
+					for (unsigned int threadToJoin = 0; threadToJoin < threadPool.size(); threadToJoin++)
+					{
+						threadPool[threadToJoin].join();
+					}
+					app.cleanUp();
+					break;
+
+				case SDL_WINDOWEVENT:
+					switch (sdlEvent.window.event)
+					{
+					case SDL_WINDOWEVENT_MOVED:
+						SDL_SetWindowPosition(app.getWindow(), sdlEvent.window.data1, sdlEvent.window.data2);
+						break;
+					}
 					break;
 				}
-				break;
 			}
-		}
-		std::this_thread::sleep_for(std::chrono::milliseconds(100));
-	}
-}
 
+			if (!doneRendering)
+			{
+				if (threadsTerminated == threadPool.size())
+				{
+					doneRendering = true;
+					double renderingTime = raytracing::Timer::getInstance().stop();
+					SDL_Log("Elapsed time for rendering scene: %.2f seconds", renderingTime);
+				}
+				app.updateRender(rayTracer.getViewport());
+			}
 
-double get_wall_time() {
-	LARGE_INTEGER time, freq;
-	if (!QueryPerformanceFrequency(&freq)) {
-		//  Handle error
-		return 0;
+			std::this_thread::sleep_for(std::chrono::milliseconds(10));
 	}
-	if (!QueryPerformanceCounter(&time)) {
-		//  Handle error
-		return 0;
-	}
-	return (double)time.QuadPart / freq.QuadPart;
 }
 
 
@@ -73,7 +87,7 @@ int main(int argc, char* argv[])
 	}
 	catch(raytracing::SdlException& exception)
 	{
-		raytracing::ErrorHandler::getInstance().reportError(exception);
+		SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, exception.what());
 		app.cleanUp();
 		return 0;
 	}
@@ -83,7 +97,7 @@ int main(int argc, char* argv[])
 	const aiScene* scene = assetImporter.ReadFile(sceneFilePath, 0);
 	if (!scene)
 	{
-		raytracing::ErrorHandler::getInstance().reportError("Import of 3D scene failed: ", assetImporter.GetErrorString());
+		SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "Import of 3D scene failed: %s", assetImporter.GetErrorString());
 		app.cleanUp();
 		return 0;
 	}
@@ -225,31 +239,26 @@ int main(int argc, char* argv[])
 	
 	raytracing::RayTracer rayTracer(app, scene);
 	rayTracer.initialize();
-	// 4 threads render this scene fastet on my Intel Xeon X5675 system
+
+#if MULTI_THREADING
+	// 4 threads render scenes generally fastet on my Intel Xeon X5675 system
 	unsigned int numberOfThreads(4/*std::thread::hardware_concurrency()*/);
-	std::vector<std::thread> threads;
-	double start = get_wall_time();
+#else
+	unsigned int numberOfThreads(1);
+#endif
+
+	std::vector<std::thread> threadPool;
+	std::atomic<uint8_t> threadsTerminated(0);
+	raytracing::Timer::getInstance().start();
 	for (int i = 0; i < numberOfThreads; i++)
 	{
-		threads.push_back(rayTracer.renderThread());
+		threadPool.push_back(rayTracer.renderThread(threadsTerminated));
 	}
-	//handleEvents(app);
-	for (unsigned int threadToJoin = 0; threadToJoin < threads.size(); threadToJoin++)
-	{
-		threads[threadToJoin].join();
-	}
-	double end = get_wall_time();
-	double elapsedTimeInSec = end - start;
-	BOOST_LOG_TRIVIAL(info) << "Elapsed time for rendering scene: " << elapsedTimeInSec << " seconds.";
-	app.presentRender(rayTracer.getViewport());
+	handleEvents(app, rayTracer, threadPool, threadsTerminated);
 
-	raytracing::ErrorHandler::getInstance().reportInfo("Success. Press Enter to exit SDL...");
-	std::cin.get();
-
-	app.cleanUp();
 	assetImporter.FreeScene();
 
-	raytracing::ErrorHandler::getInstance().reportInfo("Press Enter to quit...");
+	SDL_LogInfo(SDL_LOG_CATEGORY_APPLICATION, "Press Enter to quit...");
 	std::cin.get();
 
 	return 0;

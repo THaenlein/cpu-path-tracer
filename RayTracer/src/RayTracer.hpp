@@ -7,6 +7,7 @@
 /*--------------------------------< Includes >-------------------------------------------*/
 #include <thread>
 #include <mutex>
+#include <atomic>
 
 #include "assimp/scene.h"
 
@@ -45,9 +46,9 @@ namespace raytracing
 
 		void renderSingleThreaded();
 
-		std::thread renderThread()
+		std::thread renderThread(std::atomic<uint8_t>& threadsTerminated)
 		{
-			return std::thread([=] { renderMultiThreaded(); });
+			return std::thread([&] { renderMultiThreaded(); threadsTerminated++; });
 		}
 
 		inline Uint24* getViewport()
