@@ -15,8 +15,3 @@ TEST(RayTracer, testPass)
 {
 	EXPECT_EQ(1, 1);
 }
-
-TEST(RayTracer, testFail)
-{
-	EXPECT_EQ(1, 0);
-}
