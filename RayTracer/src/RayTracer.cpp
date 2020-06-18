@@ -9,7 +9,6 @@
 
 #include "RayTracer.hpp"
 #include "exceptions.hpp"
-#include "ErrorHandler.hpp"
 
 
 namespace raytracing
@@ -35,7 +34,7 @@ namespace raytracing
 		float fieldOfView = camera->mHorizontalFOV;
 		if (aspectRatio != 1.0f)
 		{
-			raytracing::ErrorHandler::getInstance().reportError("Aspect ratio of camera is not 1!");
+			SDL_LogWarn(SDL_LOG_CATEGORY_INPUT, "Aspect ratio of camera is not 1!");
 		}
 
 		aiVector3D cameraUp = camera->mUp.Normalize();
@@ -60,7 +59,7 @@ namespace raytracing
 		RenderJob job;
 		while (this->renderJobs.popFront(job))
 		{
-			ErrorHandler::getInstance().reportDebug("Rendering Tile.");
+			SDL_LogDebug(SDL_LOG_CATEGORY_APPLICATION, "Rendering Tile.");
 #if ANTI_ALIASING
 			this->renderAntiAliased(this->application, this->scene, job);
 #else

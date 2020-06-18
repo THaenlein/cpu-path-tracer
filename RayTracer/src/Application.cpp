@@ -5,8 +5,6 @@
 /*--------------------------------< Includes >-------------------------------------------*/
 #include "Application.hpp"
 
-#include "ErrorHandler.hpp"
-
 
 namespace raytracing
 {
@@ -36,7 +34,7 @@ namespace raytracing
 		{
 			throw Initialization(SDL_GetError());
 		}
-		ErrorHandler::getInstance().reportInfo("SDL initialized!");
+		SDL_LogInfo(SDL_LOG_CATEGORY_APPLICATION, "SDL initialized!");
 	}
 	
 	void Application::setUpSdl()
@@ -48,7 +46,7 @@ namespace raytracing
 		{
 			throw WindowCreation(SDL_GetError());
 		}
-		ErrorHandler::getInstance().reportInfo("Window created!");
+		SDL_LogInfo(SDL_LOG_CATEGORY_APPLICATION, "Window created!");
 	
 		// Create SDL renderer
 		this->sdlRenderer.reset(
@@ -57,7 +55,7 @@ namespace raytracing
 		{
 			throw RendererCreation(SDL_GetError());
 		}
-		ErrorHandler::getInstance().reportInfo("Renderer created!");
+		SDL_LogInfo(SDL_LOG_CATEGORY_APPLICATION, "Renderer created!");
 	}
 
 	std::unique_ptr<SDL_Texture, decltype(&SDL_DestroyTexture)> 
@@ -69,7 +67,7 @@ namespace raytracing
 		{
 			throw BitmapLoad(SDL_GetError());
 		}
-		ErrorHandler::getInstance().reportInfo("Bitmap loaded!");
+		SDL_LogInfo(SDL_LOG_CATEGORY_APPLICATION, "Bitmap loaded!");
 		
 		// Create texture of bitmap
 		std::unique_ptr<SDL_Texture, decltype(&SDL_DestroyTexture)> texture{
@@ -80,7 +78,7 @@ namespace raytracing
 		{
 			throw TextureCreation(SDL_GetError());
 		}
-		ErrorHandler::getInstance().reportInfo("Texture created!");
+		SDL_LogInfo(SDL_LOG_CATEGORY_APPLICATION, "Texture created!");
 
 		return texture;
 	}
@@ -94,7 +92,7 @@ namespace raytracing
 		{
 			throw TextureCreation(SDL_GetError());
 		}
-		ErrorHandler::getInstance().reportInfo("Screen texture created!");
+		SDL_LogInfo(SDL_LOG_CATEGORY_APPLICATION, "Screen texture created!");
 	}
 
 	void Application::render(SDL_Texture* texture)
