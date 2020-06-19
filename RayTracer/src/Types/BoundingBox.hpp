@@ -28,7 +28,11 @@ namespace raytracing
 			min(min), max(max) 
 		{};
 
+		void split(BoundingBox& left, BoundingBox& right);
+
 		bool intersects(aiRay& ray);
+
+		bool operator==(const BoundingBox& other) const;
 	
 	/*--------------------------------< Protected methods >---------------------------------*/
 	protected:
