@@ -1,6 +1,6 @@
 #include "TestBoundingBox.hpp"
 
-#include "../src/Types/BoundingBox.hpp"
+#include "..\src\Types\BoundingBox.hpp"
 
 // Available gtest framework macros
 // 		EXPECT_TRUE

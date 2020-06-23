@@ -9,7 +9,7 @@
 #include <mutex>
 #include <atomic>
 
-#include "assimp/scene.h"
+#include "assimp\scene.h"
 
 #include "Application.hpp"
 #include "Types\SynchronizedQueue.hpp"
@@ -62,22 +62,22 @@ namespace raytracing
 		/*--------------------------------< Private methods >-----------------------------------*/
 	private:
 
-		void render(Application& application, const aiScene* scene);
+		void render();
 
-		void render(Application& application, const aiScene* scene, RenderJob& renderJob);
+		void render(RenderJob& renderJob);
 
-		void RayTracer::renderAntiAliased(Application& application, const aiScene* scene, RenderJob& renderJob);
+		void RayTracer::renderAntiAliased(RenderJob& renderJob);
 
 		bool rayTriangleIntersection(aiRay& ray, std::vector<aiVector3D*> vecTriangle, aiVector3D* outIntersectionPoint);
 
-		aiColor3D shadePixel(const aiScene* scene, IntersectionInformation& intersectionInformation);
+		aiColor3D shadePixel(IntersectionInformation& intersectionInformation);
 
 		bool calculateIntersection(
 			aiRay& ray,
-			const aiScene* scene,
+
 			IntersectionInformation& outIntersection);
 
-		aiColor3D traceRay(aiRay& ray, const aiScene* scene);
+		aiColor3D traceRay(aiRay& ray);
 
 		void createJobs();
 

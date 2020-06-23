@@ -4,9 +4,9 @@
 #include <thread>
 #include <chrono>
 
-#include "assimp/Importer.hpp"
-#include "assimp/postprocess.h"
-#include "assimp/scene.h"
+#include "assimp\Importer.hpp"
+#include "assimp\postprocess.h"
+#include "assimp\scene.h"
 
 #include "SDL.h"
 //#include "SDL_Log.h"
@@ -105,6 +105,9 @@ int main(int argc, char* argv[])
 	// Apply post processing
 
 	// Remove single points and lines not forming a face
+#ifdef AI_CONFIG_PP_SBP_REMOVE
+	#undef AI_CONFIG_PP_SBP_REMOVE
+#endif
 #define AI_CONFIG_PP_SBP_REMOVE aiPrimitiveType_POINTS | aiPrimitiveType_LINES;
 	assetImporter.ApplyPostProcessing(
 		aiProcess_CalcTangentSpace |
@@ -222,8 +225,6 @@ int main(int argc, char* argv[])
 		{
 			aiMaterial* material = materials[currentMaterial];
 			aiString name = material->GetName();
-			const char* type;
-			unsigned int pMax = 1;
 			aiColor3D colorDiffuse;
 			material->Get(AI_MATKEY_COLOR_DIFFUSE, colorDiffuse);
 			aiColor3D colorReflective;
@@ -250,7 +251,7 @@ int main(int argc, char* argv[])
 	std::vector<std::thread> threadPool;
 	std::atomic<uint8_t> threadsTerminated(0);
 	raytracing::Timer::getInstance().start();
-	for (int i = 0; i < numberOfThreads; i++)
+	for (unsigned int i = 0; i < numberOfThreads; i++)
 	{
 		threadPool.push_back(rayTracer.renderThread(threadsTerminated));
 	}

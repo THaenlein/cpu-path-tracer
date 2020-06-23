@@ -63,7 +63,7 @@ namespace raytracing
 #if ANTI_ALIASING
 			this->renderAntiAliased(this->application, this->scene, job);
 #else
-			this->render(this->application, this->scene, job);
+			this->render(job);
 #endif
 			std::this_thread::yield();
 		}
@@ -71,14 +71,14 @@ namespace raytracing
 
 	void RayTracer::renderSingleThreaded()
 	{
-		this->render(this->application, this->scene);
+		this->render();
 	}
 
 	/*--------------------------------< Protected members >----------------------------------*/
 		
 	/*--------------------------------< Private members >------------------------------------*/
 
-	void RayTracer::render(Application& application, const aiScene* scene)
+	void RayTracer::render()
 	{
 		for (uint16_t x = 0; x < this->renderWidth; x++)
 		{
@@ -86,15 +86,15 @@ namespace raytracing
 			{
 				uint32_t currentPixel = y * renderWidth + x;
 				aiVector3D rayDirection = (this->bottomLeftPixel + (this->pixelShiftX * static_cast<float>(x)) + (this->pixelShiftY * static_cast<float>(y))).Normalize();
-				aiRay currentRay((*scene->mCameras)->mPosition, rayDirection);
+				aiRay currentRay((*this->scene->mCameras)->mPosition, rayDirection);
 
-				this->pixels[currentPixel] = this->traceRay(currentRay, scene);
+				this->pixels[currentPixel] = this->traceRay(currentRay);
 			}
 		}
 	}
 
 
-	void RayTracer::render(Application& application, const aiScene* scene, RenderJob& renderJob)
+	void RayTracer::render(RenderJob& renderJob)
 	{
 		for (uint16_t x = renderJob.getTileStartX(); x < renderJob.getTileEndX(); x++)
 		{
@@ -104,14 +104,14 @@ namespace raytracing
 				aiVector3D nextPixelX = this->pixelShiftX * static_cast<float>(x);
 				aiVector3D nextPixelY = this->pixelShiftY * static_cast<float>(y);
 				aiVector3D rayDirection = (this->bottomLeftPixel + nextPixelX + nextPixelY).Normalize();
-				aiRay currentRay((*scene->mCameras)->mPosition, rayDirection);
+				aiRay currentRay((*this->scene->mCameras)->mPosition, rayDirection);
 
-				this->pixels[currentPixel] = this->traceRay(currentRay, scene);
+				this->pixels[currentPixel] = this->traceRay(currentRay);
 			}
 		}
 	}
 
-	void RayTracer::renderAntiAliased(Application& application, const aiScene* scene, RenderJob& renderJob)
+	void RayTracer::renderAntiAliased(RenderJob& renderJob)
 	{
 		const unsigned int aa = RenderSettings::antiAliasingResolution;
 
@@ -132,11 +132,11 @@ namespace raytracing
 						aiVector3D nextPixelX = this->pixelShiftX * static_cast<float>(aaShiftX);
 						aiVector3D nextPixelY = this->pixelShiftY * static_cast<float>(aaShiftY);
 						aiVector3D rayDirection = (this->bottomLeftPixel + nextPixelX + nextPixelY).Normalize();
-						aiRay currentRay((*scene->mCameras)->mPosition, rayDirection);
-						pixelAverage = pixelAverage + this->traceRay(currentRay, scene);
+						aiRay currentRay((*this->scene->mCameras)->mPosition, rayDirection);
+						pixelAverage = pixelAverage + this->traceRay(currentRay);
 					}
 				}
-				pixelAverage = pixelAverage * (1.f/std::pow(aa, 2U));
+				pixelAverage = pixelAverage * static_cast<ai_real>(1.f/std::pow(aa, 2U));
 				this->pixels[currentPixel] = pixelAverage;
 			}
 		}
@@ -145,7 +145,7 @@ namespace raytracing
 
 	bool RayTracer::rayTriangleIntersection(aiRay& ray, std::vector<aiVector3D*> vecTriangle, aiVector3D* outIntersectionPoint)
 	{
-		const float EPSILON = 10e-7;
+		const float EPSILON = 1e-6f;
 		// Invariant: A face always consists of 3 vertices
 		// See: aiProcess_Triangulate flag in scene import
 		aiVector3D* vertex0 = vecTriangle[0];
@@ -161,7 +161,7 @@ namespace raytracing
 		{
 			return false; // This ray is parallel to this triangle.
 		}
-		invDet = 1.0 / determinant;
+		invDet = 1.f / determinant;
 		tVec = ray.pos - *vertex0;
 		u = invDet * tVec * pVec;
 		if (u < 0.0 || u > 1.0)
@@ -188,31 +188,30 @@ namespace raytracing
 	}
 
 
-	aiColor3D RayTracer::shadePixel(const aiScene* scene, IntersectionInformation& intersectionInformation)
+	aiColor3D RayTracer::shadePixel(IntersectionInformation& intersectionInformation)
 	{
 		// Get mesh properties
 		aiVector3D edge1 = *(intersectionInformation.hitTriangle[1]) - *(intersectionInformation.hitTriangle[0]);
 		aiVector3D edge2 = *(intersectionInformation.hitTriangle[2]) - *(intersectionInformation.hitTriangle[0]);
 		aiVector3D calculatedNormal = (edge1 ^ edge2).Normalize();
 		unsigned int materialIndex = intersectionInformation.hitMesh->mMaterialIndex;
-		aiMaterial* material = scene->mMaterials[materialIndex];
+		aiMaterial* material = this->scene->mMaterials[materialIndex];
 		aiColor3D materialColorDiffuse;
 		material->Get(AI_MATKEY_COLOR_DIFFUSE, materialColorDiffuse);
 
 		// TODO: Calculate color for multiple light sources
-		aiLight* light = scene->mLights[0];
+		aiLight* light = this->scene->mLights[0];
 		aiVector3D lightDirection = (light->mPosition - intersectionInformation.hitPoint);
 		float r2 = lightDirection.SquareLength();
 		float distance = lightDirection.Length();
 		lightDirection /= distance;
-		aiColor3D lightIntensity = light->mColorDiffuse * (1/(4 * M_PI * r2));
+		aiColor3D lightIntensity = light->mColorDiffuse * static_cast<ai_real>(1.f/(4 * M_PI * r2));
 
 		// Only directional lights are supported atm!
 		aiVector3D sunLightDirection = -light->mDirection;
 		aiRay shadowRay(intersectionInformation.hitPoint + (calculatedNormal * 0.001f), lightDirection);
-		aiVector3D* newFaceNormal{};
 		IntersectionInformation newIntersectionInfo;
-		bool vis = !calculateIntersection(shadowRay, scene, newIntersectionInfo);
+		bool vis = !calculateIntersection(shadowRay, newIntersectionInfo);
 		// TODO: Fix broken shading for high intensity lights
 		aiColor3D intersectionColor =  materialColorDiffuse * vis * light->mColorDiffuse * std::max(0.f, calculatedNormal * lightDirection);
 		return intersectionColor;
@@ -221,7 +220,6 @@ namespace raytracing
 
 	bool RayTracer::calculateIntersection(
 		aiRay& ray,
-		const aiScene* scene,
 		IntersectionInformation& outIntersection)
 	{
 		float leastDistanceIntersection{ std::numeric_limits<float>::max() };
@@ -229,10 +227,10 @@ namespace raytracing
 		aiVector3D intersectionPoint;
 		bool intersects{ false };
 		// Iterate through meshes and faces and call rayTriangleIntersection()
-		for (unsigned int currentMesh = 0; currentMesh < scene->mNumMeshes; currentMesh++)
+		for (unsigned int currentMesh = 0; currentMesh < this->scene->mNumMeshes; currentMesh++)
 		{
-			aiString name = scene->mMeshes[currentMesh]->mName;
-			aiMesh* mesh = scene->mMeshes[currentMesh];
+			aiString name = this->scene->mMeshes[currentMesh]->mName;
+			aiMesh* mesh = this->scene->mMeshes[currentMesh];
 
 			for (unsigned int currentFace = 0; currentFace < mesh->mNumFaces; currentFace++)
 			{
@@ -263,18 +261,14 @@ namespace raytracing
 	}
 
 
-	aiColor3D RayTracer::traceRay(aiRay& ray, const aiScene* scene)
+	aiColor3D RayTracer::traceRay(aiRay& ray)
 	{
-		std::vector<aiVector3D*> vecTriangle;
-		aiMesh* intersectedMesh{};
-		aiVector3D intersection;
-		aiVector3D* normal{};
 		IntersectionInformation intersectionInformation;
-		bool intersects = this->calculateIntersection(ray, scene, intersectionInformation);
+		bool intersects = this->calculateIntersection(ray, intersectionInformation);
 		if (intersects)
 		{
 			// Calculate color at the intersection
-			return this->shadePixel(scene, intersectionInformation);
+			return this->shadePixel(intersectionInformation);
 		}
 		else
 		{
