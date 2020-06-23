@@ -3,7 +3,7 @@
 cmake_minimum_required(VERSION "3.17.2")
 project("RayTracer")
 
-set(CMAKE_CXX_STANDARD 17) # TODO: Verify version
+set(CMAKE_CXX_STANDARD 11) # TODO: Verify version
 set(CMAKE_CXX_FLAGS ${CMAKE_CXX_FLAGS})
 set(CMAKE_PREFIX_PATH ${CMAKE_PREFIX_PATH} ${CMAKE_CURRENT_LIST_DIR}/lib)
 set(SDL2_INCLUDE_DIR ${CMAKE_CURRENT_LIST_DIR}/lib/sdl2/include)
