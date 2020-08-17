@@ -27,22 +27,22 @@ namespace raytracing
 
 		inline void reportTrace(const char* message, const char* additional = "")
 		{
-			BOOST_LOG_TRIVIAL(trace) << message << " " << additional;
+			SDL_Log << message << " " << additional;
 		}
 
 		inline void reportDebug(const char* message, const char* additional = "")
 		{
-			BOOST_LOG_TRIVIAL(debug) << message << " " << additional;
+			SDL_Log << message << " " << additional;
 		}
 
 		inline void reportInfo(const char* message, const char* additional = "")
 		{
-			BOOST_LOG_TRIVIAL(info) << message << " " << additional;
+			SDL_Log << message << " " << additional;
 		}
 
 		inline void reportWarning(const char* message, const char* additional = "")
 		{
-			BOOST_LOG_TRIVIAL(warning) << message << " " << additional;
+			SDL_Log << message << " " << additional;
 		}
 
 		void reportError(const char* message, const char* additional = "");
