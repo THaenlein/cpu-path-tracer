@@ -14,7 +14,9 @@ namespace raytracing
 {
 	/*--------------------------------< Defines >-------------------------------------------*/
 
-#define ANTI_ALIASING 1
+#define ANTI_ALIASING 0
+#define MULTI_THREADING 1
+
 	/*--------------------------------< Typedefs >------------------------------------------*/
 
 	// Force packing of struct to avoid padding bytes
