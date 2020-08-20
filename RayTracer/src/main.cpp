@@ -8,6 +8,16 @@
 #include "assimp\postprocess.h"
 #include "assimp\scene.h"
 
+//#include <dae.h>
+//#include <1.5/dom/domCOLLADA.h>
+
+#include <FCollada.h>
+#include <FCDocument/FCDocument.h>
+#include <FCDocument/FCDVersion.h>
+#include <FCDocument/FCDExtra.h>
+#include <FCDocument/FCDLibrary.h>
+#include <FCDocument/FCDLight.h>
+
 #include "SDL.h"
 //#include "SDL_Log.h"
 
@@ -90,6 +100,38 @@ int main(int argc, char* argv[])
 		SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, exception.what());
 		app.cleanUp();
 		return 0;
+	}
+
+	//DAE dae;
+	//daeElement* root = dae.open("F:/Dokumente/GitHub/ray-tracer/RayTracer/res/testScene_cube.dae");
+	//if (!root)
+	//{
+	//	SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "Import of 3D scene from collada-dom failed! \n");
+	//	app.cleanUp();
+	//	return 0;
+	//}
+
+	FCDocument* colladaFile = new FCDocument();
+	const char* filename = "F:/Dokumente/GitHub/ray-tracer/RayTracer/res/testScene_cube.dae";
+	FCollada::Initialize();
+	FCollada::LoadDocumentFromFile(colladaFile, filename);
+	if (!colladaFile)
+	{
+		SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "Import of 3D scene from fcollada failed! \n");
+		app.cleanUp();
+		return 0;
+	}
+	else
+	{
+		FCDVersion versionNumber1 = colladaFile->GetVersion();
+		FCDLightLibrary* sceneLights = colladaFile->GetLightLibrary();
+		size_t numberLights = sceneLights->GetEntityCount();
+		for (size_t i = 0; i < numberLights; i++)
+		{
+			const fstring name = sceneLights->GetEntity(i)->GetName();
+			SDL_LogInfo(SDL_LOG_CATEGORY_APPLICATION, "Name of Light %d: %s", i, name.c_str());
+		}
+		SDL_LogInfo(SDL_LOG_CATEGORY_APPLICATION, "Collada Version number1: %d", versionNumber1.revision);
 	}
 
 	Assimp::Importer assetImporter;
