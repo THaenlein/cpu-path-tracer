@@ -10,6 +10,8 @@
 #include "assimp\types.h"
 #include "assimp\mesh.h"
 
+//#include "FCDocument\FCDLight.h"
+
 namespace raytracing
 {
 	/*--------------------------------< Defines >-------------------------------------------*/
@@ -102,6 +104,13 @@ namespace raytracing
 	/*--------------------------------< Constants >-----------------------------------------*/
 
 	/*--------------------------------< Public methods >------------------------------------*/
+
+	// TODO: Fix cyclic dependency
+	//const char* getEnumText(FCDLight::LightType type)
+	//{
+	//	static const char* lightTypeStrings[] = { "Point", "Spot", "Ambient", "Directional" };
+	//	return lightTypeStrings[type];
+	//}
 	
 	/*--------------------------------< Protected methods >---------------------------------*/
 	

@@ -11,12 +11,11 @@
 //#include <dae.h>
 //#include <1.5/dom/domCOLLADA.h>
 
-#include <FCollada.h>
-#include <FCDocument/FCDocument.h>
-#include <FCDocument/FCDVersion.h>
-#include <FCDocument/FCDExtra.h>
-#include <FCDocument/FCDLibrary.h>
-#include <FCDocument/FCDLight.h>
+#include "FCollada.h"
+#include "FCDocument\FCDocument.h"
+#include "FCDocument\FCDExtra.h"
+#include "FCDocument\FCDLibrary.h"
+#include "FCDocument\FCDLight.h"
 
 #include "SDL.h"
 //#include "SDL_Log.h"
@@ -121,18 +120,6 @@ int main(int argc, char* argv[])
 		app.cleanUp();
 		return 0;
 	}
-	else
-	{
-		FCDVersion versionNumber1 = colladaFile->GetVersion();
-		FCDLightLibrary* sceneLights = colladaFile->GetLightLibrary();
-		size_t numberLights = sceneLights->GetEntityCount();
-		for (size_t i = 0; i < numberLights; i++)
-		{
-			const fstring name = sceneLights->GetEntity(i)->GetName();
-			SDL_LogInfo(SDL_LOG_CATEGORY_APPLICATION, "Name of Light %d: %s", i, name.c_str());
-		}
-		SDL_LogInfo(SDL_LOG_CATEGORY_APPLICATION, "Collada Version number1: %d", versionNumber1.revision);
-	}
 
 	Assimp::Importer assetImporter;
 	const std::string sceneFilePath("F:/Dokumente/GitHub/ray-tracer/RayTracer/res/testScene_cube.dae");
@@ -145,6 +132,8 @@ int main(int argc, char* argv[])
 	}
 
 	// Apply post processing
+
+	// TODO: Post process with fcollada
 
 	// Remove single points and lines not forming a face
 #ifdef AI_CONFIG_PP_SBP_REMOVE
@@ -201,6 +190,30 @@ int main(int argc, char* argv[])
 		light->mDirection *= rotMatrix;
 		light->mDirection.Normalize();
 	}
+
+	// TODO: Output with fcollada
+
+	FCDLightLibrary* sceneLights = colladaFile->GetLightLibrary();
+	size_t numberOfLights = sceneLights->GetEntityCount();
+	for (size_t currentLight = 0; currentLight < numberOfLights; currentLight++)
+	{
+		FCDLight* light = sceneLights->GetEntity(currentLight);
+		const fstring& name = light->GetName();
+		FCDParameterAnimatableColor3& color = light->GetColor();
+		FCDParameterAnimatableFloat intensity = light->GetIntensity();
+		FCDLight::LightType type = light->GetLightType();
+		// TODO: Get Light Position
+		std::cout << std::endl;
+		SDL_LogInfo(SDL_LOG_CATEGORY_APPLICATION, "Name of Light %d: %s", currentLight, name.c_str());
+		SDL_LogInfo(SDL_LOG_CATEGORY_APPLICATION, "\t Color: %f %f %f", color->x, color->y, color->z);
+		SDL_LogInfo(SDL_LOG_CATEGORY_APPLICATION, "\t Intensity: %f", *intensity);
+		SDL_LogDebug(SDL_LOG_CATEGORY_APPLICATION, "\t Type: %s", type); // TODO: Get enum string
+		// TODO: Print Position
+	}
+
+
+
+
 
 	if (scene->HasMeshes())
 	{
