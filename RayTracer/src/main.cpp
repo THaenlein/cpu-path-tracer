@@ -16,6 +16,18 @@
 #include "FCDocument\FCDExtra.h"
 #include "FCDocument\FCDLibrary.h"
 #include "FCDocument\FCDLight.h"
+#include "FCDocument\FCDGeometry.h"
+#include "FCDocument\FCDGeometryMesh.h"
+#include "FCDocument\FCDGeometryPolygons.h"
+#include "FCDocument\FCDCamera.h"
+#include "FCDocument\FCDMaterial.h"
+#include "FCDocument\FCDEffect.h"
+#include "FCDocument\FCDEffectParameter.h"
+#include "FCDocument\FCDGeometrySource.h"
+#include "FCDocument\FCDGeometryPolygonsInput.h"
+#include "FCDocument\FCDSceneNode.h"
+#include "FCDocument\FCDEntityReference.h"
+#include "FCDocument\FCDEffectProfile.h"
 
 #include "SDL.h"
 //#include "SDL_Log.h"
@@ -192,6 +204,72 @@ int main(int argc, char* argv[])
 	}
 
 	// TODO: Output with fcollada
+	FCDGeometryLibrary* sceneMeshes = colladaFile->GetGeometryLibrary();
+	size_t numberOfMeshes = sceneMeshes->GetEntityCount();
+	for (size_t currentMesh = 0; currentMesh < numberOfMeshes; currentMesh++)
+	{
+		FCDGeometry* geometry = sceneMeshes->GetEntity(currentMesh);
+		const fstring& name = geometry->GetName();
+		if (geometry->IsMesh())
+		{
+			SDL_LogInfo(SDL_LOG_CATEGORY_APPLICATION, "Name of mesh: %s", name.c_str());
+			FCDGeometryMesh* mesh = geometry->GetMesh();
+			size_t numberOfFaces = mesh->GetFaceCount();
+			size_t numberofVertices = mesh->GetFaceVertexCount();
+			size_t vertexSourceCount = mesh->GetVertexSourceCount();
+			SDL_LogInfo(SDL_LOG_CATEGORY_APPLICATION, "\t Mesh has %d faces with %d vertices", numberOfFaces, numberofVertices);
+			
+			for (size_t currentPolygon = 0; currentPolygon < mesh->GetPolygonsCount(); currentPolygon++)
+			{
+				FCDGeometryPolygons* polygon = mesh->GetPolygons(currentPolygon);
+				if (polygon->GetPrimitiveType() == FCDGeometryPolygons::PrimitiveType::POLYGONS) // Only Polygons (Triangles) are supported
+				{
+					SDL_LogInfo(SDL_LOG_CATEGORY_APPLICATION, "\t Polygon %d", currentPolygon);
+					for (size_t currentInputEntry = 0; currentInputEntry < polygon->GetInputCount(); currentInputEntry++)
+					{
+						FCDGeometryPolygonsInput* polygonInput = polygon->GetInput(currentInputEntry);
+						size_t indexCount = polygonInput->GetIndexCount();
+						uint32* indices = polygonInput->GetIndices();
+						FCDGeometrySource* geometrySource = polygonInput->GetSource();
+						FCDParameterListAnimatableFloat& vertexList = geometrySource->GetSourceData();
+						uint32 stride = geometrySource->GetStride();
+						FUDaeGeometryInput::Semantic vertexType = geometrySource->GetType();
+
+						if (vertexType == FUDaeGeometryInput::Semantic::POSITION) // Only print position data
+						{
+							for (size_t currentIndex = 0; currentIndex < indexCount; currentIndex++)
+							{
+								std::string vertexString = 
+									std::to_string(vertexList.at(*(indices + currentIndex) * stride + 0)) + ", " +
+									std::to_string(vertexList.at(*(indices + currentIndex) * stride + 1)) + ", " +
+									std::to_string(vertexList.at(*(indices + currentIndex) * stride + 2));
+								SDL_LogInfo(SDL_LOG_CATEGORY_APPLICATION, "\t\t Face %d: Vertex %d has Coordinates xyz: %s", currentIndex/3, currentIndex, vertexString.c_str());
+							}
+						}
+
+					}
+				}
+			}
+		}
+		std::cout << std::endl;
+	}
+
+	FCDCameraLibrary* sceneCameras = colladaFile->GetCameraLibrary();
+	size_t numberOfCameras = sceneCameras->GetEntityCount();
+	for (size_t currentCamera = 0; currentCamera < numberOfCameras; currentCamera++)
+	{
+		FCDCamera* camera = sceneCameras->GetEntity(currentCamera);
+		const fstring& name = camera->GetName();
+		FCDParameterAnimatableFloat& aspectRatio = camera->GetAspectRatio();
+		
+		// TODO: Get Position
+
+		SDL_LogInfo(SDL_LOG_CATEGORY_APPLICATION, "Name of Camera %d: %s", currentCamera, name.c_str());
+		SDL_LogInfo(SDL_LOG_CATEGORY_APPLICATION, "\t Aspect ratio: %f", *aspectRatio);
+		// TODO: Print Position
+
+		std::cout << std::endl;
+	}
 
 	FCDLightLibrary* sceneLights = colladaFile->GetLightLibrary();
 	size_t numberOfLights = sceneLights->GetEntityCount();
@@ -202,15 +280,63 @@ int main(int argc, char* argv[])
 		FCDParameterAnimatableColor3& color = light->GetColor();
 		FCDParameterAnimatableFloat intensity = light->GetIntensity();
 		FCDLight::LightType type = light->GetLightType();
-		// TODO: Get Light Position
-		std::cout << std::endl;
+		
+		// TODO: Get Position
+		FCDVisualSceneNodeLibrary* visualSceneNodes = colladaFile->GetVisualSceneLibrary();
+
+		FCDSceneNode* sceneNode = visualSceneNodes->GetEntity(0);
+		FCDSceneNode* lightNode = sceneNode->GetChild(4);
+		FCDEntityInstance* instance = lightNode->GetInstance(0);
+		FCDEntityReference* reference = instance->GetEntityReference();
+		FCDEntity* ent = reference->GetEntity();
+		FCDTransform* trans = lightNode->GetTransform(0);
+		FMMatrix44 matrix = trans->ToMatrix();
+
 		SDL_LogInfo(SDL_LOG_CATEGORY_APPLICATION, "Name of Light %d: %s", currentLight, name.c_str());
 		SDL_LogInfo(SDL_LOG_CATEGORY_APPLICATION, "\t Color: %f %f %f", color->x, color->y, color->z);
 		SDL_LogInfo(SDL_LOG_CATEGORY_APPLICATION, "\t Intensity: %f", *intensity);
 		SDL_LogDebug(SDL_LOG_CATEGORY_APPLICATION, "\t Type: %s", type); // TODO: Get enum string
+		SDL_LogInfo(SDL_LOG_CATEGORY_APPLICATION, "\t Position: %f, %f, %f", matrix[3][0], matrix[3][1], matrix[3][2]);
 		// TODO: Print Position
+
+		std::cout << std::endl;
 	}
 
+	FCDMaterialLibrary* sceneMaterials = colladaFile->GetMaterialLibrary();
+	size_t numberOfMaterials = sceneMaterials->GetEntityCount();
+	for (size_t currentMaterial = 0; currentMaterial < numberOfMaterials; currentMaterial++)
+	{
+		FCDMaterial* material = sceneMaterials->GetEntity(currentMaterial);
+		const fstring& name = material->GetName();
+		const FCDEffect* effect = material->GetEffect();
+		const FCDEffectProfile* profile = effect->GetProfile(0); // TODO: Get Effects from here
+
+		size_t effectParameterCount = effect->GetEffectParameterCount();
+		SDL_LogInfo(SDL_LOG_CATEGORY_APPLICATION, "Name of Material %d: %s", currentMaterial, name.c_str());
+		SDL_LogInfo(SDL_LOG_CATEGORY_APPLICATION, "\t Effect count %d", effectParameterCount);
+		
+		for (size_t currentEffect = 0; currentEffect < effectParameterCount; currentEffect++)
+		{
+			const FCDEffectParameter* effectParameter = effect->GetEffectParameter(currentEffect);
+			size_t annotationCount = effectParameter->GetAnnotationCount();
+			SDL_LogInfo(SDL_LOG_CATEGORY_APPLICATION, "\t Effect %d", currentEffect);
+			SDL_LogInfo(SDL_LOG_CATEGORY_APPLICATION, "\t\t Annotation count %d", annotationCount);
+
+			for (size_t currentAnnotation = 0; currentAnnotation < annotationCount; currentAnnotation++)
+			{
+				const FCDEffectParameterAnnotation* effectParameterAnnotation = effectParameter->GetAnnotation(currentAnnotation);
+				const fstring& effectParameterAnnotationName = effectParameterAnnotation->name;
+				const FCDEffectParameterAnnotation::Parameter_type& effectParameterAnnotationType = effectParameterAnnotation->type;
+				const fstring& effectParameterAnnotationValue = effectParameterAnnotation->value;
+
+				SDL_LogInfo(SDL_LOG_CATEGORY_APPLICATION, "\t\t Name of annotation %d: %s", currentAnnotation, effectParameterAnnotationName.c_str());
+				SDL_LogInfo(SDL_LOG_CATEGORY_APPLICATION, "\t\t Annotation type: %d", effectParameterAnnotationType);
+				SDL_LogInfo(SDL_LOG_CATEGORY_APPLICATION, "\t\t Annotation value: %s", effectParameterAnnotationValue);
+			}
+		}
+
+
+	}
 
 
 
