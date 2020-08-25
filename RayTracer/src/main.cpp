@@ -10,21 +10,23 @@
 
 #include "FCollada.h"
 #include "FCDocument\FCDocument.h"
-#include "FCDocument\FCDExtra.h"
 #include "FCDocument\FCDLibrary.h"
 #include "FCDocument\FCDLight.h"
 #include "FCDocument\FCDGeometry.h"
 #include "FCDocument\FCDGeometryMesh.h"
 #include "FCDocument\FCDGeometryPolygons.h"
 #include "FCDocument\FCDCamera.h"
-#include "FCDocument\FCDMaterial.h"
 #include "FCDocument\FCDEffect.h"
 #include "FCDocument\FCDEffectParameter.h"
 #include "FCDocument\FCDGeometrySource.h"
 #include "FCDocument\FCDGeometryPolygonsInput.h"
 #include "FCDocument\FCDSceneNode.h"
 #include "FCDocument\FCDEntityReference.h"
+#include "FCDocument\FCDMaterial.h"
 #include "FCDocument\FCDEffectProfile.h"
+#include "FCDocument\FCDEffectStandard.h"
+#include "FUtils\FUObject.h"
+#include "FUtils\FUError.h"
 
 #include "SDL.h"
 //#include "SDL_Log.h"
@@ -110,13 +112,14 @@ int main(int argc, char* argv[])
 		return 0;
 	}
 
-	FCDocument* colladaFile = new FCDocument();
-	const char* filename = "F:/Dokumente/GitHub/ray-tracer/RayTracer/res/testScene_cube.dae";
 	FCollada::Initialize();
+	FUErrorSimpleHandler errorHandler;
+	FUObjectRef<FCDocument> colladaFile = FCollada::NewTopDocument();
+	const char* filename = "F:/Dokumente/GitHub/ray-tracer/RayTracer/res/testScene_cube.dae";
 	FCollada::LoadDocumentFromFile(colladaFile, filename);
-	if (!colladaFile)
+	if (!colladaFile || !errorHandler.IsSuccessful())
 	{
-		SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "Import of 3D scene from fcollada failed! \n");
+		SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "Import of 3D scene from fcollada failed!\n%s", errorHandler.GetErrorString());
 		app.cleanUp();
 		return 0;
 	}
@@ -191,7 +194,11 @@ int main(int argc, char* argv[])
 		light->mDirection.Normalize();
 	}
 
-	// TODO: Output with fcollada
+
+	FCDVisualSceneNodeLibrary* visualSceneNodes = colladaFile->GetVisualSceneLibrary();
+	FCDSceneNode* sceneNode = visualSceneNodes->GetEntity(0);
+
+
 	FCDGeometryLibrary* sceneMeshes = colladaFile->GetGeometryLibrary();
 	size_t numberOfMeshes = sceneMeshes->GetEntityCount();
 	for (size_t currentMesh = 0; currentMesh < numberOfMeshes; currentMesh++)
@@ -223,7 +230,7 @@ int main(int argc, char* argv[])
 						uint32 stride = geometrySource->GetStride();
 						FUDaeGeometryInput::Semantic vertexType = geometrySource->GetType();
 
-						if (vertexType == FUDaeGeometryInput::Semantic::POSITION) // Only print position data
+						if (vertexType == FUDaeGeometryInput::Semantic::POSITION) // Only print position data and ignore normals
 						{
 							for (size_t currentIndex = 0; currentIndex < indexCount; currentIndex++)
 							{
@@ -249,12 +256,22 @@ int main(int argc, char* argv[])
 		FCDCamera* camera = sceneCameras->GetEntity(currentCamera);
 		const fstring& name = camera->GetName();
 		FCDParameterAnimatableFloat& aspectRatio = camera->GetAspectRatio();
+		FCDEntity* cameraEntity = sceneNode->FindDaeId(name);
 		
-		// TODO: Get Position
-
 		SDL_LogInfo(SDL_LOG_CATEGORY_APPLICATION, "Name of Camera %d: %s", currentCamera, name.c_str());
 		SDL_LogInfo(SDL_LOG_CATEGORY_APPLICATION, "\t Aspect ratio: %f", *aspectRatio);
-		// TODO: Print Position
+
+		if (dynamic_cast<FCDSceneNode*>(cameraEntity))
+		{
+			FCDSceneNode* cameraNode = dynamic_cast<FCDSceneNode*>(cameraEntity);
+
+			FCDTransform* trans = cameraNode->GetTransform(0);
+			FMMatrix44 matrix = trans->ToMatrix();
+			SDL_LogInfo(SDL_LOG_CATEGORY_APPLICATION, "\t Position: %f, %f, %f", matrix[3][0], matrix[3][1], matrix[3][2]);
+			SDL_LogInfo(SDL_LOG_CATEGORY_APPLICATION, "\t Right: %f, %f, %f", matrix[0][0], matrix[0][1], matrix[0][2]);
+			SDL_LogInfo(SDL_LOG_CATEGORY_APPLICATION, "\t Up: %f, %f, %f", matrix[1][0], matrix[1][1], matrix[1][2]);
+			SDL_LogInfo(SDL_LOG_CATEGORY_APPLICATION, "\t Look At: %f, %f, %f", -matrix[2][0], -matrix[2][1], -matrix[2][2]);
+		}
 
 		std::cout << std::endl;
 	}
@@ -267,29 +284,32 @@ int main(int argc, char* argv[])
 		const fstring& name = light->GetName();
 		FCDParameterAnimatableColor3& color = light->GetColor();
 		FCDParameterAnimatableFloat intensity = light->GetIntensity();
-		FCDLight::LightType type = light->GetLightType();
+		FCDLight::LightType lightType = light->GetLightType();
+		const char* typeString = raytracing::getEnumText(lightType);
+		FCDEntity* lightEntity = sceneNode->FindDaeId(name);
 		
-		// TODO: Get Position
-		FCDVisualSceneNodeLibrary* visualSceneNodes = colladaFile->GetVisualSceneLibrary();
-
-		FCDSceneNode* sceneNode = visualSceneNodes->GetEntity(0);
-		FCDSceneNode* lightNode = sceneNode->GetChild(4);
-		FCDEntityInstance* instance = lightNode->GetInstance(0);
-		FCDEntityReference* reference = instance->GetEntityReference();
-		FCDEntity* ent = reference->GetEntity();
-		FCDTransform* trans = lightNode->GetTransform(0);
-		FMMatrix44 matrix = trans->ToMatrix();
-
 		SDL_LogInfo(SDL_LOG_CATEGORY_APPLICATION, "Name of Light %d: %s", currentLight, name.c_str());
 		SDL_LogInfo(SDL_LOG_CATEGORY_APPLICATION, "\t Color: %f %f %f", color->x, color->y, color->z);
 		SDL_LogInfo(SDL_LOG_CATEGORY_APPLICATION, "\t Intensity: %f", *intensity);
-		SDL_LogDebug(SDL_LOG_CATEGORY_APPLICATION, "\t Type: %s", type); // TODO: Get enum string
-		SDL_LogInfo(SDL_LOG_CATEGORY_APPLICATION, "\t Position: %f, %f, %f", matrix[3][0], matrix[3][1], matrix[3][2]);
-		// TODO: Print Position
+		SDL_LogInfo(SDL_LOG_CATEGORY_APPLICATION, "\t Type: %s", typeString);
+
+		if (dynamic_cast<FCDSceneNode*>(lightEntity))
+		{
+			FCDSceneNode* lightNode = dynamic_cast<FCDSceneNode*>(lightEntity);
+
+			FCDEntityInstance* instance = lightNode->GetInstance(0);
+			FCDEntityReference* reference = instance->GetEntityReference();
+			FCDEntity* lightEntity = reference->GetEntity();
+
+			FCDTransform* trans = lightNode->GetTransform(0);
+			FMMatrix44 matrix = trans->ToMatrix();
+			SDL_LogInfo(SDL_LOG_CATEGORY_APPLICATION, "\t Position: %f, %f, %f", matrix[3][0], matrix[3][1], matrix[3][2]);
+		}
 
 		std::cout << std::endl;
 	}
 
+	// TODO: Evaluate why there may is a segmentation fault thrown
 	FCDMaterialLibrary* sceneMaterials = colladaFile->GetMaterialLibrary();
 	size_t numberOfMaterials = sceneMaterials->GetEntityCount();
 	for (size_t currentMaterial = 0; currentMaterial < numberOfMaterials; currentMaterial++)
@@ -297,115 +317,143 @@ int main(int argc, char* argv[])
 		FCDMaterial* material = sceneMaterials->GetEntity(currentMaterial);
 		const fstring& name = material->GetName();
 		const FCDEffect* effect = material->GetEffect();
-		const FCDEffectProfile* profile = effect->GetProfile(0); // TODO: Get Effects from here
-
-		size_t effectParameterCount = effect->GetEffectParameterCount();
+		const FCDEffectProfile* profile = effect->GetProfile(0); // First profile ist used for rendering
 		SDL_LogInfo(SDL_LOG_CATEGORY_APPLICATION, "Name of Material %d: %s", currentMaterial, name.c_str());
-		SDL_LogInfo(SDL_LOG_CATEGORY_APPLICATION, "\t Effect count %d", effectParameterCount);
-		
-		for (size_t currentEffect = 0; currentEffect < effectParameterCount; currentEffect++)
+
+		if (dynamic_cast<const FCDEffectStandard*>(profile))
 		{
-			const FCDEffectParameter* effectParameter = effect->GetEffectParameter(currentEffect);
-			size_t annotationCount = effectParameter->GetAnnotationCount();
-			SDL_LogInfo(SDL_LOG_CATEGORY_APPLICATION, "\t Effect %d", currentEffect);
-			SDL_LogInfo(SDL_LOG_CATEGORY_APPLICATION, "\t\t Annotation count %d", annotationCount);
+			const FCDEffectStandard* standardEffect = dynamic_cast<const FCDEffectStandard*>(profile);
 
-			for (size_t currentAnnotation = 0; currentAnnotation < annotationCount; currentAnnotation++)
-			{
-				const FCDEffectParameterAnnotation* effectParameterAnnotation = effectParameter->GetAnnotation(currentAnnotation);
-				const fstring& effectParameterAnnotationName = effectParameterAnnotation->name;
-				const FCDEffectParameterAnnotation::Parameter_type& effectParameterAnnotationType = effectParameterAnnotation->type;
-				const fstring& effectParameterAnnotationValue = effectParameterAnnotation->value;
+			const FMVector4& diffuseColor = standardEffect->GetDiffuseColor();
+			SDL_LogInfo(SDL_LOG_CATEGORY_APPLICATION, "\t Diffuse color: %f, %f, %f", diffuseColor.x, diffuseColor.y, diffuseColor.z);
 
-				SDL_LogInfo(SDL_LOG_CATEGORY_APPLICATION, "\t\t Name of annotation %d: %s", currentAnnotation, effectParameterAnnotationName.c_str());
-				SDL_LogInfo(SDL_LOG_CATEGORY_APPLICATION, "\t\t Annotation type: %d", effectParameterAnnotationType);
-				SDL_LogInfo(SDL_LOG_CATEGORY_APPLICATION, "\t\t Annotation value: %s", effectParameterAnnotationValue);
-			}
-		}
+			const FMVector4& specularColor = standardEffect->GetSpecularColor();
+			SDL_LogInfo(SDL_LOG_CATEGORY_APPLICATION, "\t Specular color: %f, %f, %f", specularColor.x, specularColor.y, specularColor.z);
+			const float& specularFactor = standardEffect->GetSpecularFactor();
+			SDL_LogInfo(SDL_LOG_CATEGORY_APPLICATION, "\t Specular factor: %f", specularFactor);
 
+			const float& shininess = standardEffect->GetShininess();
+			SDL_LogInfo(SDL_LOG_CATEGORY_APPLICATION, "\t Shininess: %f", shininess);
 
-	}
+			const FMVector4& emissionColor = standardEffect->GetEmissionColor();
+			SDL_LogInfo(SDL_LOG_CATEGORY_APPLICATION, "\t Emission color: %f, %f, %f", emissionColor.x, emissionColor.y, emissionColor.z);
+			const float& emissionFactor = standardEffect->GetEmissionFactor();
+			SDL_LogInfo(SDL_LOG_CATEGORY_APPLICATION, "\t Emission factor: %f", emissionFactor);
 
-
-
-
-	if (scene->HasMeshes())
-	{
-		aiMesh** meshes = scene->mMeshes;
-		unsigned int numberOfMeshes = scene->mNumMeshes;
-		for (unsigned int currentMesh=0; currentMesh < numberOfMeshes; currentMesh++)
-		{
-			aiMesh* mesh = meshes[currentMesh];
-			aiString name = mesh->mName;
-			std::cout << "Name of Mesh " << currentMesh << ": " << name.C_Str() << std::endl;
+			FCDEffectStandard::LightingType lightingType = standardEffect->GetLightingType();
+			const char* typeString = raytracing::getEnumText(lightingType);
+			SDL_LogInfo(SDL_LOG_CATEGORY_APPLICATION, "\t Lighting type: %s", typeString);
 			
-			for (unsigned int currentFace = 0; currentFace < mesh->mNumFaces; currentFace++)
-			{
-				aiFace* face = (mesh->mFaces)+currentFace;
-				*(face->mIndices),20;
-				//std::cout << "Face: " << mesh->mVertices[face->mIndices[0]].x << ", " << mesh->mVertices[face->mIndices[0]].y << ", " << mesh->mVertices[face->mIndices[0]].z << std::endl;
-				//std::cout << "Face: " << mesh->mVertices[face->mIndices[1]].x << ", " << mesh->mVertices[face->mIndices[1]].y << ", " << mesh->mVertices[face->mIndices[1]].z << std::endl;
-				//std::cout << "Face: " << mesh->mVertices[face->mIndices[2]].x << ", " << mesh->mVertices[face->mIndices[2]].y << ", " << mesh->mVertices[face->mIndices[2]].z << std::endl;
-				//std::cout << std::endl;
-			}
+			const FMVector4& reflectivityColor = standardEffect->GetReflectivityColor();
+			SDL_LogInfo(SDL_LOG_CATEGORY_APPLICATION, "\t Reflectivity color: %f, %f, %f", reflectivityColor.x, reflectivityColor.y, reflectivityColor.z);
+			const float& reflectivityFactor = standardEffect->GetReflectivityFactor();
+			SDL_LogInfo(SDL_LOG_CATEGORY_APPLICATION, "\t Reflectivity factor: %f", reflectivityFactor);
+			const float& reflectivity = standardEffect->GetReflectivity();
+			SDL_LogInfo(SDL_LOG_CATEGORY_APPLICATION, "\t Reflectivity: %f", reflectivity);
+			
+			const FMVector4& translucencyColor = standardEffect->GetTranslucencyColor();
+			SDL_LogInfo(SDL_LOG_CATEGORY_APPLICATION, "\t Translucency color: %f, %f, %f", translucencyColor.x, translucencyColor.y, translucencyColor.z);
+			const float& translucencyFactor = standardEffect->GetTranslucencyFactor();
+			SDL_LogInfo(SDL_LOG_CATEGORY_APPLICATION, "\t Translucency factor: %f", translucencyFactor);
+
+			const bool isRefractive = standardEffect->IsRefractive();
+			SDL_LogInfo(SDL_LOG_CATEGORY_APPLICATION, "\t Is refractive: %s", isRefractive ? "true" : "false");
+			const float& ior = standardEffect->GetIndexOfRefraction();
+			SDL_LogInfo(SDL_LOG_CATEGORY_APPLICATION, "\t Index of refraction: %f", ior);
+
+			const FMVector4& ambientColor = standardEffect->GetAmbientColor();
+			SDL_LogInfo(SDL_LOG_CATEGORY_APPLICATION, "\t Ambient color: %f, %f, %f", ambientColor.x, ambientColor.y, ambientColor.z);
+
+			std::cout << std::endl;
 		}
 
-		std::cout << std::endl;
-
-		aiCamera** cameras = scene->mCameras;
-		unsigned int numberOfCameras = scene->mNumLights;
-		for (unsigned int currentCamera = 0; currentCamera < numberOfCameras; currentCamera++)
-		{
-			aiCamera* camera = cameras[currentCamera];
-			aiString name = camera->mName;
-			aiVector3D pos = camera->mPosition;
-			aiVector3D up = camera->mUp;
-			aiVector3D right = (camera->mUp ^ camera->mLookAt).Normalize();
-			aiVector3D lookAt = camera->mLookAt;
-			std::cout << "Name of Camera " << currentCamera << ": " << name.C_Str() << std::endl;
-			std::cout << '\t' << "Position: " << pos.x << ", " << pos.y << ", " << pos.z << std::endl;
-			std::cout << '\t' << "Up: " << up.x << ", " << up.y << ", " << up.z << std::endl;
-			std::cout << '\t' << "Right: " << right.x << ", " << right.y << ", " << right.z << std::endl;
-			std::cout << '\t' << "Look at: " << lookAt.x << ", " << lookAt.y << ", " << lookAt.z << std::endl;
-		}
-
-		std::cout << std::endl;
-		
-		aiLight** lights = scene->mLights;
-		unsigned int numberOfLights = scene->mNumLights;
-		for (unsigned int currentLight = 0; currentLight < numberOfLights; currentLight++)
-		{
-			aiLight* light = lights[currentLight];
-			aiString name = light->mName;
-			aiColor3D color = light->mColorDiffuse;
-			aiVector3D pos = light->mPosition;
-			aiVector3D dir = light->mDirection;
-			std::cout << "Name of Light " << currentLight << ": " << name.C_Str() << std::endl;
-			std::cout << '\t' << "Diffuse color: " << color.r << ", " << color.g << ", " << color.b << std::endl;
-			std::cout << '\t' << "Position: " << pos.x << ", " << pos.y << ", " << pos.z << std::endl;
-			std::cout << '\t' << "Direction: " << dir.x << ", " << dir.y << ", " << dir.z << std::endl;
-		}
-
-		std::cout << std::endl;
-
-		aiMaterial** materials = scene->mMaterials;
-		unsigned int numberOfMaterials = scene->mNumMaterials;
-		for (unsigned int currentMaterial = 0; currentMaterial < numberOfMaterials; currentMaterial++)
-		{
-			aiMaterial* material = materials[currentMaterial];
-			aiString name = material->GetName();
-			aiColor3D colorDiffuse;
-			material->Get(AI_MATKEY_COLOR_DIFFUSE, colorDiffuse);
-			aiColor3D colorReflective;
-			material->Get(AI_MATKEY_COLOR_REFLECTIVE, colorReflective);
-			aiColor3D colorSpecular;
-			material->Get(AI_MATKEY_COLOR_SPECULAR, colorSpecular);
-			std::cout << "Name of Material " << currentMaterial << ": " << name.C_Str() << std::endl;
-			std::cout << '\t' << "Diffuse color: " << colorDiffuse.r << ", " << colorDiffuse.g << ", " << colorDiffuse.b << std::endl;
-			std::cout << '\t' << "Reflective color: " << colorReflective.r << ", " << colorReflective.g << ", " << colorReflective.b << std::endl;
-			std::cout << '\t' << "Specular color: " << colorSpecular.r << ", " << colorSpecular.g << ", " << colorSpecular.b << std::endl;
-		}
 	}
+
+
+
+	//if (scene->HasMeshes())
+	//{
+	//	aiMesh** meshes = scene->mMeshes;
+	//	unsigned int numberOfMeshes = scene->mNumMeshes;
+	//	for (unsigned int currentMesh = 0; currentMesh < numberOfMeshes; currentMesh++)
+	//	{
+	//		aiMesh* mesh = meshes[currentMesh];
+	//		aiString name = mesh->mName;
+	//		std::cout << "Name of Mesh " << currentMesh << ": " << name.C_Str() << std::endl;
+
+	//		for (unsigned int currentFace = 0; currentFace < mesh->mNumFaces; currentFace++)
+	//		{
+	//			aiFace* face = (mesh->mFaces) + currentFace;
+	//			*(face->mIndices), 20;
+	//			//std::cout << "Face: " << mesh->mVertices[face->mIndices[0]].x << ", " << mesh->mVertices[face->mIndices[0]].y << ", " << mesh->mVertices[face->mIndices[0]].z << std::endl;
+	//			//std::cout << "Face: " << mesh->mVertices[face->mIndices[1]].x << ", " << mesh->mVertices[face->mIndices[1]].y << ", " << mesh->mVertices[face->mIndices[1]].z << std::endl;
+	//			//std::cout << "Face: " << mesh->mVertices[face->mIndices[2]].x << ", " << mesh->mVertices[face->mIndices[2]].y << ", " << mesh->mVertices[face->mIndices[2]].z << std::endl;
+	//			//std::cout << std::endl;
+	//		}
+	//	}
+	//}
+	//std::cout << std::endl;
+
+	//if (scene->HasCameras())
+	//{
+	//	aiCamera** cameras = scene->mCameras;
+	//	unsigned int numberOfCameras = scene->mNumLights;
+	//	for (unsigned int currentCamera = 0; currentCamera < numberOfCameras; currentCamera++)
+	//	{
+	//		aiCamera* camera = cameras[currentCamera];
+	//		aiString name = camera->mName;
+	//		aiVector3D pos = camera->mPosition;
+	//		aiVector3D up = camera->mUp;
+	//		aiVector3D right = (camera->mUp ^ camera->mLookAt).Normalize();
+	//		aiVector3D lookAt = camera->mLookAt;
+	//		std::cout << "Name of Camera " << currentCamera << ": " << name.C_Str() << std::endl;
+	//		std::cout << '\t' << "Position: " << pos.x << ", " << pos.y << ", " << pos.z << std::endl;
+	//		std::cout << '\t' << "Up: " << up.x << ", " << up.y << ", " << up.z << std::endl;
+	//		std::cout << '\t' << "Right: " << right.x << ", " << right.y << ", " << right.z << std::endl;
+	//		std::cout << '\t' << "Look at: " << lookAt.x << ", " << lookAt.y << ", " << lookAt.z << std::endl;
+	//	}
+	//}
+	//std::cout << std::endl;
+
+	//if (scene->HasLights())
+	//{
+	//	aiLight** lights = scene->mLights;
+	//	unsigned int numberOfLights = scene->mNumLights;
+	//	for (unsigned int currentLight = 0; currentLight < numberOfLights; currentLight++)
+	//	{
+	//		aiLight* light = lights[currentLight];
+	//		aiString name = light->mName;
+	//		aiColor3D color = light->mColorDiffuse;
+	//		aiVector3D pos = light->mPosition;
+	//		aiVector3D dir = light->mDirection;
+	//		std::cout << "Name of Light " << currentLight << ": " << name.C_Str() << std::endl;
+	//		std::cout << '\t' << "Diffuse color: " << color.r << ", " << color.g << ", " << color.b << std::endl;
+	//		std::cout << '\t' << "Position: " << pos.x << ", " << pos.y << ", " << pos.z << std::endl;
+	//		std::cout << '\t' << "Direction: " << dir.x << ", " << dir.y << ", " << dir.z << std::endl;
+	//	}
+	//}
+	//std::cout << std::endl;
+
+	//if (scene->HasMaterials())
+	//{
+	//	aiMaterial** materials = scene->mMaterials;
+	//	unsigned int numberOfMaterials = scene->mNumMaterials;
+	//	for (unsigned int currentMaterial = 0; currentMaterial < numberOfMaterials; currentMaterial++)
+	//	{
+	//		aiMaterial* material = materials[currentMaterial];
+	//		aiString name = material->GetName();
+	//		aiColor3D colorDiffuse;
+	//		material->Get(AI_MATKEY_COLOR_DIFFUSE, colorDiffuse);
+	//		aiColor3D colorReflective;
+	//		material->Get(AI_MATKEY_COLOR_REFLECTIVE, colorReflective);
+	//		aiColor3D colorSpecular;
+	//		material->Get(AI_MATKEY_COLOR_SPECULAR, colorSpecular);
+	//		std::cout << "Name of Material " << currentMaterial << ": " << name.C_Str() << std::endl;
+	//		std::cout << '\t' << "Diffuse color: " << colorDiffuse.r << ", " << colorDiffuse.g << ", " << colorDiffuse.b << std::endl;
+	//		std::cout << '\t' << "Reflective color: " << colorReflective.r << ", " << colorReflective.g << ", " << colorReflective.b << std::endl;
+	//		std::cout << '\t' << "Specular color: " << colorSpecular.r << ", " << colorSpecular.g << ", " << colorSpecular.b << std::endl;
+	//	}
+	//}
 	
 	raytracing::RayTracer rayTracer(app, scene);
 	rayTracer.initialize();
@@ -427,6 +475,8 @@ int main(int argc, char* argv[])
 	handleEvents(app, rayTracer, threadPool, threadsTerminated);
 
 	assetImporter.FreeScene();
+	colladaFile->Release();
+	FCollada::Release();
 
 	SDL_LogInfo(SDL_LOG_CATEGORY_APPLICATION, "Press Enter to quit...");
 	std::cin.get();
