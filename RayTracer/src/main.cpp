@@ -8,9 +8,6 @@
 #include "assimp\postprocess.h"
 #include "assimp\scene.h"
 
-//#include <dae.h>
-//#include <1.5/dom/domCOLLADA.h>
-
 #include "FCollada.h"
 #include "FCDocument\FCDocument.h"
 #include "FCDocument\FCDExtra.h"
@@ -112,15 +109,6 @@ int main(int argc, char* argv[])
 		app.cleanUp();
 		return 0;
 	}
-
-	//DAE dae;
-	//daeElement* root = dae.open("F:/Dokumente/GitHub/ray-tracer/RayTracer/res/testScene_cube.dae");
-	//if (!root)
-	//{
-	//	SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "Import of 3D scene from collada-dom failed! \n");
-	//	app.cleanUp();
-	//	return 0;
-	//}
 
 	FCDocument* colladaFile = new FCDocument();
 	const char* filename = "F:/Dokumente/GitHub/ray-tracer/RayTracer/res/testScene_cube.dae";
