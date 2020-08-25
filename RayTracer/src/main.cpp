@@ -28,6 +28,9 @@
 #include "FUtils\FUObject.h"
 #include "FUtils\FUError.h"
 
+#include "FCDocument\FCDGeometryPolygonsTools.h"
+#include "FCDocument\FCDocumentTools.h"
+
 #include "SDL.h"
 //#include "SDL_Log.h"
 
@@ -114,9 +117,10 @@ int main(int argc, char* argv[])
 
 	FCollada::Initialize();
 	FUErrorSimpleHandler errorHandler;
-	FUObjectRef<FCDocument> colladaFile = FCollada::NewTopDocument();
+	FUObjectRef<FCDocument> colladaFile = FCollada::NewTopDocument(); // Sometimes throws an exception
+	//FCDocument* colladaFile = FCollada::NewDocument(); // Sometimes throws an exception
 	const char* filename = "F:/Dokumente/GitHub/ray-tracer/RayTracer/res/testScene_cube.dae";
-	FCollada::LoadDocumentFromFile(colladaFile, filename);
+	FCollada::LoadDocumentFromFile(colladaFile, FC("F:/Dokumente/GitHub/ray-tracer/RayTracer/res/testScene_cube.dae"));
 	if (!colladaFile || !errorHandler.IsSuccessful())
 	{
 		SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "Import of 3D scene from fcollada failed!\n%s", errorHandler.GetErrorString());
@@ -198,9 +202,39 @@ int main(int argc, char* argv[])
 	FCDVisualSceneNodeLibrary* visualSceneNodes = colladaFile->GetVisualSceneLibrary();
 	FCDSceneNode* sceneNode = visualSceneNodes->GetEntity(0);
 
+	FCDocumentTools::StandardizeUpAxisAndLength(colladaFile, {0.f, 0.f, 1.f}, 1.f);
 
 	FCDGeometryLibrary* sceneMeshes = colladaFile->GetGeometryLibrary();
 	size_t numberOfMeshes = sceneMeshes->GetEntityCount();
+	for (size_t currentMesh = 0; currentMesh < numberOfMeshes; currentMesh++)
+	{
+		FCDGeometry* geometry = sceneMeshes->GetEntity(currentMesh);
+		FCDGeometryMesh* mesh = geometry->GetMesh();
+		FCDGeometryPolygonsTools::Triangulate(mesh);
+	}
+
+	FCDCameraLibrary* sceneCameras = colladaFile->GetCameraLibrary();
+	size_t numberOfCameras = sceneCameras->GetEntityCount();
+	for (size_t currentMesh = 0; currentMesh < numberOfMeshes; currentMesh++)
+	{
+
+	}
+
+	FCDLightLibrary* sceneLights = colladaFile->GetLightLibrary();
+	size_t numberOfLights = sceneLights->GetEntityCount();
+	for (size_t currentMesh = 0; currentMesh < numberOfMeshes; currentMesh++)
+	{
+
+	}
+
+	FCDMaterialLibrary* sceneMaterials = colladaFile->GetMaterialLibrary();
+	size_t numberOfMaterials = sceneMaterials->GetEntityCount();
+	for (size_t currentMesh = 0; currentMesh < numberOfMeshes; currentMesh++)
+	{
+
+	}
+
+
 	for (size_t currentMesh = 0; currentMesh < numberOfMeshes; currentMesh++)
 	{
 		FCDGeometry* geometry = sceneMeshes->GetEntity(currentMesh);
@@ -249,8 +283,6 @@ int main(int argc, char* argv[])
 		std::cout << std::endl;
 	}
 
-	FCDCameraLibrary* sceneCameras = colladaFile->GetCameraLibrary();
-	size_t numberOfCameras = sceneCameras->GetEntityCount();
 	for (size_t currentCamera = 0; currentCamera < numberOfCameras; currentCamera++)
 	{
 		FCDCamera* camera = sceneCameras->GetEntity(currentCamera);
@@ -276,8 +308,6 @@ int main(int argc, char* argv[])
 		std::cout << std::endl;
 	}
 
-	FCDLightLibrary* sceneLights = colladaFile->GetLightLibrary();
-	size_t numberOfLights = sceneLights->GetEntityCount();
 	for (size_t currentLight = 0; currentLight < numberOfLights; currentLight++)
 	{
 		FCDLight* light = sceneLights->GetEntity(currentLight);
@@ -310,8 +340,6 @@ int main(int argc, char* argv[])
 	}
 
 	// TODO: Evaluate why there may is a segmentation fault thrown
-	FCDMaterialLibrary* sceneMaterials = colladaFile->GetMaterialLibrary();
-	size_t numberOfMaterials = sceneMaterials->GetEntityCount();
 	for (size_t currentMaterial = 0; currentMaterial < numberOfMaterials; currentMaterial++)
 	{
 		FCDMaterial* material = sceneMaterials->GetEntity(currentMaterial);
