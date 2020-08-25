@@ -10,7 +10,9 @@
 #include "assimp\types.h"
 #include "assimp\mesh.h"
 
-//#include "FCDocument\FCDLight.h"
+#include "FCollada.h"
+#include "FCDocument\FCDLight.h"
+#include "FCDocument\FCDEffectStandard.h"
 
 namespace raytracing
 {
@@ -106,11 +108,17 @@ namespace raytracing
 	/*--------------------------------< Public methods >------------------------------------*/
 
 	// TODO: Fix cyclic dependency
-	//const char* getEnumText(FCDLight::LightType type)
-	//{
-	//	static const char* lightTypeStrings[] = { "Point", "Spot", "Ambient", "Directional" };
-	//	return lightTypeStrings[type];
-	//}
+	inline const char* getEnumText(FCDLight::LightType type)
+	{
+		static const char* lightTypeStrings[] = { "Point", "Spot", "Ambient", "Directional" };
+		return lightTypeStrings[type];
+	}
+
+	inline const char* getEnumText(FCDEffectStandard::LightingType type)
+	{
+		static const char* lightingTypeStrings[] = { "Constant", "Lambert", "Phong", "Blinn", "Unknown" };
+		return lightingTypeStrings[type];
+	}
 	
 	/*--------------------------------< Protected methods >---------------------------------*/
 	
