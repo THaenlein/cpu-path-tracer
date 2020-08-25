@@ -107,7 +107,6 @@ namespace raytracing
 
 	/*--------------------------------< Public methods >------------------------------------*/
 
-	// TODO: Fix cyclic dependency
 	inline const char* getEnumText(FCDLight::LightType type)
 	{
 		static const char* lightTypeStrings[] = { "Point", "Spot", "Ambient", "Directional" };
