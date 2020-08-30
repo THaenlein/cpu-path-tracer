@@ -7,7 +7,6 @@
 */
 
 #include "StdAfx.h"
-
 #ifdef FCOLLADA_DLL
 #ifdef WIN32
 HINSTANCE hInstance = NULL;

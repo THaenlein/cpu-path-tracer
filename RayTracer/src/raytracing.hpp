@@ -13,6 +13,8 @@
 #include "FCollada.h"
 #include "FCDocument\FCDLight.h"
 #include "FCDocument\FCDEffectStandard.h"
+#include "FCDocument\FCDGeometry.h"
+#include "FCDocument\FCDGeometryMesh.h"
 
 namespace raytracing
 {
@@ -43,7 +45,15 @@ namespace raytracing
 			this->color = (red << 16) | (green << 8) | (blue << 0);
 		}
 
-		Uint24(aiVector3D value)
+		Uint24(FMColor value)
+		{
+			uint8_t red = static_cast<uint8_t>(value.r * 255U);
+			uint8_t green = static_cast<uint8_t>(value.g * 255U);
+			uint8_t blue = static_cast<uint8_t>(value.b * 255U);
+			this->color = (red << 16) | (green << 8) | (blue << 0);
+		}
+
+		Uint24(FMVector3 value)
 		{
 			uint8_t red = static_cast<uint8_t>(value.x * 255U);
 			uint8_t green = static_cast<uint8_t>(value.y * 255U);
@@ -94,6 +104,62 @@ namespace raytracing
 
 		uint32_t index;
 	};
+
+	//struct IntersectionInformation
+	//{
+	//	IntersectionInformation() :
+	//		hitMesh(nullptr),
+	//		hitPoint(),
+	//		hitTriangle(),
+	//		intersectionDistance((std::numeric_limits<float>::max)()), // Paranthesize to prevent call of macro "max"
+	//		uv(),
+	//		index(0)
+	//	{}
+
+	//	FCDGeometryMesh* hitMesh;
+
+	//	FMVector3 hitPoint;
+
+	//	std::vector<FMVector3*> hitTriangle;
+
+	//	float intersectionDistance;
+
+	//	FMVector2 uv;
+
+	//	uint32_t index;
+	//};
+
+
+	//struct SceneShortcuts
+	//{
+	//	SceneShortcuts(FCDocument& colladaScene)
+	//	{
+
+	//	}
+
+	//	struct CameraShorts
+	//	{
+	//		FCDCamera* camera;
+	//		FCDSceneNode* cameraNode;
+	//		FMLookAt cameraLookAt;
+	//	};
+
+	//	struct LightShorts
+	//	{
+	//		FCDLightLibrary* sceneLights;
+	//		FCDSceneNode* cameraNode;
+	//		FMLookAt cameraLookAt;
+	//	};
+
+	//	struct GeometryShorts
+	//	{
+	//		FCDGeometryLibrary* sceneMeshes;
+	//	};
+
+	//	CameraShorts camera;
+
+	//	FCDSceneNode* sceneNode;
+	//};
 
 
 	static const struct RenderSettings

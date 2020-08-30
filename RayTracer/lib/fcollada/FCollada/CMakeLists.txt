@@ -13,7 +13,7 @@ option(BUILD_TESTS "Build the test suite." OFF)
 set(LIBRARY_NAME FCollada)
 
 if(BUILD_SHARED_LIBS)
-    add_definitions(-DFCOLLADA_DLL)
+    add_definitions(-DBUILD_DLL)
 elseif(NOT MSVC)
     set(LIBRARY_NAME "${LIBRARY_NAME}S")
 endif()
@@ -54,7 +54,7 @@ file(GLOB SOURCE_FILES
     "../FColladaPlugins/FArchiveXML/*.cpp"
 )
 
-add_library(${LIBRARY_NAME} ${SOURCE_FILES})
+add_library(${LIBRARY_NAME} STATIC ${SOURCE_FILES})
 target_link_libraries(${LIBRARY_NAME} ${CMAKE_DL_LIBS})
 
 if(NOT MSVC)

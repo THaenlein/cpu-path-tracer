@@ -4,35 +4,32 @@
 #include <thread>
 #include <chrono>
 
+#include "SDL.h"
+
 #include "assimp\Importer.hpp"
 #include "assimp\postprocess.h"
 #include "assimp\scene.h"
 
-#include "FCollada.h"
-#include "FCDocument\FCDocument.h"
-#include "FCDocument\FCDLibrary.h"
-#include "FCDocument\FCDLight.h"
-#include "FCDocument\FCDGeometry.h"
-#include "FCDocument\FCDGeometryMesh.h"
-#include "FCDocument\FCDGeometryPolygons.h"
-#include "FCDocument\FCDCamera.h"
-#include "FCDocument\FCDEffect.h"
-#include "FCDocument\FCDEffectParameter.h"
-#include "FCDocument\FCDGeometrySource.h"
-#include "FCDocument\FCDGeometryPolygonsInput.h"
-#include "FCDocument\FCDSceneNode.h"
-#include "FCDocument\FCDEntityReference.h"
-#include "FCDocument\FCDMaterial.h"
-#include "FCDocument\FCDEffectProfile.h"
-#include "FCDocument\FCDEffectStandard.h"
-#include "FUtils\FUObject.h"
-#include "FUtils\FUError.h"
-
-#include "FCDocument\FCDGeometryPolygonsTools.h"
-#include "FCDocument\FCDocumentTools.h"
-
-#include "SDL.h"
-//#include "SDL_Log.h"
+#include "StdAfx.h"
+//#include "FCDocument\FCDocument.h"
+//#include "FCDocument\FCDLibrary.h"
+//#include "FCDocument\FCDLight.h"
+//#include "FCDocument\FCDGeometry.h"
+//#include "FCDocument\FCDGeometryMesh.h"
+//#include "FCDocument\FCDGeometryPolygons.h"
+//#include "FCDocument\FCDCamera.h"
+//#include "FCDocument\FCDEffect.h"
+//#include "FCDocument\FCDEffectParameter.h"
+//#include "FCDocument\FCDGeometrySource.h"
+//#include "FCDocument\FCDGeometryPolygonsInput.h"
+//#include "FCDocument\FCDSceneNode.h"
+//#include "FCDocument\FCDEntityReference.h"
+//#include "FCDocument\FCDMaterial.h"
+//#include "FCDocument\FCDEffectProfile.h"
+//#include "FCDocument\FCDEffectStandard.h"
+//
+//#include "FCDocument\FCDGeometryPolygonsTools.h"
+//#include "FCDocument\FCDocumentTools.h"
 
 #include "main.hpp"
 #include "Application.hpp"
@@ -199,203 +196,200 @@ int main(int argc, char* argv[])
 	}
 
 
-	FCDVisualSceneNodeLibrary* visualSceneNodes = colladaFile->GetVisualSceneLibrary();
-	FCDSceneNode* sceneNode = visualSceneNodes->GetEntity(0);
+	//FCDVisualSceneNodeLibrary* visualSceneNodes = colladaFile->GetVisualSceneLibrary();
+	//FCDSceneNode* sceneNode = visualSceneNodes->GetEntity(0);
 
-	FCDocumentTools::StandardizeUpAxisAndLength(colladaFile, {0.f, 0.f, 1.f}, 1.f);
+	//FCDocumentTools::StandardizeUpAxisAndLength(colladaFile, {0.f, 0.f, 1.f}, 1.f);
 
-	FCDGeometryLibrary* sceneMeshes = colladaFile->GetGeometryLibrary();
-	size_t numberOfMeshes = sceneMeshes->GetEntityCount();
-	for (size_t currentMesh = 0; currentMesh < numberOfMeshes; currentMesh++)
-	{
-		FCDGeometry* geometry = sceneMeshes->GetEntity(currentMesh);
-		FCDGeometryMesh* mesh = geometry->GetMesh();
-		FCDGeometryPolygonsTools::Triangulate(mesh);
-	}
+	//FCDGeometryLibrary* sceneMeshes = colladaFile->GetGeometryLibrary();
+	//size_t numberOfMeshes = sceneMeshes->GetEntityCount();
+	//for (size_t currentMesh = 0; currentMesh < numberOfMeshes; currentMesh++)
+	//{
+	//	FCDGeometry* geometry = sceneMeshes->GetEntity(currentMesh);
+	//	if (geometry->IsMesh())
+	//	{
+	//		FCDGeometryMesh* mesh = geometry->GetMesh();
+	//		FCDGeometryPolygonsTools::Triangulate(mesh);
+	//	}
+	//}
 
-	FCDCameraLibrary* sceneCameras = colladaFile->GetCameraLibrary();
-	size_t numberOfCameras = sceneCameras->GetEntityCount();
-	for (size_t currentMesh = 0; currentMesh < numberOfMeshes; currentMesh++)
-	{
+	//FCDCameraLibrary* sceneCameras = colladaFile->GetCameraLibrary();
+	//size_t numberOfCameras = sceneCameras->GetEntityCount();
+	//for (size_t currentMesh = 0; currentMesh < numberOfMeshes; currentMesh++)
+	//{
 
-	}
+	//}
 
-	FCDLightLibrary* sceneLights = colladaFile->GetLightLibrary();
-	size_t numberOfLights = sceneLights->GetEntityCount();
-	for (size_t currentMesh = 0; currentMesh < numberOfMeshes; currentMesh++)
-	{
+	//FCDLightLibrary* sceneLights = colladaFile->GetLightLibrary();
+	//size_t numberOfLights = sceneLights->GetEntityCount();
+	//for (size_t currentMesh = 0; currentMesh < numberOfMeshes; currentMesh++)
+	//{
 
-	}
+	//}
 
-	FCDMaterialLibrary* sceneMaterials = colladaFile->GetMaterialLibrary();
-	size_t numberOfMaterials = sceneMaterials->GetEntityCount();
-	for (size_t currentMesh = 0; currentMesh < numberOfMeshes; currentMesh++)
-	{
+	//FCDMaterialLibrary* sceneMaterials = colladaFile->GetMaterialLibrary();
+	//size_t numberOfMaterials = sceneMaterials->GetEntityCount();
+	//for (size_t currentMesh = 0; currentMesh < numberOfMeshes; currentMesh++)
+	//{
 
-	}
+	//}
 
 
-	for (size_t currentMesh = 0; currentMesh < numberOfMeshes; currentMesh++)
-	{
-		FCDGeometry* geometry = sceneMeshes->GetEntity(currentMesh);
-		const fstring& name = geometry->GetName();
-		if (geometry->IsMesh())
-		{
-			SDL_LogInfo(SDL_LOG_CATEGORY_APPLICATION, "Name of mesh: %s", name.c_str());
-			FCDGeometryMesh* mesh = geometry->GetMesh();
-			size_t numberOfFaces = mesh->GetFaceCount();
-			size_t numberofVertices = mesh->GetFaceVertexCount();
-			size_t vertexSourceCount = mesh->GetVertexSourceCount();
-			SDL_LogInfo(SDL_LOG_CATEGORY_APPLICATION, "\t Mesh has %d faces with %d vertices", numberOfFaces, numberofVertices);
-			
-			for (size_t currentPolygon = 0; currentPolygon < mesh->GetPolygonsCount(); currentPolygon++)
-			{
-				FCDGeometryPolygons* polygon = mesh->GetPolygons(currentPolygon);
-				if (polygon->GetPrimitiveType() == FCDGeometryPolygons::PrimitiveType::POLYGONS) // Only Polygons (Triangles) are supported
-				{
-					SDL_LogInfo(SDL_LOG_CATEGORY_APPLICATION, "\t Polygon %d", currentPolygon);
-					for (size_t currentInputEntry = 0; currentInputEntry < polygon->GetInputCount(); currentInputEntry++)
-					{
-						FCDGeometryPolygonsInput* polygonInput = polygon->GetInput(currentInputEntry);
-						size_t indexCount = polygonInput->GetIndexCount();
-						uint32* indices = polygonInput->GetIndices();
-						FCDGeometrySource* geometrySource = polygonInput->GetSource();
-						FCDParameterListAnimatableFloat& vertexList = geometrySource->GetSourceData();
-						uint32 stride = geometrySource->GetStride();
-						FUDaeGeometryInput::Semantic vertexType = geometrySource->GetType();
+	//for (size_t currentMesh = 0; currentMesh < numberOfMeshes; currentMesh++)
+	//{
+	//	FCDGeometry* geometry = sceneMeshes->GetEntity(currentMesh);
+	//	const fstring& name = geometry->GetName();
+	//	if (geometry->IsMesh())
+	//	{
+	//		SDL_LogInfo(SDL_LOG_CATEGORY_APPLICATION, "Name of mesh: %s", name.c_str());
+	//		FCDGeometryMesh* mesh = geometry->GetMesh();
+	//		size_t numberOfFaces = mesh->GetFaceCount();
+	//		size_t numberofVertices = mesh->GetFaceVertexCount();
+	//		size_t vertexSourceCount = mesh->GetVertexSourceCount();
+	//		SDL_LogInfo(SDL_LOG_CATEGORY_APPLICATION, "\t Mesh has %d faces with %d vertices", numberOfFaces, numberofVertices);
+	//		
+	//		for (size_t currentPolygon = 0; currentPolygon < mesh->GetPolygonsCount(); currentPolygon++)
+	//		{
+	//			FCDGeometryPolygons* polygon = mesh->GetPolygons(currentPolygon);
+	//			if (polygon->GetPrimitiveType() == FCDGeometryPolygons::PrimitiveType::POLYGONS) // Only Polygons (Triangles) are supported
+	//			{
+	//				SDL_LogInfo(SDL_LOG_CATEGORY_APPLICATION, "\t Polygon %d", currentPolygon);
+	//				for (size_t currentInputEntry = 0; currentInputEntry < polygon->GetInputCount(); currentInputEntry++)
+	//				{
+	//					FCDGeometryPolygonsInput* polygonInput = polygon->GetInput(currentInputEntry);
+	//					size_t indexCount = polygonInput->GetIndexCount();
+	//					uint32* indices = polygonInput->GetIndices();
+	//					FCDGeometrySource* geometrySource = polygonInput->GetSource();
+	//					FCDParameterListAnimatableFloat& vertexList = geometrySource->GetSourceData();
+	//					uint32 stride = geometrySource->GetStride();
+	//					FUDaeGeometryInput::Semantic vertexType = geometrySource->GetType();
 
-						if (vertexType == FUDaeGeometryInput::Semantic::POSITION) // Only print position data and ignore normals
-						{
-							for (size_t currentIndex = 0; currentIndex < indexCount; currentIndex++)
-							{
-								std::string vertexString = 
-									std::to_string(vertexList.at(*(indices + currentIndex) * stride + 0)) + ", " +
-									std::to_string(vertexList.at(*(indices + currentIndex) * stride + 1)) + ", " +
-									std::to_string(vertexList.at(*(indices + currentIndex) * stride + 2));
-								SDL_LogInfo(SDL_LOG_CATEGORY_APPLICATION, "\t\t Face %d: Vertex %d has Coordinates xyz: %s", currentIndex/3, currentIndex, vertexString.c_str());
-							}
-						}
+	//					if (vertexType == FUDaeGeometryInput::Semantic::POSITION) // Only print position data and ignore normals
+	//					{
+	//						for (size_t currentIndex = 0; currentIndex < indexCount; currentIndex++)
+	//						{
+	//							std::string vertexString = 
+	//								std::to_string(vertexList.at(*(indices + currentIndex) * stride + 0)) + ", " +
+	//								std::to_string(vertexList.at(*(indices + currentIndex) * stride + 1)) + ", " +
+	//								std::to_string(vertexList.at(*(indices + currentIndex) * stride + 2));
+	//							SDL_LogInfo(SDL_LOG_CATEGORY_APPLICATION, "\t\t Face %d: Vertex %d has Coordinates xyz: %s", currentIndex/3, currentIndex, vertexString.c_str());
+	//						}
+	//					}
 
-					}
-				}
-			}
-		}
-		std::cout << std::endl;
-	}
+	//				}
+	//			}
+	//		}
+	//	}
+	//	std::cout << std::endl;
+	//}
 
-	for (size_t currentCamera = 0; currentCamera < numberOfCameras; currentCamera++)
-	{
-		FCDCamera* camera = sceneCameras->GetEntity(currentCamera);
-		const fstring& name = camera->GetName();
-		FCDParameterAnimatableFloat& aspectRatio = camera->GetAspectRatio();
-		FCDEntity* cameraEntity = sceneNode->FindDaeId(name);
-		
-		SDL_LogInfo(SDL_LOG_CATEGORY_APPLICATION, "Name of Camera %d: %s", currentCamera, name.c_str());
-		SDL_LogInfo(SDL_LOG_CATEGORY_APPLICATION, "\t Aspect ratio: %f", *aspectRatio);
+	//for (size_t currentCamera = 0; currentCamera < numberOfCameras; currentCamera++)
+	//{
+	//	FCDCamera* camera = sceneCameras->GetEntity(currentCamera);
+	//	const fstring& name = camera->GetName();
+	//	FCDParameterAnimatableFloat& aspectRatio = camera->GetAspectRatio();
+	//	FCDEntity* cameraEntity = sceneNode->FindDaeId(name);
+	//	
+	//	SDL_LogInfo(SDL_LOG_CATEGORY_APPLICATION, "Name of Camera %d: %s", currentCamera, name.c_str());
+	//	SDL_LogInfo(SDL_LOG_CATEGORY_APPLICATION, "\t Aspect ratio: %f", *aspectRatio);
 
-		if (dynamic_cast<FCDSceneNode*>(cameraEntity))
-		{
-			FCDSceneNode* cameraNode = dynamic_cast<FCDSceneNode*>(cameraEntity);
+	//	if (FCDSceneNode* cameraNode = dynamic_cast<FCDSceneNode*>(cameraEntity))
+	//	{
+	//		FCDTransform* trans = cameraNode->GetTransform(0);
+	//		FMMatrix44 matrix = trans->ToMatrix();
+	//		SDL_LogInfo(SDL_LOG_CATEGORY_APPLICATION, "\t Position: %f, %f, %f", matrix[3][0], matrix[3][1], matrix[3][2]);
+	//		SDL_LogInfo(SDL_LOG_CATEGORY_APPLICATION, "\t Right: %f, %f, %f", matrix[0][0], matrix[0][1], matrix[0][2]);
+	//		SDL_LogInfo(SDL_LOG_CATEGORY_APPLICATION, "\t Up: %f, %f, %f", matrix[1][0], matrix[1][1], matrix[1][2]);
+	//		SDL_LogInfo(SDL_LOG_CATEGORY_APPLICATION, "\t Look At: %f, %f, %f", -matrix[2][0], -matrix[2][1], -matrix[2][2]);
+	//	}
 
-			FCDTransform* trans = cameraNode->GetTransform(0);
-			FMMatrix44 matrix = trans->ToMatrix();
-			SDL_LogInfo(SDL_LOG_CATEGORY_APPLICATION, "\t Position: %f, %f, %f", matrix[3][0], matrix[3][1], matrix[3][2]);
-			SDL_LogInfo(SDL_LOG_CATEGORY_APPLICATION, "\t Right: %f, %f, %f", matrix[0][0], matrix[0][1], matrix[0][2]);
-			SDL_LogInfo(SDL_LOG_CATEGORY_APPLICATION, "\t Up: %f, %f, %f", matrix[1][0], matrix[1][1], matrix[1][2]);
-			SDL_LogInfo(SDL_LOG_CATEGORY_APPLICATION, "\t Look At: %f, %f, %f", -matrix[2][0], -matrix[2][1], -matrix[2][2]);
-		}
+	//	std::cout << std::endl;
+	//}
 
-		std::cout << std::endl;
-	}
+	//for (size_t currentLight = 0; currentLight < numberOfLights; currentLight++)
+	//{
+	//	FCDLight* light = sceneLights->GetEntity(currentLight);
+	//	const fstring& name = light->GetName();
+	//	FCDParameterAnimatableColor3& color = light->GetColor();
+	//	FCDParameterAnimatableFloat intensity = light->GetIntensity();
+	//	FCDLight::LightType lightType = light->GetLightType();
+	//	const char* typeString = raytracing::getEnumText(lightType);
+	//	FCDEntity* lightEntity = sceneNode->FindDaeId(name);
+	//	
+	//	SDL_LogInfo(SDL_LOG_CATEGORY_APPLICATION, "Name of Light %d: %s", currentLight, name.c_str());
+	//	SDL_LogInfo(SDL_LOG_CATEGORY_APPLICATION, "\t Color: %f %f %f", color->x, color->y, color->z);
+	//	SDL_LogInfo(SDL_LOG_CATEGORY_APPLICATION, "\t Intensity: %f", *intensity);
+	//	SDL_LogInfo(SDL_LOG_CATEGORY_APPLICATION, "\t Type: %s", typeString);
 
-	for (size_t currentLight = 0; currentLight < numberOfLights; currentLight++)
-	{
-		FCDLight* light = sceneLights->GetEntity(currentLight);
-		const fstring& name = light->GetName();
-		FCDParameterAnimatableColor3& color = light->GetColor();
-		FCDParameterAnimatableFloat intensity = light->GetIntensity();
-		FCDLight::LightType lightType = light->GetLightType();
-		const char* typeString = raytracing::getEnumText(lightType);
-		FCDEntity* lightEntity = sceneNode->FindDaeId(name);
-		
-		SDL_LogInfo(SDL_LOG_CATEGORY_APPLICATION, "Name of Light %d: %s", currentLight, name.c_str());
-		SDL_LogInfo(SDL_LOG_CATEGORY_APPLICATION, "\t Color: %f %f %f", color->x, color->y, color->z);
-		SDL_LogInfo(SDL_LOG_CATEGORY_APPLICATION, "\t Intensity: %f", *intensity);
-		SDL_LogInfo(SDL_LOG_CATEGORY_APPLICATION, "\t Type: %s", typeString);
+	//	if (FCDSceneNode* lightNode = dynamic_cast<FCDSceneNode*>(lightEntity))
+	//	{
+	//		FCDEntityInstance* instance = lightNode->GetInstance(0);
+	//		FCDEntityReference* reference = instance->GetEntityReference();
+	//		FCDEntity* lightEntity = reference->GetEntity();
 
-		if (dynamic_cast<FCDSceneNode*>(lightEntity))
-		{
-			FCDSceneNode* lightNode = dynamic_cast<FCDSceneNode*>(lightEntity);
+	//		FCDTransform* trans = lightNode->GetTransform(0);
+	//		FMMatrix44 matrix = trans->ToMatrix();
+	//		SDL_LogInfo(SDL_LOG_CATEGORY_APPLICATION, "\t Position: %f, %f, %f", matrix[3][0], matrix[3][1], matrix[3][2]);
+	//	}
 
-			FCDEntityInstance* instance = lightNode->GetInstance(0);
-			FCDEntityReference* reference = instance->GetEntityReference();
-			FCDEntity* lightEntity = reference->GetEntity();
+	//	std::cout << std::endl;
+	//}
 
-			FCDTransform* trans = lightNode->GetTransform(0);
-			FMMatrix44 matrix = trans->ToMatrix();
-			SDL_LogInfo(SDL_LOG_CATEGORY_APPLICATION, "\t Position: %f, %f, %f", matrix[3][0], matrix[3][1], matrix[3][2]);
-		}
+	//// TODO: Evaluate why there may is a segmentation fault thrown
+	//for (size_t currentMaterial = 0; currentMaterial < numberOfMaterials; currentMaterial++)
+	//{
+	//	FCDMaterial* material = sceneMaterials->GetEntity(currentMaterial);
+	//	const fstring& name = material->GetName();
+	//	const FCDEffect* effect = material->GetEffect();
+	//	const FCDEffectProfile* profile = effect->GetProfile(0); // First profile ist used for rendering
+	//	SDL_LogInfo(SDL_LOG_CATEGORY_APPLICATION, "Name of Material %d: %s", currentMaterial, name.c_str());
 
-		std::cout << std::endl;
-	}
+	//	if (const FCDEffectStandard* standardEffect = dynamic_cast<const FCDEffectStandard*>(profile))
+	//	{
+	//		const FMVector4& diffuseColor = standardEffect->GetDiffuseColor();
+	//		SDL_LogInfo(SDL_LOG_CATEGORY_APPLICATION, "\t Diffuse color: %f, %f, %f", diffuseColor.x, diffuseColor.y, diffuseColor.z);
 
-	// TODO: Evaluate why there may is a segmentation fault thrown
-	for (size_t currentMaterial = 0; currentMaterial < numberOfMaterials; currentMaterial++)
-	{
-		FCDMaterial* material = sceneMaterials->GetEntity(currentMaterial);
-		const fstring& name = material->GetName();
-		const FCDEffect* effect = material->GetEffect();
-		const FCDEffectProfile* profile = effect->GetProfile(0); // First profile ist used for rendering
-		SDL_LogInfo(SDL_LOG_CATEGORY_APPLICATION, "Name of Material %d: %s", currentMaterial, name.c_str());
+	//		const FMVector4& specularColor = standardEffect->GetSpecularColor();
+	//		SDL_LogInfo(SDL_LOG_CATEGORY_APPLICATION, "\t Specular color: %f, %f, %f", specularColor.x, specularColor.y, specularColor.z);
+	//		const float& specularFactor = standardEffect->GetSpecularFactor();
+	//		SDL_LogInfo(SDL_LOG_CATEGORY_APPLICATION, "\t Specular factor: %f", specularFactor);
 
-		if (dynamic_cast<const FCDEffectStandard*>(profile))
-		{
-			const FCDEffectStandard* standardEffect = dynamic_cast<const FCDEffectStandard*>(profile);
+	//		const float& shininess = standardEffect->GetShininess();
+	//		SDL_LogInfo(SDL_LOG_CATEGORY_APPLICATION, "\t Shininess: %f", shininess);
 
-			const FMVector4& diffuseColor = standardEffect->GetDiffuseColor();
-			SDL_LogInfo(SDL_LOG_CATEGORY_APPLICATION, "\t Diffuse color: %f, %f, %f", diffuseColor.x, diffuseColor.y, diffuseColor.z);
+	//		const FMVector4& emissionColor = standardEffect->GetEmissionColor();
+	//		SDL_LogInfo(SDL_LOG_CATEGORY_APPLICATION, "\t Emission color: %f, %f, %f", emissionColor.x, emissionColor.y, emissionColor.z);
+	//		const float& emissionFactor = standardEffect->GetEmissionFactor();
+	//		SDL_LogInfo(SDL_LOG_CATEGORY_APPLICATION, "\t Emission factor: %f", emissionFactor);
 
-			const FMVector4& specularColor = standardEffect->GetSpecularColor();
-			SDL_LogInfo(SDL_LOG_CATEGORY_APPLICATION, "\t Specular color: %f, %f, %f", specularColor.x, specularColor.y, specularColor.z);
-			const float& specularFactor = standardEffect->GetSpecularFactor();
-			SDL_LogInfo(SDL_LOG_CATEGORY_APPLICATION, "\t Specular factor: %f", specularFactor);
+	//		FCDEffectStandard::LightingType lightingType = standardEffect->GetLightingType();
+	//		const char* typeString = raytracing::getEnumText(lightingType);
+	//		SDL_LogInfo(SDL_LOG_CATEGORY_APPLICATION, "\t Lighting type: %s", typeString);
+	//		
+	//		const FMVector4& reflectivityColor = standardEffect->GetReflectivityColor();
+	//		SDL_LogInfo(SDL_LOG_CATEGORY_APPLICATION, "\t Reflectivity color: %f, %f, %f", reflectivityColor.x, reflectivityColor.y, reflectivityColor.z);
+	//		const float& reflectivityFactor = standardEffect->GetReflectivityFactor();
+	//		SDL_LogInfo(SDL_LOG_CATEGORY_APPLICATION, "\t Reflectivity factor: %f", reflectivityFactor);
+	//		const float& reflectivity = standardEffect->GetReflectivity();
+	//		SDL_LogInfo(SDL_LOG_CATEGORY_APPLICATION, "\t Reflectivity: %f", reflectivity);
+	//		
+	//		const FMVector4& translucencyColor = standardEffect->GetTranslucencyColor();
+	//		SDL_LogInfo(SDL_LOG_CATEGORY_APPLICATION, "\t Translucency color: %f, %f, %f", translucencyColor.x, translucencyColor.y, translucencyColor.z);
+	//		const float& translucencyFactor = standardEffect->GetTranslucencyFactor();
+	//		SDL_LogInfo(SDL_LOG_CATEGORY_APPLICATION, "\t Translucency factor: %f", translucencyFactor);
 
-			const float& shininess = standardEffect->GetShininess();
-			SDL_LogInfo(SDL_LOG_CATEGORY_APPLICATION, "\t Shininess: %f", shininess);
+	//		const bool isRefractive = standardEffect->IsRefractive();
+	//		SDL_LogInfo(SDL_LOG_CATEGORY_APPLICATION, "\t Is refractive: %s", isRefractive ? "true" : "false");
+	//		const float& ior = standardEffect->GetIndexOfRefraction();
+	//		SDL_LogInfo(SDL_LOG_CATEGORY_APPLICATION, "\t Index of refraction: %f", ior);
 
-			const FMVector4& emissionColor = standardEffect->GetEmissionColor();
-			SDL_LogInfo(SDL_LOG_CATEGORY_APPLICATION, "\t Emission color: %f, %f, %f", emissionColor.x, emissionColor.y, emissionColor.z);
-			const float& emissionFactor = standardEffect->GetEmissionFactor();
-			SDL_LogInfo(SDL_LOG_CATEGORY_APPLICATION, "\t Emission factor: %f", emissionFactor);
+	//		const FMVector4& ambientColor = standardEffect->GetAmbientColor();
+	//		SDL_LogInfo(SDL_LOG_CATEGORY_APPLICATION, "\t Ambient color: %f, %f, %f", ambientColor.x, ambientColor.y, ambientColor.z);
 
-			FCDEffectStandard::LightingType lightingType = standardEffect->GetLightingType();
-			const char* typeString = raytracing::getEnumText(lightingType);
-			SDL_LogInfo(SDL_LOG_CATEGORY_APPLICATION, "\t Lighting type: %s", typeString);
-			
-			const FMVector4& reflectivityColor = standardEffect->GetReflectivityColor();
-			SDL_LogInfo(SDL_LOG_CATEGORY_APPLICATION, "\t Reflectivity color: %f, %f, %f", reflectivityColor.x, reflectivityColor.y, reflectivityColor.z);
-			const float& reflectivityFactor = standardEffect->GetReflectivityFactor();
-			SDL_LogInfo(SDL_LOG_CATEGORY_APPLICATION, "\t Reflectivity factor: %f", reflectivityFactor);
-			const float& reflectivity = standardEffect->GetReflectivity();
-			SDL_LogInfo(SDL_LOG_CATEGORY_APPLICATION, "\t Reflectivity: %f", reflectivity);
-			
-			const FMVector4& translucencyColor = standardEffect->GetTranslucencyColor();
-			SDL_LogInfo(SDL_LOG_CATEGORY_APPLICATION, "\t Translucency color: %f, %f, %f", translucencyColor.x, translucencyColor.y, translucencyColor.z);
-			const float& translucencyFactor = standardEffect->GetTranslucencyFactor();
-			SDL_LogInfo(SDL_LOG_CATEGORY_APPLICATION, "\t Translucency factor: %f", translucencyFactor);
+	//		std::cout << std::endl;
+	//	}
 
-			const bool isRefractive = standardEffect->IsRefractive();
-			SDL_LogInfo(SDL_LOG_CATEGORY_APPLICATION, "\t Is refractive: %s", isRefractive ? "true" : "false");
-			const float& ior = standardEffect->GetIndexOfRefraction();
-			SDL_LogInfo(SDL_LOG_CATEGORY_APPLICATION, "\t Index of refraction: %f", ior);
-
-			const FMVector4& ambientColor = standardEffect->GetAmbientColor();
-			SDL_LogInfo(SDL_LOG_CATEGORY_APPLICATION, "\t Ambient color: %f, %f, %f", ambientColor.x, ambientColor.y, ambientColor.z);
-
-			std::cout << std::endl;
-		}
-
-	}
+	//}
 
 
 
@@ -503,8 +497,8 @@ int main(int argc, char* argv[])
 	handleEvents(app, rayTracer, threadPool, threadsTerminated);
 
 	assetImporter.FreeScene();
-	colladaFile->Release();
-	FCollada::Release();
+	//colladaFile->Release();
+	//FCollada::Release();
 
 	SDL_LogInfo(SDL_LOG_CATEGORY_APPLICATION, "Press Enter to quit...");
 	std::cin.get();
