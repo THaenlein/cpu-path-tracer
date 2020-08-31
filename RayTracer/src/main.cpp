@@ -102,13 +102,13 @@ int main(int argc, char* argv[])
 		return 0;
 	}
 
-	// Apply post processing
-
 	// Remove single points and lines not forming a face
 #ifdef AI_CONFIG_PP_SBP_REMOVE
 	#undef AI_CONFIG_PP_SBP_REMOVE
 #endif
 #define AI_CONFIG_PP_SBP_REMOVE aiPrimitiveType_POINTS | aiPrimitiveType_LINES;
+
+	// Apply post processing
 	assetImporter.ApplyPostProcessing(
 		aiProcess_CalcTangentSpace |
 		aiProcess_Triangulate |
@@ -117,72 +117,80 @@ int main(int argc, char* argv[])
 
 	for (unsigned int currentCamera = 0; currentCamera < scene->mNumCameras; currentCamera++)
 	{
-		aiMatrix4x4 transMatrix;
-		aiMatrix4x4 rotMatrix;
 		aiCamera* camera = scene->mCameras[currentCamera];
 		aiString name = camera->mName;
 		aiNode* cameraNode = scene->mRootNode->FindNode(name);
 
-		transMatrix *= cameraNode->mTransformation;
-		rotMatrix = transMatrix;
-		rotMatrix.a4 = rotMatrix.b4 = rotMatrix.c4 = 0.f;
-		rotMatrix.d4 = 1.f;
-		camera->mPosition *= transMatrix;
+		/* Transformation matrix layout
+		 *
+		 * [Right.x] [Up.x] [Back.x] [Position.x]
+		 * [Right.y] [Up.y] [Back.y] [Position.y]
+		 * [Right.z] [Up.z] [Back.z] [Position.Z]
+		 * [       ] [    ] [      ] [Unit Scale]
+		 */
+		aiMatrix4x4& transMatrix = cameraNode->mTransformation;
+		camera->mRight = { transMatrix.a1, transMatrix.b1, transMatrix.c1 };
+		camera->mUp = { transMatrix.a2, transMatrix.b2, transMatrix.c2 };
+		camera->mLookAt = { -transMatrix.a3, -transMatrix.b3, -transMatrix.c3 };
+		camera->mPosition = { transMatrix.a4, transMatrix.b4, transMatrix.c4 };
 
-		camera->mUp *= rotMatrix;
-		// TODO: Evaluate why mUp has to be flipped
-		camera->mUp *= -1;
+		// Normalize vectors
+		camera->mRight.Normalize();
 		camera->mUp.Normalize();
-
-		camera->mLookAt *= rotMatrix;
 		camera->mLookAt.Normalize();
 	}
 
 	for (unsigned int currentLight = 0; currentLight < scene->mNumLights; currentLight++)
 	{
-		aiMatrix4x4 transMatrix;
-		aiMatrix4x4 rotMatrix;
 		aiLight* light = scene->mLights[currentLight];
 		aiString name = light->mName;
 		aiNode* lightNode = scene->mRootNode->FindNode(name);
 
-		transMatrix *= lightNode->mTransformation;
-		rotMatrix = transMatrix;
-		rotMatrix.a4 = rotMatrix.b4 = rotMatrix.c4 = 0.f;
-		rotMatrix.d4 = 1.f;
-		light->mPosition *= transMatrix;
+		/* Transformation matrix layout
+		*
+		* [Right.x] [Up.x] [Back.x] [Position.x]
+		* [Right.y] [Up.y] [Back.y] [Position.y]
+		* [Right.z] [Up.z] [Back.z] [Position.Z]
+		* [       ] [    ] [      ] [Unit Scale]
+		*/
+		aiMatrix4x4& transMatrix = lightNode->mTransformation;
+		if (!light->mType == aiLightSource_POINT) // Up and direction vectors are undefined for point lights
+		{
+			light->mUp = { transMatrix.a2, transMatrix.b2, transMatrix.c2 };
+			light->mDirection = { -transMatrix.a3, -transMatrix.b3, -transMatrix.c3 };
+			// Normalize vectors
+			light->mUp.Normalize();
+			light->mDirection.Normalize();
+		}
 
-		light->mUp *= rotMatrix;
-
-		light->mUp.Normalize();
-
-		light->mDirection *= rotMatrix;
-		light->mDirection.Normalize();
+		light->mPosition = { transMatrix.a4, transMatrix.b4, transMatrix.c4 };
 	}
 
 	if (scene->HasMeshes())
 	{
 		aiMesh** meshes = scene->mMeshes;
 		unsigned int numberOfMeshes = scene->mNumMeshes;
-		for (unsigned int currentMesh=0; currentMesh < numberOfMeshes; currentMesh++)
+		for (unsigned int currentMesh = 0; currentMesh < numberOfMeshes; currentMesh++)
 		{
 			aiMesh* mesh = meshes[currentMesh];
 			aiString name = mesh->mName;
 			std::cout << "Name of Mesh " << currentMesh << ": " << name.C_Str() << std::endl;
-			
+
 			for (unsigned int currentFace = 0; currentFace < mesh->mNumFaces; currentFace++)
 			{
-				aiFace* face = (mesh->mFaces)+currentFace;
-				*(face->mIndices),20;
+				aiFace* face = (mesh->mFaces) + currentFace;
+				*(face->mIndices), 20;
 				//std::cout << "Face: " << mesh->mVertices[face->mIndices[0]].x << ", " << mesh->mVertices[face->mIndices[0]].y << ", " << mesh->mVertices[face->mIndices[0]].z << std::endl;
 				//std::cout << "Face: " << mesh->mVertices[face->mIndices[1]].x << ", " << mesh->mVertices[face->mIndices[1]].y << ", " << mesh->mVertices[face->mIndices[1]].z << std::endl;
 				//std::cout << "Face: " << mesh->mVertices[face->mIndices[2]].x << ", " << mesh->mVertices[face->mIndices[2]].y << ", " << mesh->mVertices[face->mIndices[2]].z << std::endl;
 				//std::cout << std::endl;
 			}
 		}
-
 		std::cout << std::endl;
+	}
 
+	if (scene->HasCameras())
+	{
 		aiCamera** cameras = scene->mCameras;
 		unsigned int numberOfCameras = scene->mNumLights;
 		for (unsigned int currentCamera = 0; currentCamera < numberOfCameras; currentCamera++)
@@ -199,9 +207,11 @@ int main(int argc, char* argv[])
 			std::cout << '\t' << "Right: " << right.x << ", " << right.y << ", " << right.z << std::endl;
 			std::cout << '\t' << "Look at: " << lookAt.x << ", " << lookAt.y << ", " << lookAt.z << std::endl;
 		}
-
 		std::cout << std::endl;
+	}
 		
+	if (scene->HasLights())
+	{
 		aiLight** lights = scene->mLights;
 		unsigned int numberOfLights = scene->mNumLights;
 		for (unsigned int currentLight = 0; currentLight < numberOfLights; currentLight++)
@@ -216,9 +226,10 @@ int main(int argc, char* argv[])
 			std::cout << '\t' << "Position: " << pos.x << ", " << pos.y << ", " << pos.z << std::endl;
 			std::cout << '\t' << "Direction: " << dir.x << ", " << dir.y << ", " << dir.z << std::endl;
 		}
-
 		std::cout << std::endl;
-
+	}
+	if(scene->HasMaterials())
+	{
 		aiMaterial** materials = scene->mMaterials;
 		unsigned int numberOfMaterials = scene->mNumMaterials;
 		for (unsigned int currentMaterial = 0; currentMaterial < numberOfMaterials; currentMaterial++)
@@ -236,6 +247,7 @@ int main(int argc, char* argv[])
 			std::cout << '\t' << "Reflective color: " << colorReflective.r << ", " << colorReflective.g << ", " << colorReflective.b << std::endl;
 			std::cout << '\t' << "Specular color: " << colorSpecular.r << ", " << colorSpecular.g << ", " << colorSpecular.b << std::endl;
 		}
+		std::cout << std::endl;
 	}
 	
 	raytracing::RayTracer rayTracer(app, scene);

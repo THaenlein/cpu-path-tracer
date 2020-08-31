@@ -39,14 +39,14 @@ namespace raytracing
 
 		aiVector3D cameraUp = camera->mUp.Normalize();
 		aiVector3D lookAt = camera->mLookAt.Normalize();
-		aiVector3D cameraRight = (cameraUp ^ lookAt).Normalize();
+		aiVector3D cameraRight = camera->mRight.Normalize();
 
 		float halfViewportWidth = std::tan(fieldOfView / 2.0f);
 		float halfViewportHeight = halfViewportWidth * aspectRatio;
 
 		this->pixelShiftX = ((2 * halfViewportWidth) / (renderWidth)) * cameraRight;
 		this->pixelShiftY = ((2 * halfViewportHeight) / (renderHeight)) * cameraUp;
-		this->bottomLeftPixel = lookAt - (halfViewportWidth * cameraRight) - (halfViewportHeight * cameraUp);
+		this->topLeftPixel = lookAt - (halfViewportWidth * cameraRight) + (halfViewportHeight * cameraUp);
 
 		this->createJobs();
 
@@ -85,7 +85,7 @@ namespace raytracing
 			for (uint16_t y = 0; y < this->renderHeight; y++)
 			{
 				uint32_t currentPixel = y * renderWidth + x;
-				aiVector3D rayDirection = (this->bottomLeftPixel + (this->pixelShiftX * static_cast<float>(x)) + (this->pixelShiftY * static_cast<float>(y))).Normalize();
+				aiVector3D rayDirection = (this->topLeftPixel + (this->pixelShiftX * static_cast<float>(x)) + (this->pixelShiftY * static_cast<float>(y))).Normalize();
 				aiRay currentRay((*this->scene->mCameras)->mPosition, rayDirection);
 
 				this->pixels[currentPixel] = this->traceRay(currentRay);
@@ -103,7 +103,7 @@ namespace raytracing
 				uint32_t currentPixel = y * renderWidth + x;
 				aiVector3D nextPixelX = this->pixelShiftX * static_cast<float>(x);
 				aiVector3D nextPixelY = this->pixelShiftY * static_cast<float>(y);
-				aiVector3D rayDirection = (this->bottomLeftPixel + nextPixelX + nextPixelY).Normalize();
+				aiVector3D rayDirection = (this->topLeftPixel + nextPixelX - nextPixelY).Normalize();
 				aiRay currentRay((*this->scene->mCameras)->mPosition, rayDirection);
 
 				this->pixels[currentPixel] = this->traceRay(currentRay);
@@ -131,7 +131,7 @@ namespace raytracing
 						float aaShiftY = y + (q + r) / aa;
 						aiVector3D nextPixelX = this->pixelShiftX * static_cast<float>(aaShiftX);
 						aiVector3D nextPixelY = this->pixelShiftY * static_cast<float>(aaShiftY);
-						aiVector3D rayDirection = (this->bottomLeftPixel + nextPixelX + nextPixelY).Normalize();
+						aiVector3D rayDirection = (this->topLeftPixel + nextPixelX + nextPixelY).Normalize();
 						aiRay currentRay((*this->scene->mCameras)->mPosition, rayDirection);
 						pixelAverage = pixelAverage + this->traceRay(currentRay);
 					}

@@ -105,7 +105,7 @@ namespace raytracing
 
 		aiVector3D pixelShiftY;
 
-		aiVector3D bottomLeftPixel;
+		aiVector3D topLeftPixel;
 
 		Application& application;
 
