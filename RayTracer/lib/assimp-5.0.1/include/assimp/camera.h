@@ -133,6 +133,16 @@ struct aiCamera
      */
     C_STRUCT aiVector3D mLookAt;
 
+
+    /** 'Right' - vector of the camera relative to the coordinate space
+     *  defined by the corresponding node.
+     *
+     *  This is the viewing direction of the user.
+     *  The default value is 0|0|0. The vector
+     *  may be normalized, but it needn't.
+     */
+    C_STRUCT aiVector3D mRight;
+
     /** Half horizontal field of view angle, in radians.
      *
      *  The field of view angle is the angle between the center
@@ -186,25 +196,25 @@ struct aiCamera
         /** todo: test ... should work, but i'm not absolutely sure */
 
         /** We don't know whether these vectors are already normalized ...*/
-        aiVector3D zaxis = mLookAt;     zaxis.Normalize();
-        aiVector3D yaxis = mUp;         yaxis.Normalize();
-        aiVector3D xaxis = mUp^mLookAt; xaxis.Normalize();
+        aiVector3D lookAt = mLookAt;    lookAt.Normalize();
+        aiVector3D up = mUp;            up.Normalize();
+        aiVector3D right = mRight;      right.Normalize();
 
-        out.a4 = -(xaxis * mPosition);
-        out.b4 = -(yaxis * mPosition);
-        out.c4 = -(zaxis * mPosition);
+        out.a4 = mPosition.x;
+        out.b4 = mPosition.y;
+        out.c4 = mPosition.z;
 
-        out.a1 = xaxis.x;
-        out.a2 = xaxis.y;
-        out.a3 = xaxis.z;
+        out.a1 = right.x;
+        out.b1 = right.y;
+        out.c1 = right.z;
 
-        out.b1 = yaxis.x;
-        out.b2 = yaxis.y;
-        out.b3 = yaxis.z;
+        out.a2 = up.x;
+        out.b2 = up.y;
+        out.c2 = up.z;
 
-        out.c1 = zaxis.x;
-        out.c2 = zaxis.y;
-        out.c3 = zaxis.z;
+        out.a3 = lookAt.x;
+        out.b3 = lookAt.y;
+        out.c3 = lookAt.z;
 
         out.d1 = out.d2 = out.d3 = 0.f;
         out.d4 = 1.f;
