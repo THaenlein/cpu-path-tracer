@@ -37,9 +37,9 @@ namespace raytracing
 			SDL_LogWarn(SDL_LOG_CATEGORY_INPUT, "Aspect ratio of camera is not 1!");
 		}
 
-		aiVector3D cameraUp = camera->mUp.Normalize();
-		aiVector3D lookAt = camera->mLookAt.Normalize();
-		aiVector3D cameraRight = camera->mRight.Normalize();
+		const aiVector3D cameraUp = camera->mUp.Normalize();
+		const aiVector3D lookAt = camera->mLookAt.Normalize();
+		const aiVector3D cameraRight = camera->mRight.Normalize();
 
 		float halfViewportWidth = std::tan(fieldOfView / 2.0f);
 		float halfViewportHeight = halfViewportWidth * aspectRatio;
@@ -143,7 +143,7 @@ namespace raytracing
 	}
 
 
-	bool RayTracer::rayTriangleIntersection(aiRay& ray, std::vector<aiVector3D*> vecTriangle, aiVector3D* outIntersectionPoint)
+	bool RayTracer::rayTriangleIntersection(const aiRay& ray, std::vector<aiVector3D*> vecTriangle, aiVector3D* outIntersectionPoint)
 	{
 		const float EPSILON = 1e-6f;
 		// Invariant: A face always consists of 3 vertices

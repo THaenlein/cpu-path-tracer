@@ -24,8 +24,8 @@ namespace raytracing
 
 		RenderJob(uint16_t startX, uint16_t startY, uint16_t endX, uint16_t endY) :
 			startCoordinateX(startX),
-			startCoordinateY(startY),
 			endCoordinateX(endX),
+			startCoordinateY(startY),
 			endCoordinateY(endY)
 		{
 
@@ -33,8 +33,8 @@ namespace raytracing
 
 		RenderJob() :
 			startCoordinateX(0),
-			startCoordinateY(0),
 			endCoordinateX(0),
+			startCoordinateY(0),
 			endCoordinateY(0)
 		{
 

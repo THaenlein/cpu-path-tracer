@@ -31,7 +31,7 @@ namespace raytracing
 			color(value)
 		{}
 
-		Uint24(aiColor3D value)
+		explicit Uint24(const aiColor3D& value)
 		{
 			uint8_t red = static_cast<uint8_t>(value.r * 255U);
 			uint8_t green = static_cast<uint8_t>(value.g * 255U);
@@ -39,12 +39,30 @@ namespace raytracing
 			this->color = (red << 16) | (green << 8) | (blue << 0);
 		}
 
-		Uint24(aiVector3D value)
+		explicit Uint24(const aiVector3D& value)
 		{
 			uint8_t red = static_cast<uint8_t>(value.x * 255U);
 			uint8_t green = static_cast<uint8_t>(value.y * 255U);
 			uint8_t blue = static_cast<uint8_t>(value.z * 255U);
 			this->color = (red << 16) | (green << 8) | (blue << 0);
+		}
+
+		Uint24& operator=(const aiColor3D& value)
+		{
+			uint8_t red = static_cast<uint8_t>(value.r * 255U);
+			uint8_t green = static_cast<uint8_t>(value.g * 255U);
+			uint8_t blue = static_cast<uint8_t>(value.b * 255U);
+			this->color = (red << 16) | (green << 8) | (blue << 0);
+			return *this;
+		}
+
+		Uint24& operator=(const aiVector3D& value)
+		{
+			uint8_t red = static_cast<uint8_t>(value.x * 255U);
+			uint8_t green = static_cast<uint8_t>(value.y * 255U);
+			uint8_t blue = static_cast<uint8_t>(value.z * 255U);
+			this->color = (red << 16) | (green << 8) | (blue << 0);
+			return *this;
 		}
 
 		// Adding up colors in Uint24 should not be done, because risk of overflow!
@@ -56,7 +74,7 @@ namespace raytracing
 		}
 
 		// Adding up colors in Uint24 should not be done, because risk of overflow!
-		friend Uint24& operator+(Uint24 left, const Uint24& right)
+		friend Uint24& operator+(Uint24& left, const Uint24& right)
 		{
 			left += right;
 			return left;
