@@ -154,7 +154,7 @@ int main(int argc, char* argv[])
 		* [       ] [    ] [      ] [Unit Scale]
 		*/
 		aiMatrix4x4& transMatrix = lightNode->mTransformation;
-		if (!light->mType == aiLightSource_POINT) // Up and direction vectors are undefined for point lights
+		if (!(light->mType == aiLightSource_POINT)) // Up and direction vectors are undefined for point lights
 		{
 			light->mUp = { transMatrix.a2, transMatrix.b2, transMatrix.c2 };
 			light->mDirection = { -transMatrix.a3, -transMatrix.b3, -transMatrix.c3 };
@@ -228,6 +228,7 @@ int main(int argc, char* argv[])
 		}
 		std::cout << std::endl;
 	}
+
 	if(scene->HasMaterials())
 	{
 		aiMaterial** materials = scene->mMaterials;
@@ -236,18 +237,112 @@ int main(int argc, char* argv[])
 		{
 			aiMaterial* material = materials[currentMaterial];
 			aiString name = material->GetName();
-			aiColor3D colorDiffuse;
+			aiColor3D colorDiffuse (0.f, 0.f, 0.f);
 			material->Get(AI_MATKEY_COLOR_DIFFUSE, colorDiffuse);
-			aiColor3D colorReflective;
+			aiColor3D colorReflective(0.f, 0.f, 0.f);
 			material->Get(AI_MATKEY_COLOR_REFLECTIVE, colorReflective);
-			aiColor3D colorSpecular;
+			aiColor3D colorSpecular(0.f, 0.f, 0.f);
 			material->Get(AI_MATKEY_COLOR_SPECULAR, colorSpecular);
+			aiColor3D colorAmbient(0.f, 0.f, 0.f);
+			material->Get(AI_MATKEY_COLOR_AMBIENT, colorAmbient);
+			aiColor3D colorEmissive(0.f, 0.f, 0.f);
+			material->Get(AI_MATKEY_COLOR_EMISSIVE, colorEmissive);
+			aiColor3D colorTransparent{};
+			material->Get(AI_MATKEY_COLOR_TRANSPARENT, colorTransparent);
+			ai_real reflectivity{};
+			material->Get(AI_MATKEY_REFLECTIVITY, reflectivity);
+			ai_real refractionIndex{};
+			material->Get(AI_MATKEY_REFRACTI, refractionIndex);
+			ai_real opacity{};
+			material->Get(AI_MATKEY_OPACITY, opacity);
+			ai_real shininess{};
+			material->Get(AI_MATKEY_SHININESS, shininess);
+			ai_real shininessStrength{};
+			material->Get(AI_MATKEY_SHININESS_STRENGTH, shininessStrength);
+			ai_real transparency{};
+			material->Get(AI_MATKEY_TRANSPARENCYFACTOR, transparency);
+
 			std::cout << "Name of Material " << currentMaterial << ": " << name.C_Str() << std::endl;
 			std::cout << '\t' << "Diffuse color: " << colorDiffuse.r << ", " << colorDiffuse.g << ", " << colorDiffuse.b << std::endl;
-			std::cout << '\t' << "Reflective color: " << colorReflective.r << ", " << colorReflective.g << ", " << colorReflective.b << std::endl;
 			std::cout << '\t' << "Specular color: " << colorSpecular.r << ", " << colorSpecular.g << ", " << colorSpecular.b << std::endl;
+			std::cout << '\t' << "Reflective color: " << colorReflective.r << ", " << colorReflective.g << ", " << colorReflective.b << std::endl;
+			std::cout << '\t' << "Ambient color: " << colorAmbient.r << ", " << colorAmbient.g << ", " << colorAmbient.b << std::endl;
+			std::cout << '\t' << "Transparent color: " << colorTransparent.r << ", " << colorTransparent.g << ", " << colorTransparent.b << std::endl;
+			std::cout << '\t' << "Emissive color: " << colorEmissive.r << ", " << colorEmissive.g << ", " << colorEmissive.b << std::endl;
+
+			std::cout << '\t' << "Reflectivity: " << reflectivity << std::endl;
+			std::cout << '\t' << "Shininess: " << shininess << std::endl; // Or Hardness
+			std::cout << '\t' << "Shininess strength: " << shininessStrength << std::endl;
+			std::cout << '\t' << "Opacity: " << opacity << std::endl; // Alpha blending
+			std::cout << '\t' << "Transparency: " << transparency << std::endl;
+			std::cout << '\t' << "Refraction Index: " << refractionIndex << std::endl;
 		}
 		std::cout << std::endl;
+	}
+
+	{
+		aiMetadata* metaData = scene->mMetaData;
+		unsigned int propertyCount = metaData->mNumProperties;
+		std::cout << "Scene meta data " << std::endl;
+		for (unsigned int currentProperty = 0; currentProperty < propertyCount; currentProperty++)
+		{
+			aiMetadataEntry* entry;
+			entry = &metaData->mValues[currentProperty];
+			switch (entry->mType)
+			{
+				case aiMetadataType::AI_AISTRING:
+				{
+					if (aiString* decodedEntry = static_cast<aiString*>(entry->mData))
+					{
+						std::cout << '\t' << metaData->mKeys[currentProperty].C_Str() << ": " << decodedEntry->C_Str() << std::endl;
+					}
+				}break;
+
+				case aiMetadataType::AI_AIVECTOR3D:
+				{
+					if (aiVector3D* decodedEntry = static_cast<aiVector3D*>(entry->mData))
+					{
+						std::cout << '\t' << ": " << decodedEntry->x << ", " << decodedEntry->y << ", " << decodedEntry->z << std::endl;
+					}
+				}break;
+
+				case aiMetadataType::AI_BOOL:
+				{
+					if (bool* decodedEntry = static_cast<bool*>(entry->mData))
+					{
+						std::cout << ": " << decodedEntry << std::endl;
+					}
+				}break;
+
+				case aiMetadataType::AI_DOUBLE:
+				case aiMetadataType::AI_FLOAT:
+				{
+					if (ai_real* decodedEntry = static_cast<ai_real*>(entry->mData))
+					{
+						std::cout << '\t' << ": " << decodedEntry << std::endl;
+					}
+				}break;
+
+				case aiMetadataType::AI_INT32:
+				{
+					if (int32_t* decodedEntry = static_cast<int32_t*>(entry->mData))
+					{
+						std::cout << '\t' << ": " << decodedEntry << std::endl;
+					}
+				}break;
+
+				case aiMetadataType::AI_UINT64:
+				{
+					if (uint64_t* decodedEntry = static_cast<uint64_t*>(entry->mData))
+					{
+						std::cout << '\t' << ": " << decodedEntry << std::endl;
+					}
+				}break;
+
+				default:
+					std::cout << '\t' << "Invalid meta data entry type!" << std::endl;
+			}
+		}
 	}
 	
 	raytracing::RayTracer rayTracer(app, scene);
