@@ -73,19 +73,19 @@ namespace raytracing
 		//	return left;
 		//}
 
-		std::vector<uint8_t> clamp(const aiColor3D& color)
+		std::vector<uint8_t> clamp(const aiColor3D& value)
 		{
-			uint8_t red = static_cast<uint8_t>(std::clamp(color.r, 0.f, 1.f) * 255U);
-			uint8_t green = static_cast<uint8_t>(std::clamp(color.g, 0.f, 1.f) * 255U);
-			uint8_t blue = static_cast<uint8_t>(std::clamp(color.b, 0.f, 1.f) * 255U);
+			uint8_t red = static_cast<uint8_t>(std::clamp(value.r, 0.f, 1.f) * 255U);
+			uint8_t green = static_cast<uint8_t>(std::clamp(value.g, 0.f, 1.f) * 255U);
+			uint8_t blue = static_cast<uint8_t>(std::clamp(value.b, 0.f, 1.f) * 255U);
 			return { red, green, blue };
 		}
 
-		std::vector<uint8_t> clamp(const aiVector3D& color)
+		std::vector<uint8_t> clamp(const aiVector3D& value)
 		{
-			uint8_t red = static_cast<uint8_t>(std::clamp(color.x, 0.f, 1.f) * 255U);
-			uint8_t green = static_cast<uint8_t>(std::clamp(color.y, 0.f, 1.f) * 255U);
-			uint8_t blue = static_cast<uint8_t>(std::clamp(color.z, 0.f, 1.f) * 255U);
+			uint8_t red = static_cast<uint8_t>(std::clamp(value.x, 0.f, 1.f) * 255U);
+			uint8_t green = static_cast<uint8_t>(std::clamp(value.y, 0.f, 1.f) * 255U);
+			uint8_t blue = static_cast<uint8_t>(std::clamp(value.z, 0.f, 1.f) * 255U);
 			return { red, green, blue };
 		}
 
