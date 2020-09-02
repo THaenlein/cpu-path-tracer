@@ -198,22 +198,43 @@ namespace raytracing
 		aiMaterial* material = this->scene->mMaterials[materialIndex];
 		aiColor3D materialColorDiffuse;
 		material->Get(AI_MATKEY_COLOR_DIFFUSE, materialColorDiffuse);
+		aiColor3D intersectionColor{ 0.f, 0.f, 0.f };
 
-		// TODO: Calculate color for multiple light sources
-		aiLight* light = this->scene->mLights[0];
-		aiVector3D lightDirection = (light->mPosition - intersectionInformation.hitPoint);
-		float r2 = lightDirection.SquareLength();
-		float distance = lightDirection.Length();
-		lightDirection /= distance;
-		aiColor3D lightIntensity = light->mColorDiffuse * static_cast<ai_real>(1.f/(4 * M_PI * r2));
+		for (unsigned int currentLight = 0; currentLight < scene->mNumLights; currentLight++)
+		{
+			aiLight* light = this->scene->mLights[currentLight];
+			aiVector3D lightDirection;
+			aiColor3D lightIntensity;
 
-		// Only directional lights are supported atm!
-		aiVector3D sunLightDirection = -light->mDirection;
-		aiRay shadowRay(intersectionInformation.hitPoint + (calculatedNormal * 0.001f), lightDirection);
-		IntersectionInformation newIntersectionInfo;
-		bool vis = !calculateIntersection(shadowRay, newIntersectionInfo);
-		// TODO: Fix broken shading for high intensity lights
-		aiColor3D intersectionColor =  materialColorDiffuse * vis * light->mColorDiffuse * std::max(0.f, calculatedNormal * lightDirection);
+			if (light->mType == aiLightSource_POINT)
+			{
+				lightDirection = (light->mPosition - intersectionInformation.hitPoint);
+				float distance = lightDirection.Length();
+				float squareDistance = lightDirection.SquareLength();
+				lightDirection.Normalize();
+				float attConst = light->mAttenuationConstant;
+				float attLinear = light->mAttenuationLinear;
+				float attQuad = light->mAttenuationQuadratic;
+				float attenuation = 1 / (attConst + attLinear * distance + attQuad * squareDistance);
+				lightIntensity = light->mColorDiffuse * attenuation;
+			}
+			else if (light->mType == aiLightSource_DIRECTIONAL)
+			{
+				lightDirection = -light->mDirection;
+				lightDirection.Normalize();
+				lightIntensity = light->mColorDiffuse;
+			}
+			else
+			{
+				// Skip calculation for undefined or unsupported light types
+				continue;
+			}
+
+			aiRay shadowRay(intersectionInformation.hitPoint + (calculatedNormal * RenderSettings::bias), lightDirection);
+			IntersectionInformation newIntersectionInfo;
+			bool vis = !calculateIntersection(shadowRay, newIntersectionInfo);
+			intersectionColor +=  materialColorDiffuse * vis * lightIntensity * std::max(0.f, calculatedNormal * lightDirection);
+		}
 		return intersectionColor;
 	}
 
