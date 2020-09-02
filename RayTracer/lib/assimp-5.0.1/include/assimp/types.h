@@ -54,6 +54,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <string.h>
 #include <limits.h>
 #include <stdint.h>
+#include <algorithm>
 
 // Our compile configuration
 #include "defs.h"
@@ -183,6 +184,13 @@ struct aiColor3D
     bool operator != (const aiColor3D& other) const
         {return r != other.r || g != other.g || b != other.b;}
 
+    const aiColor3D& operator += (const aiColor3D& other){
+        r += other.r;
+        g += other.g;
+        b += other.b;
+        return *this;
+    }
+
     /** Component-wise comparison */
     // TODO: add epsilon?
     bool operator < (const aiColor3D& other) const {
@@ -209,6 +217,15 @@ struct aiColor3D
         return aiColor3D(r*f,g*f,b*f);
     }
 
+    /** Divide by a scalar */
+    aiColor3D operator/(ai_real f) const {
+        if (f == 0.f)
+        {
+            return aiColor3D(0.f, 0.f, 0.f);
+        }
+        return aiColor3D(r/f, g/f, b/f);
+    }
+
     /** Access a specific color component */
     ai_real operator[](unsigned int i) const {
         return *(&r + i);
@@ -230,6 +247,15 @@ struct aiColor3D
     bool IsBlack() const {
         static const ai_real epsilon = ai_real(10e-3);
         return std::fabs( r ) < epsilon && std::fabs( g ) < epsilon && std::fabs( b ) < epsilon;
+    }
+
+    void clampValues(float low, float high){
+        ai_real red = std::clamp(r, low, high);
+        ai_real green = std::clamp(g, low, high);
+        ai_real blue = std::clamp(b, low, high);
+        r = red;
+        g = green;
+        b = blue;
     }
 
 #endif // !__cplusplus
