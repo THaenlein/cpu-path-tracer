@@ -192,7 +192,7 @@ int main(int argc, char* argv[])
 	if (scene->HasCameras())
 	{
 		aiCamera** cameras = scene->mCameras;
-		unsigned int numberOfCameras = scene->mNumLights;
+		unsigned int numberOfCameras = scene->mNumCameras;
 		for (unsigned int currentCamera = 0; currentCamera < numberOfCameras; currentCamera++)
 		{
 			aiCamera* camera = cameras[currentCamera];
