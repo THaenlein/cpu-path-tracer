@@ -118,15 +118,15 @@ namespace raytracing
 		uint32_t index;
 	};
 
+	/*--------------------------------< Constants >-----------------------------------------*/
 
 	static const struct RenderSettings
 	{
 		// Defines the anti aliasing resolution. This number splits every pixel into n^2 subpixel.
 		// Increasing this number smoothes edges of the rendered image, but increases render time.
 		static const unsigned int antiAliasingResolution = 4;
+		static constexpr float bias = 0.001f;
 	}renderSettings;
-
-	/*--------------------------------< Constants >-----------------------------------------*/
 
 	/*--------------------------------< Public methods >------------------------------------*/
 	
