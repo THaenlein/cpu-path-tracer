@@ -10,6 +10,7 @@
 
 #include "assimp\types.h"
 #include "assimp\mesh.h"
+#include "assimp\material.h"
 
 namespace raytracing
 {
@@ -129,6 +130,12 @@ namespace raytracing
 	}renderSettings;
 
 	/*--------------------------------< Public methods >------------------------------------*/
+
+	static const char* getShadingModelString(int enumerator)
+	{
+		static const char* strings[] = {"Undefined", "Flat", "Gouraud", "Phong", "Blinn", "Toon", "Oren-Nayar", "Minnaert", "Cook-Torrance", "Shadeless", "Fresnel"};
+		return strings[enumerator];
+	}
 	
 	/*--------------------------------< Protected methods >---------------------------------*/
 	

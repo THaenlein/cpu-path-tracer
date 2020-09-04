@@ -261,6 +261,8 @@ int main(int argc, char* argv[])
 			material->Get(AI_MATKEY_SHININESS_STRENGTH, shininessStrength);
 			ai_real transparency{};
 			material->Get(AI_MATKEY_TRANSPARENCYFACTOR, transparency);
+			int shadingModel{};
+			material->Get(AI_MATKEY_SHADING_MODEL, shadingModel);
 
 			std::cout << "Name of Material " << currentMaterial << ": " << name.C_Str() << std::endl;
 			std::cout << '\t' << "Diffuse color: " << colorDiffuse.r << ", " << colorDiffuse.g << ", " << colorDiffuse.b << std::endl;
@@ -276,6 +278,9 @@ int main(int argc, char* argv[])
 			std::cout << '\t' << "Opacity: " << opacity << std::endl; // Alpha blending
 			std::cout << '\t' << "Transparency: " << transparency << std::endl;
 			std::cout << '\t' << "Refraction Index: " << refractionIndex << std::endl;
+
+			std::cout << '\t' << "Shading model: " << raytracing::getShadingModelString(shadingModel) << std::endl;
+
 		}
 		std::cout << std::endl;
 	}
