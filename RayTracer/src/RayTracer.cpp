@@ -188,7 +188,7 @@ namespace raytracing
 	}
 
 
-	aiColor3D RayTracer::shadePixel(IntersectionInformation& intersectionInformation)
+	aiColor3D RayTracer::shadePixel(IntersectionInformation& intersectionInformation, uint8_t& rayDepth)
 	{
 		// Get mesh properties
 		aiVector3D edge1 = *(intersectionInformation.hitTriangle[1]) - *(intersectionInformation.hitTriangle[0]);
@@ -196,12 +196,15 @@ namespace raytracing
 		aiVector3D faceNormal = (edge1 ^ edge2).Normalize();
 		unsigned int materialIndex = intersectionInformation.hitMesh->mMaterialIndex;
 		aiMaterial* material = this->scene->mMaterials[materialIndex];
-		aiColor3D materialColorDiffuse{}, materialColorEmission{}, materialColorAmbient{};
+		aiColor3D materialColorDiffuse{}, materialColorEmission{}, materialColorAmbient{}, colorReflective{};
 		int shadingModel{};
+		ai_real reflectivity{};
 		material->Get(AI_MATKEY_COLOR_DIFFUSE, materialColorDiffuse);
 		material->Get(AI_MATKEY_COLOR_EMISSIVE, materialColorEmission);
 		material->Get(AI_MATKEY_COLOR_AMBIENT, materialColorAmbient);
 		material->Get(AI_MATKEY_SHADING_MODEL, shadingModel);
+		material->Get(AI_MATKEY_REFLECTIVITY, reflectivity);
+		material->Get(AI_MATKEY_COLOR_REFLECTIVE, colorReflective);
 		aiColor3D intersectionColor{ 0.f, 0.f, 0.f };
 
 		if (shadingModel == aiShadingMode::aiShadingMode_NoShading)
@@ -220,6 +223,16 @@ namespace raytracing
 		}
 		else if (shadingModel == aiShadingMode::aiShadingMode_Phong || shadingModel == aiShadingMode::aiShadingMode_Gouraud)
 		{
+			if (reflectivity > 0.f)
+			{
+				// Surface is reflective. Cast reflection ray and calculate color at reflection
+				aiVector3D reflectionDirection = calculateReflectionDirection(intersectionInformation.ray.dir, faceNormal);
+				aiVector3D reflectionPoint = intersectionInformation.hitPoint + (faceNormal * RenderSettings::bias);
+				aiRay reflectionRay(reflectionPoint, reflectionDirection);
+				intersectionColor += traceRay(reflectionRay, ++rayDepth) * reflectivity;
+			}
+
+			// Calculate surface color
 			for (unsigned int currentLight = 0; currentLight < scene->mNumLights; currentLight++)
 			{
 				aiLight* light = this->scene->mLights[currentLight];
@@ -253,7 +266,7 @@ namespace raytracing
 				aiRay shadowRay(intersectionInformation.hitPoint + (faceNormal * RenderSettings::bias), lightDirection);
 				IntersectionInformation newIntersectionInfo;
 				bool vis = !calculateIntersection(shadowRay, newIntersectionInfo);
-				intersectionColor +=  materialColorDiffuse * vis * lightIntensity * std::max(0.f, faceNormal * lightDirection);
+				intersectionColor += materialColorDiffuse * vis * lightIntensity * std::max(0.f, faceNormal * lightDirection) * (1 - reflectivity);
 			}
 		}
 		else if (shadingModel == aiShadingMode::aiShadingMode_Phong)
@@ -300,9 +313,7 @@ namespace raytracing
 					outIntersection.hitMesh = mesh;
 					outIntersection.hitTriangle = nearestIntersectedTriangle;
 					outIntersection.hitPoint = intersectionPoint;
-					// TODO: Evaluate if mNormals[currentFace] is ok since mNormals is mNumVertices in size
-					// else calculate face normals
-					//outFaceNormal = &mesh->mNormals[currentFace];
+					outIntersection.ray = ray;
 					intersects = true;
 				}
 				nearestIntersectedTriangle.clear();
@@ -312,19 +323,24 @@ namespace raytracing
 	}
 
 
-	aiColor3D RayTracer::traceRay(aiRay& ray)
+	aiColor3D RayTracer::traceRay(aiRay& ray, uint8_t rayDepth /*= 0*/)
 	{
 		IntersectionInformation intersectionInformation;
+		if (rayDepth > RenderSettings::maxRayDepth)
+		{
+			// TODO: Get scene background color
+			return { .1f, .1f, .1f };
+		}
 		bool intersects = this->calculateIntersection(ray, intersectionInformation);
 		if (intersects)
 		{
 			// Calculate color at the intersection
-			return this->shadePixel(intersectionInformation);
+			return this->shadePixel(intersectionInformation, rayDepth);
 		}
 		else
 		{
 			// TODO: Get scene background color
-			return { 0.f, 0.f, 0.f };
+			return { .1f, .1f, .1f };
 		}
 	}
 
@@ -340,6 +356,22 @@ namespace raytracing
 				this->renderJobs.pushBack(job);
 			}
 		}
+	}
+
+	//     I->       N         R->
+	//      \        |        /
+	//       \       |       /
+	//        \      |      /
+	//         \     |     /
+	//          \    |    /
+	//           \   |   /
+	//            \  |  /
+	//             \ | /
+	//   ___________\|/___________
+	//          G R O U N D 
+	aiVector3D RayTracer::calculateReflectionDirection(const aiVector3D& vectorToReflect, const aiVector3D& reflectionNormal)
+	{
+		return { vectorToReflect - 2 * (vectorToReflect * reflectionNormal) * reflectionNormal };
 	}
 
 } // end of namespace raytracing

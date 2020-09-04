@@ -70,16 +70,18 @@ namespace raytracing
 
 		bool rayTriangleIntersection(const aiRay& ray, std::vector<aiVector3D*> vecTriangle, aiVector3D* outIntersectionPoint);
 
-		aiColor3D shadePixel(IntersectionInformation& intersectionInformation);
+		aiColor3D shadePixel(IntersectionInformation& intersectionInformation, uint8_t& rayDepth);
 
 		bool calculateIntersection(
 			aiRay& ray,
 
 			IntersectionInformation& outIntersection);
 
-		aiColor3D traceRay(aiRay& ray);
+		aiColor3D traceRay(aiRay& ray, uint8_t rayDepth = 0);
 
 		void createJobs();
+
+		aiVector3D calculateReflectionDirection(const aiVector3D& vectorToReflect, const aiVector3D& reflectionNormal);
 
 		/*--------------------------------< Public members >------------------------------------*/
 	public:
