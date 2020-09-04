@@ -103,7 +103,8 @@ namespace raytracing
 			hitTriangle(),
 			intersectionDistance((std::numeric_limits<float>::max)()), // Paranthesize to prevent call of macro "max"
 			uv(),
-			index(0)
+			index(0),
+			ray()
 		{}
 		
 		aiMesh* hitMesh;
@@ -117,6 +118,8 @@ namespace raytracing
 		aiVector2D uv;
 
 		uint32_t index;
+
+		aiRay ray;
 	};
 
 	/*--------------------------------< Constants >-----------------------------------------*/
@@ -127,6 +130,7 @@ namespace raytracing
 		// Increasing this number smoothes edges of the rendered image, but increases render time.
 		static const unsigned int antiAliasingResolution = 4;
 		static constexpr float bias = 0.001f;
+		static const uint8_t maxRayDepth = 2;
 	}renderSettings;
 
 	/*--------------------------------< Public methods >------------------------------------*/
