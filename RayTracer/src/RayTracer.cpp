@@ -193,48 +193,78 @@ namespace raytracing
 		// Get mesh properties
 		aiVector3D edge1 = *(intersectionInformation.hitTriangle[1]) - *(intersectionInformation.hitTriangle[0]);
 		aiVector3D edge2 = *(intersectionInformation.hitTriangle[2]) - *(intersectionInformation.hitTriangle[0]);
-		aiVector3D calculatedNormal = (edge1 ^ edge2).Normalize();
+		aiVector3D faceNormal = (edge1 ^ edge2).Normalize();
 		unsigned int materialIndex = intersectionInformation.hitMesh->mMaterialIndex;
 		aiMaterial* material = this->scene->mMaterials[materialIndex];
-		aiColor3D materialColorDiffuse;
+		aiColor3D materialColorDiffuse{}, materialColorEmission{}, materialColorAmbient{};
+		int shadingModel{};
 		material->Get(AI_MATKEY_COLOR_DIFFUSE, materialColorDiffuse);
+		material->Get(AI_MATKEY_COLOR_EMISSIVE, materialColorEmission);
+		material->Get(AI_MATKEY_COLOR_AMBIENT, materialColorAmbient);
+		material->Get(AI_MATKEY_SHADING_MODEL, shadingModel);
 		aiColor3D intersectionColor{ 0.f, 0.f, 0.f };
 
-		for (unsigned int currentLight = 0; currentLight < scene->mNumLights; currentLight++)
+		if (shadingModel == aiShadingMode::aiShadingMode_NoShading)
 		{
-			aiLight* light = this->scene->mLights[currentLight];
-			aiVector3D lightDirection;
-			aiColor3D lightIntensity;
-
-			if (light->mType == aiLightSource_POINT)
+			aiColor3D ambientLightStrength{};
+			for (unsigned int currentLight = 0; currentLight < scene->mNumLights; currentLight++)
 			{
-				lightDirection = (light->mPosition - intersectionInformation.hitPoint);
-				float distance = lightDirection.Length();
-				float squareDistance = lightDirection.SquareLength();
-				lightDirection.Normalize();
-				float attConst = light->mAttenuationConstant;
-				float attLinear = light->mAttenuationLinear;
-				float attQuad = light->mAttenuationQuadratic;
-				float attenuation = 1 / (attConst + attLinear * distance + attQuad * squareDistance);
-				lightIntensity = light->mColorDiffuse * attenuation;
+				aiLight* light = this->scene->mLights[currentLight];
+				if (light->mType == aiLightSourceType::aiLightSource_AMBIENT)
+				{
+					ambientLightStrength += light->mColorAmbient;
+				}
 			}
-			else if (light->mType == aiLightSource_DIRECTIONAL)
-			{
-				lightDirection = -light->mDirection;
-				lightDirection.Normalize();
-				lightIntensity = light->mColorDiffuse;
-			}
-			else
-			{
-				// Skip calculation for undefined or unsupported light types
-				continue;
-			}
-
-			aiRay shadowRay(intersectionInformation.hitPoint + (calculatedNormal * RenderSettings::bias), lightDirection);
-			IntersectionInformation newIntersectionInfo;
-			bool vis = !calculateIntersection(shadowRay, newIntersectionInfo);
-			intersectionColor +=  materialColorDiffuse * vis * lightIntensity * std::max(0.f, calculatedNormal * lightDirection);
+			// TODO: Verify ambient light contributes to shadeless model
+			intersectionColor = materialColorEmission + materialColorAmbient * ambientLightStrength;
 		}
+		else if (shadingModel == aiShadingMode::aiShadingMode_Phong || shadingModel == aiShadingMode::aiShadingMode_Gouraud)
+		{
+			for (unsigned int currentLight = 0; currentLight < scene->mNumLights; currentLight++)
+			{
+				aiLight* light = this->scene->mLights[currentLight];
+				aiVector3D lightDirection;
+				aiColor3D lightIntensity;
+
+				if (light->mType == aiLightSourceType::aiLightSource_POINT)
+				{
+					lightDirection = (light->mPosition - intersectionInformation.hitPoint);
+					float distance = lightDirection.Length();
+					float squareDistance = lightDirection.SquareLength();
+					lightDirection.Normalize();
+					float attConst = light->mAttenuationConstant;
+					float attLinear = light->mAttenuationLinear;
+					float attQuad = light->mAttenuationQuadratic;
+					float attenuation = 1 / (attConst + attLinear * distance + attQuad * squareDistance);
+					lightIntensity = light->mColorDiffuse * attenuation;
+				}
+				else if (light->mType == aiLightSourceType::aiLightSource_DIRECTIONAL)
+				{
+					lightDirection = -light->mDirection;
+					lightDirection.Normalize();
+					lightIntensity = light->mColorDiffuse;
+				}
+				else
+				{
+					// Skip calculation for undefined or unsupported light types
+					continue;
+				}
+
+				aiRay shadowRay(intersectionInformation.hitPoint + (faceNormal * RenderSettings::bias), lightDirection);
+				IntersectionInformation newIntersectionInfo;
+				bool vis = !calculateIntersection(shadowRay, newIntersectionInfo);
+				intersectionColor +=  materialColorDiffuse * vis * lightIntensity * std::max(0.f, faceNormal * lightDirection);
+			}
+		}
+		else if (shadingModel == aiShadingMode::aiShadingMode_Phong)
+		{
+			// TODO: Implement
+		}
+		else if (shadingModel == aiShadingMode::aiShadingMode_Gouraud) // Lambert in collada
+		{
+			// TODO: Implement
+		}
+
 		return intersectionColor;
 	}
 
