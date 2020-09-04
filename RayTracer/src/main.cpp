@@ -237,15 +237,15 @@ int main(int argc, char* argv[])
 		{
 			aiMaterial* material = materials[currentMaterial];
 			aiString name = material->GetName();
-			aiColor3D colorDiffuse (0.f, 0.f, 0.f);
+			aiColor3D colorDiffuse{};
 			material->Get(AI_MATKEY_COLOR_DIFFUSE, colorDiffuse);
-			aiColor3D colorReflective(0.f, 0.f, 0.f);
+			aiColor3D colorReflective{};
 			material->Get(AI_MATKEY_COLOR_REFLECTIVE, colorReflective);
-			aiColor3D colorSpecular(0.f, 0.f, 0.f);
+			aiColor3D colorSpecular{};
 			material->Get(AI_MATKEY_COLOR_SPECULAR, colorSpecular);
-			aiColor3D colorAmbient(0.f, 0.f, 0.f);
+			aiColor3D colorAmbient{};
 			material->Get(AI_MATKEY_COLOR_AMBIENT, colorAmbient);
-			aiColor3D colorEmissive(0.f, 0.f, 0.f);
+			aiColor3D colorEmissive{};
 			material->Get(AI_MATKEY_COLOR_EMISSIVE, colorEmissive);
 			aiColor3D colorTransparent{};
 			material->Get(AI_MATKEY_COLOR_TRANSPARENT, colorTransparent);
