@@ -130,7 +130,7 @@ namespace raytracing
 		// Increasing this number smoothes edges of the rendered image, but increases render time.
 		static const unsigned int antiAliasingResolution = 4;
 		static constexpr float bias = 0.001f;
-		static const uint8_t maxRayDepth = 2;
+		static const uint8_t maxRayDepth = 4;
 	}renderSettings;
 
 	/*--------------------------------< Public methods >------------------------------------*/
