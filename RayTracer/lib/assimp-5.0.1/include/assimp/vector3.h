@@ -79,6 +79,9 @@ public:
     const aiVector3t& operator *= (TReal f);
     const aiVector3t& operator /= (TReal f);
 
+    const aiVector3t operator + (TReal f);
+    const aiVector3t operator - (TReal f);
+
     // transform vector by matrix
     aiVector3t& operator *= (const aiMatrix3x3t<TReal>& mat);
     aiVector3t& operator *= (const aiMatrix4x4t<TReal>& mat);
