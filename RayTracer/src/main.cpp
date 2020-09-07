@@ -251,9 +251,9 @@ int main(int argc, char* argv[])
 			material->Get(AI_MATKEY_COLOR_TRANSPARENT, colorTransparent);
 			ai_real reflectivity{};
 			material->Get(AI_MATKEY_REFLECTIVITY, reflectivity);
-			ai_real refractionIndex{};
+			ai_real refractionIndex{1};
 			material->Get(AI_MATKEY_REFRACTI, refractionIndex);
-			ai_real opacity{};
+			ai_real opacity{1};
 			material->Get(AI_MATKEY_OPACITY, opacity);
 			ai_real shininess{};
 			material->Get(AI_MATKEY_SHININESS, shininess);
@@ -275,7 +275,7 @@ int main(int argc, char* argv[])
 			std::cout << '\t' << "Reflectivity: " << reflectivity << std::endl;
 			std::cout << '\t' << "Shininess: " << shininess << std::endl; // Or Hardness
 			std::cout << '\t' << "Shininess strength: " << shininessStrength << std::endl;
-			std::cout << '\t' << "Opacity: " << opacity << std::endl; // Alpha blending
+			std::cout << '\t' << "Opacity: " << opacity << std::endl; // Alpha blending: 1 Fully visible - 0 full light transmit
 			std::cout << '\t' << "Transparency: " << transparency << std::endl;
 			std::cout << '\t' << "Refraction Index: " << refractionIndex << std::endl;
 
