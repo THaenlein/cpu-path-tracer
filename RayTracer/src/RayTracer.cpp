@@ -198,13 +198,15 @@ namespace raytracing
 		aiMaterial* material = this->scene->mMaterials[materialIndex];
 		aiColor3D materialColorDiffuse{}, materialColorEmission{}, materialColorAmbient{}, colorReflective{};
 		int shadingModel{};
-		ai_real reflectivity{};
+		ai_real reflectivity{}, opacity{ 1 }, refractionIndex{ 1 };
 		material->Get(AI_MATKEY_COLOR_DIFFUSE, materialColorDiffuse);
 		material->Get(AI_MATKEY_COLOR_EMISSIVE, materialColorEmission);
 		material->Get(AI_MATKEY_COLOR_AMBIENT, materialColorAmbient);
 		material->Get(AI_MATKEY_SHADING_MODEL, shadingModel);
 		material->Get(AI_MATKEY_REFLECTIVITY, reflectivity);
 		material->Get(AI_MATKEY_COLOR_REFLECTIVE, colorReflective);
+		material->Get(AI_MATKEY_OPACITY, opacity);
+		material->Get(AI_MATKEY_REFRACTI, refractionIndex);
 		aiColor3D intersectionColor{ 0.f, 0.f, 0.f };
 
 		if (shadingModel == aiShadingMode::aiShadingMode_NoShading)
@@ -223,13 +225,46 @@ namespace raytracing
 		}
 		else if (shadingModel == aiShadingMode::aiShadingMode_Phong || shadingModel == aiShadingMode::aiShadingMode_Gouraud)
 		{
-			if (reflectivity > 0.f)
+
+			if (opacity < 1.f)
 			{
-				// Surface is reflective. Cast reflection ray and calculate color at reflection
+				// Surface transmits light. Cast refraction ray and calculate color
+				const ai_real EPSILON = 1e-3f;
+				aiColor3D refractionColor{}, reflectionColor{};
+				ai_real fresnelResult = fresnel(intersectionInformation.ray.dir, faceNormal, refractionIndex);
+				bool outside = (intersectionInformation.ray.dir * faceNormal) < 0;
+				aiVector3D bias = RenderSettings::bias * faceNormal;
+
+				if (fresnelResult < 1.f)
+				{
+					// Ignore total internal reflection
+					aiVector3D refractionDirection = calculateRefractionDirection(intersectionInformation.ray.dir, faceNormal, refractionIndex);
+					refractionDirection.Normalize();
+					aiVector3D refractionPoint = outside ? intersectionInformation.hitPoint - bias : intersectionInformation.hitPoint + bias;
+					aiRay refractionRay(refractionPoint, refractionDirection);
+					refractionColor = traceRay(refractionRay, rayDepth + 1) * (1 - fresnelResult);
+				}
+
+				if ((fresnelResult > EPSILON) && (reflectivity > 0.f))
+				{
+					// Surface also is reflective. Cast reflection ray and blend color with fresnel
+					aiVector3D reflectionDirection = calculateReflectionDirection(intersectionInformation.ray.dir, faceNormal);
+					reflectionDirection.Normalize();
+					aiVector3D reflectionPoint = outside ? intersectionInformation.ray.pos + bias : intersectionInformation.ray.pos - bias;
+					aiRay reflectionRay(reflectionPoint, reflectionDirection);
+					reflectionColor = traceRay(reflectionRay, rayDepth + 1) * fresnelResult * reflectivity;
+				}
+
+				intersectionColor += reflectionColor + refractionColor;
+				return intersectionColor; // TODO: Implement color shading for refractive materials
+			}
+			else if (reflectivity > 0.f)
+			{
+				// Surface only is reflective. Cast reflection ray and calculate color at reflection
 				aiVector3D reflectionDirection = calculateReflectionDirection(intersectionInformation.ray.dir, faceNormal);
 				aiVector3D reflectionPoint = intersectionInformation.hitPoint + (faceNormal * RenderSettings::bias);
 				aiRay reflectionRay(reflectionPoint, reflectionDirection);
-				intersectionColor += traceRay(reflectionRay, ++rayDepth) * reflectivity;
+				intersectionColor += traceRay(reflectionRay, rayDepth + 1) * reflectivity;
 			}
 
 			// Calculate surface color
