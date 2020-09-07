@@ -369,9 +369,63 @@ namespace raytracing
 	//             \ | /
 	//   ___________\|/___________
 	//          G R O U N D 
-	aiVector3D RayTracer::calculateReflectionDirection(const aiVector3D& vectorToReflect, const aiVector3D& reflectionNormal)
+	aiVector3D RayTracer::calculateReflectionDirection(const aiVector3D& incidenceVector, const aiVector3D& incidenceNormal)
 	{
-		return { vectorToReflect - 2 * (vectorToReflect * reflectionNormal) * reflectionNormal };
+		return { incidenceVector - 2 * (incidenceVector * incidenceNormal) * incidenceNormal };
+	}
+
+	aiVector3D RayTracer::calculateRefractionDirection(const aiVector3D& incidenceVector, const aiVector3D& incidenceNormal, const ai_real ior)
+	{
+		ai_real cosIncidence = std::clamp(incidenceVector * incidenceNormal, -1.0f, 1.0f);
+		ai_real etaIncidence = 1.f;
+		ai_real etaTransmission = ior;
+		aiVector3D nRefraction(incidenceNormal);
+		if (cosIncidence < 0.f)
+		{
+			// Inside medium
+			cosIncidence = -cosIncidence;
+		}
+		else
+		{
+			// Outside medium
+			std::swap(etaIncidence, etaTransmission);
+			nRefraction = -incidenceNormal;
+		}
+		ai_real eta = etaIncidence / etaTransmission;
+		ai_real criticalAngle = 1.f - eta * eta * (1.f - cosIncidence * cosIncidence);
+		if (criticalAngle < 0.f)
+		{
+			return { 0.f, 0.f, 0.f};
+		}
+		else
+		{
+			return { eta * incidenceVector + (eta * cosIncidence - sqrtf(criticalAngle)) * nRefraction };
+		}
+	}
+
+	ai_real RayTracer::fresnel(const aiVector3D& incidenceVector, const aiVector3D& incidenceNormal, const ai_real ior)
+	{
+		ai_real cosIncidence = std::clamp(incidenceVector * incidenceNormal, -1.f, 1.f);
+		ai_real etaIncidence = 1.f;
+		ai_real etaTransmission = ior;
+		if (cosIncidence > 0.f) { std::swap(etaIncidence, etaTransmission); }
+		// Snell's law
+		ai_real sinTransmission = etaIncidence / etaTransmission * sqrtf(std::max(0.f, 1.f - cosIncidence * cosIncidence));
+		
+		if (sinTransmission >= 1.f) 
+		{
+			// Total internal reflection
+			return 1.f;
+		}
+		else 
+		{
+			ai_real cosTransmission = sqrtf(std::max(0.f, 1.f - sinTransmission * sinTransmission));
+			cosIncidence = fabsf(cosIncidence);
+			ai_real Rs = ((etaTransmission * cosIncidence) - (etaIncidence * cosTransmission)) / ((etaTransmission * cosIncidence) + (etaIncidence * cosTransmission));
+			ai_real Rp = ((etaIncidence * cosIncidence) - (etaTransmission * cosTransmission)) / ((etaIncidence * cosIncidence) + (etaTransmission * cosTransmission));
+			ai_real reflectedLight = (Rs * Rs + Rp * Rp) / 2.f;
+			return reflectedLight;
+		}
 	}
 
 } // end of namespace raytracing

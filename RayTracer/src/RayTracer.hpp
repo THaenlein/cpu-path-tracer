@@ -81,7 +81,11 @@ namespace raytracing
 
 		void createJobs();
 
-		aiVector3D calculateReflectionDirection(const aiVector3D& vectorToReflect, const aiVector3D& reflectionNormal);
+		aiVector3D calculateReflectionDirection(const aiVector3D& incidenceVector, const aiVector3D& incidenceNormal);
+
+		aiVector3D calculateRefractionDirection(const aiVector3D& incidenceVector, const aiVector3D& incidenceNormal, const ai_real ior);
+
+		ai_real fresnel(const aiVector3D& incidenceVector, const aiVector3D& incidenceNormal, const ai_real ior);
 
 		/*--------------------------------< Public members >------------------------------------*/
 	public:
