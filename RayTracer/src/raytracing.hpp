@@ -107,7 +107,7 @@ namespace raytracing
 			ray()
 		{}
 		
-		aiMesh* hitMesh;
+		const aiMesh* hitMesh;
 
 		aiVector3D hitPoint;
 
