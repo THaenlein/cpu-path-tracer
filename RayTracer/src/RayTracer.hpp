@@ -14,6 +14,7 @@
 #include "Application.hpp"
 #include "Types\SynchronizedQueue.hpp"
 #include "Types\RenderJob.hpp"
+#include "Types\AccelerationStructure.hpp"
 #include "raytracing.hpp"
 
 
@@ -33,9 +34,10 @@ namespace raytracing
 		/*--------------------------------< Public methods >------------------------------------*/
 	public:
 
-		RayTracer(Application& app, const aiScene* scene):
+		RayTracer(Application& app, const aiScene* scene, AccelerationStructure* accStruct):
 			application(app),
-			scene(scene)
+			scene(scene),
+			accelerationStructure(accStruct)
 		{
 
 		}
@@ -116,6 +118,8 @@ namespace raytracing
 		Application& application;
 
 		const aiScene* scene;
+
+		AccelerationStructure* accelerationStructure;
 
 	};
 	

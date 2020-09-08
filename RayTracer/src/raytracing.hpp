@@ -18,6 +18,7 @@ namespace raytracing
 
 #define ANTI_ALIASING 0
 #define MULTI_THREADING 1
+#define USE_ACCELERATION_STRUCTURE 1
 
 	/*--------------------------------< Typedefs >------------------------------------------*/
 

@@ -300,7 +300,11 @@ namespace raytracing
 
 				aiRay shadowRay(intersectionInformation.hitPoint + (faceNormal * RenderSettings::bias), lightDirection);
 				IntersectionInformation newIntersectionInfo;
+#if USE_ACCELERATION_STRUCTURE
+				bool vis = !this->accelerationStructure->calculateIntersection(shadowRay, newIntersectionInfo);
+#else
 				bool vis = !calculateIntersection(shadowRay, newIntersectionInfo);
+#endif
 				intersectionColor += materialColorDiffuse * vis * lightIntensity * std::max(0.f, faceNormal * lightDirection) * (1 - reflectivity);
 			}
 		}
@@ -366,7 +370,11 @@ namespace raytracing
 			// TODO: Get scene background color
 			return { .1f, .1f, .1f };
 		}
+#if USE_ACCELERATION_STRUCTURE
+		bool intersects = this->accelerationStructure->calculateIntersection(ray, intersectionInformation);
+#else
 		bool intersects = this->calculateIntersection(ray, intersectionInformation);
+#endif
 		if (intersects)
 		{
 			// Calculate color at the intersection

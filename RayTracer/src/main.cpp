@@ -17,6 +17,8 @@
 #include "RayTracer.hpp"
 #include "Timer.hpp"
 
+#include "Types\BoundingVolume.hpp"
+
 void handleEvents(raytracing::Application& app, raytracing::RayTracer& rayTracer, std::vector<std::thread>& threadPool, std::atomic<uint8_t>& threadsTerminated)
 {
 	SDL_Event sdlEvent;
@@ -101,6 +103,9 @@ int main(int argc, char* argv[])
 		app.cleanUp();
 		return 0;
 	}
+
+	raytracing::BoundingVolume* bVolume = new raytracing::BoundingVolume();
+	bVolume->initialize(scene);
 
 	// Remove single points and lines not forming a face
 #ifdef AI_CONFIG_PP_SBP_REMOVE
@@ -350,7 +355,7 @@ int main(int argc, char* argv[])
 		}
 	}
 	
-	raytracing::RayTracer rayTracer(app, scene);
+	raytracing::RayTracer rayTracer(app, scene, bVolume);
 	rayTracer.initialize();
 
 #if MULTI_THREADING
@@ -369,6 +374,7 @@ int main(int argc, char* argv[])
 	}
 	handleEvents(app, rayTracer, threadPool, threadsTerminated);
 
+	delete bVolume;
 	assetImporter.FreeScene();
 
 	SDL_LogInfo(SDL_LOG_CATEGORY_APPLICATION, "Press Enter to quit...");
