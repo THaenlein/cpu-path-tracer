@@ -70,7 +70,7 @@ namespace raytracing
 
 		void RayTracer::renderAntiAliased(RenderJob& renderJob);
 
-		bool rayTriangleIntersection(const aiRay& ray, std::vector<aiVector3D*> vecTriangle, aiVector3D* outIntersectionPoint);
+		bool rayTriangleIntersection(const aiRay& ray, std::vector<aiVector3D*> vecTriangle, aiVector3D* outIntersectionPoint, aiVector2D* outUV);
 
 		aiColor3D shadePixel(IntersectionInformation& intersectionInformation, uint8_t& rayDepth);
 

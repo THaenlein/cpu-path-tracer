@@ -143,7 +143,7 @@ namespace raytracing
 	}
 
 
-	bool RayTracer::rayTriangleIntersection(const aiRay& ray, std::vector<aiVector3D*> vecTriangle, aiVector3D* outIntersectionPoint)
+	bool RayTracer::rayTriangleIntersection(const aiRay& ray, std::vector<aiVector3D*> vecTriangle, aiVector3D* outIntersectionPoint, aiVector2D* outUV)
 	{
 		const float EPSILON = 1e-6f;
 		// Invariant: A face always consists of 3 vertices
@@ -179,6 +179,8 @@ namespace raytracing
 		if (t > EPSILON) // ray intersection
 		{
 			*outIntersectionPoint = ray.pos + ray.dir * t;
+			outUV->x = u;
+			outUV->y = v;
 			return true;
 		}
 		else // This means that there is a line intersection but not a ray intersection.
@@ -208,6 +210,13 @@ namespace raytracing
 		material->Get(AI_MATKEY_OPACITY, opacity);
 		material->Get(AI_MATKEY_REFRACTI, refractionIndex);
 		aiColor3D intersectionColor{ 0.f, 0.f, 0.f };
+
+		// Calculate vertex normal for smooth shading
+		aiVector3D smoothNormal = (1 - intersectionInformation.uv.x - intersectionInformation.uv.y) *
+			*intersectionInformation.vertexNormals[0] + intersectionInformation.uv.x *
+			*intersectionInformation.vertexNormals[1] + intersectionInformation.uv.y *
+			*intersectionInformation.vertexNormals[2];
+		smoothNormal.Normalize();
 
 		if (shadingModel == aiShadingMode::aiShadingMode_NoShading)
 		{
@@ -261,8 +270,8 @@ namespace raytracing
 			else if (reflectivity > 0.f)
 			{
 				// Surface only is reflective. Cast reflection ray and calculate color at reflection
-				aiVector3D reflectionDirection = calculateReflectionDirection(intersectionInformation.ray.dir, faceNormal);
-				aiVector3D reflectionPoint = intersectionInformation.hitPoint + (faceNormal * RenderSettings::bias);
+				aiVector3D reflectionDirection = calculateReflectionDirection(intersectionInformation.ray.dir, smoothNormal);
+				aiVector3D reflectionPoint = intersectionInformation.hitPoint + (smoothNormal * RenderSettings::bias);
 				aiRay reflectionRay(reflectionPoint, reflectionDirection);
 				intersectionColor += traceRay(reflectionRay, rayDepth + 1) * reflectivity;
 			}
@@ -298,14 +307,14 @@ namespace raytracing
 					continue;
 				}
 
-				aiRay shadowRay(intersectionInformation.hitPoint + (faceNormal * RenderSettings::bias), lightDirection);
-				IntersectionInformation newIntersectionInfo;
+				aiRay shadowRay(intersectionInformation.hitPoint + (smoothNormal * RenderSettings::bias), lightDirection);
+				IntersectionInformation shadowRayIntersectionInfo;
 #if USE_ACCELERATION_STRUCTURE
-				bool vis = !this->accelerationStructure->calculateIntersection(shadowRay, newIntersectionInfo);
+				bool vis = !this->accelerationStructure->calculateIntersection(shadowRay, shadowRayIntersectionInfo);
 #else
-				bool vis = !calculateIntersection(shadowRay, newIntersectionInfo);
+				bool vis = !calculateIntersection(shadowRay, shadowRayIntersectionInfo);
 #endif
-				intersectionColor += materialColorDiffuse * vis * lightIntensity * std::max(0.f, faceNormal * lightDirection) * (1 - reflectivity);
+				intersectionColor += materialColorDiffuse * vis * lightIntensity * std::max(0.f, smoothNormal * lightDirection) * (1 - reflectivity);
 			}
 		}
 		else if (shadingModel == aiShadingMode::aiShadingMode_Phong)
@@ -327,7 +336,9 @@ namespace raytracing
 	{
 		float leastDistanceIntersection{ std::numeric_limits<float>::max() };
 		std::vector<aiVector3D*> nearestIntersectedTriangle;
+		std::vector<aiVector3D*> triangleVertexNormals;
 		aiVector3D intersectionPoint;
+		aiVector2D uvCoordinates;
 		bool intersects{ false };
 		// Iterate through meshes and faces and call rayTriangleIntersection()
 		for (unsigned int currentMesh = 0; currentMesh < this->scene->mNumMeshes; currentMesh++)
@@ -341,10 +352,11 @@ namespace raytracing
 				for (unsigned int currentIndex = 0; currentIndex < face->mNumIndices; currentIndex++)
 				{
 					nearestIntersectedTriangle.push_back(&(mesh->mVertices[face->mIndices[currentIndex]]));
+					triangleVertexNormals.push_back(&(mesh->mNormals[face->mIndices[currentIndex]]));
 				}
 				// TODO: Collect all intersections and push them back into a collection
 				// Evaluate nearest intersection point and return
-				bool intersectsCurrentTriangle = this->rayTriangleIntersection(ray, nearestIntersectedTriangle, &intersectionPoint);
+				bool intersectsCurrentTriangle = this->rayTriangleIntersection(ray, nearestIntersectedTriangle, &intersectionPoint, &uvCoordinates);
 				float distanceToIntersectionPoint = (intersectionPoint - ray.pos).Length();
 				if (intersectsCurrentTriangle && (distanceToIntersectionPoint < leastDistanceIntersection))
 				{
@@ -353,9 +365,12 @@ namespace raytracing
 					outIntersection.hitTriangle = nearestIntersectedTriangle;
 					outIntersection.hitPoint = intersectionPoint;
 					outIntersection.ray = ray;
+					outIntersection.uv = uvCoordinates;
+					outIntersection.vertexNormals = triangleVertexNormals;
 					intersects = true;
 				}
 				nearestIntersectedTriangle.clear();
+				triangleVertexNormals.clear();
 			}
 		}
 		return intersects;

@@ -18,7 +18,7 @@ namespace raytracing
 		
 	/*--------------------------------< Protected members >----------------------------------*/
 
-	bool AccelerationStructure::rayTriangleIntersection(const aiRay& ray, std::vector<aiVector3D*> vecTriangle, aiVector3D* outIntersectionPoint)
+	bool AccelerationStructure::rayTriangleIntersection(const aiRay& ray, std::vector<aiVector3D*> vecTriangle, aiVector3D* outIntersectionPoint, aiVector2D* outUV)
 	{
 		const float EPSILON = 1e-6f;
 		// Invariant: A face always consists of 3 vertices
@@ -54,6 +54,8 @@ namespace raytracing
 		if (t > EPSILON) // ray intersection
 		{
 			*outIntersectionPoint = ray.pos + ray.dir * t;
+			outUV->x = u;
+			outUV->y = v;
 			return true;
 		}
 		else // This means that there is a line intersection but not a ray intersection.

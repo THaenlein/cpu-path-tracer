@@ -102,6 +102,7 @@ namespace raytracing
 			hitMesh(nullptr),
 			hitPoint(),
 			hitTriangle(),
+			vertexNormals(),
 			intersectionDistance((std::numeric_limits<float>::max)()), // Paranthesize to prevent call of macro "max"
 			uv(),
 			index(0),
@@ -113,6 +114,8 @@ namespace raytracing
 		aiVector3D hitPoint;
 
 		std::vector<aiVector3D*> hitTriangle;
+		
+		std::vector<aiVector3D*> vertexNormals;
 
 		float intersectionDistance;
 

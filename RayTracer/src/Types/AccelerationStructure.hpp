@@ -28,7 +28,7 @@ namespace raytracing
 	/*--------------------------------< Protected methods >---------------------------------*/
 	protected:
 
-		bool rayTriangleIntersection(const aiRay& ray, std::vector<aiVector3D*> vecTriangle, aiVector3D* outIntersectionPoint);
+		bool rayTriangleIntersection(const aiRay& ray, std::vector<aiVector3D*> vecTriangle, aiVector3D* outIntersectionPoint, aiVector2D* outUV);
 	
 	/*--------------------------------< Private methods >-----------------------------------*/
 	private:

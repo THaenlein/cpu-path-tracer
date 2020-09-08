@@ -35,7 +35,9 @@ namespace raytracing
 	{
 		float leastDistanceIntersection{ std::numeric_limits<float>::max() };
 		std::vector<aiVector3D*> nearestIntersectedTriangle;
+		std::vector<aiVector3D*> triangleVertexNormals;
 		aiVector3D intersectionPoint;
+		aiVector2D uvCoordinates;
 		bool intersects{ false };
 
 		for (std::unique_ptr<BoundingBox>& box : this->bBoxes)
@@ -49,9 +51,10 @@ namespace raytracing
 					for (unsigned int currentIndex = 0; currentIndex < face->mNumIndices; currentIndex++)
 					{
 						nearestIntersectedTriangle.push_back(&(intersectedMesh->mVertices[face->mIndices[currentIndex]]));
+						triangleVertexNormals.push_back(&(intersectedMesh->mNormals[face->mIndices[currentIndex]]));
 					}
 					// Evaluate nearest intersection point and return
-					bool intersectsCurrentTriangle = this->rayTriangleIntersection(ray, nearestIntersectedTriangle, &intersectionPoint);
+					bool intersectsCurrentTriangle = this->rayTriangleIntersection(ray, nearestIntersectedTriangle, &intersectionPoint, &uvCoordinates);
 					float distanceToIntersectionPoint = (intersectionPoint - ray.pos).Length();
 					if (intersectsCurrentTriangle && (distanceToIntersectionPoint < leastDistanceIntersection))
 					{
@@ -60,9 +63,12 @@ namespace raytracing
 						outIntersection.hitTriangle = nearestIntersectedTriangle;
 						outIntersection.hitPoint = intersectionPoint;
 						outIntersection.ray = ray;
+						outIntersection.uv = uvCoordinates;
+						outIntersection.vertexNormals = triangleVertexNormals;
 						intersects = true;
 					}
 					nearestIntersectedTriangle.clear();
+					triangleVertexNormals.clear();
 				}
 			}
 		}
