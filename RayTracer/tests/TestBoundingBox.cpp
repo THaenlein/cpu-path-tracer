@@ -14,6 +14,28 @@
 //		EXPECT_FLOAT_EQ
 
 
+const aiScene* importAndProcess(Assimp::Importer& importer, const std::string& filePath)
+{
+	const std::string sceneFilePath(filePath);
+	const aiScene* scene = importer.ReadFile(sceneFilePath, 0);
+
+	// Remove single points and lines not forming a face
+#ifdef AI_CONFIG_PP_SBP_REMOVE
+#undef AI_CONFIG_PP_SBP_REMOVE
+#endif
+#define AI_CONFIG_PP_SBP_REMOVE aiPrimitiveType_POINTS | aiPrimitiveType_LINES;
+
+	// Apply post processing
+	importer.ApplyPostProcessing(
+		aiProcess_CalcTangentSpace |
+		aiProcess_Triangulate |
+		aiProcess_FindDegenerates |
+		aiProcess_SortByPType);
+
+	return scene;
+}
+
+
 // Regular intersection
 TEST(BoundingBox, TestIntersectsRegular)
 {
@@ -156,4 +178,36 @@ TEST(BoundingBox, TestSplitZ)
 
 	raytracing::BoundingBox expectedRight(aiVector3D(0.f, 0.f, 2.f), max);
 	EXPECT_EQ(right, expectedRight);
+}
+
+TEST(BoundingBox, CreateBBoxFromSphere)
+{
+	Assimp::Importer assetImporter;
+	const std::string sceneFilePath("F:/Dokumente/GitHub/ray-tracer/RayTracer/res/test_sphere.dae");
+	const aiScene* scene = importAndProcess(assetImporter, sceneFilePath);
+	EXPECT_TRUE(scene);
+	EXPECT_TRUE(scene->HasMeshes());
+
+	// Create BBox of first mesh in scene
+	raytracing::BoundingBox bBoxOfMesh(scene->mMeshes[0]);
+	aiVector3D expectedMin(3.5f, 0.25f, 0.f);
+	aiVector3D expectedMax(4.5f, 1.25f, 1.f);
+	EXPECT_TRUE(expectedMin.Equal(bBoxOfMesh.getMin(), 1e-2));
+	EXPECT_TRUE(expectedMax.Equal(bBoxOfMesh.getMax(), 1e-2));
+}
+
+TEST(BoundingBox, CreateBBoxFromMesh)
+{
+	Assimp::Importer assetImporter;
+	const std::string sceneFilePath("F:/Dokumente/GitHub/ray-tracer/RayTracer/res/test_bunny.dae");
+	const aiScene* scene = importAndProcess(assetImporter, sceneFilePath);
+	EXPECT_TRUE(scene);
+	EXPECT_TRUE(scene->HasMeshes());
+
+	// Create BBox of first mesh in scene
+	raytracing::BoundingBox bBoxOfMesh(scene->mMeshes[0]);
+	aiVector3D expectedMin(-5.222f, -3.332f, -4.820f);
+	aiVector3D expectedMax(0.258f, 3.744f, 2.186f);
+	EXPECT_TRUE(expectedMin.Equal(bBoxOfMesh.getMin(), 1e-2));
+	EXPECT_TRUE(expectedMax.Equal(bBoxOfMesh.getMax(), 1e-2));
 }
