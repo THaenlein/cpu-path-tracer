@@ -34,10 +34,10 @@ namespace raytracing
 		/*--------------------------------< Public methods >------------------------------------*/
 	public:
 
-		RayTracer(Application& app, const aiScene* scene, AccelerationStructure* accStruct):
+		RayTracer(Application& app, const aiScene* scene, std::unique_ptr<AccelerationStructure> accStruct):
 			application(app),
 			scene(scene),
-			accelerationStructure(accStruct)
+			accelerationStructure(std::move(accStruct))
 		{
 
 		}
@@ -119,7 +119,7 @@ namespace raytracing
 
 		const aiScene* scene;
 
-		AccelerationStructure* accelerationStructure;
+		std::unique_ptr<AccelerationStructure> accelerationStructure;
 
 	};
 	

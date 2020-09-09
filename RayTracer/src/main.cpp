@@ -47,8 +47,6 @@ int main(int argc, char* argv[])
 		return 0;
 	}
 
-	raytracing::BoundingVolume* bVolume = new raytracing::BoundingVolume();
-	bVolume->initialize(scene);
 
 	// Remove single points and lines not forming a face
 #ifdef AI_CONFIG_PP_SBP_REMOVE
@@ -291,6 +289,8 @@ int main(int argc, char* argv[])
 						std::cout << '\t' << ": " << decodedEntry << std::endl;
 					}
 				}break;
+	std::unique_ptr<raytracing::BoundingVolume> bVolume(new raytracing::BoundingVolume());
+	bVolume->initialize(scene);
 
 				default:
 					std::cout << '\t' << "Invalid meta data entry type!" << std::endl;
@@ -298,7 +298,7 @@ int main(int argc, char* argv[])
 		}
 	}
 	
-	raytracing::RayTracer rayTracer(app, scene, bVolume);
+	raytracing::RayTracer rayTracer(app, scene, std::move(bVolume));
 	rayTracer.initialize();
 
 #if MULTI_THREADING
@@ -317,7 +317,6 @@ int main(int argc, char* argv[])
 	}
 	app.handleEvents(rayTracer.getViewport(), threadPool, threadsTerminated);
 
-	delete bVolume;
 	assetImporter.FreeScene();
 
 	SDL_LogInfo(SDL_LOG_CATEGORY_APPLICATION, "Press Enter to quit...");
