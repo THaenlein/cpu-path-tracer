@@ -19,63 +19,6 @@
 
 #include "Types\BoundingVolume.hpp"
 
-void handleEvents(raytracing::Application& app, raytracing::RayTracer& rayTracer, std::vector<std::thread>& threadPool, std::atomic<uint8_t>& threadsTerminated)
-{
-	SDL_Event sdlEvent;
-	bool doneRendering{ false };
-	bool quitApplication{ false };
-
-	while (!quitApplication)
-	{
-			while (SDL_PollEvent(&sdlEvent))
-			{
-				switch (sdlEvent.type)
-				{
-				case SDL_QUIT:
-					quitApplication = true;
-					if (!doneRendering)
-					{
-						doneRendering = true;
-						SDL_LogWarn(SDL_LOG_CATEGORY_APPLICATION, "Terminated application before finishing render! Waiting for render threads to finish...");
-						SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_INFORMATION,
-							"Still running.",
-							"Waiting for render threads to finish...",
-							app.getWindow());
-						// TODO: Evaluate if threads can safely be terminated instead of joining them
-					}
-					for (unsigned int threadToJoin = 0; threadToJoin < threadPool.size(); threadToJoin++)
-					{
-						threadPool[threadToJoin].join();
-					}
-					app.cleanUp();
-					break;
-
-				case SDL_WINDOWEVENT:
-					switch (sdlEvent.window.event)
-					{
-					case SDL_WINDOWEVENT_MOVED:
-						SDL_SetWindowPosition(app.getWindow(), sdlEvent.window.data1, sdlEvent.window.data2);
-						break;
-					}
-					break;
-				}
-			}
-
-			if (!doneRendering)
-			{
-				if (threadsTerminated == threadPool.size())
-				{
-					doneRendering = true;
-					double renderingTime = raytracing::Timer::getInstance().stop();
-					SDL_Log("Elapsed time for rendering scene: %.2f seconds", renderingTime);
-				}
-				app.updateRender(rayTracer.getViewport());
-			}
-
-			std::this_thread::sleep_for(std::chrono::milliseconds(10));
-	}
-}
-
 
 int main(int argc, char* argv[])
 {
@@ -372,7 +315,7 @@ int main(int argc, char* argv[])
 	{
 		threadPool.push_back(rayTracer.renderThread(threadsTerminated));
 	}
-	handleEvents(app, rayTracer, threadPool, threadsTerminated);
+	app.handleEvents(rayTracer.getViewport(), threadPool, threadsTerminated);
 
 	delete bVolume;
 	assetImporter.FreeScene();

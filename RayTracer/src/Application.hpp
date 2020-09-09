@@ -8,6 +8,7 @@
 #include <iostream>
 #include <string>
 #include <memory>
+#include <atomic>
 
 #define SDL_MAIN_HANDLED
 #include "SDL.h"
@@ -61,6 +62,8 @@ namespace raytracing
 		void cleanUp();
 
 		void updateRender(Uint24* pixels);
+
+		void handleEvents(Uint24* viewport, std::vector<std::thread>& threadPool, std::atomic<uint8_t>& threadsTerminated);
 
 	/*--------------------------------< Protected methods >---------------------------------*/
 	protected:
