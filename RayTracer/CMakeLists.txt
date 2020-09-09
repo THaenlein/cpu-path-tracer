@@ -15,6 +15,10 @@ set(ASSIMP_CODE_DIR ${CMAKE_CURRENT_LIST_DIR}/lib/assimp-5.0.1/code)
 set(ASSIMP_LIBRARIES_DIR ${CMAKE_CURRENT_BINARY_DIR}/lib/assimp-5.0.1/code)
 set(ASSIMP_LIBRARIES assimp-vc141-mtd)
 #set(ASSIMP_DIR ${CMAKE_CURRENT_LIST_DIR}/lib/assimp-5.0.1)
+
+set(CMAKE_CXX_FLAGS_DEBUG "/Zi /Ob0 /Od /RTC1 /DDEBUG")
+set(CMAKE_CXX_FLAGS_RELEASE "/O2 /Ob2 /DNDEBUG")
+
 enable_testing()
 
 ###############################################################################
