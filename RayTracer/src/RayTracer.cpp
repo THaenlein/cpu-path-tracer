@@ -34,7 +34,7 @@ namespace raytracing
 		float fieldOfView = camera->mHorizontalFOV;
 		if (aspectRatio != 1.0f)
 		{
-			SDL_LogWarn(SDL_LOG_CATEGORY_INPUT, "Aspect ratio of camera is not 1!");
+			SDL_LogWarn(SDL_LOG_CATEGORY_INPUT, "Aspect ratio of camera is not 1! Proceeding...");
 		}
 
 		const aiVector3D cameraUp = camera->mUp.Normalize();
@@ -59,7 +59,6 @@ namespace raytracing
 		RenderJob job;
 		while (this->renderJobs.popFront(job))
 		{
-			SDL_LogDebug(SDL_LOG_CATEGORY_APPLICATION, "Rendering Tile.");
 #if ANTI_ALIASING
 			this->renderAntiAliased(this->application, this->scene, job);
 #else
@@ -240,14 +239,14 @@ namespace raytracing
 				// Surface transmits light. Cast refraction ray and calculate color
 				const ai_real EPSILON = 1e-3f;
 				aiColor3D refractionColor{}, reflectionColor{};
-				ai_real fresnelResult = fresnel(intersectionInformation.ray.dir, faceNormal, refractionIndex);
-				bool outside = (intersectionInformation.ray.dir * faceNormal) < 0;
-				aiVector3D bias = RenderSettings::bias * faceNormal;
+				ai_real fresnelResult = fresnel(intersectionInformation.ray.dir, smoothNormal, refractionIndex);
+				bool outside = (intersectionInformation.ray.dir * smoothNormal) < 0;
+				aiVector3D bias = RenderSettings::bias * smoothNormal;
 
 				if (fresnelResult < 1.f)
 				{
 					// Ignore total internal reflection
-					aiVector3D refractionDirection = calculateRefractionDirection(intersectionInformation.ray.dir, faceNormal, refractionIndex);
+					aiVector3D refractionDirection = calculateRefractionDirection(intersectionInformation.ray.dir, smoothNormal, refractionIndex);
 					refractionDirection.Normalize();
 					aiVector3D refractionPoint = outside ? intersectionInformation.hitPoint - bias : intersectionInformation.hitPoint + bias;
 					aiRay refractionRay(refractionPoint, refractionDirection);
@@ -257,7 +256,7 @@ namespace raytracing
 				if ((fresnelResult > EPSILON) && (reflectivity > 0.f))
 				{
 					// Surface also is reflective. Cast reflection ray and blend color with fresnel
-					aiVector3D reflectionDirection = calculateReflectionDirection(intersectionInformation.ray.dir, faceNormal);
+					aiVector3D reflectionDirection = calculateReflectionDirection(intersectionInformation.ray.dir, smoothNormal);
 					reflectionDirection.Normalize();
 					aiVector3D reflectionPoint = outside ? intersectionInformation.ray.pos + bias : intersectionInformation.ray.pos - bias;
 					aiRay reflectionRay(reflectionPoint, reflectionDirection);
@@ -265,7 +264,7 @@ namespace raytracing
 				}
 
 				intersectionColor += reflectionColor + refractionColor;
-				return intersectionColor; // TODO: Implement color shading for refractive materials
+				//return intersectionColor; // TODO: Implement color shading for refractive materials
 			}
 			else if (reflectivity > 0.f)
 			{
@@ -314,7 +313,7 @@ namespace raytracing
 #else
 				bool vis = !calculateIntersection(shadowRay, shadowRayIntersectionInfo);
 #endif
-				intersectionColor += materialColorDiffuse * vis * lightIntensity * std::max(0.f, smoothNormal * lightDirection) * (1 - reflectivity);
+				intersectionColor += materialColorDiffuse * vis * lightIntensity * std::max(0.f, smoothNormal * lightDirection) * (1 - reflectivity) * opacity;
 			}
 		}
 		else if (shadingModel == aiShadingMode::aiShadingMode_Phong)
