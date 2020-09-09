@@ -631,3 +631,53 @@ void aiMaterial::CopyPropertyList(aiMaterial* pcDest,
         memcpy(prop->mData,propSrc->mData,prop->mDataLength);
     }
 }
+
+// ------------------------------------------------------------------------------------------------
+void aiMaterial::print(std::ostream& printStream)
+{
+    aiString name = GetName();
+    aiColor3D colorDiffuse{};
+    Get(AI_MATKEY_COLOR_DIFFUSE, colorDiffuse);
+    aiColor3D colorReflective{};
+    Get(AI_MATKEY_COLOR_REFLECTIVE, colorReflective);
+    aiColor3D colorSpecular{};
+    Get(AI_MATKEY_COLOR_SPECULAR, colorSpecular);
+    aiColor3D colorAmbient{};
+    Get(AI_MATKEY_COLOR_AMBIENT, colorAmbient);
+    aiColor3D colorEmissive{};
+    Get(AI_MATKEY_COLOR_EMISSIVE, colorEmissive);
+    aiColor3D colorTransparent{};
+    Get(AI_MATKEY_COLOR_TRANSPARENT, colorTransparent);
+    ai_real reflectivity{};
+    Get(AI_MATKEY_REFLECTIVITY, reflectivity);
+    ai_real refractionIndex{ 1 };
+    Get(AI_MATKEY_REFRACTI, refractionIndex);
+    ai_real opacity{ 1 };
+    Get(AI_MATKEY_OPACITY, opacity);
+    ai_real shininess{};
+    Get(AI_MATKEY_SHININESS, shininess);
+    ai_real shininessStrength{};
+    Get(AI_MATKEY_SHININESS_STRENGTH, shininessStrength);
+    ai_real transparency{};
+    Get(AI_MATKEY_TRANSPARENCYFACTOR, transparency);
+    int shadingModel{};
+    Get(AI_MATKEY_SHADING_MODEL, shadingModel);
+
+    printStream << "Material name: " << name.C_Str() << '\n';
+    printStream << '\t' << "Diffuse color: " << colorDiffuse.r << ", " << colorDiffuse.g << ", " << colorDiffuse.b << '\n';
+    printStream << '\t' << "Specular color: " << colorSpecular.r << ", " << colorSpecular.g << ", " << colorSpecular.b << '\n';
+    printStream << '\t' << "Reflective color: " << colorReflective.r << ", " << colorReflective.g << ", " << colorReflective.b << '\n';
+    printStream << '\t' << "Ambient color: " << colorAmbient.r << ", " << colorAmbient.g << ", " << colorAmbient.b << '\n';
+    printStream << '\t' << "Transparent color: " << colorTransparent.r << ", " << colorTransparent.g << ", " << colorTransparent.b << '\n';
+    printStream << '\t' << "Emissive color: " << colorEmissive.r << ", " << colorEmissive.g << ", " << colorEmissive.b << '\n';
+
+    printStream << '\t' << "Reflectivity: " << reflectivity << '\n';
+    printStream << '\t' << "Shininess: " << shininess << '\n'; // Or Hardness
+    printStream << '\t' << "Shininess strength: " << shininessStrength << '\n';
+    printStream << '\t' << "Opacity: " << opacity << '\n'; // Alpha blending: 1 Fully visible - 0 full light transmit
+    printStream << '\t' << "Transparency: " << transparency << '\n';
+    printStream << '\t' << "Refraction Index: " << refractionIndex << '\n';
+
+    printStream << '\t' << "Shading model: " << shadingModel << '\n';
+    printStream << '\n';
+}

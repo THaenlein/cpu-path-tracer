@@ -895,6 +895,7 @@ public:
     static void CopyPropertyList(aiMaterial* pcDest,
         const aiMaterial* pcSrc);
 
+    void print(std::ostream& printStream);
 
 #endif
 
@@ -1591,6 +1592,7 @@ C_ENUM aiReturn aiGetMaterialTexture(const C_STRUCT aiMaterial* mat,
 
 
 #ifdef __cplusplus
+
 }
 
 #include "material.inl"

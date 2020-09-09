@@ -248,6 +248,36 @@ struct aiLight
     {
     }
 
+    /* Transformation matrix layout
+    *
+    * [Right.x] [Up.x] [Back.x] [Position.x]
+    * [Right.y] [Up.y] [Back.y] [Position.y]
+    * [Right.z] [Up.z] [Back.z] [Position.Z]
+    * [       ] [    ] [      ] [Unit Scale]
+    */
+    void Transform(aiMatrix4x4& transMatrix)
+    {
+        if (!(mType == aiLightSource_POINT)) // Up and direction vectors are undefined for point lights
+        {
+            mUp = { transMatrix.a2, transMatrix.b2, transMatrix.c2 };
+            mDirection = { -transMatrix.a3, -transMatrix.b3, -transMatrix.c3 };
+            mUp.Normalize();
+            mDirection.Normalize();
+        }
+        if (!(mType == aiLightSource_DIRECTIONAL))
+        {
+            mPosition = { transMatrix.a4, transMatrix.b4, transMatrix.c4 };
+        }
+    }
+
+    void print(std::ostream& printStream)
+    {
+        printStream << "Light name: " << mName.C_Str() << '\n';
+        printStream << '\t' << "Position: " << mPosition.x << ", " << mPosition.y << ", " << mPosition.z << '\n';
+        printStream << '\t' << "Up: " << mUp.x << ", " << mUp.y << ", " << mUp.z << '\n';
+        printStream << '\t' << "Direction: " << mDirection.x << ", " << mDirection.y << ", " << mDirection.z << '\n';
+        printStream << '\t' << "Diffuse color: " << mColorDiffuse.r << ", " << mColorDiffuse.g << ", " << mColorDiffuse.b << "\n\n";
+    }
 #endif
 };
 

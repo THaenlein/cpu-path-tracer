@@ -220,6 +220,34 @@ struct aiCamera
         out.d4 = 1.f;
     }
 
+    /* Transformation matrix layout
+    *
+    * [Right.x] [Up.x] [Back.x] [Position.x]
+    * [Right.y] [Up.y] [Back.y] [Position.y]
+    * [Right.z] [Up.z] [Back.z] [Position.Z]
+    * [       ] [    ] [      ] [Unit Scale]
+    */
+    void Transform(aiMatrix4x4& transMatrix)
+    {
+        mRight = { transMatrix.a1, transMatrix.b1, transMatrix.c1 };
+        mUp = { transMatrix.a2, transMatrix.b2, transMatrix.c2 };
+        mLookAt = { -transMatrix.a3, -transMatrix.b3, -transMatrix.c3 };
+        mPosition = { transMatrix.a4, transMatrix.b4, transMatrix.c4 };
+
+        mRight.Normalize();
+        mUp.Normalize();
+        mLookAt.Normalize();
+    }
+
+    void print(std::ostream& printStream)
+    {
+        printStream << "Camera name: " << mName.C_Str() << '\n';
+        printStream << '\t' << "Position: " << mPosition.x << ", " << mPosition.y << ", " << mPosition.z << '\n';
+        printStream << '\t' << "Up: " << mUp.x << ", " << mUp.y << ", " << mUp.z << '\n';
+        printStream << '\t' << "Right: " << mRight.x << ", " << mRight.y << ", " << mRight.z << '\n';
+        printStream << '\t' << "Look at: " << mLookAt.x << ", " << mLookAt.y << ", " << mLookAt.z << "\n\n";
+    }
+
 #endif
 };
 

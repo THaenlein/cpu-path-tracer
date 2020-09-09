@@ -849,6 +849,33 @@ struct aiMesh
         return mBones != nullptr && mNumBones > 0;
     }
 
+    void print(std::ostream& printStream)
+    {
+        printStream << "Mesh name: " << mName.C_Str() << '\n';
+        printStream << '\t' << "Number of vertices: " << mNumVertices << '\n';
+        printStream << '\t' << "Number of faces: " << mNumFaces << "\n\n";
+    }
+
+    void printDetailed(std::ostream& printStream)
+    {
+        printStream << "Mesh name: " << mName.C_Str() << '\n';
+        printStream << '\t' << "Number of vertices: " << mNumVertices << '\n';
+        printStream << '\t' << "Number of faces: " << mNumFaces << '\n';
+
+        for (unsigned int currentFace = 0; currentFace < mNumFaces; currentFace++)
+        {
+            printStream << '\t' << "Vertices of face " << currentFace << '\n';
+            aiFace* face = (mFaces) + currentFace;
+            for (unsigned int currentIndex = 0; currentIndex < face->mNumIndices; currentIndex++)
+            {
+                printStream << "\t\t" << mVertices[face->mIndices[currentIndex]].x << ", "
+                    << mVertices[face->mIndices[currentIndex]].y << ", "
+                    << mVertices[face->mIndices[currentIndex]].z << '\n';
+            }
+        }
+        printStream << '\n';
+    }
+
 #endif // __cplusplus
 };
 

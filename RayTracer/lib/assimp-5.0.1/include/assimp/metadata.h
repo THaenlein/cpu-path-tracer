@@ -373,6 +373,70 @@ struct aiMetadata {
 		return true;
 	}
 
+    void print(std::ostream& printStream)
+    {
+        printStream << "Scene meta data" << '\n';
+        for (unsigned int currentProperty = 0; currentProperty < mNumProperties; currentProperty++)
+        {
+            aiMetadataEntry* entry;
+            entry = &mValues[currentProperty];
+            switch (entry->mType)
+            {
+            case aiMetadataType::AI_AISTRING:
+            {
+                if (aiString* decodedEntry = static_cast<aiString*>(entry->mData))
+                {
+                    printStream << '\t' << mKeys[currentProperty].C_Str() << ": " << decodedEntry->C_Str() << '\n';
+                }
+            }break;
+
+            case aiMetadataType::AI_AIVECTOR3D:
+            {
+                if (aiVector3D* decodedEntry = static_cast<aiVector3D*>(entry->mData))
+                {
+                    printStream << '\t' << ": " << decodedEntry->x << ", " << decodedEntry->y << ", " << decodedEntry->z << '\n';
+                }
+            }break;
+
+            case aiMetadataType::AI_BOOL:
+            {
+                if (bool* decodedEntry = static_cast<bool*>(entry->mData))
+                {
+                    printStream << ": " << decodedEntry << '\n';
+                }
+            }break;
+
+            case aiMetadataType::AI_DOUBLE:
+            case aiMetadataType::AI_FLOAT:
+            {
+                if (ai_real* decodedEntry = static_cast<ai_real*>(entry->mData))
+                {
+                    printStream << '\t' << ": " << decodedEntry << '\n';
+                }
+            }break;
+
+            case aiMetadataType::AI_INT32:
+            {
+                if (int32_t* decodedEntry = static_cast<int32_t*>(entry->mData))
+                {
+                    printStream << '\t' << ": " << decodedEntry << '\n';
+                }
+            }break;
+
+            case aiMetadataType::AI_UINT64:
+            {
+                if (uint64_t* decodedEntry = static_cast<uint64_t*>(entry->mData))
+                {
+                    printStream << '\t' << ": " << decodedEntry << '\n';
+                }
+            }break;
+
+            default:
+                printStream << '\t' << "Invalid meta data entry type!" << '\n';
+            }
+        }
+    }
+
 #endif // __cplusplus
 
 };
