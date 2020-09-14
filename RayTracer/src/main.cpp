@@ -17,6 +17,7 @@
 #include "Timer.hpp"
 
 #include "Types\BoundingVolume.hpp"
+#include "Types\KdNode.hpp"
 
 
 int main(int argc, char* argv[])
@@ -48,12 +49,12 @@ int main(int argc, char* argv[])
 		return 0;
 	}
 
-	// Apply post processing
 	// Remove single points and lines not forming a face
 #ifdef AI_CONFIG_PP_SBP_REMOVE
 	#undef AI_CONFIG_PP_SBP_REMOVE
 #endif
 #define AI_CONFIG_PP_SBP_REMOVE aiPrimitiveType_POINTS | aiPrimitiveType_LINES;
+	// Apply post processing
 	scene = assetImporter.ApplyPostProcessing(
 		aiProcess_ImproveCacheLocality |
 		aiProcess_RemoveRedundantMaterials |
@@ -123,10 +124,25 @@ int main(int argc, char* argv[])
 	}
 #endif
 
-	std::unique_ptr<raytracing::BoundingVolume> bVolume(new raytracing::BoundingVolume());
-	bVolume->initialize(scene);
+	// Kd-Tree
+	std::vector<std::pair<aiFace*, aiMesh*>> triangleMeshCollection;
+	for (unsigned int currentMesh = 0; currentMesh < scene->mNumMeshes; currentMesh++)
+	{
+		aiMesh* mesh = scene->mMeshes[currentMesh];
+		if (mesh->mPrimitiveTypes != aiPrimitiveType_TRIANGLE)
+		{
+			// Ignore points, lines and faces with more than 3 edges
+			continue;
+		}
+		for (unsigned int currentFace = 0; currentFace < mesh->mNumFaces; currentFace++)
+		{
+			aiFace* face = (mesh->mFaces)+currentFace;
+			triangleMeshCollection.push_back(std::make_pair(face, mesh));
+		}
+	}
+	std::unique_ptr<raytracing::KdNode> kdTree(raytracing::KdNode::buildTree(triangleMeshCollection));
 
-	raytracing::RayTracer rayTracer(app, scene, std::move(bVolume));
+	raytracing::RayTracer rayTracer(app, scene, std::move(kdTree));
 	rayTracer.initialize();
 
 #if MULTI_THREADING
