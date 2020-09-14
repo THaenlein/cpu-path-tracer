@@ -306,14 +306,14 @@ namespace raytracing
 					continue;
 				}
 
-				aiRay shadowRay(intersectionInformation.hitPoint + (smoothNormal * RenderSettings::bias), lightDirection);
+				aiRay shadowRay(intersectionInformation.hitPoint + (smoothNormal * RenderSettings::bias), lightDirection, RayType::SHADOW);
 				IntersectionInformation shadowRayIntersectionInfo;
 #if USE_ACCELERATION_STRUCTURE
-				bool vis = !this->accelerationStructure->calculateIntersection(shadowRay, shadowRayIntersectionInfo);
+				bool pointInShadow = !this->accelerationStructure->calculateIntersection(shadowRay, shadowRayIntersectionInfo);
 #else
-				bool vis = !calculateIntersection(shadowRay, shadowRayIntersectionInfo);
+				bool pointInShadow = !calculateIntersection(shadowRay, shadowRayIntersectionInfo);
 #endif
-				intersectionColor += materialColorDiffuse * vis * lightIntensity * std::max(0.f, smoothNormal * lightDirection) * (1 - reflectivity) * opacity;
+				intersectionColor += materialColorDiffuse * pointInShadow * lightIntensity * std::max(0.f, smoothNormal * lightDirection) * (1 - reflectivity) * opacity;
 			}
 		}
 		else if (shadingModel == aiShadingMode::aiShadingMode_Phong)
@@ -356,6 +356,11 @@ namespace raytracing
 				// TODO: Collect all intersections and push them back into a collection
 				// Evaluate nearest intersection point and return
 				bool intersectsCurrentTriangle = this->rayTriangleIntersection(ray, nearestIntersectedTriangle, &intersectionPoint, &uvCoordinates);
+				// We can immediately return if the cast ray is a shadow ray
+				if (ray.type == RayType::SHADOW)
+				{
+					return true;
+				}
 				float distanceToIntersectionPoint = (intersectionPoint - ray.pos).Length();
 				if (intersectsCurrentTriangle && (distanceToIntersectionPoint < leastDistanceIntersection))
 				{
