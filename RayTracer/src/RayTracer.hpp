@@ -42,6 +42,11 @@ namespace raytracing
 
 		}
 
+		~RayTracer()
+		{
+			delete[] this->pixels;
+		}
+
 		void initialize();
 
 		void renderMultiThreaded();
