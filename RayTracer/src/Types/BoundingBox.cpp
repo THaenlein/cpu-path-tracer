@@ -20,11 +20,9 @@ namespace raytracing
 
 	BoundingBox::BoundingBox(aiMesh* mesh)
 	{
-		aiString name = mesh->mName;
-		std::cout << "Calculating BBox of Mesh: " << name.C_Str() << std::endl;
-
 		aiVector3D meshMin{ std::numeric_limits<float>::max() };
 		aiVector3D meshMax{ -std::numeric_limits<float>::max() };
+
 		if (mesh->HasPositions())
 		{
 			for (unsigned int currentVertex = 0; currentVertex < mesh->mNumVertices; currentVertex++)
@@ -46,6 +44,56 @@ namespace raytracing
 		this->containedMesh = mesh;
 	}
 
+	BoundingBox::BoundingBox(std::vector<std::pair<aiFace*, aiMesh*>>& triangles)
+	{
+		aiVector3D meshMin{ std::numeric_limits<float>::max() };
+		aiVector3D meshMax{ -std::numeric_limits<float>::max() };
+		
+		for (std::pair<aiFace*, aiMesh*>& currentPair : triangles)
+		{
+			aiFace* triangle{ currentPair.first };
+			aiMesh* associatedMesh{ currentPair.second };
+
+			for (unsigned int currentIndex = 0; currentIndex < triangle->mNumIndices; currentIndex++)
+			{
+				aiVector3D& vertex = associatedMesh->mVertices[triangle->mIndices[currentIndex]];
+				meshMin.x = meshMin.x < vertex.x ? meshMin.x : vertex.x;
+				meshMin.y = meshMin.y < vertex.y ? meshMin.y : vertex.y;
+				meshMin.z = meshMin.z < vertex.z ? meshMin.z : vertex.z;
+
+				meshMax.x = meshMax.x < vertex.x ? vertex.x : meshMax.x;
+				meshMax.y = meshMax.y < vertex.y ? vertex.y : meshMax.y;
+				meshMax.z = meshMax.z < vertex.z ? vertex.z : meshMax.z;
+			}
+			this->min = meshMin;
+			this->max = meshMax;
+		}
+	}
+
+	BoundingBox::BoundingBox(std::pair<aiFace*, aiMesh*>& triangle)
+	{
+		aiVector3D triMin{ std::numeric_limits<float>::max() };
+		aiVector3D triMax{ -std::numeric_limits<float>::max() };
+
+		aiFace* tri = triangle.first;
+		aiMesh* associatedMesh = triangle.second;
+		
+		for (unsigned int currentIndex = 0; currentIndex < tri->mNumIndices; currentIndex++)
+		{
+			aiVector3D& vertex = associatedMesh->mVertices[tri->mIndices[currentIndex]];
+			triMin.x = triMin.x < vertex.x ? triMin.x : vertex.x;
+			triMin.y = triMin.y < vertex.y ? triMin.y : vertex.y;
+			triMin.z = triMin.z < vertex.z ? triMin.z : vertex.z;
+
+			triMax.x = triMax.x < vertex.x ? vertex.x : triMax.x;
+			triMax.y = triMax.y < vertex.y ? vertex.y : triMax.y;
+			triMax.z = triMax.z < vertex.z ? vertex.z : triMax.z;
+		}
+
+		this->min = triMin;
+		this->max = triMax;
+	}
+
 	void BoundingBox::reset()
 	{
 		this->min = aiVector3D{ std::numeric_limits<float>::max() };
@@ -62,14 +110,35 @@ namespace raytracing
 		// Left box
 		aiVector3D leftMin = this->min;
 		aiVector3D leftMax = this->max;
-		leftMax[indexOfAxisToSplitAlong] = splitAt;
+		leftMax[indexOfAxisToSplitAlong] -= splitAt;
 		left.min = leftMin;
 		left.max = leftMax;
 		
 		// Right box
 		aiVector3D rightMin = this->min;
 		aiVector3D rightMax = this->max;
-		rightMin[indexOfAxisToSplitAlong] = splitAt;
+		rightMin[indexOfAxisToSplitAlong] += splitAt;
+		right.min = rightMin;
+		right.max = rightMax;
+	}
+
+	void BoundingBox::split(BoundingBox& left, BoundingBox& right, uint8_t splitAxis)
+	{
+		// Evaluate longest axis
+		aiVector3D length = this->max - this->min;
+		ai_real splitAt = length[splitAxis] / 2.f;
+
+		// Left box
+		aiVector3D leftMin = this->min;
+		aiVector3D leftMax = this->max;
+		leftMax[splitAxis] -= splitAt;
+		left.min = leftMin;
+		left.max = leftMax;
+
+		// Right box
+		aiVector3D rightMin = this->min;
+		aiVector3D rightMax = this->max;
+		rightMin[splitAxis] += splitAt;
 		right.min = rightMin;
 		right.max = rightMax;
 	}
@@ -77,6 +146,37 @@ namespace raytracing
 	bool BoundingBox::contains(std::vector<aiVector3D*> triangle)
 	{
 		return contains(triangle[0]) || contains(triangle[1]) || contains(triangle[2]);
+	}
+
+	bool BoundingBox::contains(std::pair<aiFace*, aiMesh*>& triangleMeshPair)
+	{
+		aiFace* triangle{ triangleMeshPair.first };
+		aiMesh* associatedMesh{ triangleMeshPair.second };
+		return contains(&associatedMesh->mVertices[triangle->mIndices[0]]) ||
+			   contains(&associatedMesh->mVertices[triangle->mIndices[1]]) ||
+			   contains(&associatedMesh->mVertices[triangle->mIndices[2]]);
+	}
+
+	bool BoundingBox::contains(aiVector3D* point)
+	{
+		bool xInRange = (this->min.x <= point->x) && (point->x <= this->max.x);
+		bool yInRange = (this->min.y <= point->y) && (point->y <= this->max.y);
+		bool zInRange = (this->min.z <= point->z) && (point->z <= this->max.z);
+		return xInRange && yInRange && zInRange;
+	}
+
+	bool BoundingBox::exclusiveContains(std::vector<aiVector3D*> triangle)
+	{
+		return contains(triangle[0]) && contains(triangle[1]) && contains(triangle[2]);
+	}
+
+	bool BoundingBox::exclusiveContains(std::pair<aiFace*, aiMesh*>& triangleMeshPair)
+	{
+		aiFace* triangle{ triangleMeshPair.first };
+		aiMesh* associatedMesh{ triangleMeshPair.second };
+		return contains(&associatedMesh->mVertices[triangle->mIndices[0]]) &&
+			   contains(&associatedMesh->mVertices[triangle->mIndices[1]]) &&
+			   contains(&associatedMesh->mVertices[triangle->mIndices[2]]);
 	}
 
 	bool BoundingBox::intersects(aiRay& ray)
@@ -94,6 +194,11 @@ namespace raytracing
 		return tMaximum >= tMinimum;
 	}
 
+	aiVector3D BoundingBox::getCenter()
+	{
+		return aiVector3D((this->min + this->max) * 1.f/2.f);
+	}
+
 	bool BoundingBox::operator==(const BoundingBox & other) const
 	{
 		return this->min.Equal(other.min) && this->max.Equal(other.max);
@@ -102,18 +207,5 @@ namespace raytracing
 	/*--------------------------------< Protected members >----------------------------------*/
 		
 	/*--------------------------------< Private members >------------------------------------*/
-
-	bool BoundingBox::contains(aiVector3D* point)
-	{
-		bool xInRange = (this->min.x <= point->x) && (point->x <= this->max.x);
-		bool yInRange = (this->min.y <= point->y) && (point->y <= this->max.y);
-		bool zInRange = (this->min.z <= point->z) && (point->z <= this->max.z);
-		return xInRange && yInRange && zInRange;
-	}
-
-	aiVector3D BoundingBox::getCenter()
-	{
-		return aiVector3D((this->min + this->max) * 1.f/2.f);
-	}
 
 } // end of namespace raytracer

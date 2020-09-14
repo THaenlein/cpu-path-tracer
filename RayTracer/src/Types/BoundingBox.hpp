@@ -31,6 +31,10 @@ namespace raytracing
 
 		BoundingBox(aiMesh* mesh);
 
+		BoundingBox(std::vector<std::pair<aiFace*, aiMesh*>>& triangles);
+
+		BoundingBox(std::pair<aiFace*, aiMesh*>& triangle);
+
 		BoundingBox(aiVector3D& min, aiVector3D& max) :
 			min{ min },
 			max{ max }
@@ -43,11 +47,19 @@ namespace raytracing
 
 		void reset();
 
-		//void setDimensions(aiFace* triangle);
-
 		void split(BoundingBox& left, BoundingBox& right);
+		
+		void split(BoundingBox& left, BoundingBox& right, uint8_t splitAxis);
 
 		bool contains(std::vector<aiVector3D*> triangle);
+		
+		bool contains(std::pair<aiFace*, aiMesh*>& triangleMeshPair);
+		
+		bool contains(aiVector3D* point);
+		
+		bool exclusiveContains(std::vector<aiVector3D*> triangle);
+
+		bool exclusiveContains(std::pair<aiFace*, aiMesh*>& triangleMeshPair);
 
 		bool intersects(aiRay& ray);
 
@@ -66,6 +78,14 @@ namespace raytracing
 			return this->containedMesh;
 		}
 
+		const uint8_t getLongestAxis()
+		{
+			aiVector3D length = this->max - this->min;
+			return length.x >= length.y ? (length.x >= length.z ? 0 : 2) : (length.y >= length.z ? 1 : 2);
+		}
+		
+		aiVector3D getCenter();
+
 		bool operator==(const BoundingBox& other) const;
 	
 	/*--------------------------------< Protected methods >---------------------------------*/
@@ -74,9 +94,6 @@ namespace raytracing
 	/*--------------------------------< Private methods >-----------------------------------*/
 	private:
 
-		bool contains(aiVector3D* point);
-
-		aiVector3D getCenter();
 
 	/*--------------------------------< Public members >------------------------------------*/
 	public:
