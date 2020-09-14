@@ -68,7 +68,15 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include "quaternion.h"
 
 typedef int32_t ai_int32;
-typedef uint32_t ai_uint32 ;
+typedef uint32_t ai_uint32;
+
+typedef enum RayType
+{
+    PRIMARY,
+    SHADOW,
+    REFLECTION,
+    REFRACTION
+}RayType;
 
 #ifdef __cplusplus
 #include <cstring>
@@ -145,15 +153,19 @@ struct aiPlane {
 struct aiRay {
 #ifdef __cplusplus
     aiRay () AI_NO_EXCEPT {}
-    aiRay (const aiVector3D& _pos, const aiVector3D& _dir)
-        : pos(_pos), dir(_dir) {}
+    aiRay (const aiVector3D& _pos, const aiVector3D& _dir, const RayType _type = RayType::PRIMARY)
+        : pos(_pos), dir(_dir), type(_type) {}
 
-    aiRay (const aiRay& o) : pos (o.pos), dir (o.dir) {}
+    aiRay (const aiRay& o) : pos (o.pos), dir (o.dir), type (o.type) {}
 
 #endif // !__cplusplus
 
     //! Position and direction of the ray
     C_STRUCT aiVector3D pos, dir;
+
+    //! Type of ray
+    RayType type;
+
 }; // !struct aiRay
 
 // ----------------------------------------------------------------------------------
