@@ -5,13 +5,13 @@
       <author>Blender User</author>
       <authoring_tool>Blender 2.79.0 commit date:2018-03-22, commit time:14:10, hash:f4dc9f9d68b</authoring_tool>
     </contributor>
-    <created>2020-09-08T23:32:19</created>
-    <modified>2020-09-08T23:32:19</modified>
+    <created>2020-09-14T00:39:30</created>
+    <modified>2020-09-14T00:39:30</modified>
     <unit name="meter" meter="1"/>
     <up_axis>Z_UP</up_axis>
   </asset>
   <library_cameras>
-    <camera id="Camera-camera" name="Camera">
+    <camera id="Camera_000-camera" name="Camera.011">
       <optics>
         <technique_common>
           <perspective>
@@ -134,7 +134,7 @@
               <color sid="ambient">0 0 0 1</color>
             </ambient>
             <diffuse>
-              <color sid="diffuse">0.8 0.8 0.8 1</color>
+              <color sid="diffuse">1 1 1 1</color>
             </diffuse>
             <reflective>
               <color>1 1 1 1</color>
@@ -353,10 +353,6 @@
           </bind_material>
         </instance_geometry>
       </node>
-      <node id="Camera" name="Camera" type="NODE">
-        <matrix sid="transform">7.54979e-8 -0.3420202 0.9396926 7.186697 1 2.58218e-8 -7.09448e-8 0 0 0.9396926 0.3420202 1.661248 0 0 0 1</matrix>
-        <instance_camera url="#Camera-camera"/>
-      </node>
       <node id="Sphere" name="Sphere" type="NODE">
         <matrix sid="transform">1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1</matrix>
         <instance_geometry url="#Sphere-mesh" name="Sphere">
@@ -390,6 +386,10 @@
             </technique_common>
           </bind_material>
         </instance_geometry>
+      </node>
+      <node id="Camera_000" name="Camera_000" type="NODE">
+        <matrix sid="transform">7.54979e-8 -0.3420202 0.9396926 7.186697 1 2.58218e-8 -7.09448e-8 0 0 0.9396926 0.3420202 1.661248 0 0 0 1</matrix>
+        <instance_camera url="#Camera_000-camera"/>
       </node>
     </visual_scene>
   </library_visual_scenes>
