@@ -60,7 +60,7 @@ namespace raytracing
 		while (this->renderJobs.popFront(job))
 		{
 #if ANTI_ALIASING
-			this->renderAntiAliased(this->application, this->scene, job);
+			this->renderAntiAliased(job);
 #else
 			this->render(job);
 #endif
@@ -130,7 +130,7 @@ namespace raytracing
 						float aaShiftY = y + (q + r) / aa;
 						aiVector3D nextPixelX = this->pixelShiftX * static_cast<float>(aaShiftX);
 						aiVector3D nextPixelY = this->pixelShiftY * static_cast<float>(aaShiftY);
-						aiVector3D rayDirection = (this->topLeftPixel + nextPixelX + nextPixelY).Normalize();
+						aiVector3D rayDirection = (this->topLeftPixel + nextPixelX - nextPixelY).Normalize();
 						aiRay currentRay((*this->scene->mCameras)->mPosition, rayDirection);
 						pixelAverage = pixelAverage + this->traceRay(currentRay);
 					}
