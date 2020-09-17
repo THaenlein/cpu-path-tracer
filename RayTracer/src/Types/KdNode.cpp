@@ -102,7 +102,6 @@ namespace raytracing
 
 		return new KdNode(splittingPlane, build(trianglesLeft, leftBox, depth + 1), build(trianglesRight, rightBox, depth + 1), bBox);
 	}
-	}
 
 	bool KdNode::calculateIntersection(aiRay& ray, IntersectionInformation& outIntersection)
 	{
