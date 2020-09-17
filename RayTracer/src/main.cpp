@@ -125,7 +125,7 @@ int main(int argc, char* argv[])
 #endif
 
 	// Kd-Tree
-	std::vector<std::pair<aiFace*, aiMesh*>> triangleMeshCollection;
+	std::vector<raytracing::KdTriangle> triangleMeshCollection;
 	for (unsigned int currentMesh = 0; currentMesh < scene->mNumMeshes; currentMesh++)
 	{
 		aiMesh* mesh = scene->mMeshes[currentMesh];
@@ -137,7 +137,7 @@ int main(int argc, char* argv[])
 		for (unsigned int currentFace = 0; currentFace < mesh->mNumFaces; currentFace++)
 		{
 			aiFace* face = (mesh->mFaces)+currentFace;
-			triangleMeshCollection.push_back(std::make_pair(face, mesh));
+			triangleMeshCollection.push_back({ std::make_pair(face, mesh), raytracing::ChildSide::UNDEFINED});
 		}
 	}
 	std::unique_ptr<raytracing::KdNode> kdTree(raytracing::KdNode::buildTree(triangleMeshCollection));

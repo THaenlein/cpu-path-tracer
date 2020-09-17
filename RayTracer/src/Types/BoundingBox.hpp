@@ -11,6 +11,10 @@
 #include "assimp\types.h"
 #include "assimp\mesh.h"
 
+#include "raytracing.hpp"
+
+#include "Types\Plane.hpp"
+
 namespace raytracing
 {
 	/*--------------------------------< Defines >-------------------------------------------*/
@@ -31,7 +35,9 @@ namespace raytracing
 
 		BoundingBox(aiMesh* mesh);
 
-		BoundingBox(std::vector<std::pair<aiFace*, aiMesh*>>& triangles);
+		BoundingBox(std::vector<KdTriangle>& triangles);
+		
+		BoundingBox(const KdTriangle& triangles);
 
 		BoundingBox(std::pair<aiFace*, aiMesh*>& triangle);
 
@@ -50,6 +56,8 @@ namespace raytracing
 		void split(BoundingBox& left, BoundingBox& right);
 		
 		void split(BoundingBox& left, BoundingBox& right, uint8_t splitAxis);
+
+		void split(BoundingBox& left, BoundingBox& right, Plane& splitPlane);
 
 		bool contains(std::vector<aiVector3D*> triangle);
 		
@@ -78,10 +86,10 @@ namespace raytracing
 			return this->containedMesh;
 		}
 
-		const uint8_t getLongestAxis()
+		const Axis getLongestAxis()
 		{
 			aiVector3D length = this->max - this->min;
-			return length.x >= length.y ? (length.x >= length.z ? 0 : 2) : (length.y >= length.z ? 1 : 2);
+			return length.x >= length.y ? (length.x >= length.z ? Axis::X : Axis::Z) : (length.y >= length.z ? Axis::Y : Axis::Z);
 		}
 		
 		aiVector3D getCenter();

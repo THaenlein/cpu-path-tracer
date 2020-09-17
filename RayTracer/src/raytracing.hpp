@@ -95,7 +95,6 @@ namespace raytracing
 	};
 #pragma pack(pop)
 
-
 	struct IntersectionInformation
 	{
 		IntersectionInformation() :
@@ -125,6 +124,32 @@ namespace raytracing
 
 		aiRay ray;
 	};
+
+	typedef enum Axis : int8_t
+	{
+		NONE = -1,
+		X = 0,
+		Y = 1,
+		Z = 2
+	}Axis;
+
+	typedef enum ChildSide
+	{
+		LEFT,
+		RIGHT,
+		BOTH,
+		UNDEFINED
+	}ChildSide;
+
+	typedef struct KdTriangle
+	{
+		KdTriangle(std::pair<aiFace*, aiMesh*> pair, ChildSide childSide):
+			faceMeshPair(pair), side(childSide)
+		{}
+
+		std::pair<aiFace*, aiMesh*> faceMeshPair;
+		ChildSide side;
+	}KdTriangle;
 
 	/*--------------------------------< Constants >-----------------------------------------*/
 

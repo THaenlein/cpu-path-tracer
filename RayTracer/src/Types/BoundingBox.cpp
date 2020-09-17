@@ -44,15 +44,15 @@ namespace raytracing
 		this->containedMesh = mesh;
 	}
 
-	BoundingBox::BoundingBox(std::vector<std::pair<aiFace*, aiMesh*>>& triangles)
+	BoundingBox::BoundingBox(std::vector<KdTriangle>& triangles)
 	{
 		aiVector3D meshMin{ std::numeric_limits<float>::max() };
 		aiVector3D meshMax{ -std::numeric_limits<float>::max() };
 		
-		for (std::pair<aiFace*, aiMesh*>& currentPair : triangles)
+		for (KdTriangle& currentPair : triangles)
 		{
-			aiFace* triangle{ currentPair.first };
-			aiMesh* associatedMesh{ currentPair.second };
+			aiFace* triangle{ currentPair.faceMeshPair.first };
+			aiMesh* associatedMesh{ currentPair.faceMeshPair.second };
 
 			for (unsigned int currentIndex = 0; currentIndex < triangle->mNumIndices; currentIndex++)
 			{
@@ -68,6 +68,30 @@ namespace raytracing
 			this->min = meshMin;
 			this->max = meshMax;
 		}
+	}
+
+	BoundingBox::BoundingBox(const KdTriangle& triangle)
+	{
+		aiVector3D triMin{ std::numeric_limits<float>::max() };
+		aiVector3D triMax{ -std::numeric_limits<float>::max() };
+
+		aiFace* tri = triangle.faceMeshPair.first;
+		aiMesh* associatedMesh = triangle.faceMeshPair.second;
+
+		for (unsigned int currentIndex = 0; currentIndex < tri->mNumIndices; currentIndex++)
+		{
+			aiVector3D& vertex = associatedMesh->mVertices[tri->mIndices[currentIndex]];
+			triMin.x = triMin.x < vertex.x ? triMin.x : vertex.x;
+			triMin.y = triMin.y < vertex.y ? triMin.y : vertex.y;
+			triMin.z = triMin.z < vertex.z ? triMin.z : vertex.z;
+
+			triMax.x = triMax.x < vertex.x ? vertex.x : triMax.x;
+			triMax.y = triMax.y < vertex.y ? vertex.y : triMax.y;
+			triMax.z = triMax.z < vertex.z ? vertex.z : triMax.z;
+		}
+
+		this->min = triMin;
+		this->max = triMax;
 	}
 
 	BoundingBox::BoundingBox(std::pair<aiFace*, aiMesh*>& triangle)
@@ -143,6 +167,20 @@ namespace raytracing
 		right.max = rightMax;
 	}
 
+	void BoundingBox::split(BoundingBox& left, BoundingBox& right, Plane& splitPlane)
+	{
+		float planePosition = splitPlane.getPosition();
+		Axis planeAxis = splitPlane.getAxis();
+
+		// TODO: Check if plane is in box
+
+		left = *this;
+		right = *this;
+
+		left.max[planeAxis] = planePosition;
+		right.min[planeAxis] = planePosition;
+	}
+
 	bool BoundingBox::contains(std::vector<aiVector3D*> triangle)
 	{
 		return contains(triangle[0]) || contains(triangle[1]) || contains(triangle[2]);
@@ -196,7 +234,7 @@ namespace raytracing
 
 	aiVector3D BoundingBox::getCenter()
 	{
-		return aiVector3D((this->min + this->max) * 1.f/2.f);
+		return aiVector3D((this->min + this->max) / 2.f);
 	}
 
 	bool BoundingBox::operator==(const BoundingBox & other) const

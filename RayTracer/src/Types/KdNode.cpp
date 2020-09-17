@@ -16,15 +16,15 @@ namespace raytracing
 		
 	/*--------------------------------< Public members >-------------------------------------*/
 
-	/*static*/ KdNode* KdNode::buildTree(std::vector<std::pair<aiFace*, aiMesh*>>& triangles)
+	/*static*/ KdNode* KdNode::buildTree(std::vector<KdTriangle>& triangles)
 	{
 		// Create BBox of full scene
 		BoundingBox rootBox(triangles);
-
+		// Start recursive build of tree
 		return build(triangles, rootBox);
 	}
 
-	/*static*/ KdNode* KdNode::build(std::vector<std::pair<aiFace*, aiMesh*>>& triangles, BoundingBox bBox, unsigned int depth/* = 0*/)
+	/*static*/ KdNode* KdNode::build(std::vector<KdTriangle>& triangles, BoundingBox bBox, unsigned int depth/* = 1*/)
 	{
 		const ai_real EPSILON = 1e-3f;
 
@@ -35,30 +35,49 @@ namespace raytracing
 		}
 
 		// Find plane to split
-		// TODO: Implement SAH
+		Axis longestAxis = bBox.getLongestAxis();
+		auto compareTriangles = [longestAxis](const KdTriangle& t1, const KdTriangle& t2) -> bool
+		{
+			aiFace* t1Face = t1.faceMeshPair.first;
+			aiMesh* t1Mesh = t1.faceMeshPair.second;
+			aiFace* t2Face = t2.faceMeshPair.first;
+			aiMesh* t2Mesh = t2.faceMeshPair.second;
+			return
+				((t1Mesh->mVertices[t1Face->mIndices[0]][longestAxis] +
+					t1Mesh->mVertices[t1Face->mIndices[1]][longestAxis] +
+					t1Mesh->mVertices[t1Face->mIndices[2]][longestAxis]) / 3.f) <
+					((t2Mesh->mVertices[t2Face->mIndices[0]][longestAxis] +
+						t2Mesh->mVertices[t2Face->mIndices[1]][longestAxis] +
+						t2Mesh->mVertices[t2Face->mIndices[2]][longestAxis]) / 3.f);
+		};
+		sort(triangles.begin(), triangles.end(), compareTriangles);
+		BoundingBox medianTriBox{ triangles[triangles.size() / 2].faceMeshPair };
+		aiVector3D center = bBox.getCenter();
+		aiVector3D medianCenter = medianTriBox.getCenter();
+		float planePosition = center[longestAxis] - ((center[longestAxis] - medianCenter[longestAxis]) * .1f);
+		Plane splittingPlane(planePosition, longestAxis);
 
-		// Split box
+		// Split box in longest axis
 		BoundingBox leftBox;
 		BoundingBox rightBox;
-		bBox.split(leftBox, rightBox, depth % 3);
+		bBox.split(leftBox, rightBox, splittingPlane);
 
 		// Add left and overlapping tris to left
 		// Add right and overlapping tris to right
-		std::vector<std::pair<aiFace*, aiMesh*>> trianglesLeft;
-		std::vector<std::pair<aiFace*, aiMesh*>> trianglesRight;
-		aiVector3D centerPoint{ bBox.getCenter() };
+		std::vector<KdTriangle> trianglesLeft;
+		std::vector<KdTriangle> trianglesRight;
 
-		for (std::pair<aiFace*, aiMesh*>& currentPair : triangles)
+		for (KdTriangle& triangle : triangles)
 		{
-			BoundingBox triangleBounds{ currentPair };
+			BoundingBox triangleBounds{ triangle };
 
-			if (triangleBounds.getMin()[depth % 3] < (centerPoint[depth % 3] + EPSILON))
+			if (triangleBounds.getMin()[longestAxis] < (splittingPlane.getPosition() + EPSILON))
 			{
-				trianglesLeft.push_back(currentPair);
+				trianglesLeft.push_back(triangle);
 			}
-			if (triangleBounds.getMax()[depth % 3] >= (centerPoint[depth % 3] - EPSILON))
+			if (triangleBounds.getMax()[longestAxis] >= (splittingPlane.getPosition() - EPSILON))
 			{
-				trianglesRight.push_back(currentPair);
+				trianglesRight.push_back(triangle);
 			}
 		}
 
@@ -68,20 +87,21 @@ namespace raytracing
 		if ((leftIndivisible && rightIndivisible) && (depth >= MIN_DEPTH))
 		{
 			// No further division of both branches possible
-			return new KdNode(centerPoint, new KdNode(trianglesLeft, leftBox), new KdNode(trianglesRight, rightBox), bBox);
+			return new KdNode(splittingPlane, new KdNode(trianglesLeft, leftBox), new KdNode(trianglesRight, rightBox), bBox);
 		}
 		else if (leftIndivisible && (depth >= MIN_DEPTH))
 		{
 			// No further division of left branch possible
-			return new KdNode(centerPoint, new KdNode(trianglesLeft, leftBox), build(trianglesRight, rightBox, depth + 1), bBox);
+			return new KdNode(splittingPlane, new KdNode(trianglesLeft, leftBox), build(trianglesRight, rightBox, depth + 1), bBox);
 		}
 		else if (rightIndivisible && (depth >= MIN_DEPTH))
 		{
 			// No further division of right branch possible
-			return new KdNode(centerPoint, build(trianglesLeft, leftBox, depth + 1), new KdNode(trianglesRight, rightBox), bBox);
+			return new KdNode(splittingPlane, build(trianglesLeft, leftBox, depth + 1), new KdNode(trianglesRight, rightBox), bBox);
 		}
 
-		return new KdNode(centerPoint, build(trianglesLeft, leftBox, depth + 1), build(trianglesRight, rightBox, depth + 1), bBox);
+		return new KdNode(splittingPlane, build(trianglesLeft, leftBox, depth + 1), build(trianglesRight, rightBox, depth + 1), bBox);
+	}
 	}
 
 	bool KdNode::calculateIntersection(aiRay& ray, IntersectionInformation& outIntersection)
@@ -112,10 +132,10 @@ namespace raytracing
 		{
 			// This is a leaf node
 			// Check triangles for intersection
-			for (std::pair<aiFace*, aiMesh*> currentPair : this->containedTriangles)
+			for (KdTriangle& currentPair : this->containedTriangles)
 			{
-				aiFace* currentFace{ currentPair.first };
-				aiMesh* associatedMesh{ currentPair.second };
+				aiFace* currentFace{ currentPair.faceMeshPair.first };
+				aiMesh* associatedMesh{ currentPair.faceMeshPair.second };
 
 				for (unsigned int currentIndex = 0; currentIndex < currentFace->mNumIndices; currentIndex++)
 				{

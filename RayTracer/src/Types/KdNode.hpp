@@ -23,11 +23,11 @@ namespace raytracing
 
 	/*--------------------------------< Constants >-----------------------------------------*/
 	
-	static const int MAX_TRIANGLES_PER_LEAF = 32;
+	static const unsigned int MAX_TRIANGLES_PER_LEAF = 32;
 
-	static const int MAX_DEPTH = 512;
+	static const unsigned int MAX_DEPTH = 512;
 	
-	static const int MIN_DEPTH = 32;
+	static const unsigned int MIN_DEPTH = 32;
 
 
 	class KdNode : public AccelerationStructure
@@ -37,11 +37,11 @@ namespace raytracing
 
 		KdNode() = default;
 
-		KdNode(aiVector3D location, KdNode* leftChild, KdNode* rightChild, BoundingBox box) :
-			splitLocation(location), left(leftChild), right(rightChild), boundingBox(box)
+		KdNode(Plane location, KdNode* leftChild, KdNode* rightChild, BoundingBox box) :
+			splittingPlane(location), left(leftChild), right(rightChild), boundingBox(box)
 		{};
 
-		KdNode(std::vector<std::pair<aiFace*, aiMesh*>>& triangles, BoundingBox box) :
+		KdNode(std::vector<KdTriangle>& triangles, BoundingBox box) :
 			containedTriangles(triangles), boundingBox(box), left(nullptr), right(nullptr)
 		{};
 
@@ -56,9 +56,10 @@ namespace raytracing
 			delete right;
 		}
 
-		static KdNode* buildTree(std::vector<std::pair<aiFace*, aiMesh*>>& triangles);
+		static KdNode* buildTree(std::vector<KdTriangle>& triangles);
 
-		static KdNode* build(std::vector<std::pair<aiFace*, aiMesh*>>& triangles, BoundingBox bBox, unsigned int depth = 1);
+		static KdNode* build(std::vector<KdTriangle>& triangles, BoundingBox bBox, unsigned int depth = 1);
+
 
 		virtual bool calculateIntersection(aiRay& ray, IntersectionInformation& outIntersection) override;
 
@@ -82,7 +83,7 @@ namespace raytracing
 		BoundingBox boundingBox;
 		
 		// The point at which the BB of this node was split along the axis = depth % 3
-		aiVector3D splitLocation;
+		Plane splittingPlane;
 
 		// Left subtree
 		KdNode* left;
@@ -91,7 +92,7 @@ namespace raytracing
 		KdNode* right;
 		
 		// Triangles contained by a leaf
-		std::vector<std::pair<aiFace*, aiMesh*>> containedTriangles;
+		std::vector<KdTriangle> containedTriangles;
 
 	};
 	
