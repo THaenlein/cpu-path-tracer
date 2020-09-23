@@ -81,6 +81,10 @@ public:
 
     const aiVector3t operator + (TReal f);
     const aiVector3t operator - (TReal f);
+    const aiVector3t operator * (TReal f);
+    const aiVector3t operator / (TReal f);
+    const aiVector3t operator % (aiVector3t& m);
+    const aiVector3t operator % (TReal f);
 
     // transform vector by matrix
     aiVector3t& operator *= (const aiMatrix3x3t<TReal>& mat);

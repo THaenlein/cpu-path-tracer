@@ -663,6 +663,7 @@ void aiMaterial::print(std::ostream& printStream)
     int shadingModel{};
     Get(AI_MATKEY_SHADING_MODEL, shadingModel);
 
+
     printStream << "Material name: " << name.C_Str() << '\n';
     printStream << '\t' << "Diffuse color: " << colorDiffuse.r << ", " << colorDiffuse.g << ", " << colorDiffuse.b << '\n';
     printStream << '\t' << "Specular color: " << colorSpecular.r << ", " << colorSpecular.g << ", " << colorSpecular.b << '\n';
@@ -679,5 +680,24 @@ void aiMaterial::print(std::ostream& printStream)
     printStream << '\t' << "Refraction Index: " << refractionIndex << '\n';
 
     printStream << '\t' << "Shading model: " << shadingModel << '\n';
+
+
+    unsigned int diffuseTextureCount = GetTextureCount(aiTextureType::aiTextureType_DIFFUSE);
+    if (diffuseTextureCount > 0)
+    {
+        aiString diffuseTexturePath;
+        aiTextureMapping diffuseTextureMapping;
+        unsigned int uvindex;
+        printStream << '\t' << "Diffuse textures: " << diffuseTextureCount << '\n';
+
+        if (GetTexture(aiTextureType_DIFFUSE, 0, &diffuseTexturePath, &diffuseTextureMapping, &uvindex) == AI_SUCCESS)
+        {
+            printStream << '\t' << '\t' << "Diffuse texture path: " << diffuseTexturePath.C_Str() << '\n';
+            printStream << '\t' << '\t' << "Diffuse texture mapping: " << diffuseTextureMapping << '\n';
+            printStream << '\t' << '\t' << "Diffuse texture UV index: " << uvindex << '\n';
+        }
+    }
+
+
     printStream << '\n';
 }

@@ -171,6 +171,34 @@ const aiVector3t<TReal> aiVector3t<TReal>::operator - (TReal f)
 // ------------------------------------------------------------------------------------------------
 template <typename TReal>
 AI_FORCE_INLINE
+const aiVector3t<TReal> aiVector3t<TReal>::operator * (TReal f)
+{
+    return aiVector3D(x * f, y * f, z * f);
+}
+// ------------------------------------------------------------------------------------------------
+template <typename TReal>
+AI_FORCE_INLINE
+const aiVector3t<TReal> aiVector3t<TReal>::operator / (TReal f)
+{
+    return aiVector3D(x / f, y / f, z / f);
+}
+// ------------------------------------------------------------------------------------------------
+template <typename TReal>
+AI_FORCE_INLINE
+const aiVector3t<TReal> aiVector3t<TReal>::operator % (aiVector3t& m)
+{
+    return aiVector3D(x % m.x, y % m.y, z % m.z);
+}
+// ------------------------------------------------------------------------------------------------
+template <typename TReal>
+AI_FORCE_INLINE
+const aiVector3t<TReal> aiVector3t<TReal>::operator % (TReal f)
+{
+    return aiVector3D(x % f, y % f, z % f);
+}
+// ------------------------------------------------------------------------------------------------
+template <typename TReal>
+AI_FORCE_INLINE
 const aiVector3t<TReal> aiVector3t<TReal>::operator + (TReal f)
 {
     return aiVector3D(x + f, y + f, z + f);

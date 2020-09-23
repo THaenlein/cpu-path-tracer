@@ -75,7 +75,8 @@ typedef enum RayType
     PRIMARY,
     SHADOW,
     REFLECTION,
-    REFRACTION
+    REFRACTION,
+    INDIRECT_DIFFUSE
 }RayType;
 
 #ifdef __cplusplus
