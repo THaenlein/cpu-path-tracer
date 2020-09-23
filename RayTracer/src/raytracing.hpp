@@ -16,9 +16,10 @@ namespace raytracing
 {
 	/*--------------------------------< Defines >-------------------------------------------*/
 
-#define ANTI_ALIASING 0
+#define ANTI_ALIASING 1
 #define MULTI_THREADING 1
 #define USE_ACCELERATION_STRUCTURE 1
+#define PATH_TRACE 1
 
 	/*--------------------------------< Typedefs >------------------------------------------*/
 
@@ -159,7 +160,9 @@ namespace raytracing
 		// Increasing this number smoothes edges of the rendered image, but increases render time.
 		static const unsigned int antiAliasingResolution = 4;
 		static constexpr float bias = 0.001f;
-		static const uint8_t maxRayDepth = 4;
+		static const uint8_t maxRayDepth = 8;
+		static const uint8_t maxBounces = 10;
+		static const uint16_t maxSamples = 1;
 	}renderSettings;
 
 	/*--------------------------------< Public methods >------------------------------------*/

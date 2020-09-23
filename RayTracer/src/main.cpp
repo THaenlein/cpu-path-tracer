@@ -39,7 +39,7 @@ int main(int argc, char* argv[])
 	}
 
 	Assimp::Importer assetImporter;
-	const std::string sceneFilePath("F:/Dokumente/GitHub/ray-tracer/RayTracer/res/testScene_cube.dae");
+	const std::string sceneFilePath("F:/Dokumente/GitHub/ray-tracer/RayTracer/res/testScene_path_trace.dae");
 	const aiScene* scene = assetImporter.ReadFile(sceneFilePath, 0);
 	if (!scene)
 	{

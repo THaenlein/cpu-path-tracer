@@ -8,6 +8,8 @@
 #include <thread>
 #include <mutex>
 #include <atomic>
+#include <time.h>
+#include <stdlib.h>
 
 #include "assimp\scene.h"
 
@@ -77,6 +79,8 @@ namespace raytracing
 
 		bool rayTriangleIntersection(const aiRay& ray, std::vector<aiVector3D*> vecTriangle, aiVector3D* outIntersectionPoint, aiVector2D* outUV);
 
+		aiColor3D sampleLight(IntersectionInformation& intersectionInformation, uint8_t rayDepth);
+
 		aiColor3D shadePixel(IntersectionInformation& intersectionInformation, uint8_t& rayDepth);
 
 		bool calculateIntersection(
@@ -85,6 +89,8 @@ namespace raytracing
 			IntersectionInformation& outIntersection);
 
 		aiColor3D traceRay(aiRay& ray, uint8_t rayDepth = 0);
+		
+		aiColor3D tracePath(aiRay& ray, uint8_t rayDepth = 0);
 
 		void createJobs();
 
@@ -93,6 +99,12 @@ namespace raytracing
 		aiVector3D calculateRefractionDirection(const aiVector3D& incidenceVector, const aiVector3D& incidenceNormal, const ai_real ior);
 
 		ai_real fresnel(const aiVector3D& incidenceVector, const aiVector3D& incidenceNormal, const ai_real ior);
+
+		void createCoordinateSystem(const aiVector3D& N, aiVector3D& Nt, aiVector3D& Nb);
+
+		aiVector3D uniformSampleHemisphere(const float r1, const float r2);
+
+		float getRandomFloat(unsigned int lowerBound, unsigned int upperBound);
 
 		/*--------------------------------< Public members >------------------------------------*/
 	public:

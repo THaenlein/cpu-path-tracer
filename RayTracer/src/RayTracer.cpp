@@ -5,7 +5,7 @@
 /*--------------------------------< Includes >-------------------------------------------*/
 #include <vector>
 #include <math.h>
-#include <ctime>
+#include <random>
 
 #include "RayTracer.hpp"
 #include "exceptions.hpp"
@@ -50,6 +50,8 @@ namespace raytracing
 
 		this->createJobs();
 
+		std::srand(static_cast<unsigned int>(time(0)));
+
 		this->pixels = new Uint24[renderWidth * renderHeight];
 	}
 
@@ -86,8 +88,11 @@ namespace raytracing
 				uint32_t currentPixel = y * renderWidth + x;
 				aiVector3D rayDirection = (this->topLeftPixel + (this->pixelShiftX * static_cast<float>(x)) + (this->pixelShiftY * static_cast<float>(y))).Normalize();
 				aiRay currentRay((*this->scene->mCameras)->mPosition, rayDirection);
-
+#if PATH_TRACE
+				this->pixels[currentPixel] = this->tracePath(currentRay);
+#else
 				this->pixels[currentPixel] = this->traceRay(currentRay);
+#endif
 			}
 		}
 	}
@@ -105,7 +110,11 @@ namespace raytracing
 				aiVector3D rayDirection = (this->topLeftPixel + nextPixelX - nextPixelY).Normalize();
 				aiRay currentRay((*this->scene->mCameras)->mPosition, rayDirection);
 
+#if PATH_TRACE
+				this->pixels[currentPixel] = this->tracePath(currentRay)/* / static_cast<float>(RenderSettings::maxBounces)*/;
+#else
 				this->pixels[currentPixel] = this->traceRay(currentRay);
+#endif
 			}
 		}
 	}
@@ -132,7 +141,11 @@ namespace raytracing
 						aiVector3D nextPixelY = this->pixelShiftY * static_cast<float>(aaShiftY);
 						aiVector3D rayDirection = (this->topLeftPixel + nextPixelX - nextPixelY).Normalize();
 						aiRay currentRay((*this->scene->mCameras)->mPosition, rayDirection);
+#if PATH_TRACE
+						pixelAverage = pixelAverage + this->tracePath(currentRay);
+#else
 						pixelAverage = pixelAverage + this->traceRay(currentRay);
+#endif
 					}
 				}
 				pixelAverage = pixelAverage * static_cast<ai_real>(1.f/std::pow(aa, 2U));
@@ -186,6 +199,106 @@ namespace raytracing
 		{
 			return false;
 		}
+	}
+
+	aiColor3D RayTracer::sampleLight(IntersectionInformation& intersectionInformation, uint8_t rayDepth)
+	{
+		unsigned int materialIndex = intersectionInformation.hitMesh->mMaterialIndex;
+		aiMaterial* material = this->scene->mMaterials[materialIndex];
+		aiColor3D materialColorDiffuse{}, materialColorEmission{}, materialColorAmbient{}, colorReflective{}, brdf{}, incomingLight{};
+		ai_real reflectivity{}, opacity{ 1 }, refractionIndex{ 1 }, shininess{};
+		material->Get(AI_MATKEY_SHININESS, shininess);
+		material->Get(AI_MATKEY_COLOR_DIFFUSE, materialColorDiffuse);
+		material->Get(AI_MATKEY_COLOR_EMISSIVE, materialColorEmission);
+		material->Get(AI_MATKEY_COLOR_AMBIENT, materialColorAmbient);
+		material->Get(AI_MATKEY_REFLECTIVITY, reflectivity);
+		material->Get(AI_MATKEY_COLOR_REFLECTIVE, colorReflective);
+		material->Get(AI_MATKEY_OPACITY, opacity);
+		material->Get(AI_MATKEY_REFRACTI, refractionIndex);
+
+		// Calculate vertex normal for smooth shading
+		aiVector3D smoothNormal = (1 - intersectionInformation.uv.x - intersectionInformation.uv.y) *
+			*intersectionInformation.vertexNormals[0] + intersectionInformation.uv.x *
+			*intersectionInformation.vertexNormals[1] + intersectionInformation.uv.y *
+			*intersectionInformation.vertexNormals[2];
+		smoothNormal.Normalize();
+
+		const float pdf = 1 / (2 * M_PI);
+
+		// Return immediately if hit object is emissive
+		if (aiColor3D{0.f, 0.f, 0.f} < materialColorEmission)
+		{
+			return materialColorEmission;
+		}
+
+		// Russian roulette
+		brdf = materialColorDiffuse / M_PI;
+		const float probability = 
+			(materialColorDiffuse.r > materialColorDiffuse.g) && (materialColorDiffuse.r>materialColorDiffuse.b) ? 
+				materialColorDiffuse.r : materialColorDiffuse.g > materialColorDiffuse.b ? 
+					materialColorDiffuse.g : materialColorDiffuse.b;
+		float random = getRandomFloat(0.f, 1.f);
+		if ((rayDepth + 1) > 5)
+		{
+			if (random < (probability * 0.9f))
+			{
+				brdf = brdf * (0.9f / probability);
+			}
+			else
+			{
+				// Russian roulette takes effect!
+				return materialColorEmission;
+			}
+		}
+
+		// Compute indirect light
+		aiColor3D indirectDiffuse{ 0.f, 0.f, 0.f }, indirectLight{ 0.f, 0.f, 0.f };
+		aiVector3D Nt{}, Nb{}, newRayDirection{}, newRayPosition{};
+		aiRay sampleRay{};
+
+		if (reflectivity > 0.f)
+		{
+			// Perfect specular reflection
+			const float roughness = 0.f;
+			const float rx = getRandomFloat(0.f, 1.f);
+			const float ry = getRandomFloat(0.f, 1.f);
+			const float rz = getRandomFloat(0.f, 1.f);
+
+			// Calculate reflection direction
+			newRayDirection = calculateReflectionDirection(intersectionInformation.ray.dir, smoothNormal);
+			newRayDirection = aiVector3D(
+				newRayDirection.x + (rx - .5f ) * roughness,
+				newRayDirection.y + (ry - .5f ) * roughness,
+				newRayDirection.z + (rz - .5f ) * roughness);
+
+			brdf = colorReflective / M_PI;
+			newRayPosition = intersectionInformation.hitPoint + (newRayDirection * RenderSettings::bias);
+			sampleRay = { newRayPosition, newRayDirection, RayType::REFLECTION };
+		}
+		else
+		{
+			// Perfect diffuse reflection
+			const float r1 = getRandomFloat(0.f, 1.f);
+			const float r2 = getRandomFloat(0.f, 1.f);
+			newRayDirection = uniformSampleHemisphere(r1, r2);
+			createCoordinateSystem(smoothNormal, Nt, Nb);
+
+			// step 3: transform sample from world space to shaded point local coordinate system
+			aiMatrix3x3 toLocalMatrix
+			{ Nt.x, Nt.y, Nt.z,
+				smoothNormal.x, smoothNormal.y, smoothNormal.z,
+				Nb.x, Nb.y, Nb.z };
+			newRayDirection *= toLocalMatrix;
+
+			newRayPosition = intersectionInformation.hitPoint + (newRayDirection * RenderSettings::bias);
+			sampleRay = { newRayPosition, newRayDirection, RayType::INDIRECT_DIFFUSE };
+		}
+
+		// Cast a ray in calculated direction
+		incomingLight = tracePath(sampleRay, rayDepth + 1);
+		float cos_theta = newRayDirection * smoothNormal;
+
+		return  materialColorEmission + (brdf * incomingLight * cos_theta / pdf);
 	}
 
 
@@ -381,6 +494,31 @@ namespace raytracing
 	}
 
 
+	aiColor3D RayTracer::tracePath(aiRay& ray, uint8_t rayDepth /*= 0*/)
+	{
+		IntersectionInformation intersectionInformation;
+		if (rayDepth > RenderSettings::maxBounces)
+		{
+			// TODO: Get scene background color
+			return { .1f, .1f, .1f };
+		}
+#if USE_ACCELERATION_STRUCTURE
+		bool intersects = this->accelerationStructure->calculateIntersection(ray, intersectionInformation);
+#else
+		bool intersects = this->calculateIntersection(ray, intersectionInformation);
+#endif
+		if (intersects)
+		{
+			// Calculate color at the intersection
+			return this->sampleLight(intersectionInformation, rayDepth);
+		}
+		else
+		{
+			// TODO: Get scene background color
+			return { .1f, .1f, .1f };
+		}
+	}
+
 	aiColor3D RayTracer::traceRay(aiRay& ray, uint8_t rayDepth /*= 0*/)
 	{
 		IntersectionInformation intersectionInformation;
@@ -405,7 +543,6 @@ namespace raytracing
 			return { .1f, .1f, .1f };
 		}
 	}
-
 
 	void RayTracer::createJobs()
 	{
@@ -488,6 +625,40 @@ namespace raytracing
 			ai_real reflectedLight = (Rs * Rs + Rp * Rp) / 2.f;
 			return reflectedLight;
 		}
+	}
+
+	void RayTracer::createCoordinateSystem(const aiVector3D& N, aiVector3D& Nt, aiVector3D& Nb)
+	{
+		if (std::fabs(N.x) > std::fabs(N.y))
+		{
+			Nt = aiVector3D(N.z, 0, -N.x) / sqrtf(N.x * N.x + N.z * N.z);
+		}
+		else
+		{
+			Nt = aiVector3D(0, -N.z, N.y) / sqrtf(N.y * N.y + N.z * N.z);
+		}
+		
+		Nb = N ^ Nt;
+	}
+
+	aiVector3D RayTracer::uniformSampleHemisphere(const float r1, const float r2)
+	{
+		// cos(theta) = r1 = y
+		// cos^2(theta) + sin^2(theta) = 1 -> sin(theta) = srtf(1 - cos^2(theta))
+		
+		float sinTheta = sqrtf(1 - r1 * r1);
+		float phi = 2 * M_PI * r2;
+		float x = sinTheta * cosf(phi);
+		float z = sinTheta * sinf(phi);
+
+		return aiVector3D(x, r1, z);
+	}
+
+	float RayTracer::getRandomFloat(unsigned int lowerBound, unsigned int upperBound)
+	{
+		static std::default_random_engine randomEngine;
+		static std::uniform_real_distribution<> uniformDistribution(lowerBound, upperBound);
+		return uniformDistribution(randomEngine);
 	}
 
 } // end of namespace raytracing
