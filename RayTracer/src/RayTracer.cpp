@@ -27,6 +27,10 @@ namespace raytracing
 		this->renderWidth = this->application.getRenderWidth();
 		this->renderHeight = this->application.getRenderHeight();
 
+		if (!this->scene->HasCameras())
+		{
+			throw Renderer("No camera found!");
+		}
 		// Using first camera in scene
 		aiCamera* camera = (*this->scene->mCameras);
 

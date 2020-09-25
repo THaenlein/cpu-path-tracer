@@ -133,6 +133,16 @@ namespace raytracing
 		}
 	};
 
+	struct Renderer : public std::exception
+	{
+	public:
+		
+		Renderer(const char* message = "") :
+			std::exception(message)
+		{};
+	};
+
+
 	/*--------------------------------< Constants >-----------------------------------------*/
 
 	/*--------------------------------< Public methods >------------------------------------*/

@@ -33,10 +33,10 @@ int main(int argc, char* argv[])
 	}
 	catch(raytracing::SdlException& exception)
 	{
-		SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, exception.what());
+		SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, exception.what(), ": %s", exception.getSdlError());
 		app.cleanUp();
 		std::cin.get();
-		return 0;
+		return 1;
 	}
 
 	Assimp::Importer assetImporter;
@@ -47,7 +47,7 @@ int main(int argc, char* argv[])
 		SDL_LogError(SDL_LOG_CATEGORY_INPUT, "Import of 3D scene failed: %s", assetImporter.GetErrorString());
 		app.cleanUp();
 		std::cin.get();
-		return 0;
+		return 1;
 	}
 
 	// Remove single points and lines not forming a face
@@ -69,7 +69,7 @@ int main(int argc, char* argv[])
 		SDL_LogError(SDL_LOG_CATEGORY_INPUT, "Post processing of 3D scene failed: %s", assetImporter.GetErrorString());
 		app.cleanUp();
 		std::cin.get();
-		return 0;
+		return 1;
 	}
 
 	// Transform cameras to world space
@@ -145,7 +145,18 @@ int main(int argc, char* argv[])
 
 	raytracing::Settings renderSettings;
 	raytracing::RayTracer rayTracer(app, scene, renderSettings, std::move(kdTree));
-	rayTracer.initialize();
+	
+	try
+	{
+		rayTracer.initialize();
+	}
+	catch(std::exception& exception)
+	{
+		SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, exception.what());
+		app.cleanUp();
+		std::cin.get();
+		return 1;
+	}
 
 #if MULTI_THREADING
 	// 4 threads render scenes generally fastet on my Intel Xeon X5675 system
