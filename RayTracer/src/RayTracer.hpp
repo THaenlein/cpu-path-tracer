@@ -18,6 +18,7 @@
 #include "Types\RenderJob.hpp"
 #include "Types\AccelerationStructure.hpp"
 #include "raytracing.hpp"
+#include "settings.hpp"
 
 
 namespace raytracing
@@ -36,9 +37,10 @@ namespace raytracing
 		/*--------------------------------< Public methods >------------------------------------*/
 	public:
 
-		RayTracer(Application& app, const aiScene* scene, std::unique_ptr<AccelerationStructure> accStruct):
+		RayTracer(Application& app, const aiScene* scene, Settings settings, std::unique_ptr<AccelerationStructure> accStruct):
 			application(app),
 			scene(scene),
+			renderSettings(settings),
 			accelerationStructure(std::move(accStruct))
 		{
 
@@ -135,6 +137,8 @@ namespace raytracing
 		Application& application;
 
 		const aiScene* scene;
+
+		const Settings renderSettings;
 
 		std::unique_ptr<AccelerationStructure> accelerationStructure;
 

@@ -13,6 +13,7 @@
 #include "main.hpp"
 #include "Application.hpp"
 #include "exceptions.hpp"
+#include "settings.hpp"
 #include "RayTracer.hpp"
 #include "Timer.hpp"
 
@@ -142,7 +143,8 @@ int main(int argc, char* argv[])
 	}
 	std::unique_ptr<raytracing::KdNode> kdTree(raytracing::KdNode::buildTree(triangleMeshCollection));
 
-	raytracing::RayTracer rayTracer(app, scene, std::move(kdTree));
+	raytracing::Settings renderSettings;
+	raytracing::RayTracer rayTracer(app, scene, renderSettings, std::move(kdTree));
 	rayTracer.initialize();
 
 #if MULTI_THREADING

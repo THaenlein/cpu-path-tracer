@@ -11,6 +11,7 @@ LIST(APPEND HEADERFILES
 
   "${CMAKE_CURRENT_LIST_DIR}/exceptions.hpp"
   "${CMAKE_CURRENT_LIST_DIR}/raytracing.hpp"
+  "${CMAKE_CURRENT_LIST_DIR}/settings.hpp"
 )
 
 ###############################################################################

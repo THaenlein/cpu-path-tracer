@@ -111,7 +111,7 @@ namespace raytracing
 				aiRay currentRay((*this->scene->mCameras)->mPosition, rayDirection);
 
 #if PATH_TRACE
-				this->pixels[currentPixel] = this->tracePath(currentRay)/* / static_cast<float>(RenderSettings::maxBounces)*/;
+				this->pixels[currentPixel] = this->tracePath(currentRay)/* / static_cast<float>(this->renderSettings.maxBounces)*/;
 #else
 				this->pixels[currentPixel] = this->traceRay(currentRay);
 #endif
@@ -121,7 +121,7 @@ namespace raytracing
 
 	void RayTracer::renderAntiAliased(RenderJob& renderJob)
 	{
-		const unsigned int aa = RenderSettings::antiAliasingResolution;
+		const uint8_t aa = this->renderSettings.getAAResolution();
 
 		for (unsigned int x = renderJob.getTileStartX(); x < renderJob.getTileEndX(); x++)
 		{
@@ -272,7 +272,7 @@ namespace raytracing
 				newRayDirection.z + (rz - .5f ) * roughness);
 
 			brdf = colorReflective / M_PI;
-			newRayPosition = intersectionInformation.hitPoint + (newRayDirection * RenderSettings::bias);
+			newRayPosition = intersectionInformation.hitPoint + (newRayDirection * this->renderSettings.getBias());
 			sampleRay = { newRayPosition, newRayDirection, RayType::REFLECTION };
 		}
 		else
@@ -290,7 +290,7 @@ namespace raytracing
 				Nb.x, Nb.y, Nb.z };
 			newRayDirection *= toLocalMatrix;
 
-			newRayPosition = intersectionInformation.hitPoint + (newRayDirection * RenderSettings::bias);
+			newRayPosition = intersectionInformation.hitPoint + (newRayDirection * this->renderSettings.getBias());
 			sampleRay = { newRayPosition, newRayDirection, RayType::INDIRECT_DIFFUSE };
 		}
 
@@ -354,7 +354,7 @@ namespace raytracing
 				aiColor3D refractionColor{}, reflectionColor{};
 				ai_real fresnelResult = fresnel(intersectionInformation.ray.dir, smoothNormal, refractionIndex);
 				bool outside = (intersectionInformation.ray.dir * smoothNormal) < 0;
-				aiVector3D bias = RenderSettings::bias * smoothNormal;
+				aiVector3D bias = this->renderSettings.getBias() * smoothNormal;
 
 				if (fresnelResult < 1.f)
 				{
@@ -383,7 +383,7 @@ namespace raytracing
 			{
 				// Surface only is reflective. Cast reflection ray and calculate color at reflection
 				aiVector3D reflectionDirection = calculateReflectionDirection(intersectionInformation.ray.dir, smoothNormal);
-				aiVector3D reflectionPoint = intersectionInformation.hitPoint + (smoothNormal * RenderSettings::bias);
+				aiVector3D reflectionPoint = intersectionInformation.hitPoint + (smoothNormal * this->renderSettings.getBias());
 				aiRay reflectionRay(reflectionPoint, reflectionDirection);
 				intersectionColor += traceRay(reflectionRay, rayDepth + 1) * reflectivity;
 			}
@@ -419,7 +419,7 @@ namespace raytracing
 					continue;
 				}
 
-				aiRay shadowRay(intersectionInformation.hitPoint + (smoothNormal * RenderSettings::bias), lightDirection, RayType::SHADOW);
+				aiRay shadowRay(intersectionInformation.hitPoint + (smoothNormal * this->renderSettings.getBias()), lightDirection, RayType::SHADOW);
 				IntersectionInformation shadowRayIntersectionInfo;
 #if USE_ACCELERATION_STRUCTURE
 				bool pointInShadow = !this->accelerationStructure->calculateIntersection(shadowRay, shadowRayIntersectionInfo);
@@ -497,7 +497,7 @@ namespace raytracing
 	aiColor3D RayTracer::tracePath(aiRay& ray, uint8_t rayDepth /*= 0*/)
 	{
 		IntersectionInformation intersectionInformation;
-		if (rayDepth > RenderSettings::maxBounces)
+		if (rayDepth > this->renderSettings.getMaxRayDepth())
 		{
 			// TODO: Get scene background color
 			return { .1f, .1f, .1f };
@@ -522,7 +522,7 @@ namespace raytracing
 	aiColor3D RayTracer::traceRay(aiRay& ray, uint8_t rayDepth /*= 0*/)
 	{
 		IntersectionInformation intersectionInformation;
-		if (rayDepth > RenderSettings::maxRayDepth)
+		if (rayDepth > this->renderSettings.getMaxRayDepth())
 		{
 			// TODO: Get scene background color
 			return { .1f, .1f, .1f };
