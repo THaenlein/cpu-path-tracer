@@ -77,6 +77,7 @@ public:
     const aiVector2t& operator -= (const aiVector2t& o);
     const aiVector2t& operator *= (TReal f);
     const aiVector2t& operator /= (TReal f);
+    const aiVector2t operator + (TReal f);
 
     TReal operator[](unsigned int i) const;
 

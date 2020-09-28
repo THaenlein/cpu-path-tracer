@@ -107,6 +107,13 @@ const aiVector2t<TReal>& aiVector2t<TReal>::operator -= (const aiVector2t& o) {
 // ------------------------------------------------------------------------------------------------
 template <typename TReal>
 inline
+const aiVector2t<TReal> aiVector2t<TReal>::operator + (TReal f) {
+    return aiVector2t<TReal>(x + f, y + f);
+}
+
+// ------------------------------------------------------------------------------------------------
+template <typename TReal>
+inline
 const aiVector2t<TReal>& aiVector2t<TReal>::operator *= (TReal f) {
     x *= f; y *= f;
     return *this;
