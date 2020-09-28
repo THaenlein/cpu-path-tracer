@@ -143,7 +143,7 @@ int main(int argc, char* argv[])
 	}
 	std::unique_ptr<raytracing::KdNode> kdTree(raytracing::KdNode::buildTree(triangleMeshCollection));
 
-	raytracing::Settings renderSettings;
+	raytracing::Settings renderSettings(8, 3, 1, 0.001f, 0.02f, 1.71333f);
 	raytracing::RayTracer rayTracer(app, scene, renderSettings, std::move(kdTree));
 	
 	try

@@ -17,6 +17,9 @@ namespace raytracing
 #define USE_ACCELERATION_STRUCTURE 1
 #define PATH_TRACE 1
 
+	// Depth of field requires anti aliasing
+#define DEPTH_OF_FIELD 1
+
 	/*--------------------------------< Typedefs >------------------------------------------*/
 
 	/*--------------------------------< Constants >-----------------------------------------*/
@@ -26,8 +29,8 @@ namespace raytracing
 	/*--------------------------------< Public methods >------------------------------------*/
 	public:
 
-		Settings(uint8_t aa = 4, uint8_t maxDepth = 10, uint8_t samples = 1, float offset = 0.001f) :
-			antiAliasingResolution(aa), maxRayDepth(maxDepth), maxSamples(samples), bias(offset)
+		Settings(uint8_t aa = 8, uint8_t maxDepth = 3, uint8_t samples = 1, float offset = 0.001f, const float aperture = 0.f, const float fDist = 0.f) :
+			antiAliasingResolution(aa), maxRayDepth(maxDepth), maxSamples(samples), bias(offset), apertureRadius(aperture), focalDistance(fDist)
 		{};
 
 		inline uint8_t getAAResolution() const
@@ -48,6 +51,16 @@ namespace raytracing
 		inline float getBias() const
 		{
 			return this->bias;
+		}
+
+		inline float getAperture() const
+		{
+			return this->apertureRadius;
+		}
+		
+		inline float getFocalDistance() const
+		{
+			return this->focalDistance;
 		}
 	
 	/*--------------------------------< Protected methods >---------------------------------*/
@@ -74,6 +87,10 @@ namespace raytracing
 		const uint16_t maxSamples;
 		
 		const float bias;
+
+		const float apertureRadius;
+
+		const float focalDistance;
 	};
 	
 } // end of namespace raytracer

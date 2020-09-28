@@ -115,7 +115,7 @@ namespace raytracing
 				aiRay currentRay((*this->scene->mCameras)->mPosition, rayDirection);
 
 #if PATH_TRACE
-				this->pixels[currentPixel] = this->tracePath(currentRay)/* / static_cast<float>(this->renderSettings.maxBounces)*/;
+				this->pixels[currentPixel] = this->tracePath(currentRay);
 #else
 				this->pixels[currentPixel] = this->traceRay(currentRay);
 #endif
@@ -126,6 +126,7 @@ namespace raytracing
 	void RayTracer::renderAntiAliased(RenderJob& renderJob)
 	{
 		const uint8_t aa = this->renderSettings.getAAResolution();
+		aiVector3D& cameraPosition = (*this->scene->mCameras)->mPosition;
 
 		for (unsigned int x = renderJob.getTileStartX(); x < renderJob.getTileEndX(); x++)
 		{
@@ -138,13 +139,36 @@ namespace raytracing
 				{
 					for (unsigned int q = 0; q < aa; q++)
 					{
+						// Anti aliasing
 						float r = static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
 						float aaShiftX = x + (p + r) / aa;
 						float aaShiftY = y + (q + r) / aa;
+
 						aiVector3D nextPixelX = this->pixelShiftX * static_cast<float>(aaShiftX);
 						aiVector3D nextPixelY = this->pixelShiftY * static_cast<float>(aaShiftY);
 						aiVector3D rayDirection = (this->topLeftPixel + nextPixelX - nextPixelY).Normalize();
-						aiRay currentRay((*this->scene->mCameras)->mPosition, rayDirection);
+						aiRay currentRay(cameraPosition, rayDirection);
+
+						// DOF
+#ifdef DEPTH_OF_FIELD
+						// Uniform random point on the aperture
+						float angle = getRandomFloat(0.f, 1.f) * 2.0f * M_PI;
+						float radius = sqrt(getRandomFloat(0.f, 1.f));
+						aiVector2D offset = aiVector2D(cos(angle), sin(angle)) * radius * this->renderSettings.getAperture();
+						
+						// Find to intersection point with the focal plane
+						aiVector3D focalPoint(cameraPosition + this->renderSettings.getFocalDistance() * currentRay.dir);
+						aiVector3D focalRayDir(focalPoint - (cameraPosition + (offset.x + offset.y)));
+						focalRayDir.Normalize();
+
+						// Calculate position of focal ray
+						aiVector3D focalRayPos(cameraPosition);
+						focalRayPos = focalRayPos + (offset.x + offset.y);
+
+						currentRay.pos = focalRayPos;
+						currentRay.dir = focalRayDir;
+#endif
+
 #if PATH_TRACE
 						pixelAverage = pixelAverage + this->tracePath(currentRay);
 #else
