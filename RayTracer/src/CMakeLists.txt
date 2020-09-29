@@ -27,6 +27,7 @@ LIST(APPEND SOURCEFILES
 ###############################################################################
 ## Include subdirectories
 
+INCLUDE("${CMAKE_CURRENT_LIST_DIR}/Textures/CMakeLists.txt")
 INCLUDE("${CMAKE_CURRENT_LIST_DIR}/Types/CMakeLists.txt")
 INCLUDE("${CMAKE_CURRENT_LIST_DIR}/Utility/CMakeLists.txt")
 

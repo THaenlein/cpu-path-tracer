@@ -19,6 +19,7 @@
 #include "Types\AccelerationStructure.hpp"
 #include "raytracing.hpp"
 #include "settings.hpp"
+#include "Textures\Texture.hpp"
 
 
 namespace raytracing
@@ -126,6 +127,8 @@ namespace raytracing
 		const Settings renderSettings;
 
 		std::unique_ptr<AccelerationStructure> accelerationStructure;
+
+		std::unordered_map<aiMaterial*, Texture*> textureMapping;
 
 	};
 	

@@ -11,6 +11,8 @@
 #include "exceptions.hpp"
 #include "Utility\mathUtility.hpp"
 
+#include "Textures\CheckerTexture.hpp"
+
 
 namespace raytracing
 {
@@ -148,7 +150,7 @@ namespace raytracing
 						aiRay currentRay(cameraPosition, rayDirection);
 
 						// DOF
-#ifdef DEPTH_OF_FIELD
+#if DEPTH_OF_FIELD
 						mathUtility::calculateDepthOfFieldRay(
 							&currentRay, 
 							this->renderSettings.getAperture(), 
@@ -182,6 +184,11 @@ namespace raytracing
 		material->Get(AI_MATKEY_COLOR_REFLECTIVE, colorReflective);
 		material->Get(AI_MATKEY_OPACITY, opacity);
 		material->Get(AI_MATKEY_REFRACTI, refractionIndex);
+		Texture* materialTexture = this->textureMapping[material];
+		if (materialTexture)
+		{
+			materialColorDiffuse = materialTexture->getColor(intersectionInformation.uvTextureCoords.x, intersectionInformation.uvTextureCoords.y);
+		}
 
 		// Calculate vertex normal for smooth shading
 		aiVector3D smoothNormal = (1 - intersectionInformation.uv.x - intersectionInformation.uv.y) *
@@ -412,13 +419,13 @@ namespace raytracing
 		aiRay& ray,
 		IntersectionInformation& outIntersection)
 	{
-		float leastDistanceIntersection{ std::numeric_limits<float>::max() };
+		bool intersects{ false };
 		std::vector<aiVector3D*> nearestIntersectedTriangle;
 		std::vector<aiVector3D*> triangleVertexNormals;
+		std::vector<aiVector3D*> textureCoordinates;
 		aiVector3D intersectionPoint;
 		aiVector2D uvCoordinates;
-		bool intersects{ false };
-		// Iterate through meshes and faces and call rayTriangleIntersection()
+		// Iterate through meshes and faces and check for  ray-triangle intersections
 		for (unsigned int currentMesh = 0; currentMesh < this->scene->mNumMeshes; currentMesh++)
 		{
 			aiString name = this->scene->mMeshes[currentMesh]->mName;
@@ -431,6 +438,8 @@ namespace raytracing
 				{
 					nearestIntersectedTriangle.push_back(&(mesh->mVertices[face->mIndices[currentIndex]]));
 					triangleVertexNormals.push_back(&(mesh->mNormals[face->mIndices[currentIndex]]));
+					// Always use first texture channel
+					textureCoordinates.push_back(&(mesh->mTextureCoords[0][face->mIndices[currentIndex]]));
 				}
 				// TODO: Collect all intersections and push them back into a collection
 				// Evaluate nearest intersection point and return
@@ -441,19 +450,30 @@ namespace raytracing
 					return true;
 				}
 				float distanceToIntersectionPoint = (intersectionPoint - ray.pos).Length();
-				if (intersectsCurrentTriangle && (distanceToIntersectionPoint < leastDistanceIntersection))
+				if (intersectsCurrentTriangle && (distanceToIntersectionPoint < outIntersection.intersectionDistance))
 				{
-					leastDistanceIntersection = distanceToIntersectionPoint;
+					outIntersection.intersectionDistance = distanceToIntersectionPoint;
 					outIntersection.hitMesh = mesh;
 					outIntersection.hitTriangle = nearestIntersectedTriangle;
 					outIntersection.hitPoint = intersectionPoint;
 					outIntersection.ray = ray;
 					outIntersection.uv = uvCoordinates;
+					// Always use first texture channel
+					if (mesh->HasTextureCoords(0))
+					{
+						outIntersection.uvTextureCoords =
+							(1 - uvCoordinates.x - uvCoordinates.y) *
+							*(textureCoordinates[0]) + uvCoordinates.x *
+							*(textureCoordinates[1]) + uvCoordinates.y *
+							*(textureCoordinates[2]);
+					}
 					outIntersection.vertexNormals = triangleVertexNormals;
+					outIntersection.textureCoordinates = textureCoordinates;
 					intersects = true;
 				}
 				nearestIntersectedTriangle.clear();
 				triangleVertexNormals.clear();
+				textureCoordinates.clear();
 			}
 		}
 		return intersects;

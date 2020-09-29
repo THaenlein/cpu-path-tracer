@@ -98,8 +98,10 @@ namespace raytracing
 			hitPoint(),
 			hitTriangle(),
 			vertexNormals(),
+			textureCoordinates(),
 			intersectionDistance((std::numeric_limits<float>::max)()), // Paranthesize to prevent call of macro "max"
 			uv(),
+			uvTextureCoords(),
 			index(0),
 			ray()
 		{}
@@ -111,10 +113,14 @@ namespace raytracing
 		std::vector<aiVector3D*> hitTriangle;
 		
 		std::vector<aiVector3D*> vertexNormals;
+		
+		std::vector<aiVector3D*> textureCoordinates;
 
 		float intersectionDistance;
 
 		aiVector2D uv;
+		
+		aiVector3D uvTextureCoords;
 
 		uint32_t index;
 
