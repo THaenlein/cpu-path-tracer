@@ -7,7 +7,7 @@
 /*--------------------------------< Includes >-------------------------------------------*/
 #include <cstdint>
 
-#include "../exceptions.hpp"
+#include "exceptions.hpp"
 
 namespace raytracing
 {

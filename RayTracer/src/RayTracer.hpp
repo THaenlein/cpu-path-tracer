@@ -55,14 +55,16 @@ namespace raytracing
 
 		void renderMultiThreaded();
 
-		void renderSingleThreaded();
-
-		std::thread renderThread(std::atomic<uint8_t>& threadsTerminated)
+		std::thread createRenderThread(std::atomic<uint8_t>& threadsTerminated)
 		{
-			return std::thread([&] { renderMultiThreaded(); threadsTerminated++; });
+			return std::thread([&] 
+			{ 
+				renderMultiThreaded(); 
+				threadsTerminated++; 
+			});
 		}
 
-		inline Uint24* getViewport()
+		inline const Uint24* getViewport()
 		{
 			return this->pixels;
 		}
@@ -79,16 +81,17 @@ namespace raytracing
 
 		void RayTracer::renderAntiAliased(RenderJob& renderJob);
 
-		bool rayTriangleIntersection(const aiRay& ray, std::vector<aiVector3D*> vecTriangle, aiVector3D* outIntersectionPoint, aiVector2D* outUV);
+		bool rayTriangleIntersection(
+			const aiRay& ray,
+			std::vector<aiVector3D*> vecTriangle,
+			aiVector3D* outIntersectionPoint,
+			aiVector2D* outUV);
 
 		aiColor3D sampleLight(IntersectionInformation& intersectionInformation, uint8_t rayDepth);
 
 		aiColor3D shadePixel(IntersectionInformation& intersectionInformation, uint8_t& rayDepth);
 
-		bool calculateIntersection(
-			aiRay& ray,
-
-			IntersectionInformation& outIntersection);
+		bool calculateIntersection(aiRay& ray, IntersectionInformation& outIntersection);
 
 		aiColor3D traceRay(aiRay& ray, uint8_t rayDepth = 0);
 		
@@ -106,7 +109,7 @@ namespace raytracing
 
 		aiVector3D uniformSampleHemisphere(const float r1, const float r2);
 
-		float getRandomFloat(unsigned int lowerBound, unsigned int upperBound);
+		float getRandomFloat(float lowerBound, float upperBound);
 
 		/*--------------------------------< Public members >------------------------------------*/
 	public:

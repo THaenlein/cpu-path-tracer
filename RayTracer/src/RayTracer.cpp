@@ -74,11 +74,6 @@ namespace raytracing
 		}
 	}
 
-	void RayTracer::renderSingleThreaded()
-	{
-		this->render();
-	}
-
 	/*--------------------------------< Protected members >----------------------------------*/
 		
 	/*--------------------------------< Private members >------------------------------------*/
@@ -152,7 +147,7 @@ namespace raytracing
 						// DOF
 #ifdef DEPTH_OF_FIELD
 						// Uniform random point on the aperture
-						float angle = getRandomFloat(0.f, 1.f) * 2.0f * M_PI;
+						float angle = getRandomFloat(0.f, 1.f) * 2.0f * static_cast<float>(M_PI);
 						float radius = sqrt(getRandomFloat(0.f, 1.f));
 						aiVector2D offset = aiVector2D(cos(angle), sin(angle)) * radius * this->renderSettings.getAperture();
 						
@@ -183,7 +178,11 @@ namespace raytracing
 	}
 
 
-	bool RayTracer::rayTriangleIntersection(const aiRay& ray, std::vector<aiVector3D*> vecTriangle, aiVector3D* outIntersectionPoint, aiVector2D* outUV)
+	bool RayTracer::rayTriangleIntersection(
+		const aiRay& ray,
+		std::vector<aiVector3D*> vecTriangle,
+		aiVector3D* outIntersectionPoint,
+		aiVector2D* outUV)
 	{
 		const float EPSILON = 1e-6f;
 		// Invariant: A face always consists of 3 vertices
@@ -251,7 +250,7 @@ namespace raytracing
 			*intersectionInformation.vertexNormals[2];
 		smoothNormal.Normalize();
 
-		const float pdf = 1 / (2 * M_PI);
+		const float pdf = 1.f / (2.f * static_cast<float>(M_PI));
 
 		// Return immediately if hit object is emissive
 		if (aiColor3D{0.f, 0.f, 0.f} < materialColorEmission)
@@ -260,7 +259,7 @@ namespace raytracing
 		}
 
 		// Russian roulette
-		brdf = materialColorDiffuse / M_PI;
+		brdf = materialColorDiffuse / static_cast<float>(M_PI);
 		const float probability = 
 			(materialColorDiffuse.r > materialColorDiffuse.g) && (materialColorDiffuse.r>materialColorDiffuse.b) ? 
 				materialColorDiffuse.r : materialColorDiffuse.g > materialColorDiffuse.b ? 
@@ -299,7 +298,7 @@ namespace raytracing
 				newRayDirection.y + (ry - .5f ) * roughness,
 				newRayDirection.z + (rz - .5f ) * roughness);
 
-			brdf = colorReflective / M_PI;
+			brdf = colorReflective / static_cast<float>(M_PI);
 			newRayPosition = intersectionInformation.hitPoint + (newRayDirection * this->renderSettings.getBias());
 			sampleRay = { newRayPosition, newRayDirection, RayType::REFLECTION };
 		}
@@ -674,18 +673,18 @@ namespace raytracing
 		// cos(theta) = r1 = y
 		// cos^2(theta) + sin^2(theta) = 1 -> sin(theta) = srtf(1 - cos^2(theta))
 		
-		float sinTheta = sqrtf(1 - r1 * r1);
-		float phi = 2 * M_PI * r2;
+		float sinTheta = sqrtf(1.f - r1 * r1);
+		float phi = 2.f * static_cast<float>(M_PI) * r2;
 		float x = sinTheta * cosf(phi);
 		float z = sinTheta * sinf(phi);
 
 		return aiVector3D(x, r1, z);
 	}
 
-	float RayTracer::getRandomFloat(unsigned int lowerBound, unsigned int upperBound)
+	float RayTracer::getRandomFloat(float lowerBound, float upperBound)
 	{
 		static std::default_random_engine randomEngine;
-		static std::uniform_real_distribution<> uniformDistribution(lowerBound, upperBound);
+		static std::uniform_real_distribution<float> uniformDistribution(lowerBound, upperBound);
 		return uniformDistribution(randomEngine);
 	}
 

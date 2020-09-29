@@ -29,8 +29,8 @@ namespace raytracing
 	/*--------------------------------< Public methods >------------------------------------*/
 	public:
 
-		Settings(uint8_t aa = 8, uint8_t maxDepth = 3, uint8_t samples = 1, float offset = 0.001f, const float aperture = 0.f, const float fDist = 0.f) :
-			antiAliasingResolution(aa), maxRayDepth(maxDepth), maxSamples(samples), bias(offset), apertureRadius(aperture), focalDistance(fDist)
+		Settings(uint8_t aa = 8, uint8_t maxDepth = 3, float offset = 0.001f, const float aperture = 0.f, const float fDist = 0.f) :
+			antiAliasingResolution(aa), maxRayDepth(maxDepth), bias(offset), apertureRadius(aperture), focalDistance(fDist)
 		{};
 
 		inline uint8_t getAAResolution() const
@@ -41,11 +41,6 @@ namespace raytracing
 		inline uint8_t getMaxRayDepth() const
 		{
 			return this->maxRayDepth;
-		}
-
-		inline uint8_t getMaxSamples() const
-		{
-			return this->maxSamples;
 		}
 
 		inline float getBias() const
@@ -83,8 +78,6 @@ namespace raytracing
 		const uint8_t antiAliasingResolution;
 
 		const uint8_t maxRayDepth;
-
-		const uint16_t maxSamples;
 		
 		const float bias;
 

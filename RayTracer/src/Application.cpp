@@ -112,17 +112,7 @@ namespace raytracing
 		SDL_Quit();
 	}
 
-	void Application::updateRender(Uint24* pixels)
-	{
-		int result = SDL_UpdateTexture(this->screenTexture.get(), NULL, pixels, this->WINDOW_DIMENSION_X * sizeof(Uint24));
-		if (result)
-		{
-			throw TextureUpdate(SDL_GetError());
-		}
-		this->render(this->screenTexture.get());
-	}
-
-	void Application::handleEvents(Uint24* viewport, std::vector<std::thread>& threadPool, std::atomic<uint8_t>& threadsTerminated)
+	void Application::handleEvents(const Uint24* const viewport, std::vector<std::thread>& threadPool, std::atomic<uint8_t>& threadsTerminated)
 	{
 		SDL_Event sdlEvent;
 		bool doneRendering{ false };
@@ -182,5 +172,15 @@ namespace raytracing
 	/*--------------------------------< Protected members >----------------------------------*/
 
 	/*--------------------------------< Private members >------------------------------------*/
+
+	void Application::updateRender(const Uint24* pixels)
+	{
+		int result = SDL_UpdateTexture(this->screenTexture.get(), NULL, pixels, this->WINDOW_DIMENSION_X * sizeof(Uint24));
+		if (result)
+		{
+			throw TextureUpdate(SDL_GetError());
+		}
+		this->render(this->screenTexture.get());
+	}
 
 } // end of namespace raytracing

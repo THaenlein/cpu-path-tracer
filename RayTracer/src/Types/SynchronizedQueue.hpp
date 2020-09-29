@@ -8,8 +8,7 @@
 #include <queue>
 #include <mutex>
 
-// TODO: Fix path
-#include "..\exceptions.hpp"
+#include "exceptions.hpp"
 
 namespace raytracing
 {

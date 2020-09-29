@@ -125,7 +125,7 @@ int main(int argc, char* argv[])
 	}
 #endif
 
-	// Kd-Tree
+	// Create Kd-Tree
 	std::vector<raytracing::KdTriangle> triangleMeshCollection;
 	for (unsigned int currentMesh = 0; currentMesh < scene->mNumMeshes; currentMesh++)
 	{
@@ -143,7 +143,7 @@ int main(int argc, char* argv[])
 	}
 	std::unique_ptr<raytracing::KdNode> kdTree(raytracing::KdNode::buildTree(triangleMeshCollection));
 
-	raytracing::Settings renderSettings(8, 3, 1, 0.001f, 0.02f, 1.71333f);
+	raytracing::Settings renderSettings(8, 3, 0.001f, 0.02f, 1.71333f);
 	raytracing::RayTracer rayTracer(app, scene, renderSettings, std::move(kdTree));
 	
 	try
@@ -170,7 +170,7 @@ int main(int argc, char* argv[])
 	raytracing::Timer::getInstance().start();
 	for (unsigned int i = 0; i < numberOfThreads; i++)
 	{
-		threadPool.push_back(rayTracer.renderThread(threadsTerminated));
+		threadPool.push_back(rayTracer.createRenderThread(threadsTerminated));
 	}
 	app.handleEvents(rayTracer.getViewport(), threadPool, threadsTerminated);
 

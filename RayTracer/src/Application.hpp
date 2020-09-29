@@ -61,15 +61,15 @@ namespace raytracing
 
 		void cleanUp();
 
-		void updateRender(Uint24* pixels);
-
-		void handleEvents(Uint24* viewport, std::vector<std::thread>& threadPool, std::atomic<uint8_t>& threadsTerminated);
+		void handleEvents(const Uint24* viewport, std::vector<std::thread>& threadPool, std::atomic<uint8_t>& threadsTerminated);
 
 	/*--------------------------------< Protected methods >---------------------------------*/
 	protected:
 	
 	/*--------------------------------< Private methods >-----------------------------------*/
 	private:
+
+		void updateRender(const Uint24* pixels);
 
 	/*--------------------------------< Public members >------------------------------------*/
 	public:

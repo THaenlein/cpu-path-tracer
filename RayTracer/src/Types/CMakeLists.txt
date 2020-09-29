@@ -21,6 +21,4 @@ LIST(APPEND SOURCEFILES
   "${CMAKE_CURRENT_LIST_DIR}/BoundingVolume.cpp"
   "${CMAKE_CURRENT_LIST_DIR}/KdNode.cpp"
   "${CMAKE_CURRENT_LIST_DIR}/KdTree.cpp"
-  "${CMAKE_CURRENT_LIST_DIR}/RenderJob.cpp"
-  "${CMAKE_CURRENT_LIST_DIR}/SynchronizedQueue.cpp"
 )
