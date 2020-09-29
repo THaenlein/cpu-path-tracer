@@ -141,7 +141,7 @@ namespace raytracing
 					nearestIntersectedTriangle.push_back(&(associatedMesh->mVertices[currentFace->mIndices[currentIndex]]));
 					triangleVertexNormals.push_back(&(associatedMesh->mNormals[currentFace->mIndices[currentIndex]]));
 				}
-				bool intersectsCurrentTriangle = rayTriangleIntersection(ray, nearestIntersectedTriangle, &intersectionPoint, &uvCoordinates);
+				bool intersectsCurrentTriangle = mathUtility::rayTriangleIntersection(ray, nearestIntersectedTriangle, &intersectionPoint, &uvCoordinates);
 				// We can immediately return if the cast ray is a shadow ray
 				if (intersectsCurrentTriangle && (ray.type == RayType::SHADOW))
 				{

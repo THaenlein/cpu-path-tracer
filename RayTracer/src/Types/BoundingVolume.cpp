@@ -5,12 +5,16 @@
 /*--------------------------------< Includes >-------------------------------------------*/
 #include "BoundingVolume.hpp"
 
+#include "Utility\mathUtility.hpp"
+
 
 namespace raytracing
 {
 	/*--------------------------------< Defines >--------------------------------------------*/
 
 	/*--------------------------------< Typedefs >-------------------------------------------*/
+
+	using namespace utility;
 
 	/*--------------------------------< Constants >------------------------------------------*/
 		
@@ -54,7 +58,7 @@ namespace raytracing
 						triangleVertexNormals.push_back(&(intersectedMesh->mNormals[face->mIndices[currentIndex]]));
 					}
 					// Evaluate nearest intersection point and return
-					bool intersectsCurrentTriangle = this->rayTriangleIntersection(ray, nearestIntersectedTriangle, &intersectionPoint, &uvCoordinates);
+					bool intersectsCurrentTriangle = mathUtility::rayTriangleIntersection(ray, nearestIntersectedTriangle, &intersectionPoint, &uvCoordinates);
 					// We can immediately return if the cast ray is a shadow ray
 					if (intersectsCurrentTriangle && (ray.type == RayType::SHADOW))
 					{

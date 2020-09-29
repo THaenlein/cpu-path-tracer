@@ -9,6 +9,7 @@
 
 #include "RayTracer.hpp"
 #include "exceptions.hpp"
+#include "Utility\mathUtility.hpp"
 
 
 namespace raytracing
@@ -16,6 +17,8 @@ namespace raytracing
 	/*--------------------------------< Defines >--------------------------------------------*/
 
 	/*--------------------------------< Typedefs >-------------------------------------------*/
+
+	using namespace utility;
 
 	/*--------------------------------< Constants >------------------------------------------*/
 		
@@ -146,22 +149,10 @@ namespace raytracing
 
 						// DOF
 #ifdef DEPTH_OF_FIELD
-						// Uniform random point on the aperture
-						float angle = getRandomFloat(0.f, 1.f) * 2.0f * static_cast<float>(M_PI);
-						float radius = sqrt(getRandomFloat(0.f, 1.f));
-						aiVector2D offset = aiVector2D(cos(angle), sin(angle)) * radius * this->renderSettings.getAperture();
-						
-						// Find to intersection point with the focal plane
-						aiVector3D focalPoint(cameraPosition + this->renderSettings.getFocalDistance() * currentRay.dir);
-						aiVector3D focalRayDir(focalPoint - (cameraPosition + (offset.x + offset.y)));
-						focalRayDir.Normalize();
-
-						// Calculate position of focal ray
-						aiVector3D focalRayPos(cameraPosition);
-						focalRayPos = focalRayPos + (offset.x + offset.y);
-
-						currentRay.pos = focalRayPos;
-						currentRay.dir = focalRayDir;
+						mathUtility::calculateDepthOfFieldRay(
+							&currentRay, 
+							this->renderSettings.getAperture(), 
+							this->renderSettings.getFocalDistance());
 #endif
 
 #if PATH_TRACE
@@ -174,57 +165,6 @@ namespace raytracing
 				pixelAverage = pixelAverage * static_cast<ai_real>(1.f/std::pow(aa, 2U));
 				this->pixels[currentPixel] = pixelAverage;
 			}
-		}
-	}
-
-
-	bool RayTracer::rayTriangleIntersection(
-		const aiRay& ray,
-		std::vector<aiVector3D*> vecTriangle,
-		aiVector3D* outIntersectionPoint,
-		aiVector2D* outUV)
-	{
-		const float EPSILON = 1e-6f;
-		// Invariant: A face always consists of 3 vertices
-		// See: aiProcess_Triangulate flag in scene import
-		aiVector3D* vertex0 = vecTriangle[0];
-		aiVector3D* vertex1 = vecTriangle[1];
-		aiVector3D* vertex2 = vecTriangle[2];
-		aiVector3D edge1, edge2, pVec, tVec, qVec;
-		float determinant, invDet, u, v;
-		edge1 = *vertex1 - *vertex0;
-		edge2 = *vertex2 - *vertex0;
-		pVec = ray.dir ^ edge2;
-		determinant = edge1 * pVec;
-		if (determinant > -EPSILON && determinant < EPSILON)
-		{
-			return false; // This ray is parallel to this triangle.
-		}
-		invDet = 1.f / determinant;
-		tVec = ray.pos - *vertex0;
-		u = invDet * tVec * pVec;
-		if (u < 0.0 || u > 1.0)
-		{
-			return false;
-		}
-		qVec = tVec ^ edge1;
-		v = invDet * ray.dir * qVec;
-		if (v < 0.0 || u + v > 1.0)
-		{
-			return false;
-		}
-		// At this stage we can compute t to find out where the intersection point is on the line.
-		float t = invDet * edge2 * qVec;
-		if (t > EPSILON) // ray intersection
-		{
-			*outIntersectionPoint = ray.pos + ray.dir * t;
-			outUV->x = u;
-			outUV->y = v;
-			return true;
-		}
-		else // This means that there is a line intersection but not a ray intersection.
-		{
-			return false;
 		}
 	}
 
@@ -250,7 +190,7 @@ namespace raytracing
 			*intersectionInformation.vertexNormals[2];
 		smoothNormal.Normalize();
 
-		const float pdf = 1.f / (2.f * static_cast<float>(M_PI));
+		const float pdf = 1.f / (2.f * PI);
 
 		// Return immediately if hit object is emissive
 		if (aiColor3D{0.f, 0.f, 0.f} < materialColorEmission)
@@ -259,22 +199,21 @@ namespace raytracing
 		}
 
 		// Russian roulette
-		brdf = materialColorDiffuse / static_cast<float>(M_PI);
+		brdf = materialColorDiffuse / PI;
 		const float probability = 
 			(materialColorDiffuse.r > materialColorDiffuse.g) && (materialColorDiffuse.r>materialColorDiffuse.b) ? 
 				materialColorDiffuse.r : materialColorDiffuse.g > materialColorDiffuse.b ? 
 					materialColorDiffuse.g : materialColorDiffuse.b;
-		float random = getRandomFloat(0.f, 1.f);
 		if ((rayDepth + 1) > 5)
 		{
-			if (random < (probability * 0.9f))
-			{
-				brdf = brdf * (0.9f / probability);
-			}
-			else
+			if (mathUtility::russianRoulette(probability, rayDepth))
 			{
 				// Russian roulette takes effect!
 				return materialColorEmission;
+			}
+			else
+			{
+				brdf = brdf * (0.9f / probability);
 			}
 		}
 
@@ -287,30 +226,30 @@ namespace raytracing
 		{
 			// Perfect specular reflection
 			const float roughness = 0.f;
-			const float rx = getRandomFloat(0.f, 1.f);
-			const float ry = getRandomFloat(0.f, 1.f);
-			const float rz = getRandomFloat(0.f, 1.f);
+			const float rx = mathUtility::getRandomFloat(0.f, 1.f);
+			const float ry = mathUtility::getRandomFloat(0.f, 1.f);
+			const float rz = mathUtility::getRandomFloat(0.f, 1.f);
 
 			// Calculate reflection direction
-			newRayDirection = calculateReflectionDirection(intersectionInformation.ray.dir, smoothNormal);
+			newRayDirection = mathUtility::calculateReflectionDirection(intersectionInformation.ray.dir, smoothNormal);
 			newRayDirection = aiVector3D(
 				newRayDirection.x + (rx - .5f ) * roughness,
 				newRayDirection.y + (ry - .5f ) * roughness,
 				newRayDirection.z + (rz - .5f ) * roughness);
 
-			brdf = colorReflective / static_cast<float>(M_PI);
+			brdf = colorReflective / PI;
 			newRayPosition = intersectionInformation.hitPoint + (newRayDirection * this->renderSettings.getBias());
 			sampleRay = { newRayPosition, newRayDirection, RayType::REFLECTION };
 		}
 		else
 		{
 			// Perfect diffuse reflection
-			const float r1 = getRandomFloat(0.f, 1.f);
-			const float r2 = getRandomFloat(0.f, 1.f);
-			newRayDirection = uniformSampleHemisphere(r1, r2);
-			createCoordinateSystem(smoothNormal, Nt, Nb);
+			const float r1 = mathUtility::getRandomFloat(0.f, 1.f);
+			const float r2 = mathUtility::getRandomFloat(0.f, 1.f);
+			newRayDirection = mathUtility::uniformSampleHemisphere(r1, r2);
+			mathUtility::createCoordinateSystem(smoothNormal, Nt, Nb);
 
-			// step 3: transform sample from world space to shaded point local coordinate system
+			// Transform sample from world space to shaded point local coordinate system
 			aiMatrix3x3 toLocalMatrix
 			{ Nt.x, Nt.y, Nt.z,
 				smoothNormal.x, smoothNormal.y, smoothNormal.z,
@@ -379,14 +318,14 @@ namespace raytracing
 				// Surface transmits light. Cast refraction ray and calculate color
 				const ai_real EPSILON = 1e-3f;
 				aiColor3D refractionColor{}, reflectionColor{};
-				ai_real fresnelResult = fresnel(intersectionInformation.ray.dir, smoothNormal, refractionIndex);
+				ai_real fresnelResult = mathUtility::fresnel(intersectionInformation.ray.dir, smoothNormal, refractionIndex);
 				bool outside = (intersectionInformation.ray.dir * smoothNormal) < 0;
 				aiVector3D bias = this->renderSettings.getBias() * smoothNormal;
 
 				if (fresnelResult < 1.f)
 				{
 					// Ignore total internal reflection
-					aiVector3D refractionDirection = calculateRefractionDirection(intersectionInformation.ray.dir, smoothNormal, refractionIndex);
+					aiVector3D refractionDirection = mathUtility::calculateRefractionDirection(intersectionInformation.ray.dir, smoothNormal, refractionIndex);
 					refractionDirection.Normalize();
 					aiVector3D refractionPoint = outside ? intersectionInformation.hitPoint - bias : intersectionInformation.hitPoint + bias;
 					aiRay refractionRay(refractionPoint, refractionDirection);
@@ -396,7 +335,7 @@ namespace raytracing
 				if ((fresnelResult > EPSILON) && (reflectivity > 0.f))
 				{
 					// Surface also is reflective. Cast reflection ray and blend color with fresnel
-					aiVector3D reflectionDirection = calculateReflectionDirection(intersectionInformation.ray.dir, smoothNormal);
+					aiVector3D reflectionDirection = mathUtility::calculateReflectionDirection(intersectionInformation.ray.dir, smoothNormal);
 					reflectionDirection.Normalize();
 					aiVector3D reflectionPoint = outside ? intersectionInformation.ray.pos + bias : intersectionInformation.ray.pos - bias;
 					aiRay reflectionRay(reflectionPoint, reflectionDirection);
@@ -409,7 +348,7 @@ namespace raytracing
 			else if (reflectivity > 0.f)
 			{
 				// Surface only is reflective. Cast reflection ray and calculate color at reflection
-				aiVector3D reflectionDirection = calculateReflectionDirection(intersectionInformation.ray.dir, smoothNormal);
+				aiVector3D reflectionDirection = mathUtility::calculateReflectionDirection(intersectionInformation.ray.dir, smoothNormal);
 				aiVector3D reflectionPoint = intersectionInformation.hitPoint + (smoothNormal * this->renderSettings.getBias());
 				aiRay reflectionRay(reflectionPoint, reflectionDirection);
 				intersectionColor += traceRay(reflectionRay, rayDepth + 1) * reflectivity;
@@ -495,7 +434,7 @@ namespace raytracing
 				}
 				// TODO: Collect all intersections and push them back into a collection
 				// Evaluate nearest intersection point and return
-				bool intersectsCurrentTriangle = this->rayTriangleIntersection(ray, nearestIntersectedTriangle, &intersectionPoint, &uvCoordinates);
+				bool intersectsCurrentTriangle = mathUtility::rayTriangleIntersection(ray, nearestIntersectedTriangle, &intersectionPoint, &uvCoordinates);
 				// We can immediately return if the cast ray is a shadow ray
 				if (ray.type == RayType::SHADOW)
 				{
@@ -577,115 +516,14 @@ namespace raytracing
 		{
 			for (uint16_t numberOfTileX = 0; numberOfTileX < this->renderWidth / TILE_SIZE; numberOfTileX++)
 			{
-				RenderJob job(numberOfTileX*TILE_SIZE, numberOfTileY*TILE_SIZE,
-					numberOfTileX*TILE_SIZE + this->TILE_SIZE, numberOfTileY*TILE_SIZE + this->TILE_SIZE);
+				RenderJob job(
+					numberOfTileX*TILE_SIZE,
+					numberOfTileY*TILE_SIZE,
+					numberOfTileX*TILE_SIZE + this->TILE_SIZE,
+					numberOfTileY*TILE_SIZE + this->TILE_SIZE);
 				this->renderJobs.pushBack(job);
 			}
 		}
-	}
-
-	//     I->       N         R->
-	//      \        |        /
-	//       \       |       /
-	//        \      |      /
-	//         \     |     /
-	//          \    |    /
-	//           \   |   /
-	//            \  |  /
-	//             \ | /
-	//   ___________\|/___________
-	//          G R O U N D 
-	aiVector3D RayTracer::calculateReflectionDirection(const aiVector3D& incidenceVector, const aiVector3D& incidenceNormal)
-	{
-		return { incidenceVector - 2 * (incidenceVector * incidenceNormal) * incidenceNormal };
-	}
-
-	aiVector3D RayTracer::calculateRefractionDirection(const aiVector3D& incidenceVector, const aiVector3D& incidenceNormal, const ai_real ior)
-	{
-		ai_real cosIncidence = std::clamp(incidenceVector * incidenceNormal, -1.0f, 1.0f);
-		ai_real etaIncidence = 1.f;
-		ai_real etaTransmission = ior;
-		aiVector3D nRefraction(incidenceNormal);
-		if (cosIncidence < 0.f)
-		{
-			// Inside medium
-			cosIncidence = -cosIncidence;
-		}
-		else
-		{
-			// Outside medium
-			std::swap(etaIncidence, etaTransmission);
-			nRefraction = -incidenceNormal;
-		}
-		ai_real eta = etaIncidence / etaTransmission;
-		ai_real criticalAngle = 1.f - eta * eta * (1.f - cosIncidence * cosIncidence);
-		if (criticalAngle < 0.f)
-		{
-			return { 0.f, 0.f, 0.f};
-		}
-		else
-		{
-			return { eta * incidenceVector + (eta * cosIncidence - sqrtf(criticalAngle)) * nRefraction };
-		}
-	}
-
-	ai_real RayTracer::fresnel(const aiVector3D& incidenceVector, const aiVector3D& incidenceNormal, const ai_real ior)
-	{
-		ai_real cosIncidence = std::clamp(incidenceVector * incidenceNormal, -1.f, 1.f);
-		ai_real etaIncidence = 1.f;
-		ai_real etaTransmission = ior;
-		if (cosIncidence > 0.f) { std::swap(etaIncidence, etaTransmission); }
-		// Snell's law
-		ai_real sinTransmission = etaIncidence / etaTransmission * sqrtf(std::max(0.f, 1.f - cosIncidence * cosIncidence));
-		
-		if (sinTransmission >= 1.f) 
-		{
-			// Total internal reflection
-			return 1.f;
-		}
-		else 
-		{
-			ai_real cosTransmission = sqrtf(std::max(0.f, 1.f - sinTransmission * sinTransmission));
-			cosIncidence = fabsf(cosIncidence);
-			ai_real Rs = ((etaTransmission * cosIncidence) - (etaIncidence * cosTransmission)) / ((etaTransmission * cosIncidence) + (etaIncidence * cosTransmission));
-			ai_real Rp = ((etaIncidence * cosIncidence) - (etaTransmission * cosTransmission)) / ((etaIncidence * cosIncidence) + (etaTransmission * cosTransmission));
-			ai_real reflectedLight = (Rs * Rs + Rp * Rp) / 2.f;
-			return reflectedLight;
-		}
-	}
-
-	void RayTracer::createCoordinateSystem(const aiVector3D& N, aiVector3D& Nt, aiVector3D& Nb)
-	{
-		if (std::fabs(N.x) > std::fabs(N.y))
-		{
-			Nt = aiVector3D(N.z, 0, -N.x) / sqrtf(N.x * N.x + N.z * N.z);
-		}
-		else
-		{
-			Nt = aiVector3D(0, -N.z, N.y) / sqrtf(N.y * N.y + N.z * N.z);
-		}
-		
-		Nb = N ^ Nt;
-	}
-
-	aiVector3D RayTracer::uniformSampleHemisphere(const float r1, const float r2)
-	{
-		// cos(theta) = r1 = y
-		// cos^2(theta) + sin^2(theta) = 1 -> sin(theta) = srtf(1 - cos^2(theta))
-		
-		float sinTheta = sqrtf(1.f - r1 * r1);
-		float phi = 2.f * static_cast<float>(M_PI) * r2;
-		float x = sinTheta * cosf(phi);
-		float z = sinTheta * sinf(phi);
-
-		return aiVector3D(x, r1, z);
-	}
-
-	float RayTracer::getRandomFloat(float lowerBound, float upperBound)
-	{
-		static std::default_random_engine randomEngine;
-		static std::uniform_real_distribution<float> uniformDistribution(lowerBound, upperBound);
-		return uniformDistribution(randomEngine);
 	}
 
 } // end of namespace raytracing
