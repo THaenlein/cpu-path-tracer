@@ -3,6 +3,7 @@
 
 LIST(APPEND HEADERFILES
   "${CMAKE_CURRENT_LIST_DIR}/CheckerTexture.hpp"
+  "${CMAKE_CURRENT_LIST_DIR}/ImageTexture.hpp"
   "${CMAKE_CURRENT_LIST_DIR}/Texture.hpp"  
 )
 
@@ -11,4 +12,5 @@ LIST(APPEND HEADERFILES
 
 LIST(APPEND SOURCEFILES
   "${CMAKE_CURRENT_LIST_DIR}/CheckerTexture.cpp"
+  "${CMAKE_CURRENT_LIST_DIR}/ImageTexture.cpp"
 )

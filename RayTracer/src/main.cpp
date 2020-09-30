@@ -148,7 +148,7 @@ int main(int argc, char* argv[])
 	
 	try
 	{
-		rayTracer.initialize();
+		rayTracer.initialize("F:/Dokumente/GitHub/ray-tracer/RayTracer/res");
 	}
 	catch(std::exception& exception)
 	{

@@ -6,12 +6,20 @@
 #include <vector>
 #include <math.h>
 #include <random>
+#include <experimental\filesystem>
+
+#define STB_IMAGE_IMPLEMENTATION
+#include "stb_image.h"
+
+#define STB_DEFINE
+#include "stb.h"
 
 #include "RayTracer.hpp"
 #include "exceptions.hpp"
 #include "Utility\mathUtility.hpp"
 
 #include "Textures\CheckerTexture.hpp"
+#include "Textures\ImageTexture.hpp"
 
 
 namespace raytracing
@@ -27,7 +35,7 @@ namespace raytracing
 	/*--------------------------------< Public members >-------------------------------------*/
 
 
-	void RayTracer::initialize()
+	void RayTracer::initialize(const std::string sceneDirPath)
 	{
 		this->renderWidth = this->application.getRenderWidth();
 		this->renderHeight = this->application.getRenderHeight();
@@ -62,6 +70,45 @@ namespace raytracing
 		std::srand(static_cast<unsigned int>(time(0)));
 
 		this->pixels = new Uint24[renderWidth * renderHeight];
+
+
+		// Iterate over materials and load texture if it has one
+		for (unsigned int currentMaterial = 0; currentMaterial < scene->mNumMaterials; currentMaterial++)
+		{
+			aiMaterial* material = scene->mMaterials[currentMaterial];
+			unsigned int diffuseTextureCount = material->GetTextureCount(aiTextureType::aiTextureType_DIFFUSE);
+			if (diffuseTextureCount > 0)
+			{
+				aiString diffuseTexturePath;
+				aiTextureMapping diffuseTextureMapping;
+				if (material->GetTexture(aiTextureType_DIFFUSE, 0, &diffuseTexturePath, &diffuseTextureMapping) == aiReturn_SUCCESS)
+				{
+					if (diffuseTextureMapping != aiTextureMapping::aiTextureMapping_UV)
+					{
+						// Ignore anything other than UV-Mapping
+						continue;
+					}
+
+					int width, height, components;
+					std::experimental::filesystem::path texturePath = sceneDirPath;
+					texturePath /= diffuseTexturePath.C_Str();
+
+					// Load image from file
+					uint8_t* image = stbi_load(texturePath.string().c_str(), &width, &height, &components, 0);
+
+					if (!image)
+					{
+						SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "Tried to load image from file: %s", texturePath.string().c_str());
+						throw Renderer("Error on image texture load!");
+					}
+					else
+					{
+						SDL_LogInfo(SDL_LOG_CATEGORY_APPLICATION, "Image texture successfully loaded: %s", texturePath.string().c_str());
+						textureMapping[material] = new ImageTexture(image, width, height);
+					}
+				}
+			}
+		}
 	}
 
 

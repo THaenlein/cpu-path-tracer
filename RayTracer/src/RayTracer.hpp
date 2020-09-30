@@ -50,9 +50,14 @@ namespace raytracing
 		~RayTracer()
 		{
 			delete[] this->pixels;
+			for (std::pair<aiMaterial*, Texture*> mapEntry : this->textureMapping)
+			{
+				// Free memory used for textures only. Materials are freed by AssimpImporter automatically.
+				delete mapEntry.second;
+			}
 		}
 
-		void initialize();
+		void initialize(const std::string sceneFilePath);
 
 		void renderMultiThreaded();
 
