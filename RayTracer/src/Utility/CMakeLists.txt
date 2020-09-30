@@ -3,6 +3,7 @@
 
 LIST(APPEND HEADERFILES
   "${CMAKE_CURRENT_LIST_DIR}/mathUtility.hpp"
+  "${CMAKE_CURRENT_LIST_DIR}/materialUtility.hpp"
 )
 
 ###############################################################################
@@ -10,4 +11,5 @@ LIST(APPEND HEADERFILES
 
 LIST(APPEND SOURCEFILES
   "${CMAKE_CURRENT_LIST_DIR}/mathUtility.cpp"
+  "${CMAKE_CURRENT_LIST_DIR}/materialUtility.cpp"
 )

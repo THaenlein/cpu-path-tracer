@@ -1,13 +1,22 @@
 /*
- * ImageTexture.hpp
+ * mathUtility.hpp
  */
 
 #pragma once
 
 /*--------------------------------< Includes >-------------------------------------------*/
-#include "Texture.hpp"
+#include <vector>
+#include <random>
+#include <unordered_map>
 
-namespace raytracing
+#include "assimp\types.h"
+#include "assimp\scene.h"
+
+#include "raytracing.hpp"
+#include "Types\Material.hpp"
+#include "Textures\Texture.hpp"
+
+namespace utility
 {
 	/*--------------------------------< Defines >-------------------------------------------*/
 
@@ -15,24 +24,16 @@ namespace raytracing
 
 	/*--------------------------------< Constants >-----------------------------------------*/
 
-	class ImageTexture : public Texture
+	class materialUtility
 	{
 	/*--------------------------------< Public methods >------------------------------------*/
 	public:
 
-		ImageTexture(uint8_t* data, int dataWidth, int dataHeight) :
-			texture(data),
-			width(dataWidth),
-			height(dataHeight)
-		{};
+		static void createMaterialMapping(
+			const std::string textureDirPath, 
+			const aiScene* scene,
+			std::unordered_map<aiMaterial*, std::unique_ptr<raytracing::Material>>* outTextureMapping);
 
-		~ImageTexture()
-		{
-			delete[] this->texture;
-		}
-
-		virtual aiColor3D getColor(const aiVector3D& uv) const override;
-	
 	/*--------------------------------< Protected methods >---------------------------------*/
 	protected:
 	
@@ -47,12 +48,6 @@ namespace raytracing
 	
 	/*--------------------------------< Private members >-----------------------------------*/
 	private:
-
-		uint8_t* texture;
-
-		int width;
-		
-		int height;
 
 	};
 	

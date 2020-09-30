@@ -142,6 +142,15 @@ namespace raytracing
 		{};
 	};
 
+	struct Utility : public std::exception
+	{
+	public:
+
+		Utility(const char* message = "") :
+			std::exception(message)
+		{};
+	};
+
 
 	/*--------------------------------< Constants >-----------------------------------------*/
 

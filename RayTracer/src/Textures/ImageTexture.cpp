@@ -16,10 +16,10 @@ namespace raytracing
 		
 	/*--------------------------------< Public members >-------------------------------------*/
 
-	aiColor3D ImageTexture::getColor(const float u, const float v) const
+	aiColor3D ImageTexture::getColor(const aiVector3D& uv) const
 	{
-		int i =      u  * width;
-		int j = (1 - v) * height - 0.001f;
+		int i =      uv.x * width;
+		int j = (1 - uv.y) * height - 0.001f;
 
 		i = std::clamp(i, 0, width - 1);
 		j = std::clamp(j, 0, height - 1);

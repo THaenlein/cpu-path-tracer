@@ -18,10 +18,11 @@ namespace raytracing
 		
 	/*--------------------------------< Public members >-------------------------------------*/
 
-	aiColor3D CheckerTexture::getColor(const float u, const float v) const
+	aiColor3D CheckerTexture::getColor(const aiVector3D& uv) const
 	{
-		static const float scale{5.f};
-		bool pattern = (fmod(v * scale, 1) < 0.5) ^ (fmod(u * scale, 1) < 0.5);
+		bool pattern = 
+			(fmod(uv.y * this->textureScale, 1) < 0.5) ^ 
+			(fmod(uv.x * this->textureScale, 1) < 0.5);
 		return pattern ? even : odd;
 	}
 	

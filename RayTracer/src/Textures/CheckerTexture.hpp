@@ -17,15 +17,17 @@ namespace raytracing
 
 	/*--------------------------------< Constants >-----------------------------------------*/
 
+	static 
+
 	class CheckerTexture : public Texture
 	{
 	/*--------------------------------< Public methods >------------------------------------*/
 	public:
-		CheckerTexture(aiColor3D colorOdd, aiColor3D colorEven):
-			odd(colorOdd), even(colorEven)
+		CheckerTexture(aiColor3D colorOdd, aiColor3D colorEven, const float scale = 5.f):
+			odd(colorOdd), even(colorEven), textureScale(scale)
 		{}
 
-		virtual aiColor3D getColor(const float u, const float v) const override;
+		virtual aiColor3D getColor(const aiVector3D& uv) const override;
 	
 	/*--------------------------------< Protected methods >---------------------------------*/
 	protected:
@@ -45,6 +47,8 @@ namespace raytracing
 		aiColor3D odd;
 
 		aiColor3D even;
+
+		const float textureScale;
 
 	};
 	

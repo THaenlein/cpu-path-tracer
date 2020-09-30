@@ -21,7 +21,7 @@ namespace raytracing
 	/*--------------------------------< Public methods >------------------------------------*/
 	public:
 
-		virtual aiColor3D getColor(const float u, const float v) const = 0;
+		virtual aiColor3D getColor(const aiVector3D& uv) const = 0;
 	
 	/*--------------------------------< Protected methods >---------------------------------*/
 	protected:
