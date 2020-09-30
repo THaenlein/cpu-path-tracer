@@ -40,6 +40,7 @@ namespace raytracing
 		float leastDistanceIntersection{ std::numeric_limits<float>::max() };
 		std::vector<aiVector3D*> nearestIntersectedTriangle;
 		std::vector<aiVector3D*> triangleVertexNormals;
+		std::vector<aiVector3D*> textureCoordinates;
 		aiVector3D intersectionPoint;
 		aiVector2D uvCoordinates;
 		bool intersects{ false };
@@ -56,6 +57,7 @@ namespace raytracing
 					{
 						nearestIntersectedTriangle.push_back(&(intersectedMesh->mVertices[face->mIndices[currentIndex]]));
 						triangleVertexNormals.push_back(&(intersectedMesh->mNormals[face->mIndices[currentIndex]]));
+						textureCoordinates.push_back(&(intersectedMesh->mTextureCoords[0][face->mIndices[currentIndex]]));
 					}
 					// Evaluate nearest intersection point and return
 					bool intersectsCurrentTriangle = mathUtility::rayTriangleIntersection(ray, nearestIntersectedTriangle, &intersectionPoint, &uvCoordinates);
@@ -73,11 +75,22 @@ namespace raytracing
 						outIntersection.hitPoint = intersectionPoint;
 						outIntersection.ray = ray;
 						outIntersection.uv = uvCoordinates;
+						// Always use first texture channel
+						if (intersectedMesh->HasTextureCoords(0))
+						{
+							outIntersection.uvTextureCoords =
+								(1 - uvCoordinates.x - uvCoordinates.y) *
+								*(textureCoordinates[0]) + uvCoordinates.x *
+								*(textureCoordinates[1]) + uvCoordinates.y *
+								*(textureCoordinates[2]);
+						}
 						outIntersection.vertexNormals = triangleVertexNormals;
+						outIntersection.textureCoordinates = textureCoordinates;
 						intersects = true;
 					}
 					nearestIntersectedTriangle.clear();
 					triangleVertexNormals.clear();
+					textureCoordinates.clear();
 				}
 			}
 		}
