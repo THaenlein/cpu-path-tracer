@@ -9,5 +9,5 @@ LIST(APPEND HEADERFILES
 ## Add common source files
 
 LIST(APPEND SOURCEFILES
-
+  "${CMAKE_CURRENT_LIST_DIR}/mathUtility.cpp"
 )
