@@ -18,15 +18,18 @@ namespace raytracing
 
 	aiColor3D ImageTexture::getColor(const aiVector3D& uv) const
 	{
-		int i =      uv.x * width;
-		int j = (1 - uv.y) * height - 0.001f;
+		float x =      uv.x  * static_cast<float>(width);
+		float y = (1 - uv.y) * static_cast<float>(height);
 
-		i = std::clamp(i, 0, width - 1);
-		j = std::clamp(j, 0, height - 1);
+		x = std::clamp(x, 0.f, static_cast<float>(width)  - 1.f);
+		y = std::clamp(y, 0.f, static_cast<float>(height) - 1.f);
 
-		float red   = static_cast<float>(this->texture[3 * i + 3 * width * j    ]) / 255.f;
-		float green = static_cast<float>(this->texture[3 * i + 3 * width * j + 1]) / 255.f;
-		float blue  = static_cast<float>(this->texture[3 * i + 3 * width * j + 2]) / 255.f;
+		int uOffset = static_cast<int>(x);
+		int vOffset = static_cast<int>(y);
+
+		float red   = static_cast<float>(this->texture[3 * uOffset + 3 * width * vOffset    ]) / 255.f;
+		float green = static_cast<float>(this->texture[3 * uOffset + 3 * width * vOffset + 1]) / 255.f;
+		float blue  = static_cast<float>(this->texture[3 * uOffset + 3 * width * vOffset + 2]) / 255.f;
 
 		return { red, green, blue };
 	}
