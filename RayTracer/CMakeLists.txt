@@ -39,6 +39,7 @@ add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/lib/assimp-5.0.1)
 ## Include directories
 include_directories(${CMAKE_CURRENT_LIST_DIR}/src)
 include_directories(${CMAKE_CURRENT_LIST_DIR}/tests)
+include_directories(${CMAKE_CURRENT_LIST_DIR}/lib/stbi)
 include_directories("${PROJECT_NAME}" ${SDL2_INCLUDE_DIR})
 include_directories("${PROJECT_NAME}" ${ASSIMP_INCLUDE_DIR})
 include_directories("${PROJECT_NAME}" ${ASSIMP_CODE_DIR})
