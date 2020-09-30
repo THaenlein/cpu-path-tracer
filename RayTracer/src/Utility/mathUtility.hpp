@@ -67,6 +67,8 @@ namespace utility
 			std::vector<aiVector3D*> vecTriangle,
 			aiVector3D* outIntersectionPoint,
 			aiVector2D* outUV);
+
+		static aiVector3D calculateSmoothNormal(aiVector2D& uv, std::vector<aiVector3D*>& vertexNormals);
 	
 	/*--------------------------------< Protected methods >---------------------------------*/
 	protected:

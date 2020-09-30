@@ -107,23 +107,14 @@ namespace raytracing
 		{}
 		
 		const aiMesh* hitMesh;
-
 		aiVector3D hitPoint;
-
 		std::vector<aiVector3D*> hitTriangle;
-		
 		std::vector<aiVector3D*> vertexNormals;
-		
 		std::vector<aiVector3D*> textureCoordinates;
-
 		float intersectionDistance;
-
 		aiVector2D uv;
-		
 		aiVector3D uvTextureCoords;
-
 		uint32_t index;
-
 		aiRay ray;
 	};
 

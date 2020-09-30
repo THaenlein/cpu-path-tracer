@@ -16,7 +16,6 @@
 #include "settings.hpp"
 #include "RayTracer.hpp"
 #include "Timer.hpp"
-
 #include "Types\BoundingVolume.hpp"
 #include "Types\KdNode.hpp"
 

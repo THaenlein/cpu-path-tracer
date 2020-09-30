@@ -10,15 +10,17 @@
 #include <atomic>
 #include <time.h>
 #include <stdlib.h>
+#include <unordered_map>
 
 #include "assimp\scene.h"
 
 #include "Application.hpp"
+#include "raytracing.hpp"
+#include "settings.hpp"
 #include "Types\SynchronizedQueue.hpp"
 #include "Types\RenderJob.hpp"
 #include "Types\AccelerationStructure.hpp"
-#include "raytracing.hpp"
-#include "settings.hpp"
+#include "Types\Material.hpp"
 #include "Textures\Texture.hpp"
 
 
@@ -50,11 +52,6 @@ namespace raytracing
 		~RayTracer()
 		{
 			delete[] this->pixels;
-			for (std::pair<aiMaterial*, Texture*> mapEntry : this->textureMapping)
-			{
-				// Free memory used for textures only. Materials are freed by AssimpImporter automatically.
-				delete mapEntry.second;
-			}
 		}
 
 		void initialize(const std::string sceneFilePath);
@@ -133,7 +130,7 @@ namespace raytracing
 
 		std::unique_ptr<AccelerationStructure> accelerationStructure;
 
-		std::unordered_map<aiMaterial*, Texture*> textureMapping;
+		std::unordered_map<aiMaterial*, std::unique_ptr<Material>> materialMapping;
 
 	};
 	

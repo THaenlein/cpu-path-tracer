@@ -6,19 +6,12 @@
 #include <vector>
 #include <math.h>
 #include <random>
-#include <experimental\filesystem>
-
-#define STB_IMAGE_IMPLEMENTATION
-#include "stb_image.h"
-
-#define STB_DEFINE
-#include "stb.h"
 
 #include "RayTracer.hpp"
 #include "exceptions.hpp"
-#include "Utility\mathUtility.hpp"
 
-#include "Textures\CheckerTexture.hpp"
+#include "Utility\mathUtility.hpp"
+#include "Utility\materialUtility.hpp"
 #include "Textures\ImageTexture.hpp"
 
 
@@ -71,44 +64,7 @@ namespace raytracing
 
 		this->pixels = new Uint24[renderWidth * renderHeight];
 
-
-		// Iterate over materials and load texture if it has one
-		for (unsigned int currentMaterial = 0; currentMaterial < scene->mNumMaterials; currentMaterial++)
-		{
-			aiMaterial* material = scene->mMaterials[currentMaterial];
-			unsigned int diffuseTextureCount = material->GetTextureCount(aiTextureType::aiTextureType_DIFFUSE);
-			if (diffuseTextureCount > 0)
-			{
-				aiString diffuseTexturePath;
-				aiTextureMapping diffuseTextureMapping;
-				if (material->GetTexture(aiTextureType_DIFFUSE, 0, &diffuseTexturePath, &diffuseTextureMapping) == aiReturn_SUCCESS)
-				{
-					if (diffuseTextureMapping != aiTextureMapping::aiTextureMapping_UV)
-					{
-						// Ignore anything other than UV-Mapping
-						continue;
-					}
-
-					int width, height, components;
-					std::experimental::filesystem::path texturePath = sceneDirPath;
-					texturePath /= diffuseTexturePath.C_Str();
-
-					// Load image from file
-					uint8_t* image = stbi_load(texturePath.string().c_str(), &width, &height, &components, 0);
-
-					if (!image)
-					{
-						SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "Tried to load image from file: %s", texturePath.string().c_str());
-						throw Renderer("Error on image texture load!");
-					}
-					else
-					{
-						SDL_LogInfo(SDL_LOG_CATEGORY_APPLICATION, "Image texture successfully loaded: %s", texturePath.string().c_str());
-						textureMapping[material] = new ImageTexture(image, width, height);
-					}
-				}
-			}
-		}
+		materialUtility::createMaterialMapping(sceneDirPath, scene, &this->materialMapping);
 	}
 
 
@@ -220,50 +176,31 @@ namespace raytracing
 	aiColor3D RayTracer::sampleLight(IntersectionInformation& intersectionInformation, uint8_t rayDepth)
 	{
 		unsigned int materialIndex = intersectionInformation.hitMesh->mMaterialIndex;
-		aiMaterial* material = this->scene->mMaterials[materialIndex];
-		aiColor3D materialColorDiffuse{}, materialColorEmission{}, materialColorAmbient{}, colorReflective{}, brdf{}, incomingLight{};
-		ai_real reflectivity{}, opacity{ 1 }, refractionIndex{ 1 }, shininess{};
-		material->Get(AI_MATKEY_SHININESS, shininess);
-		material->Get(AI_MATKEY_COLOR_DIFFUSE, materialColorDiffuse);
-		material->Get(AI_MATKEY_COLOR_EMISSIVE, materialColorEmission);
-		material->Get(AI_MATKEY_COLOR_AMBIENT, materialColorAmbient);
-		material->Get(AI_MATKEY_REFLECTIVITY, reflectivity);
-		material->Get(AI_MATKEY_COLOR_REFLECTIVE, colorReflective);
-		material->Get(AI_MATKEY_OPACITY, opacity);
-		material->Get(AI_MATKEY_REFRACTI, refractionIndex);
-		Texture* materialTexture = this->textureMapping[material];
-		if (materialTexture)
-		{
-			materialColorDiffuse = materialTexture->getColor(intersectionInformation.uvTextureCoords.x, intersectionInformation.uvTextureCoords.y);
-		}
+		aiMaterial* meshMaterial = this->scene->mMaterials[materialIndex];
+		Material* material = this->materialMapping[meshMaterial].get();
 
-		// Calculate vertex normal for smooth shading
-		aiVector3D smoothNormal = (1 - intersectionInformation.uv.x - intersectionInformation.uv.y) *
-			*intersectionInformation.vertexNormals[0] + intersectionInformation.uv.x *
-			*intersectionInformation.vertexNormals[1] + intersectionInformation.uv.y *
-			*intersectionInformation.vertexNormals[2];
-		smoothNormal.Normalize();
-
-		const float pdf = 1.f / (2.f * PI);
+		aiVector3D smoothNormal = mathUtility::calculateSmoothNormal(intersectionInformation.uv, intersectionInformation.vertexNormals);
 
 		// Return immediately if hit object is emissive
-		if (aiColor3D{0.f, 0.f, 0.f} < materialColorEmission)
+		const aiColor3D& mEmissive = material->getEmissive();
+		if (aiColor3D{0.f, 0.f, 0.f} < mEmissive)
 		{
-			return materialColorEmission;
+			return mEmissive;
 		}
 
 		// Russian roulette
-		brdf = materialColorDiffuse / PI;
+		const aiColor3D& mDiffuse = material->getDiffuse(intersectionInformation.uvTextureCoords);
+		aiColor3D brdf = mDiffuse / PI;
 		const float probability = 
-			(materialColorDiffuse.r > materialColorDiffuse.g) && (materialColorDiffuse.r>materialColorDiffuse.b) ? 
-				materialColorDiffuse.r : materialColorDiffuse.g > materialColorDiffuse.b ? 
-					materialColorDiffuse.g : materialColorDiffuse.b;
+			(mDiffuse.r > mDiffuse.g) && (mDiffuse.r>mDiffuse.b) ?
+			 mDiffuse.r : mDiffuse.g > mDiffuse.b ?
+			 mDiffuse.g : mDiffuse.b;
 		if ((rayDepth + 1) > 5)
 		{
 			if (mathUtility::russianRoulette(probability, rayDepth))
 			{
 				// Russian roulette takes effect!
-				return materialColorEmission;
+				return mEmissive;
 			}
 			else
 			{
@@ -272,11 +209,10 @@ namespace raytracing
 		}
 
 		// Compute indirect light
-		aiColor3D indirectDiffuse{ 0.f, 0.f, 0.f }, indirectLight{ 0.f, 0.f, 0.f };
 		aiVector3D Nt{}, Nb{}, newRayDirection{}, newRayPosition{};
 		aiRay sampleRay{};
 
-		if (reflectivity > 0.f)
+		if (material->getReflectivity() > 0.f)
 		{
 			// Perfect specular reflection
 			const float roughness = 0.f;
@@ -291,7 +227,7 @@ namespace raytracing
 				newRayDirection.y + (ry - .5f ) * roughness,
 				newRayDirection.z + (rz - .5f ) * roughness);
 
-			brdf = colorReflective / PI;
+			brdf = material->getReflective() / PI;
 			newRayPosition = intersectionInformation.hitPoint + (newRayDirection * this->renderSettings.getBias());
 			sampleRay = { newRayPosition, newRayDirection, RayType::REFLECTION };
 		}
@@ -315,10 +251,11 @@ namespace raytracing
 		}
 
 		// Cast a ray in calculated direction
-		incomingLight = tracePath(sampleRay, rayDepth + 1);
+		aiColor3D incomingLight = tracePath(sampleRay, rayDepth + 1);
 		float cos_theta = newRayDirection * smoothNormal;
+		const float pdf = 1.f / (2.f * PI);
 
-		return  materialColorEmission + (brdf * incomingLight * cos_theta / pdf);
+		return  mEmissive + (brdf * incomingLight * cos_theta / pdf);
 	}
 
 

@@ -12,7 +12,6 @@
 #include "assimp\mesh.h"
 
 #include "raytracing.hpp"
-
 #include "Types\Plane.hpp"
 
 namespace raytracing

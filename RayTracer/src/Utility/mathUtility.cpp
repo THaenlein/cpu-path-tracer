@@ -192,6 +192,16 @@ namespace utility
 			return false;
 		}
 	}
+
+	aiVector3D mathUtility::calculateSmoothNormal(aiVector2D& uv, std::vector<aiVector3D*>& vertexNormals)
+	{
+		aiVector3D smoothNormal = 
+			(1 - uv.x - uv.y) *
+			*(vertexNormals[0]) + uv.x *
+			*(vertexNormals[1]) + uv.y *
+			*(vertexNormals[2]);
+		return smoothNormal.Normalize();
+	}
 		
 	/*--------------------------------< Protected members >----------------------------------*/
 		
