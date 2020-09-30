@@ -5,8 +5,8 @@
       <author>Blender User</author>
       <authoring_tool>Blender 2.79.0 commit date:2018-03-22, commit time:14:10, hash:f4dc9f9d68b</authoring_tool>
     </contributor>
-    <created>2020-09-14T00:39:30</created>
-    <modified>2020-09-14T00:39:30</modified>
+    <created>2020-09-17T22:42:47</created>
+    <modified>2020-09-17T22:42:47</modified>
     <unit name="meter" meter="1"/>
     <up_axis>Z_UP</up_axis>
   </asset>
@@ -134,14 +134,8 @@
               <color sid="ambient">0 0 0 1</color>
             </ambient>
             <diffuse>
-              <color sid="diffuse">1 1 1 1</color>
+              <color sid="diffuse">1 0.007499033 0 1</color>
             </diffuse>
-            <reflective>
-              <color>1 1 1 1</color>
-            </reflective>
-            <reflectivity>
-              <float>1</float>
-            </reflectivity>
             <index_of_refraction>
               <float sid="index_of_refraction">1.33</float>
             </index_of_refraction>
@@ -160,7 +154,7 @@
               <color sid="ambient">0 0 0 1</color>
             </ambient>
             <diffuse>
-              <color sid="diffuse">0.1925764 0.3710072 0.8688806 1</color>
+              <color sid="diffuse">0.1912017 0.3712378 0.8713673 1</color>
             </diffuse>
             <index_of_refraction>
               <float sid="index_of_refraction">1</float>
@@ -180,7 +174,7 @@
               <color sid="ambient">0 0 0 1</color>
             </ambient>
             <diffuse>
-              <color sid="diffuse">0.2645805 0.7483933 0.2931176 1</color>
+              <color sid="diffuse">0.2663556 0.7454044 0.2917707 1</color>
             </diffuse>
             <specular>
               <color sid="specular">0.5 0.5 0.5 1</color>
@@ -374,7 +368,7 @@
         </instance_geometry>
       </node>
       <node id="Point" name="Point" type="NODE">
-        <matrix sid="transform">1 0 0 4 0 1 0 0 0 0 1 3 0 0 0 1</matrix>
+        <matrix sid="transform">1 0 0 4 0 1 0 0 0 0 1 2.145573 0 0 0 1</matrix>
         <instance_light url="#Point-light"/>
       </node>
       <node id="Cube_001" name="Cube_001" type="NODE">
