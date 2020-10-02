@@ -36,6 +36,17 @@ namespace utility
 		return aiVector3D(x, r1, z);
 	}
 
+	aiVector3D mathUtility::cosineSampleHemisphere(const float r1, const float r2)
+	{
+		const float r = sqrtf(r1);
+		const float theta = 2.f * PI * r2;
+
+		const float x = r * cosf(theta);
+		const float z = r * sinf(theta);
+
+		return aiVector3D(x, sqrt(1.f - r1), z);
+	}
+
 	void mathUtility::createCoordinateSystem(const aiVector3D& N, aiVector3D& Nt, aiVector3D& Nb)
 	{
 		if (std::fabs(N.x) > std::fabs(N.y))

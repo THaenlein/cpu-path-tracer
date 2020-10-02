@@ -30,6 +30,8 @@ namespace utility
 		static float getRandomFloat(float lowerBound, float upperBound);
 
 		static aiVector3D uniformSampleHemisphere(const float r1, const float r2);
+		
+		static aiVector3D cosineSampleHemisphere(const float r1, const float r2);
 
 		static void createCoordinateSystem(const aiVector3D& N, aiVector3D& Nt, aiVector3D& Nb);
 

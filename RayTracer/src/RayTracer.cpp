@@ -211,21 +211,60 @@ namespace raytracing
 		// Compute indirect light
 		aiVector3D Nt{}, Nb{}, newRayDirection{}, newRayPosition{};
 		aiRay sampleRay{};
+		const float r1 = mathUtility::getRandomFloat(0.f, 1.f);
+		const float r2 = mathUtility::getRandomFloat(0.f, 1.f);
+		
+		// Calculate transformation matrix to transform sample from world space to shaded point local coordinate system later
+		mathUtility::createCoordinateSystem(smoothNormal, Nt, Nb);
+		aiMatrix3x3 toLocalMatrix
+		{ Nt.x, Nt.y, Nt.z,
+			smoothNormal.x, smoothNormal.y, smoothNormal.z,
+			Nb.x, Nb.y, Nb.z };
 
-		if (material->getReflectivity() > 0.f)
+		if (material->getOpacity() < 1.f)
 		{
-			// Perfect specular reflection
-			const float roughness = 0.f;
-			const float rx = mathUtility::getRandomFloat(0.f, 1.f);
-			const float ry = mathUtility::getRandomFloat(0.f, 1.f);
-			const float rz = mathUtility::getRandomFloat(0.f, 1.f);
+			// Perfect translucent refraction
+			const float ior = material->getRefractionIndex();
+			float fresnelResult = mathUtility::fresnel(intersectionInformation.ray.dir, smoothNormal, ior);
+
+			if (fresnelResult >= 1.f)
+			{
+				// Total internal reflection
+				return aiColor3D{ 0.f, 0.f, 0.f };
+			}
+
+			bool outside = (intersectionInformation.ray.dir * smoothNormal) < 0;
+			aiVector3D bias = this->renderSettings.getBias() * smoothNormal;
+			const float refractionPropability = mathUtility::getRandomFloat(0.f, 1.f);
+
+			if (refractionPropability > fresnelResult)
+			{
+				// New ray is a refraction ray
+				newRayDirection = mathUtility::calculateRefractionDirection(intersectionInformation.ray.dir, smoothNormal, ior);
+				newRayDirection.Normalize();
+				newRayPosition = outside ? intersectionInformation.hitPoint - bias : intersectionInformation.hitPoint + bias;
+				sampleRay = { newRayPosition, newRayDirection, RayType::REFRACTION };
+			}
+			else
+			{
+				// New ray is a reflection ray
+				newRayDirection = mathUtility::calculateReflectionDirection(intersectionInformation.ray.dir, smoothNormal);
+				newRayDirection.Normalize();
+				newRayPosition = outside ? intersectionInformation.ray.pos + bias : intersectionInformation.ray.pos - bias;
+				sampleRay = { newRayPosition, newRayDirection, RayType::REFLECTION };
+				brdf = material->getReflective() / PI;
+			}
+		}
+		else if (material->getReflectivity() > 0.f)
+		{
+			// Specular reflection
+			const float roughness = 0.f; // 1 = blurry   0 = perfectly specular
+			aiVector3D randomScatter = mathUtility::cosineSampleHemisphere(r1, r2);
+			randomScatter *= toLocalMatrix;
 
 			// Calculate reflection direction
 			newRayDirection = mathUtility::calculateReflectionDirection(intersectionInformation.ray.dir, smoothNormal);
-			newRayDirection = aiVector3D(
-				newRayDirection.x + (rx - .5f ) * roughness,
-				newRayDirection.y + (ry - .5f ) * roughness,
-				newRayDirection.z + (rz - .5f ) * roughness);
+			newRayDirection = newRayDirection + randomScatter * roughness;
 
 			brdf = material->getReflective() / PI;
 			newRayPosition = intersectionInformation.hitPoint + (newRayDirection * this->renderSettings.getBias());
@@ -234,16 +273,7 @@ namespace raytracing
 		else
 		{
 			// Perfect diffuse reflection
-			const float r1 = mathUtility::getRandomFloat(0.f, 1.f);
-			const float r2 = mathUtility::getRandomFloat(0.f, 1.f);
-			newRayDirection = mathUtility::uniformSampleHemisphere(r1, r2);
-			mathUtility::createCoordinateSystem(smoothNormal, Nt, Nb);
-
-			// Transform sample from world space to shaded point local coordinate system
-			aiMatrix3x3 toLocalMatrix
-			{ Nt.x, Nt.y, Nt.z,
-				smoothNormal.x, smoothNormal.y, smoothNormal.z,
-				Nb.x, Nb.y, Nb.z };
+			newRayDirection = mathUtility::cosineSampleHemisphere(r1, r2);
 			newRayDirection *= toLocalMatrix;
 
 			newRayPosition = intersectionInformation.hitPoint + (newRayDirection * this->renderSettings.getBias());
@@ -252,10 +282,12 @@ namespace raytracing
 
 		// Cast a ray in calculated direction
 		aiColor3D incomingLight = tracePath(sampleRay, rayDepth + 1);
-		float cos_theta = newRayDirection * smoothNormal;
-		const float pdf = 1.f / (2.f * PI);
+		//float cos_theta = newRayDirection * smoothNormal;
+		//const float pdfUniform = 1.f / (2.f * PI);
+		//const float pdfCosine = cos_theta / PI;
 
-		return  mEmissive + (brdf * incomingLight * cos_theta / pdf);
+		// Simplified rendering equation for cosine weighted sampling
+		return brdf * incomingLight * PI;
 	}
 
 
