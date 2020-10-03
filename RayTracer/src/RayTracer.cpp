@@ -305,9 +305,6 @@ namespace raytracing
 
 		// Cast a ray in calculated direction
 		aiColor3D incomingLight = tracePath(sampleRay, rayDepth + 1);
-		//float cos_theta = newRayDirection * smoothNormal;
-		//const float pdfUniform = 1.f / (2.f * PI);
-		//const float pdfCosine = cos_theta / PI;
 
 		// Simplified rendering equation for cosine weighted sampling
 		return brdf * incomingLight * PI;

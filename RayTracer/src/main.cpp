@@ -33,11 +33,15 @@ int main(int argc, char* argv[])
 	{
 		// Print usage and exit
 		std::cout << "Usage: "
-			"--width <render-width> "
-			"--height <render-width> "
-			"--max-samples <number of max samples>"
-			"--max-depth <max ray depth>"
-			"--input <path to collada scene file>" << std::endl;
+			"--input <path to collada scene file> " 
+			"[--width <render-width>] "
+			"[--height <render-width>] "
+			"[--max-samples <number of max samples>] "
+			"[--max-depth <max ray depth>] "
+			"[--bias <bias as float>] "
+			"[--aperture <aperture as float>] "
+			"[--focal <focal distance as float>] "
+			"[--threading <number of threads for rendering>] " << std::endl;
 		return 0;
 	}
 
@@ -152,7 +156,7 @@ int main(int argc, char* argv[])
 	const std::string& threadsStr(options.getCmdOption("--threading"));
 	if (threadsStr.empty())
 	{
-		// No depth provided
+		// No thread count provided
 	}
 	else
 	{
