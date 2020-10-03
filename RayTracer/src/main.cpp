@@ -3,6 +3,8 @@
 #include <exception>
 #include <thread>
 #include <chrono>
+#include <string>
+#include <experimental\filesystem>
 
 #include "assimp\Importer.hpp"
 #include "assimp\postprocess.h"
@@ -18,11 +20,147 @@
 #include "Timer.hpp"
 #include "Types\BoundingVolume.hpp"
 #include "Types\KdNode.hpp"
+#include "Utility\ArgParser.hpp"
+
+namespace filesystem = std::experimental::filesystem;
 
 
 int main(int argc, char* argv[])
 {
-	raytracing::Application app;
+	utility::ArgParser options(argc, argv);
+
+	if (options.cmdOptionExists("-h"))
+	{
+		// Print usage and exit
+		std::cout << "Usage: "
+			"--width <render-width> "
+			"--height <render-width> "
+			"--max-samples <number of max samples>"
+			"--max-depth <max ray depth>"
+			"--input <path to collada scene file>" << std::endl;
+		return 0;
+	}
+
+	bool useAA{ false };
+	if (options.cmdOptionExists("--use-anti-aliasing"))
+	{
+		// Print usage and exit
+		useAA = true;
+	}
+	
+	uint16_t width{ 512U };
+	const std::string& widthStr(options.getCmdOption("--width"));
+	if (widthStr.empty())
+	{
+		// No width provided
+	}
+	else
+	{
+		width = std::stoi(widthStr);
+	}
+
+	uint16_t height{ 512U };
+	const std::string& heightStr(options.getCmdOption("--height"));
+	if (heightStr.empty())
+	{
+		// No height provided
+	}
+	else
+	{
+		height = std::stoi(heightStr);
+	}
+
+	uint8_t samples{ 4U };
+	const std::string& samplesStr(options.getCmdOption("--max-samples"));
+	if (samplesStr.empty())
+	{
+		// No samples provided
+	}
+	else
+	{
+		samples = std::stoi(samplesStr);
+	}
+
+	uint8_t depth{ 4U };
+	const std::string& depthStr(options.getCmdOption("--max-depth"));
+	if (depthStr.empty())
+	{
+		// No depth provided
+	}
+	else
+	{
+		depth = std::stoi(depthStr);
+	}
+
+	float bias{ 0.001f };
+	const std::string& biasStr(options.getCmdOption("--bias"));
+	if (biasStr.empty())
+	{
+		// No bias provided
+	}
+	else
+	{
+		bias = std::stof(biasStr);
+	}
+
+	float aperture{ 0.f };
+	bool useDOF{false};
+	const std::string& apertureStr(options.getCmdOption("--aperture"));
+	if (apertureStr.empty())
+	{
+		// No aperture provided
+		useDOF = false;
+	}
+	else
+	{
+		aperture = std::stof(apertureStr);
+		useDOF = true;
+	}
+
+	float fDist{ 0.f };
+	const std::string& fDistStr(options.getCmdOption("--focal"));
+	if (fDistStr.empty())
+	{
+		// No focal distance provided
+		useDOF = false;
+	}
+	else
+	{
+		fDist = std::stof(fDistStr);
+		useDOF = true;
+	}
+
+	filesystem::path scenePath{};
+	const std::string& scenePathStr(options.getCmdOption("--input"));
+	if (scenePathStr.empty())
+	{
+		// No input provided
+		SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "No scene file prodvided! Please specifiy a collada scene file using option \"--input\". Exiting..");
+		return 1;
+	}
+	else
+	{
+		scenePath = scenePathStr;
+		if (scenePath.extension().string() != std::string(".dae"))
+		{
+			SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "Specified input file is not in collada format. Please provide *.dae file. Exiting..");
+			return 1;
+		}
+	}
+
+	uint8_t threadCount{ 1U };
+	const std::string& threadsStr(options.getCmdOption("--threading"));
+	if (threadsStr.empty())
+	{
+		// No depth provided
+	}
+	else
+	{
+		threadCount = std::stoi(threadsStr);
+	}
+
+
+	raytracing::Application app(width, height);
 
 	try
 	{
@@ -34,18 +172,15 @@ int main(int argc, char* argv[])
 	{
 		SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, exception.what(), ": %s", exception.getSdlError());
 		app.cleanUp();
-		std::cin.get();
 		return 1;
 	}
 
 	Assimp::Importer assetImporter;
-	const std::string sceneFilePath("F:/Dokumente/GitHub/ray-tracer/RayTracer/res/testScene_path_trace.dae");
-	const aiScene* scene = assetImporter.ReadFile(sceneFilePath, 0);
+	const aiScene* scene = assetImporter.ReadFile(scenePath.string(), 0);
 	if (!scene)
 	{
 		SDL_LogError(SDL_LOG_CATEGORY_INPUT, "Import of 3D scene failed: %s", assetImporter.GetErrorString());
 		app.cleanUp();
-		std::cin.get();
 		return 1;
 	}
 
@@ -67,7 +202,6 @@ int main(int argc, char* argv[])
 	{
 		SDL_LogError(SDL_LOG_CATEGORY_INPUT, "Post processing of 3D scene failed: %s", assetImporter.GetErrorString());
 		app.cleanUp();
-		std::cin.get();
 		return 1;
 	}
 
@@ -142,24 +276,24 @@ int main(int argc, char* argv[])
 	}
 	std::unique_ptr<raytracing::KdNode> kdTree(raytracing::KdNode::buildTree(triangleMeshCollection));
 
-	raytracing::Settings renderSettings(8, 3, 0.001f, 0.02f, 1.71333f);
+	raytracing::Settings renderSettings(samples, depth, bias, aperture, fDist, useDOF, useAA);
 	raytracing::RayTracer rayTracer(app, scene, renderSettings, std::move(kdTree));
 	
 	try
 	{
-		rayTracer.initialize("F:/Dokumente/GitHub/ray-tracer/RayTracer/res");
+		filesystem::path sceneDir = scenePath.remove_filename();
+		rayTracer.initialize(sceneDir.string());
 	}
 	catch(std::exception& exception)
 	{
 		SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, exception.what());
 		app.cleanUp();
-		std::cin.get();
 		return 1;
 	}
 
 #if MULTI_THREADING
 	// 4 threads render scenes generally fastet on my Intel Xeon X5675 system
-	unsigned int numberOfThreads(4/*std::thread::hardware_concurrency()*/);
+	unsigned int numberOfThreads(threadCount);
 #else
 	unsigned int numberOfThreads(1);
 #endif
@@ -173,10 +307,8 @@ int main(int argc, char* argv[])
 	}
 	app.handleEvents(rayTracer.getViewport(), threadPool, threadsTerminated);
 
-	assetImporter.FreeScene();
 
-	SDL_LogInfo(SDL_LOG_CATEGORY_APPLICATION, "Press Enter to quit...");
-	std::cin.get();
+	assetImporter.FreeScene();
 
 	return 0;
 }

@@ -16,6 +16,8 @@
 #include "exceptions.hpp"
 #include "Textures\ImageTexture.hpp"
 
+namespace filesystem = std::experimental::filesystem;
+
 
 namespace utility
 {
@@ -58,7 +60,7 @@ namespace utility
 					}
 
 					int width, height, components;
-					std::experimental::filesystem::path texturePath = textureDirPath;
+					filesystem::path texturePath = textureDirPath;
 					texturePath /= diffuseTexturePath.C_Str();
 
 					// Load image from file

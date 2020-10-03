@@ -44,7 +44,7 @@ namespace raytracing
 		float fieldOfView = camera->mHorizontalFOV;
 		if (aspectRatio != 1.0f)
 		{
-			SDL_LogWarn(SDL_LOG_CATEGORY_INPUT, "Aspect ratio of camera is not 1! Proceeding...");
+			SDL_LogWarn(SDL_LOG_CATEGORY_INPUT, "Aspect ratio of camera is not 1! Proceeding..");
 		}
 
 		const aiVector3D cameraUp = camera->mUp.Normalize();
@@ -73,11 +73,15 @@ namespace raytracing
 		RenderJob job;
 		while (this->renderJobs.popFront(job))
 		{
-#if ANTI_ALIASING
-			this->renderAntiAliased(job);
-#else
-			this->render(job);
-#endif
+			if (this->renderSettings.getUseAA())
+			{
+				this->renderAntiAliased(job);
+			}
+			else
+			{
+				this->render(job);
+			}
+
 			std::this_thread::yield();
 		}
 	}
@@ -107,28 +111,46 @@ namespace raytracing
 
 	void RayTracer::render(RenderJob& renderJob)
 	{
+		const uint8_t maxSamples = this->renderSettings.getMaxSamples();
+		aiVector3D& cameraPosition = (*this->scene->mCameras)->mPosition;
+
 		for (uint16_t x = renderJob.getTileStartX(); x < renderJob.getTileEndX(); x++)
 		{
 			for (uint16_t y = renderJob.getTileStartY(); y < renderJob.getTileEndY(); y++)
 			{
+				aiColor3D pixelAverage{};
 				uint32_t currentPixel = y * renderWidth + x;
 				aiVector3D nextPixelX = this->pixelShiftX * static_cast<float>(x);
 				aiVector3D nextPixelY = this->pixelShiftY * static_cast<float>(y);
 				aiVector3D rayDirection = (this->topLeftPixel + nextPixelX - nextPixelY).Normalize();
-				aiRay currentRay((*this->scene->mCameras)->mPosition, rayDirection);
+				aiRay currentRay(cameraPosition, rayDirection);
+
+				for (unsigned int i = 0; i < std::pow(maxSamples, 2U); i++)
+				{
+					// DOF
+					if (this->renderSettings.getUseDOF())
+					{
+						mathUtility::calculateDepthOfFieldRay(
+							&currentRay,
+							this->renderSettings.getAperture(),
+							this->renderSettings.getFocalDistance());
+					}
 
 #if PATH_TRACE
-				this->pixels[currentPixel] = this->tracePath(currentRay);
+					pixelAverage += this->tracePath(currentRay);
 #else
-				this->pixels[currentPixel] = this->traceRay(currentRay);
+					pixelAverage += this->traceRay(currentRay);
 #endif
+				}
+				pixelAverage = pixelAverage * static_cast<float>(1.f / std::pow(maxSamples, 2U));
+				this->pixels[currentPixel] = pixelAverage;
 			}
 		}
 	}
 
 	void RayTracer::renderAntiAliased(RenderJob& renderJob)
 	{
-		const uint8_t aa = this->renderSettings.getAAResolution();
+		const uint8_t aa = this->renderSettings.getMaxSamples();
 		aiVector3D& cameraPosition = (*this->scene->mCameras)->mPosition;
 
 		for (unsigned int x = renderJob.getTileStartX(); x < renderJob.getTileEndX(); x++)
@@ -143,7 +165,7 @@ namespace raytracing
 					for (unsigned int q = 0; q < aa; q++)
 					{
 						// Anti aliasing
-						float r = static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
+						float r = mathUtility::getRandomFloat(0.f, 1.f);
 						float aaShiftX = x + (p + r) / aa;
 						float aaShiftY = y + (q + r) / aa;
 
@@ -153,21 +175,22 @@ namespace raytracing
 						aiRay currentRay(cameraPosition, rayDirection);
 
 						// DOF
-#if DEPTH_OF_FIELD
-						mathUtility::calculateDepthOfFieldRay(
-							&currentRay, 
-							this->renderSettings.getAperture(), 
-							this->renderSettings.getFocalDistance());
-#endif
+						if (this->renderSettings.getUseDOF())
+						{
+							mathUtility::calculateDepthOfFieldRay(
+								&currentRay, 
+								this->renderSettings.getAperture(), 
+								this->renderSettings.getFocalDistance());
+						}
 
 #if PATH_TRACE
-						pixelAverage = pixelAverage + this->tracePath(currentRay);
+						pixelAverage += this->tracePath(currentRay);
 #else
-						pixelAverage = pixelAverage + this->traceRay(currentRay);
+						pixelAverage += this->traceRay(currentRay);
 #endif
 					}
 				}
-				pixelAverage = pixelAverage * static_cast<ai_real>(1.f/std::pow(aa, 2U));
+				pixelAverage = pixelAverage * static_cast<float>(1.f/std::pow(aa, 2U));
 				this->pixels[currentPixel] = pixelAverage;
 			}
 		}
@@ -301,7 +324,7 @@ namespace raytracing
 		aiMaterial* material = this->scene->mMaterials[materialIndex];
 		aiColor3D materialColorDiffuse{}, materialColorEmission{}, materialColorAmbient{}, colorReflective{};
 		int shadingModel{};
-		ai_real reflectivity{}, opacity{ 1 }, refractionIndex{ 1 };
+		float reflectivity{}, opacity{ 1 }, refractionIndex{ 1 };
 		material->Get(AI_MATKEY_COLOR_DIFFUSE, materialColorDiffuse);
 		material->Get(AI_MATKEY_COLOR_EMISSIVE, materialColorEmission);
 		material->Get(AI_MATKEY_COLOR_AMBIENT, materialColorAmbient);
@@ -339,9 +362,9 @@ namespace raytracing
 			if (opacity < 1.f)
 			{
 				// Surface transmits light. Cast refraction ray and calculate color
-				const ai_real EPSILON = 1e-3f;
+				const float EPSILON = 1e-3f;
 				aiColor3D refractionColor{}, reflectionColor{};
-				ai_real fresnelResult = mathUtility::fresnel(intersectionInformation.ray.dir, smoothNormal, refractionIndex);
+				float fresnelResult = mathUtility::fresnel(intersectionInformation.ray.dir, smoothNormal, refractionIndex);
 				bool outside = (intersectionInformation.ray.dir * smoothNormal) < 0;
 				aiVector3D bias = this->renderSettings.getBias() * smoothNormal;
 

@@ -31,7 +31,13 @@ namespace raytracing
 	/*--------------------------------< Public methods >------------------------------------*/
 	public:
 	
-		Application();
+		Application(uint16_t width, uint16_t height) :
+			mainWindow(nullptr, SDL_DestroyWindow),
+			sdlRenderer(nullptr, SDL_DestroyRenderer),
+			screenTexture(nullptr, SDL_DestroyTexture),
+			WINDOW_DIMENSION_X(width),
+			WINDOW_DIMENSION_Y(height)
+		{};
 	
 		void initialize();
 	
@@ -85,9 +91,9 @@ namespace raytracing
 
 		std::unique_ptr<SDL_Texture, decltype(&SDL_DestroyTexture)> screenTexture;
 
-		static const uint16_t WINDOW_DIMENSION_X = 512;
+		const uint16_t WINDOW_DIMENSION_X;
 
-		static const uint16_t WINDOW_DIMENSION_Y = 512;
+		const uint16_t WINDOW_DIMENSION_Y;
 	
 	};
 	

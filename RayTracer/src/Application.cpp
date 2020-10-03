@@ -17,13 +17,6 @@ namespace raytracing
 	/*--------------------------------< Constants >------------------------------------------*/
 
 	/*--------------------------------< Public members >-------------------------------------*/
-	Application::Application():
-		mainWindow(nullptr, SDL_DestroyWindow),
-		sdlRenderer(nullptr, SDL_DestroyRenderer),
-		screenTexture(nullptr, SDL_DestroyTexture)
-	{
-		
-	}
 	
 	void Application::initialize()
 	{
