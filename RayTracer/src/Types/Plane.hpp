@@ -40,6 +40,14 @@ namespace raytracing
 		{
 			return this->position;
 		}
+
+		bool operator== (const Plane& other) const
+		{
+			static float EPSILON(1e-3);
+			return 
+				(std::abs(this->position - other.position) <= EPSILON) &&
+				this->alignedAxis == other.alignedAxis;
+		}
 	
 	/*--------------------------------< Protected methods >---------------------------------*/
 	protected:

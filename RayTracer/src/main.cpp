@@ -33,7 +33,7 @@ int main(int argc, char* argv[])
 	{
 		// Print usage and exit
 		std::cout << "Usage: "
-			"--input <path to collada scene file> " 
+			"--input <path to collada scene file> "
 			"[--width <render-width>] "
 			"[--height <render-width>] "
 			"[--max-samples <number of max samples>] "
@@ -51,7 +51,7 @@ int main(int argc, char* argv[])
 		// Print usage and exit
 		useAA = true;
 	}
-	
+
 	uint16_t width{ 512U };
 	const std::string& widthStr(options.getCmdOption("--width"));
 	if (widthStr.empty())
@@ -108,7 +108,7 @@ int main(int argc, char* argv[])
 	}
 
 	float aperture{ 0.f };
-	bool useDOF{false};
+	bool useDOF{ false };
 	const std::string& apertureStr(options.getCmdOption("--aperture"));
 	if (apertureStr.empty())
 	{
@@ -172,7 +172,7 @@ int main(int argc, char* argv[])
 		app.setUpSdl();
 		app.createScreenTexture();
 	}
-	catch(raytracing::SdlException& exception)
+	catch (raytracing::SdlException& exception)
 	{
 		SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, exception.what(), ": %s", exception.getSdlError());
 		app.cleanUp();
@@ -190,7 +190,7 @@ int main(int argc, char* argv[])
 
 	// Remove single points and lines not forming a face
 #ifdef AI_CONFIG_PP_SBP_REMOVE
-	#undef AI_CONFIG_PP_SBP_REMOVE
+#undef AI_CONFIG_PP_SBP_REMOVE
 #endif
 #define AI_CONFIG_PP_SBP_REMOVE aiPrimitiveType_POINTS | aiPrimitiveType_LINES;
 	// Apply post processing
@@ -274,21 +274,21 @@ int main(int argc, char* argv[])
 		}
 		for (unsigned int currentFace = 0; currentFace < mesh->mNumFaces; currentFace++)
 		{
-			aiFace* face = (mesh->mFaces)+currentFace;
-			triangleMeshCollection.push_back({ std::make_pair(face, mesh), raytracing::ChildSide::UNDEFINED});
+			aiFace* face = (mesh->mFaces) + currentFace;
+			triangleMeshCollection.push_back({ std::make_pair(face, mesh), raytracing::ChildSide::UNDEFINED });
 		}
 	}
-	std::unique_ptr<raytracing::KdNode> kdTree(raytracing::KdNode::buildTree(triangleMeshCollection));
+	std::unique_ptr<raytracing::KdNode> kdTree(raytracing::KdNode::buildTreeSAH(triangleMeshCollection));
 
 	raytracing::Settings renderSettings(samples, depth, bias, aperture, fDist, useDOF, useAA);
 	raytracing::RayTracer rayTracer(app, scene, renderSettings, std::move(kdTree));
-	
+
 	try
 	{
 		filesystem::path sceneDir = scenePath.remove_filename();
 		rayTracer.initialize(sceneDir.string());
 	}
-	catch(std::exception& exception)
+	catch (std::exception& exception)
 	{
 		SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, exception.what());
 		app.cleanUp();

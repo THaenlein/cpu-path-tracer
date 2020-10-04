@@ -18,6 +18,11 @@ namespace raytracing
 		
 	/*--------------------------------< Public members >-------------------------------------*/
 
+	bool BoundingBox::operator==(const BoundingBox & other) const
+	{
+		return this->min.Equal(other.min) && this->max.Equal(other.max);
+	}
+
 	BoundingBox::BoundingBox(aiMesh* mesh)
 	{
 		aiVector3D meshMin{ std::numeric_limits<float>::max() };
@@ -181,12 +186,12 @@ namespace raytracing
 		right.min[planeAxis] = planePosition;
 	}
 
-	bool BoundingBox::contains(std::vector<aiVector3D*> triangle)
+	bool BoundingBox::contains(std::vector<aiVector3D*> triangle) const
 	{
 		return contains(triangle[0]) || contains(triangle[1]) || contains(triangle[2]);
 	}
 
-	bool BoundingBox::contains(std::pair<aiFace*, aiMesh*>& triangleMeshPair)
+	bool BoundingBox::contains(std::pair<aiFace*, aiMesh*>& triangleMeshPair) const
 	{
 		aiFace* triangle{ triangleMeshPair.first };
 		aiMesh* associatedMesh{ triangleMeshPair.second };
@@ -195,7 +200,7 @@ namespace raytracing
 			   contains(&associatedMesh->mVertices[triangle->mIndices[2]]);
 	}
 
-	bool BoundingBox::contains(aiVector3D* point)
+	bool BoundingBox::contains(aiVector3D* point) const
 	{
 		bool xInRange = (this->min.x <= point->x) && (point->x <= this->max.x);
 		bool yInRange = (this->min.y <= point->y) && (point->y <= this->max.y);
@@ -203,12 +208,12 @@ namespace raytracing
 		return xInRange && yInRange && zInRange;
 	}
 
-	bool BoundingBox::exclusiveContains(std::vector<aiVector3D*> triangle)
+	bool BoundingBox::exclusiveContains(std::vector<aiVector3D*> triangle) const
 	{
 		return contains(triangle[0]) && contains(triangle[1]) && contains(triangle[2]);
 	}
 
-	bool BoundingBox::exclusiveContains(std::pair<aiFace*, aiMesh*>& triangleMeshPair)
+	bool BoundingBox::exclusiveContains(std::pair<aiFace*, aiMesh*>& triangleMeshPair) const
 	{
 		aiFace* triangle{ triangleMeshPair.first };
 		aiMesh* associatedMesh{ triangleMeshPair.second };
@@ -217,7 +222,7 @@ namespace raytracing
 			   contains(&associatedMesh->mVertices[triangle->mIndices[2]]);
 	}
 
-	bool BoundingBox::intersects(aiRay& ray)
+	bool BoundingBox::intersects(aiRay& ray) const
 	{
 		aiVector3D tMin((this->min - ray.pos) / ray.dir);
 		aiVector3D tMax((this->max - ray.pos) / ray.dir);
@@ -232,48 +237,58 @@ namespace raytracing
 		return tMaximum >= tMinimum;
 	}
 
-	const float BoundingBox::getSurfaceArea()
+	const float BoundingBox::getSurfaceArea() const
 	{
 		aiVector3D length = this->max - this->min;
 		return (length.x * length.y + length.y * length.z + length.x * length.z) * 2;
 	}
 
-	aiVector3D BoundingBox::getCenter()
+	aiVector3D BoundingBox::getCenter() const
 	{
 		return aiVector3D((this->min + this->max) / 2.f);
 	}
 
-	bool BoundingBox::isPlanar(float epsilon/* = 1e-6*/)
+	bool BoundingBox::isPlanar(float epsilon/* = 1e-6*/) const
 	{
 		return 
-			std::abs(this->min.x - this->max.x) <= epsilon ||
-			std::abs(this->min.y - this->max.y) <= epsilon ||
-			std::abs(this->min.z - this->max.z) <= epsilon;
+			std::abs(this->max.x - this->min.x) <= epsilon ||
+			std::abs(this->max.y - this->min.y) <= epsilon ||
+			std::abs(this->max.z - this->min.z) <= epsilon;
 	}
 
-	float BoundingBox::length(const Axis axis)
+	float BoundingBox::length(const Axis axis) const
 	{
 		switch (axis)
 		{
 		case Axis::X:
-			return std::abs(this->min.x - this->max.x);
+			return std::abs(this->max.x - this->min.x);
 			break;
 	
 		case Axis::Y:
-			return std::abs(this->min.y - this->max.y);
+			return std::abs(this->max.y - this->min.y);
 			break;
 	
 		case Axis::Z:
-			return std::abs(this->min.z - this->max.z);
+			return std::abs(this->max.z - this->min.z);
 			break;
 		default:
-			return std::numeric_limits<float>::infinity();
+			return std::abs((this->max - this->min).Length());
 		}
 	}
 
-	bool BoundingBox::operator==(const BoundingBox & other) const
+	void BoundingBox::clipToBox(const BoundingBox& box)
 	{
-		return this->min.Equal(other.min) && this->max.Equal(other.max);
+		for (int k = 0; k < 3; k++) 
+		{
+			if (box.min[k] > this->min[k])
+			{
+				this->min[k] = box.min[k];
+			}
+			if (box.max[k] < this->max[k])
+			{
+				this->max[k] = box.max[k];
+			}
+		}
 	}
 
 	/*--------------------------------< Protected members >----------------------------------*/

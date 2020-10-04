@@ -50,6 +50,8 @@ namespace raytracing
 			max{other.max}
 		{};
 
+		bool operator==(const BoundingBox& other) const;
+
 		void reset();
 
 		void split(BoundingBox& left, BoundingBox& right);
@@ -58,49 +60,49 @@ namespace raytracing
 
 		void split(BoundingBox& left, BoundingBox& right, Plane& splitPlane);
 
-		bool contains(std::vector<aiVector3D*> triangle);
+		bool contains(std::vector<aiVector3D*> triangle) const;
 		
-		bool contains(std::pair<aiFace*, aiMesh*>& triangleMeshPair);
+		bool contains(std::pair<aiFace*, aiMesh*>& triangleMeshPair) const;
 		
-		bool contains(aiVector3D* point);
+		bool contains(aiVector3D* point) const;
 		
-		bool exclusiveContains(std::vector<aiVector3D*> triangle);
+		bool exclusiveContains(std::vector<aiVector3D*> triangle) const;
 
-		bool exclusiveContains(std::pair<aiFace*, aiMesh*>& triangleMeshPair);
+		bool exclusiveContains(std::pair<aiFace*, aiMesh*>& triangleMeshPair) const;
 
-		bool intersects(aiRay& ray);
+		bool intersects(aiRay& ray) const;
 
-		inline const aiVector3D& getMin()
+		inline const aiVector3D& getMin() const
 		{
 			return this->min;
 		}
 
-		inline const aiVector3D& getMax()
+		inline const aiVector3D& getMax() const
 		{
 			return this->max;
 		}
 
-		inline const aiMesh* getContainedMesh()
+		inline const aiMesh* getContainedMesh() const
 		{
 			return this->containedMesh;
 		}
 
-		const Axis getLongestAxis()
+		const Axis getLongestAxis() const
 		{
 			aiVector3D length = this->max - this->min;
 			return length.x >= length.y ? (length.x >= length.z ? Axis::X : Axis::Z) : (length.y >= length.z ? Axis::Y : Axis::Z);
 		}
 
-		const float getSurfaceArea();
+		const float getSurfaceArea() const;
 		
-		aiVector3D getCenter();
+		aiVector3D getCenter() const;
 
-		bool isPlanar(float epsilon = 1e-6);
+		bool isPlanar(float epsilon = 1e-6) const;
 
-		float length(const Axis axis);
+		float length(const Axis axis) const;
 
-		bool operator==(const BoundingBox& other) const;
-	
+		void clipToBox(const BoundingBox& box);
+
 	/*--------------------------------< Protected methods >---------------------------------*/
 	protected:
 	

@@ -51,9 +51,9 @@ namespace raytracing
 	
 	static const unsigned int MIN_DEPTH = 32;
 
-	static const float TRAVERSIAL_COST = 1.1f;
+	static const float TRAVERSIAL_COST = 1.0f;
 
-	static const float INTERSECTION_COST = 1.5f;
+	static const float INTERSECTION_COST = 5.25f;
 
 	static const uint8_t MAX_TREE_DIMENSION = 3;
 
@@ -88,10 +88,6 @@ namespace raytracing
 
 		static KdNode* buildTreeSAH(std::vector<KdTriangle>& triangles);
 		
-		static KdNode* build(std::vector<KdTriangle>& triangles, BoundingBox bBox, unsigned int depth = 1);
-
-		static KdNode* buildSAH(std::vector<KdTriangle>& triangles, BoundingBox bBox, const Plane prevPlane = {}, unsigned int depth = 0);
-
 		virtual bool calculateIntersection(aiRay& ray, IntersectionInformation& outIntersection) override;
 
 	/*--------------------------------< Protected methods >---------------------------------*/
@@ -99,6 +95,10 @@ namespace raytracing
 	
 	/*--------------------------------< Private methods >-----------------------------------*/
 	private:
+		
+		static KdNode* build(std::vector<KdTriangle>& triangles, BoundingBox bBox, unsigned int depth = 1);
+
+		static KdNode* buildSAH(std::vector<KdTriangle>& triangles, BoundingBox bBox, const Plane prevPlane = {}, unsigned int depth = 0);
 
 		static std::pair<float, ChildSide> SAH(
 			Plane& plane, 
@@ -116,12 +116,13 @@ namespace raytracing
 		static std::pair<Plane, ChildSide> findPlane(
 			std::vector<KdTriangle> triangles,
 			BoundingBox& bBox,
-			float& cost);
+			float* outCost);
 
 		static void classifyTriangles(
 			std::vector<KdTriangle>& triangles,
-			std::vector<Event>& events,
-			std::pair<Plane, ChildSide> splittingPlane);
+			std::pair<Plane, ChildSide> splittingPlane,
+			std::vector<KdTriangle>& outTrianglesLeft,
+			std::vector<KdTriangle>& outTrianglesRight);
 
 		static bool compareEvents(const Event& e1, const Event& e2);
 
@@ -140,7 +141,7 @@ namespace raytracing
 		// as the bounding box of the right sub tree
 		BoundingBox boundingBox;
 		
-		// The point at which the BB of this node was split along the axis = depth % 3
+		// The plane at which the BB of this node was split along
 		Plane splittingPlane;
 
 		// Left subtree

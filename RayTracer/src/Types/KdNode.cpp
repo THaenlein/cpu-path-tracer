@@ -26,6 +26,7 @@ namespace raytracing
 	{
 		// Create BBox of full scene
 		BoundingBox rootBox(triangles);
+
 		// Start recursive build of tree
 		return build(triangles, rootBox);
 	}
@@ -35,29 +36,92 @@ namespace raytracing
 		// Create BBox of full scene
 		BoundingBox rootBox(triangles);
 
-		//std::vector<Event> events;
-		//for (uint8_t k = 0; k < MAX_TREE_DIMENSION; k++)
-		//{
-		//	Axis axis = static_cast<Axis>(k);
-		//	// Create event list
-		//	for (KdTriangle& triangle : triangles)
-		//	{
-		//		BoundingBox triangleBox(triangle.faceMeshPair);
-		//		if (triangleBox.isPlanar())
-		//		{
-		//			events.push_back({ triangleBox.getMin()[axis], axis, EventType::PLANAR, triangle });
-		//		}
-		//		else
-		//		{
-		//			events.push_back({ triangleBox.getMin()[axis], axis, EventType::START, triangle });
-		//			events.push_back({ triangleBox.getMax()[axis], axis, EventType::END, triangle });
-		//		}
-		//	}
-		//}
-		//sort(events.begin(), events.end(), compareEvents);
-
+		// Start recursive build of tree using surface area heuristic
 		return buildSAH(triangles, rootBox);
 	}
+
+	bool KdNode::calculateIntersection(aiRay& ray, IntersectionInformation& outIntersection)
+	{
+		if (!this->boundingBox.intersects(ray))
+		{
+			// Ray does not intersect with this trees bounding box 
+			// and therefore neither with a bounding box of a subtree
+			return false;
+		}
+
+		bool leftHit{ false }, rightHit{ false };
+		// If a node is no leaf node, it always has two subtrees
+		if (this->left && this->right)
+		{
+			// This node has subtrees
+			leftHit = this->left->calculateIntersection(ray, outIntersection);
+			rightHit = this->right->calculateIntersection(ray, outIntersection);
+			return leftHit || rightHit;
+		}
+
+		bool intersects{ false };
+		std::vector<aiVector3D*> nearestIntersectedTriangle;
+		std::vector<aiVector3D*> triangleVertexNormals;
+		std::vector<aiVector3D*> textureCoordinates;
+		aiVector3D intersectionPoint;
+		aiVector2D uvCoordinates;
+
+		if (!this->left && !this->right)
+		{
+			// This is a leaf node
+			// Check triangles for intersection
+			for (KdTriangle& currentPair : this->containedTriangles)
+			{
+				aiFace* currentFace{ currentPair.faceMeshPair.first };
+				aiMesh* associatedMesh{ currentPair.faceMeshPair.second };
+
+				for (unsigned int currentIndex = 0; currentIndex < currentFace->mNumIndices; currentIndex++)
+				{
+					nearestIntersectedTriangle.push_back(&(associatedMesh->mVertices[currentFace->mIndices[currentIndex]]));
+					triangleVertexNormals.push_back(&(associatedMesh->mNormals[currentFace->mIndices[currentIndex]]));
+					// Always use first texture channel
+					textureCoordinates.push_back(&(associatedMesh->mTextureCoords[0][currentFace->mIndices[currentIndex]]));
+				}
+				bool intersectsCurrentTriangle = mathUtility::rayTriangleIntersection(ray, nearestIntersectedTriangle, &intersectionPoint, &uvCoordinates);
+				// We can immediately return if the cast ray is a shadow ray
+				if (intersectsCurrentTriangle && (ray.type == RayType::SHADOW))
+				{
+					return true;
+				}
+				float distanceToIntersectionPoint = (intersectionPoint - ray.pos).Length();
+				if (intersectsCurrentTriangle && (distanceToIntersectionPoint < outIntersection.intersectionDistance))
+				{
+					outIntersection.intersectionDistance = distanceToIntersectionPoint;
+					outIntersection.hitMesh = associatedMesh;
+					outIntersection.hitTriangle = nearestIntersectedTriangle;
+					outIntersection.hitPoint = intersectionPoint;
+					outIntersection.ray = ray;
+					outIntersection.uv = uvCoordinates;
+					// Always use first texture channel
+					if (associatedMesh->HasTextureCoords(0))
+					{
+						outIntersection.uvTextureCoords =
+							(1 - uvCoordinates.x - uvCoordinates.y) * 
+							*(textureCoordinates[0]) + uvCoordinates.x *
+							*(textureCoordinates[1]) + uvCoordinates.y *
+							*(textureCoordinates[2]);
+					}
+					outIntersection.vertexNormals = triangleVertexNormals;
+					outIntersection.textureCoordinates = textureCoordinates;
+					intersects = true;
+				}
+				nearestIntersectedTriangle.clear();
+				triangleVertexNormals.clear();
+				textureCoordinates.clear();
+			}
+			return intersects;
+		}
+		return leftHit || rightHit || intersects; // This case may not exist
+	}
+
+	/*--------------------------------< Protected members >----------------------------------*/
+		
+	/*--------------------------------< Private members >------------------------------------*/
 
 	/*static*/ KdNode* KdNode::build(std::vector<KdTriangle>& triangles, BoundingBox bBox, unsigned int depth/* = 1*/)
 	{
@@ -140,212 +204,27 @@ namespace raytracing
 
 	/*static*/ KdNode* KdNode::buildSAH(std::vector<KdTriangle>& triangles, BoundingBox bBox, const Plane prevPlane, unsigned int depth/* = 0*/)
 	{
-		const ai_real EPSILON = 1e-3f;
+		// Find plane to split
 		float minCost;
-		std::pair<Plane, ChildSide> bestPlane = findPlane(triangles, bBox, minCost);
+		std::pair<Plane, ChildSide> bestPlane = findPlane(triangles, bBox, &minCost);
 
-		if ((terminate(triangles.size(), minCost)) || /*(triangles.size() <= MAX_TRIANGLES_PER_LEAF) || (depth == MAX_DEPTH) || (bBox.isPlanar()) ||*/ (bestPlane.first.getPosition() == prevPlane.getPosition()))
+		if ((terminate(triangles.size(), minCost)) || (bestPlane.first == prevPlane))
 		{
 			return new KdNode(triangles, bBox);
 		}
 
-		// Find plane to split
+		// Split root box
 		BoundingBox leftBox;
 		BoundingBox rightBox;
 		bBox.split(leftBox, rightBox, bestPlane.first);
 
 		// Classify triangles corresponding to splitting plane
-		//classifyTriangles(triangles, events, bestPlane);
-
-		// Splicing E
-		//std::vector<Event> leftEvents;
-		//std::vector<Event> rightEvents;
-		//std::vector<Event> leftOverlapEvents;
-		//std::vector<Event> rightOverlapEvents;
-
-		//std::vector<Event> leftResultEvents;
-		//std::vector<Event> rightResultEvents;
-		
 		std::vector<KdTriangle> trianglesLeft;
 		std::vector<KdTriangle> trianglesRight;
-		
-		//for (Event splitEvent : events)
-		//{
-		//	if (splitEvent.triangle.side == ChildSide::LEFT)
-		//	{
-		//		leftEvents.push_back(splitEvent);
-		//		//trianglesLeft.push_back(splitEvent.triangle);
-		//	}
-		//	else if (splitEvent.triangle.side == ChildSide::RIGHT)
-		//	{
-		//		rightEvents.push_back(splitEvent);
-		//		//trianglesRight.push_back(splitEvent.triangle);
-		//	}
-		//	else if (splitEvent.triangle.side == ChildSide::BOTH)
-		//	{
-		//		//leftEvents.push_back(splitEvent);
-		//		//rightEvents.push_back(splitEvent);
-		//		//trianglesLeft.push_back(splitEvent.triangle);
-		//		//trianglesRight.push_back(splitEvent.triangle);
-		//	}
-		//	else
-		//	{
-		//		// Discard events refering to unclassified triangles
-		//	}
-		//	// Discard events refering to triangles classified as BOTH
-		//}
-
-		for (KdTriangle& tri : triangles)
-		{
-			BoundingBox triBox(tri);
-			if ((triBox.getMin()[bestPlane.first.getAxis()] == bestPlane.first.getPosition()) &&
-				(triBox.getMax()[bestPlane.first.getAxis()] == bestPlane.first.getPosition()))
-			{
-				if (bestPlane.second == ChildSide::LEFT)
-				{
-					trianglesLeft.push_back(tri);
-				}
-				else if (bestPlane.second == ChildSide::RIGHT)
-				{
-					trianglesRight.push_back(tri);
-				}
-				else
-				{
-					std::cout << "Error sorting tris" << std::endl;
-				}
-			}
-			else
-			{
-				if (triBox.getMin()[bestPlane.first.getAxis()] < bestPlane.first.getPosition())
-				{
-					trianglesLeft.push_back(tri);
-				}
-				if (triBox.getMax()[bestPlane.first.getAxis()] > bestPlane.first.getPosition())
-				{
-					trianglesRight.push_back(tri);
-				}
-			}
-		}
-		// SAH_initial = number_of_polygons * area_of_subtree
-		// S - Surface area
-		// N - Number of polygons
-		// SAH_optimal = min(S_left * N_left + S_right * N_right)
-		
-		// define some split_cost
-		// ...
-		// 
-		// if (SAH_optimal + split_cost < SAH_initial) 
-		// {
-		//    it would be optimal to split that subtree
-		// }
-		// else 
-		// {
-		// 	  you don't have to split current subtree
-		// }
-
-		// To avoid endless recursion if no further subdivision is possible
-		//bool leftIndivisible = trianglesLeft.size() == triangles.size();
-		//bool rightIndivisible = trianglesRight.size() == triangles.size();
-		//if ((leftIndivisible && rightIndivisible) && (depth >= MIN_DEPTH))
-		//{
-		//	// No further division of both branches possible
-		//	return new KdNode(bestPlane.first, new KdNode(trianglesLeft, leftBox), new KdNode(trianglesRight, rightBox), bBox);
-		//}
-		//else if (leftIndivisible && (depth >= MIN_DEPTH))
-		//{
-		//	// No further division of left branch possible
-		//	return new KdNode(bestPlane.first, new KdNode(trianglesLeft, leftBox), build(trianglesRight, rightBox, depth + 1), bBox);
-		//}
-		//else if (rightIndivisible && (depth >= MIN_DEPTH))
-		//{
-		//	// No further division of right branch possible
-		//	return new KdNode(bestPlane.first, build(trianglesLeft, leftBox, depth + 1), new KdNode(trianglesRight, rightBox), bBox);
-		//}
+		classifyTriangles(triangles, bestPlane, trianglesLeft, trianglesRight);
 
 		return new KdNode(bestPlane.first, buildSAH(trianglesLeft, leftBox, bestPlane.first, depth + 1), buildSAH(trianglesRight, rightBox, bestPlane.first, depth + 1), bBox);
 	}
-
-	bool KdNode::calculateIntersection(aiRay& ray, IntersectionInformation& outIntersection)
-	{
-		if (!this->boundingBox.intersects(ray))
-		{
-			// Ray does not intersect with this trees bounding box 
-			// and therefore neither with a bounding box of a subtree
-			return false;
-		}
-
-		bool leftHit{ false }, rightHit{ false };
-		if (this->left && this->right) // If one of them is true, the other one is true too
-		{
-			// This node has subtrees
-			leftHit = this->left->calculateIntersection(ray, outIntersection);
-			rightHit = this->right->calculateIntersection(ray, outIntersection);
-			return leftHit || rightHit;
-		}
-
-		bool intersects{ false };
-		std::vector<aiVector3D*> nearestIntersectedTriangle;
-		std::vector<aiVector3D*> triangleVertexNormals;
-		std::vector<aiVector3D*> textureCoordinates;
-		aiVector3D intersectionPoint;
-		aiVector2D uvCoordinates;
-
-		if (!this->left && !this->right)
-		{
-			// This is a leaf node
-			// Check triangles for intersection
-			for (KdTriangle& currentPair : this->containedTriangles)
-			{
-				aiFace* currentFace{ currentPair.faceMeshPair.first };
-				aiMesh* associatedMesh{ currentPair.faceMeshPair.second };
-
-				for (unsigned int currentIndex = 0; currentIndex < currentFace->mNumIndices; currentIndex++)
-				{
-					nearestIntersectedTriangle.push_back(&(associatedMesh->mVertices[currentFace->mIndices[currentIndex]]));
-					triangleVertexNormals.push_back(&(associatedMesh->mNormals[currentFace->mIndices[currentIndex]]));
-					// Always use first texture channel
-					textureCoordinates.push_back(&(associatedMesh->mTextureCoords[0][currentFace->mIndices[currentIndex]]));
-				}
-				bool intersectsCurrentTriangle = mathUtility::rayTriangleIntersection(ray, nearestIntersectedTriangle, &intersectionPoint, &uvCoordinates);
-				// We can immediately return if the cast ray is a shadow ray
-				if (intersectsCurrentTriangle && (ray.type == RayType::SHADOW))
-				{
-					return true;
-				}
-				float distanceToIntersectionPoint = (intersectionPoint - ray.pos).Length();
-				if (intersectsCurrentTriangle && (distanceToIntersectionPoint < outIntersection.intersectionDistance))
-				{
-					outIntersection.intersectionDistance = distanceToIntersectionPoint;
-					outIntersection.hitMesh = associatedMesh;
-					outIntersection.hitTriangle = nearestIntersectedTriangle;
-					outIntersection.hitPoint = intersectionPoint;
-					outIntersection.ray = ray;
-					outIntersection.uv = uvCoordinates;
-					// Always use first texture channel
-					if (associatedMesh->HasTextureCoords(0))
-					{
-						outIntersection.uvTextureCoords =
-							(1 - uvCoordinates.x - uvCoordinates.y) * 
-							*(textureCoordinates[0]) + uvCoordinates.x *
-							*(textureCoordinates[1]) + uvCoordinates.y *
-							*(textureCoordinates[2]);
-					}
-					outIntersection.vertexNormals = triangleVertexNormals;
-					outIntersection.textureCoordinates = textureCoordinates;
-					intersects = true;
-				}
-				nearestIntersectedTriangle.clear();
-				triangleVertexNormals.clear();
-				textureCoordinates.clear();
-			}
-			return intersects;
-		}
-		return leftHit || rightHit || intersects; // This case may not exist
-	}
-
-	/*--------------------------------< Protected members >----------------------------------*/
-		
-	/*--------------------------------< Private members >------------------------------------*/
 
 	std::pair<float, ChildSide> KdNode::SAH(
 		Plane& plane,
@@ -357,19 +236,19 @@ namespace raytracing
 		BoundingBox leftBox;
 		BoundingBox rightBox;
 		box.split(leftBox, rightBox, plane);
-		//if (leftBox.isPlanar() || rightBox.isPlanar())
-		//{
-		//	return std::make_pair<float, ChildSide>(std::numeric_limits<float>::max(), ChildSide::UNDEFINED);
-		//}
+		if (leftBox.isPlanar() || rightBox.isPlanar())
+		{
+			return std::make_pair<float, ChildSide>(std::numeric_limits<float>::infinity(), ChildSide::UNDEFINED);
+		}
 		float probabilityLeft = leftBox.getSurfaceArea() / box.getSurfaceArea();
 		float probabilityRight = rightBox.getSurfaceArea() / box.getSurfaceArea();
 		if ((probabilityLeft == 0.f) || (probabilityRight == 0.f))
 		{
-			return std::make_pair<float, ChildSide>(std::numeric_limits<float>::max(), ChildSide::UNDEFINED);
+			return std::make_pair<float, ChildSide>(std::numeric_limits<float>::infinity(), ChildSide::UNDEFINED);
 		}
 		if (box.length(plane.getAxis()) == 0)
 		{
-			return std::make_pair<float, ChildSide>(std::numeric_limits<float>::max(), ChildSide::UNDEFINED);
+			return std::make_pair<float, ChildSide>(std::numeric_limits<float>::infinity(), ChildSide::UNDEFINED);
 		}
 		float costLeft = costHeuristic(probabilityLeft, probabilityRight, triangleCountLeft + triangleCountOverlap, triangleCountRight);
 		float costRight = costHeuristic(probabilityLeft, probabilityRight, triangleCountLeft, triangleCountRight + triangleCountOverlap);
@@ -384,8 +263,7 @@ namespace raytracing
 	{
 		auto lambdaP = [&] () -> float
 		{
-			return (triangleCountLeft == 0) || (triangleCountRight == 0) &&
-				!((probabilityLeft == 1.f) || (probabilityRight == 1.f)) ? 0.8f : 1.f;
+			return (triangleCountLeft == 0) || (triangleCountRight == 0) ? 0.8f : 1.f;
 		};
 
 		return 
@@ -397,9 +275,9 @@ namespace raytracing
 	std::pair<Plane, ChildSide> KdNode::findPlane(
 		std::vector<KdTriangle> triangles,
 		BoundingBox& bBox,
-		float& cost)
+		float* outCost)
 	{
-		cost = std::numeric_limits<float>::max();
+		*outCost = std::numeric_limits<float>::infinity();
 		Plane bestPlane;
 		ChildSide childSide{ ChildSide::UNDEFINED };
 
@@ -409,23 +287,24 @@ namespace raytracing
 			std::vector<Event> eventlist;
 			for (KdTriangle& triangle : triangles)
 			{
-				BoundingBox bBox(triangle);
-				if (bBox.isPlanar())
+				BoundingBox triBox(triangle);
+				triBox.clipToBox(bBox);
+				if (triBox.isPlanar())
 				{
-					eventlist.push_back({bBox.getMin()[k], axis, EventType::PLANAR, triangle});
+					eventlist.push_back({ triBox.getMin()[k], axis, EventType::PLANAR, triangle});
 				}
 				else
 				{
-					eventlist.push_back({ bBox.getMin()[k], axis, EventType::START, triangle });
-					eventlist.push_back({ bBox.getMax()[k], axis, EventType::END, triangle });
+					eventlist.push_back({ triBox.getMin()[k], axis, EventType::START, triangle });
+					eventlist.push_back({ triBox.getMax()[k], axis, EventType::END, triangle });
 				}
 			}
 			sort(eventlist.begin(), eventlist.end(), compareEvents);
 
-			// iteratively “sweep” plane over all split candidates
-			uint32_t triangleCountLeft = 0;
-			uint32_t triangleCountOverlap = 0;
-			uint32_t triangleCountRight = triangles.size(); // start with all tris on right
+			// iteratively "sweep" plane over all split candidates
+			uint64_t triangleCountLeft = 0;
+			uint64_t triangleCountOverlap = 0;
+			uint64_t triangleCountRight = triangles.size(); // start with all tris on right
 
 			for (unsigned int i = 0; i < eventlist.size(); i++)
 			{
@@ -459,9 +338,9 @@ namespace raytracing
 				triangleCountRight -= inPlane;
 				triangleCountRight -= end;
 				std::pair<float, ChildSide> result = SAH(p, bBox, triangleCountLeft, triangleCountRight, triangleCountOverlap);
-				if (result.first < cost)
+				if (result.first < *outCost)
 				{
-					cost = result.first;
+					*outCost = result.first;
 					bestPlane = p;
 					childSide = result.second;
 				}
@@ -474,50 +353,49 @@ namespace raytracing
 		return std::make_pair(bestPlane, childSide);
 	}
 
-	void KdNode::classifyTriangles(
+	/*static*/ void KdNode::classifyTriangles(
 		std::vector<KdTriangle>& triangles,
-		std::vector<Event>& events,
-		std::pair<Plane, ChildSide> splittingPlane)
+		std::pair<Plane, ChildSide> splittingPlane,
+		std::vector<KdTriangle>& outTrianglesLeft,
+		std::vector<KdTriangle>& outTrianglesRight)
 	{
 		Plane& plane{ splittingPlane.first };
 		ChildSide planeSide{ splittingPlane.second };
 
-		for (KdTriangle& triangle : triangles)
+		for (KdTriangle& tri : triangles)
 		{
-			// Put in both sides
-			triangle.side = ChildSide::BOTH;
-		}
-
-		for (Event& splitEvent : events)
-		{
-			if ((splitEvent.type == EventType::END) && (splitEvent.dimension == plane.getAxis()) && (splitEvent.position <= plane.getPosition()))
+			BoundingBox triBox(tri);
+			if ((triBox.getMin()[plane.getAxis()] == plane.getPosition()) &&
+				(triBox.getMax()[plane.getAxis()] == plane.getPosition()))
 			{
-				// Classify left
-				splitEvent.triangle.side = ChildSide::LEFT;
-			}
-			else if ((splitEvent.type == EventType::START) && (splitEvent.dimension == plane.getAxis()) && (splitEvent.position >= plane.getPosition()))
-			{
-				// Classify right
-				splitEvent.triangle.side = ChildSide::RIGHT;
-			}
-			else if ((splitEvent.type == EventType::PLANAR) && (splitEvent.dimension == plane.getAxis()))
-			{
-				if ((splitEvent.position < plane.getPosition()) || ((splitEvent.position == plane.getPosition()) && (planeSide == ChildSide::LEFT)))
+				if (planeSide == ChildSide::LEFT)
 				{
-					// Classify left
-					splitEvent.triangle.side = ChildSide::LEFT;
+					outTrianglesLeft.push_back(tri);
 				}
-				if ((splitEvent.position > plane.getPosition()) || ((splitEvent.position == plane.getPosition()) && (planeSide == ChildSide::RIGHT)))
+				else if (planeSide == ChildSide::RIGHT)
 				{
-					// Classify right
-					splitEvent.triangle.side = ChildSide::RIGHT;
+					outTrianglesRight.push_back(tri);
+				}
+				else
+				{
+					// This case should not occur!
 				}
 			}
+			else
+			{
+				if (triBox.getMin()[plane.getAxis()] < plane.getPosition())
+				{
+					outTrianglesLeft.push_back(tri);
+				}
+				if (triBox.getMax()[plane.getAxis()] > plane.getPosition())
+				{
+					outTrianglesRight.push_back(tri);
+				}
+			}
 		}
-
 	}
 
-	bool KdNode::compareEvents(const Event& e1, const Event& e2)
+	/*static*/ bool KdNode::compareEvents(const Event& e1, const Event& e2)
 	{
 		return
 			// Primary condition: sort by position
@@ -526,7 +404,7 @@ namespace raytracing
 			((e1.position < e2.position) && (e1.type < e2.type));
 	}
 
-	bool KdNode::terminate(unsigned int triangleCount, float minCost)
+	/*static*/ bool KdNode::terminate(unsigned int triangleCount, float minCost)
 	{
 		return minCost > INTERSECTION_COST * static_cast<float>(triangleCount);
 	}
