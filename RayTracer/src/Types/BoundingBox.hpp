@@ -90,8 +90,12 @@ namespace raytracing
 			aiVector3D length = this->max - this->min;
 			return length.x >= length.y ? (length.x >= length.z ? Axis::X : Axis::Z) : (length.y >= length.z ? Axis::Y : Axis::Z);
 		}
+
+		const float getSurfaceArea();
 		
 		aiVector3D getCenter();
+
+		bool isPlanar(Axis planeAxis, float epsilon = 1e-6);
 
 		bool operator==(const BoundingBox& other) const;
 	

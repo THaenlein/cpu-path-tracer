@@ -232,9 +232,20 @@ namespace raytracing
 		return tMaximum >= tMinimum;
 	}
 
+	const float BoundingBox::getSurfaceArea()
+	{
+		aiVector3D length = this->max - this->min;
+		return (length.x * length.y + length.y * length.z + length.x * length.z) * 2;
+	}
+
 	aiVector3D BoundingBox::getCenter()
 	{
 		return aiVector3D((this->min + this->max) / 2.f);
+	}
+
+	bool BoundingBox::isPlanar(Axis planeAxis, float epsilon/* = 1e-6*/)
+	{
+		return std::abs(this->min[planeAxis] - this->max[planeAxis]) <= epsilon;
 	}
 
 	bool BoundingBox::operator==(const BoundingBox & other) const

@@ -3,7 +3,10 @@
  */
 
 /*--------------------------------< Includes >-------------------------------------------*/
+#include <algorithm>
+
 #include "KdNode.hpp"
+#include "Utility\mathUtility.hpp"
 
 
 namespace raytracing
@@ -11,6 +14,8 @@ namespace raytracing
 	/*--------------------------------< Defines >--------------------------------------------*/
 
 	/*--------------------------------< Typedefs >-------------------------------------------*/
+
+	using namespace utility;
 
 	/*--------------------------------< Constants >------------------------------------------*/
 		
@@ -22,6 +27,35 @@ namespace raytracing
 		BoundingBox rootBox(triangles);
 		// Start recursive build of tree
 		return build(triangles, rootBox);
+	}
+
+	/*static*/ KdNode* KdNode::buildTreeSAH(std::vector<KdTriangle>& triangles)
+	{
+		// Create BBox of full scene
+		BoundingBox rootBox(triangles);
+
+		std::vector<Event> events;
+		for (uint8_t k = 0; k < MAX_TREE_DIMENSION; k++)
+		{
+			Axis axis = static_cast<Axis>(k);
+			// Create event list
+			for (KdTriangle& triangle : triangles)
+			{
+				BoundingBox triangleBox(triangle.faceMeshPair);
+				if (triangleBox.isPlanar(axis))
+				{
+					events.push_back({ triangleBox.getMin()[axis], axis, EventType::PLANAR, triangle });
+				}
+				else
+				{
+					events.push_back({ triangleBox.getMin()[axis], axis, EventType::START, triangle });
+					events.push_back({ triangleBox.getMax()[axis], axis, EventType::END, triangle });
+				}
+			}
+		}
+		sort(events.begin(), events.end(), compareEvents);
+
+		return buildSAH(triangles, rootBox, events);
 	}
 
 	/*static*/ KdNode* KdNode::build(std::vector<KdTriangle>& triangles, BoundingBox bBox, unsigned int depth/* = 1*/)
@@ -101,6 +135,152 @@ namespace raytracing
 		}
 
 		return new KdNode(splittingPlane, build(trianglesLeft, leftBox, depth + 1), build(trianglesRight, rightBox, depth + 1), bBox);
+	}
+
+	/*static*/ KdNode* KdNode::buildSAH(std::vector<KdTriangle>& triangles, BoundingBox bBox, std::vector<Event>& events, unsigned int depth/* = 1*/)
+	{
+		const ai_real EPSILON = 1e-3f;
+
+		if ((triangles.size() <= MAX_TRIANGLES_PER_LEAF) || (depth == MAX_DEPTH))
+		{
+			// Return leaf node
+			return new KdNode(triangles, bBox);
+		}
+
+		// Find plane to split
+		std::pair<Plane, ChildSide> bestPlane = findPlane(triangles.size(), bBox, events);
+		BoundingBox leftBox;
+		BoundingBox rightBox;
+		bBox.split(leftBox, rightBox, bestPlane.first);
+
+		// Classify triangles corresponding to splitting plane
+		classifyTriangles(triangles, events, bestPlane);
+
+		// Splicing E
+		std::vector<Event> leftEvents;
+		std::vector<Event> rightEvents;
+		std::vector<Event> leftOverlapEvents;
+		std::vector<Event> rightOverlapEvents;
+
+		std::vector<Event> leftResultEvents;
+		std::vector<Event> rightResultEvents;
+		
+		std::vector<KdTriangle> trianglesLeft;
+		std::vector<KdTriangle> trianglesRight;
+		for (Event splitEvent : events)
+		{
+			if (splitEvent.triangle.side == ChildSide::LEFT)
+			{
+				leftEvents.push_back(splitEvent);
+				//trianglesLeft.push_back(splitEvent.triangle);
+			}
+			else if (splitEvent.triangle.side == ChildSide::RIGHT)
+			{
+				rightEvents.push_back(splitEvent);
+				//trianglesRight.push_back(splitEvent.triangle);
+			}
+			else if (splitEvent.triangle.side == ChildSide::BOTH)
+			{
+				//leftEvents.push_back(splitEvent);
+				//rightEvents.push_back(splitEvent);
+				//trianglesLeft.push_back(splitEvent.triangle);
+				//trianglesRight.push_back(splitEvent.triangle);
+			}
+			else
+			{
+				// Discard events refering to unclassified triangles
+			}
+			// Discard events refering to triangles classified as BOTH
+		}
+
+		for (KdTriangle& tris : triangles)
+		{
+			if (tris.side == ChildSide::LEFT)
+			{
+				trianglesLeft.push_back(tris);
+			}
+			else if (tris.side == ChildSide::RIGHT)
+			{
+				trianglesRight.push_back(tris);
+			}
+			else if (tris.side == ChildSide::BOTH)
+			{
+				trianglesLeft.push_back(tris);
+				trianglesRight.push_back(tris);
+			}
+			else
+			{
+				// Discard events refering to unclassified triangles
+			}
+		}
+
+		// TODO: Generate new events for overlapping triangles
+		for (uint8_t k = 0; k < MAX_TREE_DIMENSION; k++)
+		{
+			Axis axis = static_cast<Axis>(k);
+			// Create event list
+			for (KdTriangle& triangle : triangles)
+			{
+				if (triangle.side == ChildSide::BOTH)
+				{
+					BoundingBox left;
+					BoundingBox right;
+					BoundingBox triangleBox(triangle.faceMeshPair);
+					triangleBox.split(left, right, bestPlane.first);
+
+					if (left.isPlanar(axis))
+					{
+						leftOverlapEvents.push_back({ left.getMin()[axis], axis, EventType::PLANAR, triangle });
+					}
+					else
+					{
+						leftOverlapEvents.push_back({ left.getMin()[axis], axis, EventType::START, triangle });
+						leftOverlapEvents.push_back({ left.getMax()[axis], axis, EventType::END, triangle });
+					}
+
+					if (right.isPlanar(axis))
+					{
+						rightOverlapEvents.push_back({ right.getMin()[axis], axis, EventType::PLANAR, triangle });
+					}
+					else
+					{
+						rightOverlapEvents.push_back({ right.getMin()[axis], axis, EventType::START, triangle });
+						rightOverlapEvents.push_back({ right.getMax()[axis], axis, EventType::END, triangle });
+					}
+				}
+			}
+		}
+
+		// TODO: Merge 
+		sort(leftOverlapEvents.begin(), leftOverlapEvents.end(), compareEvents);
+		sort(rightOverlapEvents.begin(), rightOverlapEvents.end(), compareEvents);
+		merge(
+			leftOverlapEvents.begin(), leftOverlapEvents.end(),
+			leftEvents.begin(), leftEvents.end(),
+			std::back_inserter(leftResultEvents), compareEvents);
+		merge(
+			rightOverlapEvents.begin(), rightOverlapEvents.end(),
+			rightEvents.begin(), rightEvents.end(),
+			std::back_inserter(rightResultEvents), compareEvents);
+
+
+		// SAH_initial = number_of_polygons * area_of_subtree
+		// S - Surface area
+		// N - Number of polygons
+		// SAH_optimal = min(S_left * N_left + S_right * N_right)
+		
+		// define some split_cost
+		// ...
+		// 
+		// if (SAH_optimal + split_cost < SAH_initial) 
+		// {
+		//    it would be optimal to split that subtree
+		// }
+		// else 
+		// {
+		// 	  you don't have to split current subtree
+		// }
+		return new KdNode(bestPlane.first, buildSAH(trianglesLeft, leftBox, leftResultEvents, depth + 1), buildSAH(trianglesRight, rightBox, rightResultEvents, depth + 1), bBox);
 	}
 
 	bool KdNode::calculateIntersection(aiRay& ray, IntersectionInformation& outIntersection)

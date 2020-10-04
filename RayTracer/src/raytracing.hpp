@@ -134,6 +134,13 @@ namespace raytracing
 		UNDEFINED
 	}ChildSide;
 
+	typedef enum EventType : uint8_t
+	{
+		END = 0,
+		PLANAR = 1,
+		START = 2
+	}EventType;
+
 	typedef struct KdTriangle
 	{
 		KdTriangle(std::pair<aiFace*, aiMesh*> pair, ChildSide childSide):
