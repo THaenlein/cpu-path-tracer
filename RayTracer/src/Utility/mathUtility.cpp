@@ -213,9 +213,59 @@ namespace utility
 			*(vertexNormals[2]);
 		return smoothNormal.Normalize();
 	}
+
+	void mathUtility::gammaCorrectSrgb(aiColor3D* color)
+	{
+		color->r = sRgb(color->r);
+		color->g = sRgb(color->g);
+		color->b = sRgb(color->b);
+	}
+
+	void mathUtility::gammaCorrectAdobeRgb(aiColor3D* color)
+	{
+		color->r = adobeRgb(color->r);
+		color->g = adobeRgb(color->g);
+		color->b = adobeRgb(color->b);
+	}
 		
 	/*--------------------------------< Protected members >----------------------------------*/
 		
 	/*--------------------------------< Private members >------------------------------------*/
+
+	float mathUtility::sRgb(float value)
+	{
+		static const float GAMMA = 1.f / 2.4f;
+		static const float A = 1.055f;
+		static const float B = -0.055;
+		static const float C = 12.92f;
+		static const float D = 0.0031308f;
+
+		if (value < 0.f)
+		{
+			return -sRgb(-value);
+		}
+		else if (0.f <= value < D)
+		{
+			return C * value;
+		}
+		else if (value >= D)
+		{
+			return A * std::powf(value, GAMMA) + B;
+		}
+	}
+
+	float mathUtility::adobeRgb(float value)
+	{
+		static const float GAMMA = 1.f / 2.19921875f;
+
+		if (value >= 0.f)
+		{
+			return std::powf(value, GAMMA);
+		}
+		else
+		{
+			return -std::powf(-value, GAMMA);
+		}
+	}
 	
 } // end of namespace raytracer

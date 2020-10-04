@@ -71,6 +71,10 @@ namespace utility
 			aiVector2D* outUV);
 
 		static aiVector3D calculateSmoothNormal(aiVector2D& uv, std::vector<aiVector3D*>& vertexNormals);
+
+		static void gammaCorrectSrgb(aiColor3D* color);
+		
+		static void gammaCorrectAdobeRgb(aiColor3D* color);
 	
 	/*--------------------------------< Protected methods >---------------------------------*/
 	protected:
@@ -86,6 +90,10 @@ namespace utility
 	
 	/*--------------------------------< Private members >-----------------------------------*/
 	private:
+
+		static float sRgb(float value);
+
+		static float adobeRgb(float value);
 
 	};
 	

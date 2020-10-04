@@ -143,6 +143,13 @@ namespace raytracing
 #endif
 				}
 				pixelAverage = pixelAverage * static_cast<float>(1.f / std::pow(maxSamples, 2U));
+
+				// sRGB 
+				mathUtility::gammaCorrectSrgb(&pixelAverage);
+
+				// Adobe RGB
+				//mathUtility::gammaCorrectAdobeRgb(&pixelAverage);
+
 				this->pixels[currentPixel] = pixelAverage;
 			}
 		}
@@ -191,6 +198,13 @@ namespace raytracing
 					}
 				}
 				pixelAverage = pixelAverage * static_cast<float>(1.f/std::pow(aa, 2U));
+				
+				// sRGB 
+				mathUtility::gammaCorrectSrgb(&pixelAverage);
+
+				// Adobe RGB
+				//mathUtility::gammaCorrectAdobeRgb(&pixelAverage);
+
 				this->pixels[currentPixel] = pixelAverage;
 			}
 		}
