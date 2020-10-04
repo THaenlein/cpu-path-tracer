@@ -43,7 +43,7 @@ namespace raytracing
 
 		bool operator== (const Plane& other) const
 		{
-			static float EPSILON(1e-3);
+			static float EPSILON(1e-3f);
 			return 
 				(std::abs(this->position - other.position) <= EPSILON) &&
 				this->alignedAxis == other.alignedAxis;
