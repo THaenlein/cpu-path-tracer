@@ -445,7 +445,7 @@ namespace raytracing
 				aiRay shadowRay(intersectionInformation.hitPoint + (smoothNormal * this->renderSettings.getBias()), lightDirection, RayType::SHADOW);
 				IntersectionInformation shadowRayIntersectionInfo;
 #if USE_ACCELERATION_STRUCTURE
-				bool pointInShadow = !this->accelerationStructure->calculateIntersection(shadowRay, shadowRayIntersectionInfo);
+				bool pointInShadow = !this->accelerationStructure->calculateIntersection(shadowRay, &shadowRayIntersectionInfo);
 #else
 				bool pointInShadow = !calculateIntersection(shadowRay, shadowRayIntersectionInfo);
 #endif
@@ -539,7 +539,7 @@ namespace raytracing
 			return { .1f, .1f, .1f };
 		}
 #if USE_ACCELERATION_STRUCTURE
-		bool intersects = this->accelerationStructure->calculateIntersection(ray, intersectionInformation);
+		bool intersects = this->accelerationStructure->calculateIntersection(ray, &intersectionInformation);
 #else
 		bool intersects = this->calculateIntersection(ray, intersectionInformation);
 #endif
@@ -564,7 +564,7 @@ namespace raytracing
 			return { .1f, .1f, .1f };
 		}
 #if USE_ACCELERATION_STRUCTURE
-		bool intersects = this->accelerationStructure->calculateIntersection(ray, intersectionInformation);
+		bool intersects = this->accelerationStructure->calculateIntersection(ray, &intersectionInformation);
 #else
 		bool intersects = this->calculateIntersection(ray, intersectionInformation);
 #endif

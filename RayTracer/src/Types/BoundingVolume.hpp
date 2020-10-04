@@ -27,7 +27,7 @@ namespace raytracing
 
 		void initialize(const aiScene* scene);
 
-		bool calculateIntersection(aiRay& ray, IntersectionInformation& outIntersection) override;
+		bool calculateIntersection(const aiRay& ray, IntersectionInformation* outIntersection) override;
 	
 	/*--------------------------------< Protected methods >---------------------------------*/
 	protected:

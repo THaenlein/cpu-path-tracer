@@ -35,7 +35,7 @@ namespace raytracing
 		}
 	}
 
-	bool BoundingVolume::calculateIntersection(aiRay& ray, IntersectionInformation& outIntersection)
+	bool BoundingVolume::calculateIntersection(const aiRay& ray, IntersectionInformation* outIntersection)
 	{
 		float leastDistanceIntersection{ std::numeric_limits<float>::max() };
 		std::vector<aiVector3D*> nearestIntersectedTriangle;
@@ -70,22 +70,22 @@ namespace raytracing
 					if (intersectsCurrentTriangle && (distanceToIntersectionPoint < leastDistanceIntersection))
 					{
 						leastDistanceIntersection = distanceToIntersectionPoint;
-						outIntersection.hitMesh = intersectedMesh;
-						outIntersection.hitTriangle = nearestIntersectedTriangle;
-						outIntersection.hitPoint = intersectionPoint;
-						outIntersection.ray = ray;
-						outIntersection.uv = uvCoordinates;
+						outIntersection->hitMesh = intersectedMesh;
+						outIntersection->hitTriangle = nearestIntersectedTriangle;
+						outIntersection->hitPoint = intersectionPoint;
+						outIntersection->ray = ray;
+						outIntersection->uv = uvCoordinates;
 						// Always use first texture channel
 						if (intersectedMesh->HasTextureCoords(0))
 						{
-							outIntersection.uvTextureCoords =
+							outIntersection->uvTextureCoords =
 								(1 - uvCoordinates.x - uvCoordinates.y) *
 								*(textureCoordinates[0]) + uvCoordinates.x *
 								*(textureCoordinates[1]) + uvCoordinates.y *
 								*(textureCoordinates[2]);
 						}
-						outIntersection.vertexNormals = triangleVertexNormals;
-						outIntersection.textureCoordinates = textureCoordinates;
+						outIntersection->vertexNormals = triangleVertexNormals;
+						outIntersection->textureCoordinates = textureCoordinates;
 						intersects = true;
 					}
 					nearestIntersectedTriangle.clear();

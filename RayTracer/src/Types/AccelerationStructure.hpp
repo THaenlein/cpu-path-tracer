@@ -23,7 +23,7 @@ namespace raytracing
 	/*--------------------------------< Public methods >------------------------------------*/
 	public:
 
-		virtual bool calculateIntersection(aiRay& ray, IntersectionInformation& outIntersection) = 0;
+		virtual bool calculateIntersection(const aiRay& ray, IntersectionInformation* outIntersection) = 0;
 	
 	/*--------------------------------< Protected methods >---------------------------------*/
 	protected:

@@ -40,7 +40,7 @@ namespace raytracing
 		return buildSAH(triangles, rootBox);
 	}
 
-	bool KdNode::calculateIntersection(aiRay& ray, IntersectionInformation& outIntersection)
+	bool KdNode::calculateIntersection(const aiRay& ray, IntersectionInformation* outIntersection)
 	{
 		if (!this->boundingBox.intersects(ray))
 		{
@@ -89,25 +89,25 @@ namespace raytracing
 					return true;
 				}
 				float distanceToIntersectionPoint = (intersectionPoint - ray.pos).Length();
-				if (intersectsCurrentTriangle && (distanceToIntersectionPoint < outIntersection.intersectionDistance))
+				if (intersectsCurrentTriangle && (distanceToIntersectionPoint < outIntersection->intersectionDistance))
 				{
-					outIntersection.intersectionDistance = distanceToIntersectionPoint;
-					outIntersection.hitMesh = associatedMesh;
-					outIntersection.hitTriangle = nearestIntersectedTriangle;
-					outIntersection.hitPoint = intersectionPoint;
-					outIntersection.ray = ray;
-					outIntersection.uv = uvCoordinates;
+					outIntersection->intersectionDistance = distanceToIntersectionPoint;
+					outIntersection->hitMesh = associatedMesh;
+					outIntersection->hitTriangle = nearestIntersectedTriangle;
+					outIntersection->hitPoint = intersectionPoint;
+					outIntersection->ray = ray;
+					outIntersection->uv = uvCoordinates;
 					// Always use first texture channel
 					if (associatedMesh->HasTextureCoords(0))
 					{
-						outIntersection.uvTextureCoords =
+						outIntersection->uvTextureCoords =
 							(1 - uvCoordinates.x - uvCoordinates.y) * 
 							*(textureCoordinates[0]) + uvCoordinates.x *
 							*(textureCoordinates[1]) + uvCoordinates.y *
 							*(textureCoordinates[2]);
 					}
-					outIntersection.vertexNormals = triangleVertexNormals;
-					outIntersection.textureCoordinates = textureCoordinates;
+					outIntersection->vertexNormals = triangleVertexNormals;
+					outIntersection->textureCoordinates = textureCoordinates;
 					intersects = true;
 				}
 				nearestIntersectedTriangle.clear();
@@ -123,7 +123,7 @@ namespace raytracing
 		
 	/*--------------------------------< Private members >------------------------------------*/
 
-	/*static*/ KdNode* KdNode::build(std::vector<KdTriangle>& triangles, BoundingBox bBox, unsigned int depth/* = 1*/)
+	/*static*/ KdNode* KdNode::build(std::vector<KdTriangle>& triangles, BoundingBox& bBox, unsigned int depth/* = 1*/)
 	{
 		const ai_real EPSILON = 1e-3f;
 
@@ -135,6 +135,8 @@ namespace raytracing
 
 		// Find plane to split
 		Axis longestAxis = bBox.getLongestAxis();
+
+		// Sort triangles
 		auto compareTriangles = [longestAxis](const KdTriangle& t1, const KdTriangle& t2) -> bool
 		{
 			aiFace* t1Face = t1.faceMeshPair.first;
@@ -150,10 +152,13 @@ namespace raytracing
 						t2Mesh->mVertices[t2Face->mIndices[2]][longestAxis]) / 3.f);
 		};
 		sort(triangles.begin(), triangles.end(), compareTriangles);
+
+		// Find median to split
+		const float WEIGHT = 0.1f;
 		BoundingBox medianTriBox{ triangles[triangles.size() / 2].faceMeshPair };
 		aiVector3D center = bBox.getCenter();
 		aiVector3D medianCenter = medianTriBox.getCenter();
-		float planePosition = center[longestAxis] - ((center[longestAxis] - medianCenter[longestAxis]) * .1f);
+		float planePosition = center[longestAxis] - ((center[longestAxis] - medianCenter[longestAxis]) * WEIGHT);
 		Plane splittingPlane(planePosition, longestAxis);
 
 		// Split box in longest axis
@@ -202,13 +207,16 @@ namespace raytracing
 		return new KdNode(splittingPlane, build(trianglesLeft, leftBox, depth + 1), build(trianglesRight, rightBox, depth + 1), bBox);
 	}
 
-	/*static*/ KdNode* KdNode::buildSAH(std::vector<KdTriangle>& triangles, BoundingBox bBox, const Plane prevPlane, unsigned int depth/* = 0*/)
+	/*static*/ KdNode* KdNode::buildSAH(
+		std::vector<KdTriangle>& triangles,
+		BoundingBox bBox,
+		unsigned int depth/* = 0*/)
 	{
 		// Find plane to split
 		float minCost;
 		std::pair<Plane, ChildSide> bestPlane = findPlane(triangles, bBox, &minCost);
 
-		if ((terminate(triangles.size(), minCost)) || (bestPlane.first == prevPlane))
+		if ((terminate(triangles.size(), minCost)))
 		{
 			return new KdNode(triangles, bBox);
 		}
@@ -221,17 +229,22 @@ namespace raytracing
 		// Classify triangles corresponding to splitting plane
 		std::vector<KdTriangle> trianglesLeft;
 		std::vector<KdTriangle> trianglesRight;
-		classifyTriangles(triangles, bestPlane, trianglesLeft, trianglesRight);
+		classifyTriangles(triangles, bestPlane, &trianglesLeft, &trianglesRight);
+		triangles.~vector();
 
-		return new KdNode(bestPlane.first, buildSAH(trianglesLeft, leftBox, bestPlane.first, depth + 1), buildSAH(trianglesRight, rightBox, bestPlane.first, depth + 1), bBox);
+		return new KdNode(
+			bestPlane.first, 
+			buildSAH(trianglesLeft, leftBox, depth + 1),
+			buildSAH(trianglesRight, rightBox, depth + 1),
+			bBox);
 	}
 
 	std::pair<float, ChildSide> KdNode::SAH(
-		Plane& plane,
-		BoundingBox& box,
-		int64_t triangleCountLeft,
-		int64_t triangleCountRight,
-		int64_t triangleCountOverlap)
+		const Plane& plane,
+		const BoundingBox& box,
+		const int64_t triangleCountLeft,
+		const int64_t triangleCountRight,
+		const int64_t triangleCountOverlap)
 	{
 		BoundingBox leftBox;
 		BoundingBox rightBox;
@@ -240,26 +253,18 @@ namespace raytracing
 		{
 			return std::make_pair<float, ChildSide>(std::numeric_limits<float>::infinity(), ChildSide::UNDEFINED);
 		}
-		float probabilityLeft = leftBox.getSurfaceArea() / box.getSurfaceArea();
-		float probabilityRight = rightBox.getSurfaceArea() / box.getSurfaceArea();
-		if ((probabilityLeft == 0.f) || (probabilityRight == 0.f))
-		{
-			return std::make_pair<float, ChildSide>(std::numeric_limits<float>::infinity(), ChildSide::UNDEFINED);
-		}
-		if (box.length(plane.getAxis()) == 0)
-		{
-			return std::make_pair<float, ChildSide>(std::numeric_limits<float>::infinity(), ChildSide::UNDEFINED);
-		}
-		float costLeft = costHeuristic(probabilityLeft, probabilityRight, triangleCountLeft + triangleCountOverlap, triangleCountRight);
-		float costRight = costHeuristic(probabilityLeft, probabilityRight, triangleCountLeft, triangleCountRight + triangleCountOverlap);
+		const float probabilityLeft = leftBox.getSurfaceArea() / box.getSurfaceArea();
+		const float probabilityRight = rightBox.getSurfaceArea() / box.getSurfaceArea();
+		const float costLeft = costHeuristic(probabilityLeft, probabilityRight, triangleCountLeft + triangleCountOverlap, triangleCountRight);
+		const float costRight = costHeuristic(probabilityLeft, probabilityRight, triangleCountLeft, triangleCountRight + triangleCountOverlap);
 		return std::make_pair<float, ChildSide>(costLeft < costRight ? costLeft, ChildSide::LEFT : costRight, ChildSide::RIGHT);
 	}
 
 	float KdNode::costHeuristic(
-		float probabilityLeft,
-		float probabilityRight,
-		int64_t triangleCountLeft,
-		int64_t triangleCountRight)
+		const float probabilityLeft,
+		const float probabilityRight,
+		const int64_t triangleCountLeft,
+		const int64_t triangleCountRight)
 	{
 		auto lambdaP = [&] () -> float
 		{
@@ -273,8 +278,8 @@ namespace raytracing
 	}
 
 	std::pair<Plane, ChildSide> KdNode::findPlane(
-		std::vector<KdTriangle> triangles,
-		BoundingBox& bBox,
+		std::vector<KdTriangle>& triangles,
+		const BoundingBox& bBox,
 		float* outCost)
 	{
 		*outCost = std::numeric_limits<float>::infinity();
@@ -355,9 +360,9 @@ namespace raytracing
 
 	/*static*/ void KdNode::classifyTriangles(
 		std::vector<KdTriangle>& triangles,
-		std::pair<Plane, ChildSide> splittingPlane,
-		std::vector<KdTriangle>& outTrianglesLeft,
-		std::vector<KdTriangle>& outTrianglesRight)
+		std::pair<Plane, ChildSide>& splittingPlane,
+		std::vector<KdTriangle>* outTrianglesLeft,
+		std::vector<KdTriangle>* outTrianglesRight)
 	{
 		Plane& plane{ splittingPlane.first };
 		ChildSide planeSide{ splittingPlane.second };
@@ -370,11 +375,11 @@ namespace raytracing
 			{
 				if (planeSide == ChildSide::LEFT)
 				{
-					outTrianglesLeft.push_back(tri);
+					outTrianglesLeft->push_back(tri);
 				}
 				else if (planeSide == ChildSide::RIGHT)
 				{
-					outTrianglesRight.push_back(tri);
+					outTrianglesRight->push_back(tri);
 				}
 				else
 				{
@@ -385,11 +390,11 @@ namespace raytracing
 			{
 				if (triBox.getMin()[plane.getAxis()] < plane.getPosition())
 				{
-					outTrianglesLeft.push_back(tri);
+					outTrianglesLeft->push_back(tri);
 				}
 				if (triBox.getMax()[plane.getAxis()] > plane.getPosition())
 				{
-					outTrianglesRight.push_back(tri);
+					outTrianglesRight->push_back(tri);
 				}
 			}
 		}
@@ -404,7 +409,7 @@ namespace raytracing
 			((e1.position < e2.position) && (e1.type < e2.type));
 	}
 
-	/*static*/ bool KdNode::terminate(unsigned int triangleCount, float minCost)
+	/*static*/ bool KdNode::terminate(const unsigned int triangleCount, const float minCost)
 	{
 		return minCost > INTERSECTION_COST * static_cast<float>(triangleCount);
 	}

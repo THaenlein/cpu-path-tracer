@@ -172,7 +172,7 @@ namespace raytracing
 		right.max = rightMax;
 	}
 
-	void BoundingBox::split(BoundingBox& left, BoundingBox& right, Plane& splitPlane)
+	void BoundingBox::split(BoundingBox& left, BoundingBox& right, const Plane& splitPlane) const
 	{
 		float planePosition = splitPlane.getPosition();
 		Axis planeAxis = splitPlane.getAxis();
@@ -222,7 +222,7 @@ namespace raytracing
 			   contains(&associatedMesh->mVertices[triangle->mIndices[2]]);
 	}
 
-	bool BoundingBox::intersects(aiRay& ray) const
+	bool BoundingBox::intersects(const aiRay& ray) const
 	{
 		aiVector3D tMin((this->min - ray.pos) / ray.dir);
 		aiVector3D tMax((this->max - ray.pos) / ray.dir);

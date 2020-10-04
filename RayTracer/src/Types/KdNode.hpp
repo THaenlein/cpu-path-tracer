@@ -37,39 +37,38 @@ namespace raytracing
 		}
 
 		float position;
-		aiVector3D boxPos;
 		Axis dimension;
 		EventType type;
-		KdTriangle& triangle;
+		KdTriangle triangle;
 	}Event;
 
 	/*--------------------------------< Constants >-----------------------------------------*/
-	
-	static const unsigned int MAX_TRIANGLES_PER_LEAF = 32;
-
-	static const unsigned int MAX_DEPTH = 512;
-	
-	static const unsigned int MIN_DEPTH = 32;
-
-	static const float TRAVERSIAL_COST = 1.0f;
-
-	static const float INTERSECTION_COST = 5.25f;
-
-	static const uint8_t MAX_TREE_DIMENSION = 3;
-
 
 	class KdNode : public AccelerationStructure
 	{
+
+	static constexpr unsigned int MAX_TRIANGLES_PER_LEAF = 32;
+
+	static constexpr unsigned int MAX_DEPTH = 512;
+	
+	static constexpr unsigned int MIN_DEPTH = 32;
+
+	static constexpr float TRAVERSIAL_COST = 1.0f;
+
+	static constexpr float INTERSECTION_COST = 5.25f;
+
+	static constexpr uint8_t MAX_TREE_DIMENSION = 3;
+	
 	/*--------------------------------< Public methods >------------------------------------*/
 	public:
 
 		KdNode() = default;
 
-		KdNode(Plane location, KdNode* leftChild, KdNode* rightChild, BoundingBox box) :
+		KdNode(Plane& location, KdNode* leftChild, KdNode* rightChild, BoundingBox& box) :
 			splittingPlane(location), left(leftChild), right(rightChild), boundingBox(box)
 		{};
 
-		KdNode(std::vector<KdTriangle>& triangles, BoundingBox box) :
+		KdNode(std::vector<KdTriangle>& triangles, BoundingBox& box) :
 			containedTriangles(triangles), boundingBox(box), left(nullptr), right(nullptr)
 		{};
 
@@ -88,7 +87,7 @@ namespace raytracing
 
 		static KdNode* buildTreeSAH(std::vector<KdTriangle>& triangles);
 		
-		virtual bool calculateIntersection(aiRay& ray, IntersectionInformation& outIntersection) override;
+		virtual bool calculateIntersection(const aiRay& ray, IntersectionInformation* outIntersection) override;
 
 	/*--------------------------------< Protected methods >---------------------------------*/
 	protected:
@@ -96,37 +95,40 @@ namespace raytracing
 	/*--------------------------------< Private methods >-----------------------------------*/
 	private:
 		
-		static KdNode* build(std::vector<KdTriangle>& triangles, BoundingBox bBox, unsigned int depth = 1);
+		static KdNode* build(std::vector<KdTriangle>& triangles, BoundingBox& bBox, unsigned int depth = 1);
 
-		static KdNode* buildSAH(std::vector<KdTriangle>& triangles, BoundingBox bBox, const Plane prevPlane = {}, unsigned int depth = 0);
+		static KdNode* buildSAH(
+			std::vector<KdTriangle>& triangles,
+			BoundingBox bBox,
+			unsigned int depth = 0);
 
 		static std::pair<float, ChildSide> SAH(
-			Plane& plane, 
-			BoundingBox& box,
-			int64_t triangleCountLeft,
-			int64_t triangleCountRight,
-			int64_t triangleCountOverlap);
+			const Plane& plane, 
+			const BoundingBox& box,
+			const int64_t triangleCountLeft,
+			const int64_t triangleCountRight,
+			const int64_t triangleCountOverlap);
 
 		static float costHeuristic(
-			float probabilityLeft, 
-			float probabilityRight,
-			int64_t triangleCountLeft,
-			int64_t triangleCountRight);
+			const float probabilityLeft, 
+			const float probabilityRight,
+			const int64_t triangleCountLeft,
+			const int64_t triangleCountRight);
 
 		static std::pair<Plane, ChildSide> findPlane(
-			std::vector<KdTriangle> triangles,
-			BoundingBox& bBox,
+			std::vector<KdTriangle>& triangles,
+			const BoundingBox& bBox,
 			float* outCost);
 
 		static void classifyTriangles(
 			std::vector<KdTriangle>& triangles,
-			std::pair<Plane, ChildSide> splittingPlane,
-			std::vector<KdTriangle>& outTrianglesLeft,
-			std::vector<KdTriangle>& outTrianglesRight);
+			std::pair<Plane, ChildSide>& splittingPlane,
+			std::vector<KdTriangle>* outTrianglesLeft,
+			std::vector<KdTriangle>* outTrianglesRight);
 
 		static bool compareEvents(const Event& e1, const Event& e2);
 
-		static bool terminate(unsigned int triangleCount, float minCost);
+		static bool terminate(const unsigned int triangleCount, const float minCost);
 
 	/*--------------------------------< Public members >------------------------------------*/
 	public:

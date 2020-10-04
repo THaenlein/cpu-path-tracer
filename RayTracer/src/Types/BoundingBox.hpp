@@ -58,7 +58,7 @@ namespace raytracing
 		
 		void split(BoundingBox& left, BoundingBox& right, uint8_t splitAxis);
 
-		void split(BoundingBox& left, BoundingBox& right, Plane& splitPlane);
+		void split(BoundingBox& left, BoundingBox& right, const Plane& splitPlane) const;
 
 		bool contains(std::vector<aiVector3D*> triangle) const;
 		
@@ -70,7 +70,7 @@ namespace raytracing
 
 		bool exclusiveContains(std::pair<aiFace*, aiMesh*>& triangleMeshPair) const;
 
-		bool intersects(aiRay& ray) const;
+		bool intersects(const aiRay& ray) const;
 
 		inline const aiVector3D& getMin() const
 		{

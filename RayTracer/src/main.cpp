@@ -278,7 +278,12 @@ int main(int argc, char* argv[])
 			triangleMeshCollection.push_back({ std::make_pair(face, mesh), raytracing::ChildSide::UNDEFINED });
 		}
 	}
+	SDL_LogInfo(SDL_LOG_CATEGORY_APPLICATION, "Building KD-Tree..");
+	raytracing::Timer::getInstance().start();
 	std::unique_ptr<raytracing::KdNode> kdTree(raytracing::KdNode::buildTreeSAH(triangleMeshCollection));
+	double kdBuildingTime = raytracing::Timer::getInstance().stop();
+	SDL_LogInfo(SDL_LOG_CATEGORY_APPLICATION, "Done. Took %.2f seconds", kdBuildingTime);
+	triangleMeshCollection.~vector();
 
 	raytracing::Settings renderSettings(samples, depth, bias, aperture, fDist, useDOF, useAA);
 	raytracing::RayTracer rayTracer(app, scene, renderSettings, std::move(kdTree));
@@ -304,6 +309,7 @@ int main(int argc, char* argv[])
 
 	std::vector<std::thread> threadPool;
 	std::atomic<uint8_t> threadsTerminated(0);
+	SDL_LogInfo(SDL_LOG_CATEGORY_APPLICATION, "Start rendering..");
 	raytracing::Timer::getInstance().start();
 	for (unsigned int i = 0; i < numberOfThreads; i++)
 	{
