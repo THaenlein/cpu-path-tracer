@@ -95,7 +95,9 @@ namespace raytracing
 		
 		aiVector3D getCenter();
 
-		bool isPlanar(Axis planeAxis, float epsilon = 1e-6);
+		bool isPlanar(float epsilon = 1e-6);
+
+		float length(const Axis axis);
 
 		bool operator==(const BoundingBox& other) const;
 	

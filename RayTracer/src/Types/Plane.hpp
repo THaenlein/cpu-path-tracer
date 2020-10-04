@@ -31,12 +31,12 @@ namespace raytracing
 			position(pos), alignedAxis(axis)
 		{};
 
-		inline Axis getAxis()
+		inline Axis getAxis() const
 		{
 			return this->alignedAxis;
 		}
 
-		inline float getPosition()
+		inline float getPosition() const
 		{
 			return this->position;
 		}

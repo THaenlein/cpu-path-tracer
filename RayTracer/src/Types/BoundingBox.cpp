@@ -243,9 +243,32 @@ namespace raytracing
 		return aiVector3D((this->min + this->max) / 2.f);
 	}
 
-	bool BoundingBox::isPlanar(Axis planeAxis, float epsilon/* = 1e-6*/)
+	bool BoundingBox::isPlanar(float epsilon/* = 1e-6*/)
 	{
-		return std::abs(this->min[planeAxis] - this->max[planeAxis]) <= epsilon;
+		return 
+			std::abs(this->min.x - this->max.x) <= epsilon ||
+			std::abs(this->min.y - this->max.y) <= epsilon ||
+			std::abs(this->min.z - this->max.z) <= epsilon;
+	}
+
+	float BoundingBox::length(const Axis axis)
+	{
+		switch (axis)
+		{
+		case Axis::X:
+			return std::abs(this->min.x - this->max.x);
+			break;
+	
+		case Axis::Y:
+			return std::abs(this->min.y - this->max.y);
+			break;
+	
+		case Axis::Z:
+			return std::abs(this->min.z - this->max.z);
+			break;
+		default:
+			return std::numeric_limits<float>::infinity();
+		}
 	}
 
 	bool BoundingBox::operator==(const BoundingBox & other) const

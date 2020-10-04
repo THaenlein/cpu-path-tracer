@@ -4,6 +4,7 @@
 
 /*--------------------------------< Includes >-------------------------------------------*/
 #include <algorithm>
+#include <iostream>
 
 #include "KdNode.hpp"
 #include "Utility\mathUtility.hpp"
@@ -34,28 +35,28 @@ namespace raytracing
 		// Create BBox of full scene
 		BoundingBox rootBox(triangles);
 
-		std::vector<Event> events;
-		for (uint8_t k = 0; k < MAX_TREE_DIMENSION; k++)
-		{
-			Axis axis = static_cast<Axis>(k);
-			// Create event list
-			for (KdTriangle& triangle : triangles)
-			{
-				BoundingBox triangleBox(triangle.faceMeshPair);
-				if (triangleBox.isPlanar(axis))
-				{
-					events.push_back({ triangleBox.getMin()[axis], axis, EventType::PLANAR, triangle });
-				}
-				else
-				{
-					events.push_back({ triangleBox.getMin()[axis], axis, EventType::START, triangle });
-					events.push_back({ triangleBox.getMax()[axis], axis, EventType::END, triangle });
-				}
-			}
-		}
-		sort(events.begin(), events.end(), compareEvents);
+		//std::vector<Event> events;
+		//for (uint8_t k = 0; k < MAX_TREE_DIMENSION; k++)
+		//{
+		//	Axis axis = static_cast<Axis>(k);
+		//	// Create event list
+		//	for (KdTriangle& triangle : triangles)
+		//	{
+		//		BoundingBox triangleBox(triangle.faceMeshPair);
+		//		if (triangleBox.isPlanar())
+		//		{
+		//			events.push_back({ triangleBox.getMin()[axis], axis, EventType::PLANAR, triangle });
+		//		}
+		//		else
+		//		{
+		//			events.push_back({ triangleBox.getMin()[axis], axis, EventType::START, triangle });
+		//			events.push_back({ triangleBox.getMax()[axis], axis, EventType::END, triangle });
+		//		}
+		//	}
+		//}
+		//sort(events.begin(), events.end(), compareEvents);
 
-		return buildSAH(triangles, rootBox, events);
+		return buildSAH(triangles, rootBox);
 	}
 
 	/*static*/ KdNode* KdNode::build(std::vector<KdTriangle>& triangles, BoundingBox bBox, unsigned int depth/* = 1*/)
@@ -137,133 +138,94 @@ namespace raytracing
 		return new KdNode(splittingPlane, build(trianglesLeft, leftBox, depth + 1), build(trianglesRight, rightBox, depth + 1), bBox);
 	}
 
-	/*static*/ KdNode* KdNode::buildSAH(std::vector<KdTriangle>& triangles, BoundingBox bBox, std::vector<Event>& events, unsigned int depth/* = 1*/)
+	/*static*/ KdNode* KdNode::buildSAH(std::vector<KdTriangle>& triangles, BoundingBox bBox, const Plane prevPlane, unsigned int depth/* = 0*/)
 	{
 		const ai_real EPSILON = 1e-3f;
+		float minCost;
+		std::pair<Plane, ChildSide> bestPlane = findPlane(triangles, bBox, minCost);
 
-		if ((triangles.size() <= MAX_TRIANGLES_PER_LEAF) || (depth == MAX_DEPTH))
+		if ((terminate(triangles.size(), minCost)) || /*(triangles.size() <= MAX_TRIANGLES_PER_LEAF) || (depth == MAX_DEPTH) || (bBox.isPlanar()) ||*/ (bestPlane.first.getPosition() == prevPlane.getPosition()))
 		{
-			// Return leaf node
 			return new KdNode(triangles, bBox);
 		}
 
 		// Find plane to split
-		std::pair<Plane, ChildSide> bestPlane = findPlane(triangles.size(), bBox, events);
 		BoundingBox leftBox;
 		BoundingBox rightBox;
 		bBox.split(leftBox, rightBox, bestPlane.first);
 
 		// Classify triangles corresponding to splitting plane
-		classifyTriangles(triangles, events, bestPlane);
+		//classifyTriangles(triangles, events, bestPlane);
 
 		// Splicing E
-		std::vector<Event> leftEvents;
-		std::vector<Event> rightEvents;
-		std::vector<Event> leftOverlapEvents;
-		std::vector<Event> rightOverlapEvents;
+		//std::vector<Event> leftEvents;
+		//std::vector<Event> rightEvents;
+		//std::vector<Event> leftOverlapEvents;
+		//std::vector<Event> rightOverlapEvents;
 
-		std::vector<Event> leftResultEvents;
-		std::vector<Event> rightResultEvents;
+		//std::vector<Event> leftResultEvents;
+		//std::vector<Event> rightResultEvents;
 		
 		std::vector<KdTriangle> trianglesLeft;
 		std::vector<KdTriangle> trianglesRight;
-		for (Event splitEvent : events)
-		{
-			if (splitEvent.triangle.side == ChildSide::LEFT)
-			{
-				leftEvents.push_back(splitEvent);
-				//trianglesLeft.push_back(splitEvent.triangle);
-			}
-			else if (splitEvent.triangle.side == ChildSide::RIGHT)
-			{
-				rightEvents.push_back(splitEvent);
-				//trianglesRight.push_back(splitEvent.triangle);
-			}
-			else if (splitEvent.triangle.side == ChildSide::BOTH)
-			{
-				//leftEvents.push_back(splitEvent);
-				//rightEvents.push_back(splitEvent);
-				//trianglesLeft.push_back(splitEvent.triangle);
-				//trianglesRight.push_back(splitEvent.triangle);
-			}
-			else
-			{
-				// Discard events refering to unclassified triangles
-			}
-			// Discard events refering to triangles classified as BOTH
-		}
+		
+		//for (Event splitEvent : events)
+		//{
+		//	if (splitEvent.triangle.side == ChildSide::LEFT)
+		//	{
+		//		leftEvents.push_back(splitEvent);
+		//		//trianglesLeft.push_back(splitEvent.triangle);
+		//	}
+		//	else if (splitEvent.triangle.side == ChildSide::RIGHT)
+		//	{
+		//		rightEvents.push_back(splitEvent);
+		//		//trianglesRight.push_back(splitEvent.triangle);
+		//	}
+		//	else if (splitEvent.triangle.side == ChildSide::BOTH)
+		//	{
+		//		//leftEvents.push_back(splitEvent);
+		//		//rightEvents.push_back(splitEvent);
+		//		//trianglesLeft.push_back(splitEvent.triangle);
+		//		//trianglesRight.push_back(splitEvent.triangle);
+		//	}
+		//	else
+		//	{
+		//		// Discard events refering to unclassified triangles
+		//	}
+		//	// Discard events refering to triangles classified as BOTH
+		//}
 
-		for (KdTriangle& tris : triangles)
+		for (KdTriangle& tri : triangles)
 		{
-			if (tris.side == ChildSide::LEFT)
+			BoundingBox triBox(tri);
+			if ((triBox.getMin()[bestPlane.first.getAxis()] == bestPlane.first.getPosition()) &&
+				(triBox.getMax()[bestPlane.first.getAxis()] == bestPlane.first.getPosition()))
 			{
-				trianglesLeft.push_back(tris);
-			}
-			else if (tris.side == ChildSide::RIGHT)
-			{
-				trianglesRight.push_back(tris);
-			}
-			else if (tris.side == ChildSide::BOTH)
-			{
-				trianglesLeft.push_back(tris);
-				trianglesRight.push_back(tris);
-			}
-			else
-			{
-				// Discard events refering to unclassified triangles
-			}
-		}
-
-		// TODO: Generate new events for overlapping triangles
-		for (uint8_t k = 0; k < MAX_TREE_DIMENSION; k++)
-		{
-			Axis axis = static_cast<Axis>(k);
-			// Create event list
-			for (KdTriangle& triangle : triangles)
-			{
-				if (triangle.side == ChildSide::BOTH)
+				if (bestPlane.second == ChildSide::LEFT)
 				{
-					BoundingBox left;
-					BoundingBox right;
-					BoundingBox triangleBox(triangle.faceMeshPair);
-					triangleBox.split(left, right, bestPlane.first);
-
-					if (left.isPlanar(axis))
-					{
-						leftOverlapEvents.push_back({ left.getMin()[axis], axis, EventType::PLANAR, triangle });
-					}
-					else
-					{
-						leftOverlapEvents.push_back({ left.getMin()[axis], axis, EventType::START, triangle });
-						leftOverlapEvents.push_back({ left.getMax()[axis], axis, EventType::END, triangle });
-					}
-
-					if (right.isPlanar(axis))
-					{
-						rightOverlapEvents.push_back({ right.getMin()[axis], axis, EventType::PLANAR, triangle });
-					}
-					else
-					{
-						rightOverlapEvents.push_back({ right.getMin()[axis], axis, EventType::START, triangle });
-						rightOverlapEvents.push_back({ right.getMax()[axis], axis, EventType::END, triangle });
-					}
+					trianglesLeft.push_back(tri);
+				}
+				else if (bestPlane.second == ChildSide::RIGHT)
+				{
+					trianglesRight.push_back(tri);
+				}
+				else
+				{
+					std::cout << "Error sorting tris" << std::endl;
+				}
+			}
+			else
+			{
+				if (triBox.getMin()[bestPlane.first.getAxis()] < bestPlane.first.getPosition())
+				{
+					trianglesLeft.push_back(tri);
+				}
+				if (triBox.getMax()[bestPlane.first.getAxis()] > bestPlane.first.getPosition())
+				{
+					trianglesRight.push_back(tri);
 				}
 			}
 		}
-
-		// TODO: Merge 
-		sort(leftOverlapEvents.begin(), leftOverlapEvents.end(), compareEvents);
-		sort(rightOverlapEvents.begin(), rightOverlapEvents.end(), compareEvents);
-		merge(
-			leftOverlapEvents.begin(), leftOverlapEvents.end(),
-			leftEvents.begin(), leftEvents.end(),
-			std::back_inserter(leftResultEvents), compareEvents);
-		merge(
-			rightOverlapEvents.begin(), rightOverlapEvents.end(),
-			rightEvents.begin(), rightEvents.end(),
-			std::back_inserter(rightResultEvents), compareEvents);
-
-
 		// SAH_initial = number_of_polygons * area_of_subtree
 		// S - Surface area
 		// N - Number of polygons
@@ -280,7 +242,27 @@ namespace raytracing
 		// {
 		// 	  you don't have to split current subtree
 		// }
-		return new KdNode(bestPlane.first, buildSAH(trianglesLeft, leftBox, leftResultEvents, depth + 1), buildSAH(trianglesRight, rightBox, rightResultEvents, depth + 1), bBox);
+
+		// To avoid endless recursion if no further subdivision is possible
+		//bool leftIndivisible = trianglesLeft.size() == triangles.size();
+		//bool rightIndivisible = trianglesRight.size() == triangles.size();
+		//if ((leftIndivisible && rightIndivisible) && (depth >= MIN_DEPTH))
+		//{
+		//	// No further division of both branches possible
+		//	return new KdNode(bestPlane.first, new KdNode(trianglesLeft, leftBox), new KdNode(trianglesRight, rightBox), bBox);
+		//}
+		//else if (leftIndivisible && (depth >= MIN_DEPTH))
+		//{
+		//	// No further division of left branch possible
+		//	return new KdNode(bestPlane.first, new KdNode(trianglesLeft, leftBox), build(trianglesRight, rightBox, depth + 1), bBox);
+		//}
+		//else if (rightIndivisible && (depth >= MIN_DEPTH))
+		//{
+		//	// No further division of right branch possible
+		//	return new KdNode(bestPlane.first, build(trianglesLeft, leftBox, depth + 1), new KdNode(trianglesRight, rightBox), bBox);
+		//}
+
+		return new KdNode(bestPlane.first, buildSAH(trianglesLeft, leftBox, bestPlane.first, depth + 1), buildSAH(trianglesRight, rightBox, bestPlane.first, depth + 1), bBox);
 	}
 
 	bool KdNode::calculateIntersection(aiRay& ray, IntersectionInformation& outIntersection)
@@ -375,8 +357,20 @@ namespace raytracing
 		BoundingBox leftBox;
 		BoundingBox rightBox;
 		box.split(leftBox, rightBox, plane);
+		//if (leftBox.isPlanar() || rightBox.isPlanar())
+		//{
+		//	return std::make_pair<float, ChildSide>(std::numeric_limits<float>::max(), ChildSide::UNDEFINED);
+		//}
 		float probabilityLeft = leftBox.getSurfaceArea() / box.getSurfaceArea();
 		float probabilityRight = rightBox.getSurfaceArea() / box.getSurfaceArea();
+		if ((probabilityLeft == 0.f) || (probabilityRight == 0.f))
+		{
+			return std::make_pair<float, ChildSide>(std::numeric_limits<float>::max(), ChildSide::UNDEFINED);
+		}
+		if (box.length(plane.getAxis()) == 0)
+		{
+			return std::make_pair<float, ChildSide>(std::numeric_limits<float>::max(), ChildSide::UNDEFINED);
+		}
 		float costLeft = costHeuristic(probabilityLeft, probabilityRight, triangleCountLeft + triangleCountOverlap, triangleCountRight);
 		float costRight = costHeuristic(probabilityLeft, probabilityRight, triangleCountLeft, triangleCountRight + triangleCountOverlap);
 		return std::make_pair<float, ChildSide>(costLeft < costRight ? costLeft, ChildSide::LEFT : costRight, ChildSide::RIGHT);
@@ -388,9 +382,10 @@ namespace raytracing
 		int64_t triangleCountLeft,
 		int64_t triangleCountRight)
 	{
-		auto lambdaP = [&] ()
+		auto lambdaP = [&] () -> float
 		{
-			return (triangleCountLeft == 0) || (triangleCountRight == 0) ? 0.8f : 1.f;
+			return (triangleCountLeft == 0) || (triangleCountRight == 0) &&
+				!((probabilityLeft == 1.f) || (probabilityRight == 1.f)) ? 0.8f : 1.f;
 		};
 
 		return 
@@ -400,70 +395,82 @@ namespace raytracing
 	}
 
 	std::pair<Plane, ChildSide> KdNode::findPlane(
-		int64_t triangleCount,
+		std::vector<KdTriangle> triangles,
 		BoundingBox& bBox,
-		std::vector<Event> events)
+		float& cost)
 	{
-		float bestCut = std::numeric_limits<float>::max();
+		cost = std::numeric_limits<float>::max();
 		Plane bestPlane;
 		ChildSide childSide{ ChildSide::UNDEFINED };
-		int64_t triangleCountLeft[MAX_TREE_DIMENSION];
-		int64_t triangleCountRight[MAX_TREE_DIMENSION];
-		int64_t triangleCountOverlap[MAX_TREE_DIMENSION];
-
 
 		for (unsigned int k = 0; k < MAX_TREE_DIMENSION; k++)
 		{
-			// start: all tris will be right side only
-			triangleCountLeft[k] = 0;
-			triangleCountRight[k] = triangleCount;
-			triangleCountOverlap[k] = 0;
+			Axis axis = static_cast<Axis>(k);
+			std::vector<Event> eventlist;
+			for (KdTriangle& triangle : triangles)
+			{
+				BoundingBox bBox(triangle);
+				if (bBox.isPlanar())
+				{
+					eventlist.push_back({bBox.getMin()[k], axis, EventType::PLANAR, triangle});
+				}
+				else
+				{
+					eventlist.push_back({ bBox.getMin()[k], axis, EventType::START, triangle });
+					eventlist.push_back({ bBox.getMax()[k], axis, EventType::END, triangle });
+				}
+			}
+			sort(eventlist.begin(), eventlist.end(), compareEvents);
+
+			// iteratively “sweep” plane over all split candidates
+			uint32_t triangleCountLeft = 0;
+			uint32_t triangleCountOverlap = 0;
+			uint32_t triangleCountRight = triangles.size(); // start with all tris on right
+
+			for (unsigned int i = 0; i < eventlist.size(); i++)
+			{
+				Axis eventDimension = eventlist.at(i).dimension; // TODO: remove?
+				Plane p(eventlist.at(i).position, eventDimension);
+				int64_t start{ 0 };
+				int64_t end{ 0 };
+				int64_t inPlane{ 0 };
+
+				while ((i < eventlist.size()) && (eventlist.at(i).position == p.getPosition()) && (eventlist.at(i).type == EventType::END))
+				{
+					end++;
+					i++;
+				}
+
+				while ((i < eventlist.size()) && (eventlist.at(i).position == p.getPosition()) && (eventlist.at(i).type == EventType::PLANAR))
+				{
+					inPlane++;
+					i++;
+				}
+
+				while ((i < eventlist.size()) && (eventlist.at(i).position == p.getPosition()) && (eventlist.at(i).type == EventType::START))
+				{
+					start++;
+					i++;
+				}
+
+				// Now the next plane p is found with start, end and inPlane
+				// move plane onto p
+				triangleCountOverlap = inPlane;
+				triangleCountRight -= inPlane;
+				triangleCountRight -= end;
+				std::pair<float, ChildSide> result = SAH(p, bBox, triangleCountLeft, triangleCountRight, triangleCountOverlap);
+				if (result.first < cost)
+				{
+					cost = result.first;
+					bestPlane = p;
+					childSide = result.second;
+				}
+				triangleCountLeft += start;
+				triangleCountLeft += inPlane;
+				triangleCountOverlap = 0; // move plane over p
+			}
 		}
 
-		// Now iterate over all plane candidates
-		for (unsigned int i = 0; i < events.size(); i++)
-		{
-			Axis eventDimension = events.at(i).dimension;
-			Plane p(events.at(i).position, eventDimension);
-			int64_t start{ 0 };
-			int64_t end{ 0 };
-			int64_t inPlane{ 0 };
-
-			while ((i < events.size()) && (events.at(i).dimension == p.getAxis()) && (events.at(i).position == p.getPosition()) && (events.at(i).type == EventType::END))
-			{
-				end++;
-				i++;
-			}
-
-			while ((i < events.size()) && (events.at(i).dimension == p.getAxis()) && (events.at(i).position == p.getPosition()) && (events.at(i).type == EventType::PLANAR))
-			{
-				inPlane++;
-				i++;
-			}
-
-			while ((i < events.size()) && (events.at(i).dimension == p.getAxis()) && (events.at(i).position == p.getPosition()) && (events.at(i).type == EventType::START))
-			{
-				start++;
-				i++;
-			}
-
-			// Now the next plane p is found with start, end and inPlane
-			triangleCountOverlap[eventDimension] = inPlane;
-			triangleCountRight[eventDimension] -= inPlane;
-			triangleCountRight[eventDimension] -= end;
-
-			// TODO: Verify if triangle counts have to be add up
-			std::pair<float, ChildSide> result = SAH(p, bBox, triangleCountLeft[eventDimension], triangleCountRight[eventDimension], triangleCountOverlap[eventDimension]);
-			if (result.first < bestCut)
-			{
-				bestCut = result.first;
-				bestPlane = p;
-				childSide = result.second;
-			}
-			triangleCountLeft[eventDimension] += start;
-			triangleCountLeft[eventDimension] += inPlane;
-			triangleCountOverlap[eventDimension] = 0;
-		}
 		return std::make_pair(bestPlane, childSide);
 	}
 
@@ -515,10 +522,13 @@ namespace raytracing
 		return
 			// Primary condition: sort by position
 			(e1.position < e2.position) ||
-			// Secondary condition: sort by dimension
-			((e1.position == e2.position) && (e1.dimension < e2.dimension)) || 
-			// Tertiary condition: sort by type
-			((e1.position < e2.position) && (e1.dimension == e2.dimension) && (e1.type < e2.type));
+			// Secondary condition: sort by type
+			((e1.position < e2.position) && (e1.type < e2.type));
+	}
+
+	bool KdNode::terminate(unsigned int triangleCount, float minCost)
+	{
+		return minCost > INTERSECTION_COST * static_cast<float>(triangleCount);
 	}
 
 } // end of namespace raytracer

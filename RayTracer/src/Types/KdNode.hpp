@@ -37,6 +37,7 @@ namespace raytracing
 		}
 
 		float position;
+		aiVector3D boxPos;
 		Axis dimension;
 		EventType type;
 		KdTriangle& triangle;
@@ -50,9 +51,9 @@ namespace raytracing
 	
 	static const unsigned int MIN_DEPTH = 32;
 
-	static const unsigned int TRAVERSIAL_COST = 1;
+	static const float TRAVERSIAL_COST = 1.1f;
 
-	static const unsigned int INTERSECTION_COST = 1;
+	static const float INTERSECTION_COST = 1.5f;
 
 	static const uint8_t MAX_TREE_DIMENSION = 3;
 
@@ -89,7 +90,7 @@ namespace raytracing
 		
 		static KdNode* build(std::vector<KdTriangle>& triangles, BoundingBox bBox, unsigned int depth = 1);
 
-		static KdNode* buildSAH(std::vector<KdTriangle>& triangles, BoundingBox bBox, std::vector<Event>& events, unsigned int depth = 1);
+		static KdNode* buildSAH(std::vector<KdTriangle>& triangles, BoundingBox bBox, const Plane prevPlane = {}, unsigned int depth = 0);
 
 		virtual bool calculateIntersection(aiRay& ray, IntersectionInformation& outIntersection) override;
 
@@ -113,9 +114,9 @@ namespace raytracing
 			int64_t triangleCountRight);
 
 		static std::pair<Plane, ChildSide> findPlane(
-			int64_t triangleCount,
+			std::vector<KdTriangle> triangles,
 			BoundingBox& bBox,
-			std::vector<Event> events);
+			float& cost);
 
 		static void classifyTriangles(
 			std::vector<KdTriangle>& triangles,
@@ -123,6 +124,8 @@ namespace raytracing
 			std::pair<Plane, ChildSide> splittingPlane);
 
 		static bool compareEvents(const Event& e1, const Event& e2);
+
+		static bool terminate(unsigned int triangleCount, float minCost);
 
 	/*--------------------------------< Public members >------------------------------------*/
 	public:
