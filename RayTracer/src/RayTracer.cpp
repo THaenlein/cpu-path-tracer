@@ -582,15 +582,15 @@ namespace raytracing
 
 	void RayTracer::createJobs()
 	{
-		for (uint16_t numberOfTileY = 0; numberOfTileY*TILE_SIZE < this->renderHeight; numberOfTileY++)
+		for (uint16_t numberOfTileY = 0; numberOfTileY < this->renderHeight / TILE_SIZE; numberOfTileY++)
 		{
 			for (uint16_t numberOfTileX = 0; numberOfTileX < this->renderWidth / TILE_SIZE; numberOfTileX++)
 			{
 				RenderJob job(
-					numberOfTileX*TILE_SIZE,
-					numberOfTileY*TILE_SIZE,
-					numberOfTileX*TILE_SIZE + this->TILE_SIZE,
-					numberOfTileY*TILE_SIZE + this->TILE_SIZE);
+					numberOfTileX * this->TILE_SIZE,
+					numberOfTileY * this->TILE_SIZE,
+					numberOfTileX * this->TILE_SIZE + this->TILE_SIZE,
+					numberOfTileY * this->TILE_SIZE + this->TILE_SIZE);
 				this->renderJobs.pushBack(job);
 			}
 		}
