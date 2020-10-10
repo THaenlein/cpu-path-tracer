@@ -99,6 +99,8 @@ namespace raytracing
 
 		bool isPlanar(float epsilon = 1e-6) const;
 
+		bool isPlanar(Axis axis, float epsilon = 1e-6) const;
+
 		float length(const Axis axis) const;
 
 		void clipToBox(const BoundingBox& box);

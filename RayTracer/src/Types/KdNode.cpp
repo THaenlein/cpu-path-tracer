@@ -294,7 +294,7 @@ namespace raytracing
 			{
 				BoundingBox triBox(triangle);
 				triBox.clipToBox(bBox);
-				if (triBox.isPlanar())
+				if (triBox.isPlanar(axis))
 				{
 					eventlist.push_back({ triBox.getMin()[k], axis, EventType::PLANAR, triangle});
 				}

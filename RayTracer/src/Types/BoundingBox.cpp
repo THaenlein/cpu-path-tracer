@@ -256,6 +256,11 @@ namespace raytracing
 			std::abs(this->max.z - this->min.z) <= epsilon;
 	}
 
+	bool BoundingBox::isPlanar(Axis axis, float epsilon/* = 1e-6*/) const
+	{
+		return std::abs(this->max[axis] - this->min[axis]) <= epsilon;
+	}
+
 	float BoundingBox::length(const Axis axis) const
 	{
 		switch (axis)
