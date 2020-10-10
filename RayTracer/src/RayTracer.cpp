@@ -224,33 +224,15 @@ namespace raytracing
 		{
 			return mEmissive;
 		}
-
-		// Russian roulette
-		const aiColor3D& mDiffuse = material->getDiffuse(intersectionInformation.uvTextureCoords);
-		aiColor3D brdf = mDiffuse / PI;
-		const float probability = 
-			(mDiffuse.r > mDiffuse.g) && (mDiffuse.r>mDiffuse.b) ?
-			 mDiffuse.r : mDiffuse.g > mDiffuse.b ?
-			 mDiffuse.g : mDiffuse.b;
-		if ((rayDepth + 1) > 5)
-		{
-			if (mathUtility::russianRoulette(probability, rayDepth))
-			{
-				// Russian roulette takes effect!
-				return mEmissive;
-			}
-			else
-			{
-				brdf = brdf * (0.9f / probability);
-			}
-		}
-
+		
 		// Compute indirect light
+		const aiColor3D mDiffuse = material->getDiffuse(intersectionInformation.uvTextureCoords);
+		aiColor3D distributionFunction;
 		aiVector3D Nt{}, Nb{}, newRayDirection{}, newRayPosition{};
 		aiRay sampleRay{};
 		const float r1 = mathUtility::getRandomFloat(0.f, 1.f);
 		const float r2 = mathUtility::getRandomFloat(0.f, 1.f);
-		
+
 		// Calculate transformation matrix to transform sample from world space to shaded point local coordinate system later
 		mathUtility::createCoordinateSystem(smoothNormal, Nt, Nb);
 		aiMatrix3x3 toLocalMatrix
@@ -281,6 +263,7 @@ namespace raytracing
 				newRayDirection.Normalize();
 				newRayPosition = outside ? intersectionInformation.hitPoint - bias : intersectionInformation.hitPoint + bias;
 				sampleRay = { newRayPosition, newRayDirection, RayType::REFRACTION };
+				distributionFunction = mDiffuse / PI;
 			}
 			else
 			{
@@ -289,7 +272,7 @@ namespace raytracing
 				newRayDirection.Normalize();
 				newRayPosition = outside ? intersectionInformation.ray.pos + bias : intersectionInformation.ray.pos - bias;
 				sampleRay = { newRayPosition, newRayDirection, RayType::REFLECTION };
-				brdf = material->getReflective() / PI;
+				distributionFunction = material->getReflective() / PI;
 			}
 		}
 		else if (material->getReflectivity() > 0.f)
@@ -303,9 +286,9 @@ namespace raytracing
 			newRayDirection = mathUtility::calculateReflectionDirection(intersectionInformation.ray.dir, smoothNormal);
 			newRayDirection = newRayDirection + randomScatter * roughness;
 
-			brdf = material->getReflective() / PI;
 			newRayPosition = intersectionInformation.hitPoint + (newRayDirection * this->renderSettings.getBias());
 			sampleRay = { newRayPosition, newRayDirection, RayType::REFLECTION };
+			distributionFunction = material->getReflective() / PI;
 		}
 		else
 		{
@@ -315,13 +298,14 @@ namespace raytracing
 
 			newRayPosition = intersectionInformation.hitPoint + (newRayDirection * this->renderSettings.getBias());
 			sampleRay = { newRayPosition, newRayDirection, RayType::INDIRECT_DIFFUSE };
+			distributionFunction = mDiffuse / PI;
 		}
 
 		// Cast a ray in calculated direction
 		aiColor3D incomingLight = tracePath(sampleRay, rayDepth + 1);
 
 		// Simplified rendering equation for cosine weighted sampling
-		return brdf * incomingLight * PI;
+		return distributionFunction * incomingLight * PI;
 	}
 
 
