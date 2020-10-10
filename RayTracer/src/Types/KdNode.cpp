@@ -8,6 +8,7 @@
 
 #include "KdNode.hpp"
 #include "Utility\mathUtility.hpp"
+#include "exceptions.hpp"
 
 
 namespace raytracing
@@ -384,6 +385,7 @@ namespace raytracing
 				else
 				{
 					// This case should not occur!
+					throw AccStructure("Error classifying triangles");
 				}
 			}
 			else

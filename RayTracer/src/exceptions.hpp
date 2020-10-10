@@ -151,6 +151,14 @@ namespace raytracing
 		{};
 	};
 
+	struct AccStructure : public std::exception
+	{
+	public:
+
+		AccStructure(const char* message = "") :
+			std::exception(message)
+		{};
+	};
 
 	/*--------------------------------< Constants >-----------------------------------------*/
 

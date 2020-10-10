@@ -280,7 +280,17 @@ int main(int argc, char* argv[])
 	}
 	SDL_LogInfo(SDL_LOG_CATEGORY_APPLICATION, "Building KD-Tree..");
 	raytracing::Timer::getInstance().start();
-	std::unique_ptr<raytracing::KdNode> kdTree(raytracing::KdNode::buildTreeSAH(triangleMeshCollection));
+	std::unique_ptr<raytracing::KdNode> kdTree;
+	try
+	{
+		kdTree.reset(raytracing::KdNode::buildTreeSAH(triangleMeshCollection));
+	}
+	catch(raytracing::AccStructure& exception)
+	{
+		SDL_LogError(SDL_LOG_CATEGORY_INPUT, "Building kd-tree failed: %s", exception.what());
+		app.cleanUp();
+		return 1;
+	}
 	double kdBuildingTime = raytracing::Timer::getInstance().stop();
 	SDL_LogInfo(SDL_LOG_CATEGORY_APPLICATION, "Done. Took %.2f seconds", kdBuildingTime);
 	triangleMeshCollection.~vector();
