@@ -16,7 +16,7 @@
 #include "Application.hpp"
 #include "exceptions.hpp"
 #include "settings.hpp"
-#include "RayTracer.hpp"
+#include "PathTracer.hpp"
 #include "Timer.hpp"
 #include "Types\BoundingVolume.hpp"
 #include "Types\KdNode.hpp"
@@ -315,7 +315,7 @@ int main(int argc, char* argv[])
 	SDL_LogInfo(SDL_LOG_CATEGORY_APPLICATION, "Done. Took %.2f seconds", kdBuildingTime);
 	triangleMeshCollection.~vector();
 
-	raytracing::RayTracer rayTracer(app, scene, renderSettings, std::move(kdTree));
+	raytracing::PathTracer rayTracer(app, scene, renderSettings, std::move(kdTree));
 
 	try
 	{

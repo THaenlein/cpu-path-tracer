@@ -11,7 +11,7 @@
 //		EXPECT_DOUBLE_EQ
 //		EXPECT_FLOAT_EQ
 
-TEST(RayTracer, testPass)
+TEST(PathTracer, testPass)
 {
 	EXPECT_EQ(1, 1);
 }

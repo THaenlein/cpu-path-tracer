@@ -33,14 +33,14 @@ namespace raytracing
 	/*--------------------------------< Constants >-----------------------------------------*/
 
 
-	class RayTracer
+	class PathTracer
 	{
 		static const uint16_t TILE_SIZE = 32;
 
 		/*--------------------------------< Public methods >------------------------------------*/
 	public:
 
-		RayTracer(Application& app, const aiScene* scene, Settings settings, std::unique_ptr<AccelerationStructure> accStruct):
+		PathTracer(Application& app, const aiScene* scene, Settings settings, std::unique_ptr<AccelerationStructure> accStruct):
 			application(app),
 			scene(scene),
 			renderSettings(settings),
@@ -49,7 +49,7 @@ namespace raytracing
 
 		}
 
-		~RayTracer()
+		~PathTracer()
 		{
 			delete[] this->pixels;
 		}
@@ -82,7 +82,7 @@ namespace raytracing
 
 		void render(RenderJob& renderJob);
 
-		void RayTracer::renderAntiAliased(RenderJob& renderJob);
+		void PathTracer::renderAntiAliased(RenderJob& renderJob);
 
 		aiColor3D sampleLight(IntersectionInformation& intersectionInformation, uint8_t rayDepth);
 

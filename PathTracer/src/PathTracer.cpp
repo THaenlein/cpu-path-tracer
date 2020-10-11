@@ -1,5 +1,5 @@
 /*
- * RayTracer.cpp
+ * PathTracer.cpp
  */
 
 /*--------------------------------< Includes >-------------------------------------------*/
@@ -7,7 +7,7 @@
 #include <math.h>
 #include <random>
 
-#include "RayTracer.hpp"
+#include "PathTracer.hpp"
 #include "exceptions.hpp"
 
 #include "Utility\mathUtility.hpp"
@@ -28,7 +28,7 @@ namespace raytracing
 	/*--------------------------------< Public members >-------------------------------------*/
 
 
-	void RayTracer::initialize(const std::string sceneDirPath)
+	void PathTracer::initialize(const std::string sceneDirPath)
 	{
 		this->renderWidth = this->renderSettings.getWidth();
 		this->renderHeight = this->renderSettings.getHeight();
@@ -68,7 +68,7 @@ namespace raytracing
 	}
 
 
-	void RayTracer::renderMultiThreaded()
+	void PathTracer::renderMultiThreaded()
 	{
 		RenderJob job;
 		while (this->renderJobs.popFront(job))
@@ -90,7 +90,7 @@ namespace raytracing
 		
 	/*--------------------------------< Private members >------------------------------------*/
 
-	void RayTracer::render()
+	void PathTracer::render()
 	{
 		for (uint16_t x = 0; x < this->renderWidth; x++)
 		{
@@ -109,7 +109,7 @@ namespace raytracing
 	}
 
 
-	void RayTracer::render(RenderJob& renderJob)
+	void PathTracer::render(RenderJob& renderJob)
 	{
 		const uint8_t maxSamples = this->renderSettings.getMaxSamples();
 		aiVector3D& cameraPosition = (*this->scene->mCameras)->mPosition;
@@ -155,7 +155,7 @@ namespace raytracing
 		}
 	}
 
-	void RayTracer::renderAntiAliased(RenderJob& renderJob)
+	void PathTracer::renderAntiAliased(RenderJob& renderJob)
 	{
 		const uint8_t aa = this->renderSettings.getMaxSamples();
 		aiVector3D& cameraPosition = (*this->scene->mCameras)->mPosition;
@@ -210,7 +210,7 @@ namespace raytracing
 		}
 	}
 
-	aiColor3D RayTracer::sampleLight(IntersectionInformation& intersectionInformation, uint8_t rayDepth)
+	aiColor3D PathTracer::sampleLight(IntersectionInformation& intersectionInformation, uint8_t rayDepth)
 	{
 		unsigned int materialIndex = intersectionInformation.hitMesh->mMaterialIndex;
 		aiMaterial* meshMaterial = this->scene->mMaterials[materialIndex];
@@ -309,7 +309,7 @@ namespace raytracing
 	}
 
 
-	aiColor3D RayTracer::shadePixel(IntersectionInformation& intersectionInformation, uint8_t& rayDepth)
+	aiColor3D PathTracer::shadePixel(IntersectionInformation& intersectionInformation, uint8_t& rayDepth)
 	{
 		// Get mesh properties
 		aiVector3D edge1 = *(intersectionInformation.hitTriangle[1]) - *(intersectionInformation.hitTriangle[0]);
@@ -449,7 +449,7 @@ namespace raytracing
 	}
 
 
-	bool RayTracer::calculateIntersection(
+	bool PathTracer::calculateIntersection(
 		aiRay& ray,
 		IntersectionInformation& outIntersection)
 	{
@@ -514,7 +514,7 @@ namespace raytracing
 	}
 
 
-	aiColor3D RayTracer::tracePath(aiRay& ray, uint8_t rayDepth /*= 0*/)
+	aiColor3D PathTracer::tracePath(aiRay& ray, uint8_t rayDepth /*= 0*/)
 	{
 		IntersectionInformation intersectionInformation;
 		if (rayDepth > this->renderSettings.getMaxRayDepth())
@@ -539,7 +539,7 @@ namespace raytracing
 		}
 	}
 
-	aiColor3D RayTracer::traceRay(aiRay& ray, uint8_t rayDepth /*= 0*/)
+	aiColor3D PathTracer::traceRay(aiRay& ray, uint8_t rayDepth /*= 0*/)
 	{
 		IntersectionInformation intersectionInformation;
 		if (rayDepth > this->renderSettings.getMaxRayDepth())
@@ -564,7 +564,7 @@ namespace raytracing
 		}
 	}
 
-	void RayTracer::createJobs()
+	void PathTracer::createJobs()
 	{
 		for (uint16_t numberOfTileY = 0; numberOfTileY < this->renderHeight / TILE_SIZE; numberOfTileY++)
 		{

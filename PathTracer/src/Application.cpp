@@ -40,7 +40,7 @@ namespace raytracing
 	{
 		// Create SDL window
 		this->mainWindow.reset(
-			SDL_CreateWindow("RayTracer", 0, 25, this->renderSettings.getWidth(), this->renderSettings.getHeight(), SDL_WINDOW_SHOWN));
+			SDL_CreateWindow("PathTracer", 0, 25, this->renderSettings.getWidth(), this->renderSettings.getHeight(), SDL_WINDOW_SHOWN));
 		if (!this->mainWindow)
 		{
 			throw WindowCreation(SDL_GetError());

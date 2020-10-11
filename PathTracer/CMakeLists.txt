@@ -1,7 +1,7 @@
 ###############################################################################
 ## General
 cmake_minimum_required(VERSION "3.17.2")
-project("RayTracer")
+project("PathTracer")
 
 set(CMAKE_CXX_STANDARD 17) # For std::clamp()
 set(CMAKE_CXX_FLAGS ${CMAKE_CXX_FLAGS})
