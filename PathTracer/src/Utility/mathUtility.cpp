@@ -128,7 +128,7 @@ namespace utility
 		return { incidenceVector - 2 * (incidenceVector * incidenceNormal) * incidenceNormal };
 	}
 
-	bool mathUtility::russianRoulette(const float probability, unsigned int depth)
+	bool mathUtility::russianRoulette(const float probability)
 	{
 		float random = getRandomFloat(0.f, 1.f);
 		return (random < (probability * 0.9f)) ? false : true;
@@ -236,7 +236,7 @@ namespace utility
 	{
 		static const float GAMMA = 1.f / 2.4f;
 		static const float A = 1.055f;
-		static const float B = -0.055;
+		static const float B = -0.055f;
 		static const float C = 12.92f;
 		static const float D = 0.0031308f;
 
@@ -244,13 +244,18 @@ namespace utility
 		{
 			return -sRgb(-value);
 		}
-		else if (0.f <= value < D)
+		else if ((0.f <= value) && (value < D))
 		{
 			return C * value;
 		}
 		else if (value >= D)
 		{
 			return A * std::powf(value, GAMMA) + B;
+		}
+		else
+		{
+			// This case can not occur. This return suppresses warnings
+			return value;
 		}
 	}
 

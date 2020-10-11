@@ -17,8 +17,6 @@ namespace raytracing
 
 	/*--------------------------------< Constants >-----------------------------------------*/
 
-	static 
-
 	class CheckerTexture : public Texture
 	{
 	/*--------------------------------< Public methods >------------------------------------*/

@@ -60,7 +60,7 @@ namespace utility
 			const aiVector3D& incidenceVector, 
 			const aiVector3D& incidenceNormal);
 
-		static bool russianRoulette(const float probability, unsigned int depth);
+		static bool russianRoulette(const float probability);
 
 		static void calculateDepthOfFieldRay(aiRay* cameraRay, const float aperature, const float focalDistance);
 

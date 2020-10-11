@@ -60,7 +60,7 @@ int main(int argc, char* argv[])
 	}
 	else
 	{
-		width = std::stoi(widthStr);
+		width = static_cast<uint16_t>(std::stoi(widthStr));
 	}
 
 	uint16_t height{ 512U };
@@ -71,7 +71,7 @@ int main(int argc, char* argv[])
 	}
 	else
 	{
-		height = std::stoi(heightStr);
+		height = static_cast<uint16_t>(std::stoi(heightStr));
 	}
 
 	uint8_t samples{ 4U };
@@ -82,7 +82,7 @@ int main(int argc, char* argv[])
 	}
 	else
 	{
-		samples = std::stoi(samplesStr);
+		samples = static_cast<uint8_t>(std::stoi(samplesStr));
 	}
 
 	uint8_t depth{ 4U };
@@ -93,7 +93,7 @@ int main(int argc, char* argv[])
 	}
 	else
 	{
-		depth = std::stoi(depthStr);
+		depth = static_cast<uint8_t>(std::stoi(depthStr));
 	}
 
 	float bias{ 0.001f };
@@ -180,7 +180,7 @@ int main(int argc, char* argv[])
 	}
 	else
 	{
-		threadCount = std::stoi(threadsStr);
+		threadCount = static_cast<uint8_t>(std::stoi(threadsStr));
 	}
 
 	raytracing::Settings renderSettings(width, height, samples, depth, bias, aperture, fDist, useDOF, useAA);

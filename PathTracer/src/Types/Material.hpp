@@ -149,7 +149,7 @@ namespace raytracing
 			return this->transparency;
 		}
 
-		inline float getShadingModel() const
+		inline int getShadingModel() const
 		{
 			return this->shadingModel;
 		}
