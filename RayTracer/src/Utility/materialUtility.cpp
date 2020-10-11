@@ -7,10 +7,10 @@
 
 #include "SDL.h"
 
+#ifndef STB_IMAGE_IMPLEMENTATION
 #define STB_IMAGE_IMPLEMENTATION
+#endif
 #include "stb_image.h"
-#define STB_DEFINE
-#include "stb.h"
 
 #include "materialUtility.hpp"
 #include "exceptions.hpp"

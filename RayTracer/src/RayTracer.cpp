@@ -30,8 +30,8 @@ namespace raytracing
 
 	void RayTracer::initialize(const std::string sceneDirPath)
 	{
-		this->renderWidth = this->application.getRenderWidth();
-		this->renderHeight = this->application.getRenderHeight();
+		this->renderWidth = this->renderSettings.getWidth();
+		this->renderHeight = this->renderSettings.getHeight();
 
 		if (!this->scene->HasCameras())
 		{

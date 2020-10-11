@@ -9,6 +9,7 @@
 #include <string>
 #include <memory>
 #include <atomic>
+#include <experimental\filesystem>
 
 #define SDL_MAIN_HANDLED
 #include "SDL.h"
@@ -17,12 +18,15 @@
 #include "raytracing.hpp"
 #include "Types\RenderJob.hpp"
 #include "Types\SynchronizedQueue.hpp"
+#include "settings.hpp"
 
 namespace raytracing
 {
 	/*--------------------------------< Defines >-------------------------------------------*/
 
 	/*--------------------------------< Typedefs >------------------------------------------*/
+
+	namespace filesystem = std::experimental::filesystem;
 
 	/*--------------------------------< Constants >-----------------------------------------*/
 	
@@ -31,27 +35,16 @@ namespace raytracing
 	/*--------------------------------< Public methods >------------------------------------*/
 	public:
 	
-		Application(uint16_t width, uint16_t height) :
+		Application(Settings options) :
 			mainWindow(nullptr, SDL_DestroyWindow),
 			sdlRenderer(nullptr, SDL_DestroyRenderer),
 			screenTexture(nullptr, SDL_DestroyTexture),
-			WINDOW_DIMENSION_X(width),
-			WINDOW_DIMENSION_Y(height)
+			renderSettings(options)
 		{};
 	
 		void initialize();
 	
 		void setUpSdl();
-
-		inline const uint16_t getRenderWidth()
-		{
-			return this->WINDOW_DIMENSION_X;
-		}
-
-		inline const uint16_t getRenderHeight()
-		{
-			return this->WINDOW_DIMENSION_Y;
-		}
 
 		SDL_Window* getWindow()
 		{
@@ -67,7 +60,11 @@ namespace raytracing
 
 		void cleanUp();
 
-		void handleEvents(const Uint24* viewport, std::vector<std::thread>& threadPool, std::atomic<uint8_t>& threadsTerminated);
+		void handleEvents(
+			const Uint24* viewport,
+			std::vector<std::thread>& threadPool,
+			std::atomic<uint8_t>& threadsTerminated,
+			filesystem::path outputDir);
 
 	/*--------------------------------< Protected methods >---------------------------------*/
 	protected:
@@ -76,6 +73,8 @@ namespace raytracing
 	private:
 
 		void updateRender(const Uint24* pixels);
+
+		int writeImage(filesystem::path outputDir, const void* data);
 
 	/*--------------------------------< Public members >------------------------------------*/
 	public:
@@ -91,9 +90,7 @@ namespace raytracing
 
 		std::unique_ptr<SDL_Texture, decltype(&SDL_DestroyTexture)> screenTexture;
 
-		const uint16_t WINDOW_DIMENSION_X;
-
-		const uint16_t WINDOW_DIMENSION_Y;
+		const Settings renderSettings;
 	
 	};
 	

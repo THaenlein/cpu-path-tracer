@@ -25,8 +25,8 @@ namespace raytracing
 	/*--------------------------------< Public methods >------------------------------------*/
 	public:
 
-		Settings(uint8_t samples = 8, uint8_t maxDepth = 3, float offset = 0.001f, const float aperture = 0.f, const float fDist = 0.f, const bool dof = false, const bool aa = false) :
-			maxSamples(samples), maxRayDepth(maxDepth), bias(offset), apertureRadius(aperture), focalDistance(fDist), useDOF(dof), useAA(aa)
+		Settings(uint16_t x, uint16_t y, uint8_t samples = 8, uint8_t maxDepth = 3, float offset = 0.001f, const float aperture = 0.f, const float fDist = 0.f, const bool dof = false, const bool aa = false) :
+			width(x), height(y), maxSamples(samples), maxRayDepth(maxDepth), bias(offset), apertureRadius(aperture), focalDistance(fDist), useDOF(dof), useAA(aa)
 		{};
 
 		inline uint8_t getMaxSamples() const
@@ -63,6 +63,16 @@ namespace raytracing
 		{
 			return this->useAA;
 		}
+
+		inline uint16_t getWidth() const
+		{
+			return this->width;
+		}
+
+		inline uint16_t getHeight() const
+		{
+			return this->height;
+		}
 	
 	/*--------------------------------< Protected methods >---------------------------------*/
 	protected:
@@ -94,6 +104,10 @@ namespace raytracing
 		const bool useDOF;
 
 		const bool useAA;
+
+		const uint16_t width;
+
+		const uint16_t height;
 	};
 	
 } // end of namespace raytracer

@@ -152,6 +152,26 @@ int main(int argc, char* argv[])
 		}
 	}
 
+	filesystem::path outputDir{};
+	const std::string& outputDirStr(options.getCmdOption("--output"));
+	if (outputDirStr.empty())
+	{
+		// No output dir provided
+		filesystem::path out(argv[0]);
+		out = out.remove_filename() / "out";
+		outputDir = out;
+		SDL_LogInfo(SDL_LOG_CATEGORY_APPLICATION, "No output directory prodvided! Using standard output %s", outputDir.string().c_str());
+	}
+	else
+	{
+		outputDir = outputDirStr;
+	}
+	if (!filesystem::create_directories(outputDir))
+	{
+		SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "Failed to create output directory %s. Maybe it already exists? Proceeding..", outputDir.string().c_str());
+	}
+	filesystem::permissions(outputDir, filesystem::perms::all);
+
 	uint8_t threadCount{ 1U };
 	const std::string& threadsStr(options.getCmdOption("--threading"));
 	if (threadsStr.empty())
@@ -163,8 +183,8 @@ int main(int argc, char* argv[])
 		threadCount = std::stoi(threadsStr);
 	}
 
-
-	raytracing::Application app(width, height);
+	raytracing::Settings renderSettings(width, height, samples, depth, bias, aperture, fDist, useDOF, useAA);
+	raytracing::Application app(renderSettings);
 
 	try
 	{
@@ -183,7 +203,7 @@ int main(int argc, char* argv[])
 	const aiScene* scene = assetImporter.ReadFile(scenePath.string(), 0);
 	if (!scene)
 	{
-		SDL_LogError(SDL_LOG_CATEGORY_INPUT, "Import of 3D scene failed: %s", assetImporter.GetErrorString());
+		SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "Import of 3D scene failed: %s", assetImporter.GetErrorString());
 		app.cleanUp();
 		return 1;
 	}
@@ -204,7 +224,7 @@ int main(int argc, char* argv[])
 		aiProcess_SortByPType);
 	if (!scene)
 	{
-		SDL_LogError(SDL_LOG_CATEGORY_INPUT, "Post processing of 3D scene failed: %s", assetImporter.GetErrorString());
+		SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "Post processing of 3D scene failed: %s", assetImporter.GetErrorString());
 		app.cleanUp();
 		return 1;
 	}
@@ -295,7 +315,6 @@ int main(int argc, char* argv[])
 	SDL_LogInfo(SDL_LOG_CATEGORY_APPLICATION, "Done. Took %.2f seconds", kdBuildingTime);
 	triangleMeshCollection.~vector();
 
-	raytracing::Settings renderSettings(samples, depth, bias, aperture, fDist, useDOF, useAA);
 	raytracing::RayTracer rayTracer(app, scene, renderSettings, std::move(kdTree));
 
 	try
@@ -325,9 +344,8 @@ int main(int argc, char* argv[])
 	{
 		threadPool.push_back(rayTracer.createRenderThread(threadsTerminated));
 	}
-	app.handleEvents(rayTracer.getViewport(), threadPool, threadsTerminated);
-
-
+	app.handleEvents(rayTracer.getViewport(), threadPool, threadsTerminated, outputDir);
+	
 	assetImporter.FreeScene();
 
 	return 0;

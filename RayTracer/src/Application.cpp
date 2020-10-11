@@ -3,8 +3,12 @@
  */
 
 /*--------------------------------< Includes >-------------------------------------------*/
-#include "Application.hpp"
+#ifndef STB_IMAGE_WRITE_IMPLEMENTATION
+#define STB_IMAGE_WRITE_IMPLEMENTATION
+#endif
+#include "stb_image_write.h"
 
+#include "Application.hpp"
 #include "Timer.hpp"
 
 
@@ -36,7 +40,7 @@ namespace raytracing
 	{
 		// Create SDL window
 		this->mainWindow.reset(
-			SDL_CreateWindow("RayTracer", 0, 25, this->WINDOW_DIMENSION_X, this->WINDOW_DIMENSION_Y, SDL_WINDOW_SHOWN));
+			SDL_CreateWindow("RayTracer", 0, 25, this->renderSettings.getWidth(), this->renderSettings.getHeight(), SDL_WINDOW_SHOWN));
 		if (!this->mainWindow)
 		{
 			throw WindowCreation(SDL_GetError());
@@ -82,7 +86,7 @@ namespace raytracing
 	{
 		// Maybe change static flag to streaming in the future
 		this->screenTexture.reset(SDL_CreateTexture(this->sdlRenderer.get(),
-			SDL_PIXELFORMAT_RGB888, SDL_TEXTUREACCESS_STATIC, this->WINDOW_DIMENSION_X, this->WINDOW_DIMENSION_Y));
+			SDL_PIXELFORMAT_RGB24, SDL_TEXTUREACCESS_STATIC, this->renderSettings.getWidth(), this->renderSettings.getHeight()));
 		if (!this->screenTexture)
 		{
 			throw TextureCreation(SDL_GetError());
@@ -105,7 +109,11 @@ namespace raytracing
 		SDL_Quit();
 	}
 
-	void Application::handleEvents(const Uint24* const viewport, std::vector<std::thread>& threadPool, std::atomic<uint8_t>& threadsTerminated)
+	void Application::handleEvents(
+		const Uint24* const viewport,
+		std::vector<std::thread>& threadPool,
+		std::atomic<uint8_t>& threadsTerminated,
+		filesystem::path outputDir)
 	{
 		SDL_Event sdlEvent;
 		bool doneRendering{ false };
@@ -154,6 +162,16 @@ namespace raytracing
 					doneRendering = true;
 					double renderingTime = raytracing::Timer::getInstance().stop();
 					SDL_Log("Elapsed time for rendering scene: %.2f seconds", renderingTime);
+
+					filesystem::path outFile = outputDir / "latest.bmp";
+					if (!writeImage(outFile, viewport))
+					{
+						SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "Could not write image to: %s", outFile.string().c_str());
+					}
+					else
+					{
+						SDL_LogInfo(SDL_LOG_CATEGORY_APPLICATION, "Image written to: %s", outFile.string().c_str());
+					}
 				}
 				updateRender(viewport);
 			}
@@ -168,12 +186,22 @@ namespace raytracing
 
 	void Application::updateRender(const Uint24* pixels)
 	{
-		int result = SDL_UpdateTexture(this->screenTexture.get(), NULL, pixels, this->WINDOW_DIMENSION_X * sizeof(Uint24));
+		int result = SDL_UpdateTexture(this->screenTexture.get(), NULL, pixels, this->renderSettings.getWidth() * sizeof(Uint24));
 		if (result)
 		{
 			throw TextureUpdate(SDL_GetError());
 		}
 		this->render(this->screenTexture.get());
+	}
+
+	int Application::writeImage(filesystem::path outputDir, const void* data)
+	{
+		return stbi_write_bmp(
+			outputDir.string().c_str(),
+			this->renderSettings.getWidth(),
+			this->renderSettings.getHeight(),
+			sizeof(raytracing::Uint24),
+			data);
 	}
 
 } // end of namespace raytracing
