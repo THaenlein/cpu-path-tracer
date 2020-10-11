@@ -19,40 +19,43 @@ namespace raytracing
 	/*--------------------------------< Typedefs >------------------------------------------*/
 
 	// Force packing of struct to avoid padding bytes
-#pragma pack(push, 1)
 	struct Uint24
 	{
 		Uint24() :
-			color(0x000000)
+			color{0x00, 0x00, 0x00}
 		{}
 
-		Uint24(int value) :
-			color(value)
+		// (value << 24) is cut off!
+		Uint24(uint32_t value) :
+			color{ 
+			static_cast<uint8_t>(value << 16),
+			static_cast<uint8_t>(value << 8 ), 
+			static_cast<uint8_t>(value << 0 )}
 		{}
 
 		explicit Uint24(const aiColor3D& value)
 		{
 			std::vector<uint8_t> clampedValues = clamp(value);
-			this->color = (clampedValues[0] << 16) | (clampedValues[1] << 8) | (clampedValues[2] << 0);
+			std::copy(clampedValues.begin(), clampedValues.end(), this->color);
 		}
 
 		explicit Uint24(const aiVector3D& value)
 		{
 			std::vector<uint8_t> clampedValues = clamp(value);
-			this->color = (clampedValues[0] << 16) | (clampedValues[1] << 8) | (clampedValues[2] << 0);
+			std::copy(clampedValues.begin(), clampedValues.end(), this->color);
 		}
 
 		Uint24& operator=(const aiColor3D& value)
 		{
 			std::vector<uint8_t> clampedValues = clamp(value);
-			this->color = (clampedValues[0] << 16) | (clampedValues[1] << 8) | (clampedValues[2] << 0);
+			std::copy(clampedValues.begin(), clampedValues.end(), this->color);
 			return *this;
 		}
 
 		Uint24& operator=(const aiVector3D& value)
 		{
 			std::vector<uint8_t> clampedValues = clamp(value);
-			this->color = (clampedValues[0] << 16) | (clampedValues[1] << 8) | (clampedValues[2] << 0);
+			std::copy(clampedValues.begin(), clampedValues.end(), this->color);
 			return *this;
 		}
 
@@ -87,9 +90,8 @@ namespace raytracing
 			return { red, green, blue };
 		}
 
-		unsigned int color : 24;
+		uint8_t color[3];
 	};
-#pragma pack(pop)
 
 	struct IntersectionInformation
 	{
