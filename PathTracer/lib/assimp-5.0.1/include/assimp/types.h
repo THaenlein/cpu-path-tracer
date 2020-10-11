@@ -262,14 +262,6 @@ struct aiColor3D
         return std::fabs( r ) < epsilon && std::fabs( g ) < epsilon && std::fabs( b ) < epsilon;
     }
 
-    void clampValues(float low, float high){
-        ai_real red = std::clamp(r, low, high);
-        ai_real green = std::clamp(g, low, high);
-        ai_real blue = std::clamp(b, low, high);
-        r = red;
-        g = green;
-        b = blue;
-    }
 
 #endif // !__cplusplus
 
