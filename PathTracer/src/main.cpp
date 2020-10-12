@@ -4,7 +4,7 @@
 #include <thread>
 #include <chrono>
 #include <string>
-#include <experimental\filesystem>
+#include <filesystem>
 
 #include "assimp\Importer.hpp"
 #include "assimp\postprocess.h"
@@ -22,11 +22,31 @@
 #include "Types\KdNode.hpp"
 #include "Utility\ArgParser.hpp"
 
-namespace filesystem = std::experimental::filesystem;
+namespace filesystem = std::filesystem;
 
 
 int main(int argc, char* argv[])
 {
+	char* n_argv[] = {
+		"F:\\Dokumente\\GitHub\\path-tracer\\PathTracer\\Build\\Debug\\PathTracer.exe",
+		"--use-anti-aliasing",
+		"--input",
+		"F:\\Dokumente\\GitHub\\path-tracer\\PathTracer\\res\\testScene_path_trace.dae",
+		"--output",
+		"F:\\Dokumente\\GitHub\\path-tracer\\PathTracer\\out",
+		"--threading",
+		"4",
+		"--max-depth",
+		"4",
+		"--max-samples",
+		"4"
+		//"--aperture",
+		//"0.02",
+		//"--focal",
+		//"1.31191"
+	};
+	argc = 12; //16
+	argv = n_argv;
 	utility::ArgParser options(argc, argv);
 
 	if (options.cmdOptionExists("-h"))
@@ -347,6 +367,51 @@ int main(int argc, char* argv[])
 	app.handleEvents(rayTracer.getViewport(), threadPool, threadsTerminated, outputDir);
 	
 	assetImporter.FreeScene();
+
+	// Calculate Intersection/Traversal cost
+
+	//std::vector<std::vector<aiVector3D*>> triangles;
+	//std::vector<raytracing::BoundingBox> bBoxes;
+	//for (raytracing::KdTriangle tri : triangleMeshCollection)
+	//{
+	//	aiFace* currentFace{ tri.faceMeshPair.first };
+	//	aiMesh* associatedMesh{ tri.faceMeshPair.second };
+	//	std::vector<aiVector3D*> faceTris;
+	//	for (unsigned int currentIndex = 0; currentIndex < currentFace->mNumIndices; currentIndex++)
+	//	{
+	//		faceTris.push_back(&(associatedMesh->mVertices[currentFace->mIndices[currentIndex]]));
+	//	}
+	//	triangles.push_back(faceTris);
+	//	bBoxes.push_back(raytracing::BoundingBox(tri));
+	//}
+	//
+	//aiRay someRay({ 7.1867f, 0.f, 1.66125f }, {-0.939693f, 0.f, -0.34202f});
+	//aiVector3D tempIs;
+	//aiVector2D tempUv;
+	//
+	//raytracing::Timer::getInstance().start();
+	//for (std::vector<aiVector3D*>& tri : triangles)
+	//{
+	//	utility::mathUtility::rayTriangleIntersection(someRay, tri, &tempIs, &tempUv);
+	//
+	//}
+	//double intersectionTime = raytracing::Timer::getInstance().stop();
+	//double averageIsTime = intersectionTime / static_cast<double>(triangles.size());
+	//
+	//raytracing::Timer::getInstance().start();
+	//for (raytracing::BoundingBox& box : bBoxes)
+	//{
+	//	box.intersects(someRay);
+	//}
+	//double travTime = raytracing::Timer::getInstance().stop();
+	//double averageTravTime = travTime / static_cast<double>(bBoxes.size());
+	//
+	//
+	//SDL_Log("Intersection time: %f seconds", intersectionTime);
+	//SDL_Log("Average intersection time: %f seconds", averageIsTime);
+	//SDL_Log("Average trav time: %f seconds", averageTravTime);
+	//SDL_Log("Traversal time: %f seconds", travTime);
+	//std::cin.get();
 
 	return 0;
 }

@@ -9,7 +9,7 @@
 #include <string>
 #include <memory>
 #include <atomic>
-#include <experimental\filesystem>
+#include <filesystem>
 
 #define SDL_MAIN_HANDLED
 #include "SDL.h"
@@ -26,7 +26,7 @@ namespace raytracing
 
 	/*--------------------------------< Typedefs >------------------------------------------*/
 
-	namespace filesystem = std::experimental::filesystem;
+	namespace filesystem = std::filesystem;
 
 	/*--------------------------------< Constants >-----------------------------------------*/
 	

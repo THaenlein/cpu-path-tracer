@@ -3,7 +3,7 @@
  */
 
 /*--------------------------------< Includes >-------------------------------------------*/
-#include <experimental\filesystem>
+#include <filesystem>
 
 #include "SDL.h"
 
@@ -16,7 +16,7 @@
 #include "exceptions.hpp"
 #include "Textures\ImageTexture.hpp"
 
-namespace filesystem = std::experimental::filesystem;
+namespace filesystem = std::filesystem;
 
 
 namespace utility
