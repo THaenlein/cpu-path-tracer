@@ -8,9 +8,9 @@
 #include <vector>
 #include <algorithm>
 
-#include "assimp\types.h"
-#include "assimp\mesh.h"
-#include "assimp\material.h"
+#include "assimp/types.h"
+#include "assimp/mesh.h"
+#include "assimp/material.h"
 
 namespace raytracing
 {

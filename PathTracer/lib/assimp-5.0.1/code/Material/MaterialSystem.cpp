@@ -53,6 +53,10 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <assimp/DefaultLogger.hpp>
 #include <assimp/Macros.h>
 
+#ifdef __cplusplus
+#include <iostream>
+#endif
+
 using namespace Assimp;
 
 // ------------------------------------------------------------------------------------------------

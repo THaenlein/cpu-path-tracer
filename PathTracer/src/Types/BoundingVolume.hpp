@@ -5,7 +5,7 @@
 #pragma once
 
 /*--------------------------------< Includes >-------------------------------------------*/
-#include "assimp\scene.h"
+#include "assimp/scene.h"
 
 #include "AccelerationStructure.hpp"
 #include "BoundingBox.hpp"

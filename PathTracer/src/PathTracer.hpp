@@ -12,16 +12,16 @@
 #include <stdlib.h>
 #include <unordered_map>
 
-#include "assimp\scene.h"
+#include "assimp/scene.h"
 
 #include "Application.hpp"
 #include "raytracing.hpp"
 #include "settings.hpp"
-#include "Types\SynchronizedQueue.hpp"
-#include "Types\RenderJob.hpp"
-#include "Types\AccelerationStructure.hpp"
-#include "Types\Material.hpp"
-#include "Textures\Texture.hpp"
+#include "Types/SynchronizedQueue.hpp"
+#include "Types/RenderJob.hpp"
+#include "Types/AccelerationStructure.hpp"
+#include "Types/Material.hpp"
+#include "Textures/Texture.hpp"
 
 
 namespace raytracing
@@ -82,7 +82,7 @@ namespace raytracing
 
 		void render(RenderJob& renderJob);
 
-		void PathTracer::renderAntiAliased(RenderJob& renderJob);
+		void renderAntiAliased(RenderJob& renderJob);
 
 		aiColor3D sampleLight(IntersectionInformation& intersectionInformation, uint8_t rayDepth);
 

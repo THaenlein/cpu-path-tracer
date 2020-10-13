@@ -88,6 +88,7 @@ struct aiMetadataEntry {
 
 #ifdef __cplusplus
 
+#include <iostream>
 #include <string>
 
 // -------------------------------------------------------------------------------

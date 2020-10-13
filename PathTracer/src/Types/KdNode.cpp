@@ -7,7 +7,7 @@
 #include <iostream>
 
 #include "KdNode.hpp"
-#include "Utility\mathUtility.hpp"
+#include "Utility/mathUtility.hpp"
 #include "exceptions.hpp"
 
 

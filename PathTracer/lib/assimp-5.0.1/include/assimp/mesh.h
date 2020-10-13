@@ -52,6 +52,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <assimp/aabb.h>
 
 #ifdef __cplusplus
+#include <iostream>
 extern "C" {
 #endif
 

@@ -138,8 +138,17 @@ namespace raytracing
 	public:
 		
 		Renderer(const char* message = "") :
-			std::exception(message)
+			message(message)
 		{};
+
+		virtual const char* what() const
+		{
+			return this->message;
+		}
+
+	protected:
+
+		const char* message;
 	};
 
 	struct Utility : public std::exception
@@ -147,8 +156,17 @@ namespace raytracing
 	public:
 
 		Utility(const char* message = "") :
-			std::exception(message)
+			message(message)
 		{};
+
+		virtual const char* what() const
+		{
+			return this->message;
+		}
+
+	protected:
+
+		const char* message;
 	};
 
 	struct AccStructure : public std::exception
@@ -156,8 +174,17 @@ namespace raytracing
 	public:
 
 		AccStructure(const char* message = "") :
-			std::exception(message)
+			message(message)
 		{};
+
+		virtual const char* what() const
+		{
+			return this->message;
+		}
+
+	protected:
+
+		const char* message;
 	};
 
 	/*--------------------------------< Constants >-----------------------------------------*/

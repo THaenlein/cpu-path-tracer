@@ -12,7 +12,6 @@ namespace raytracing
 {
 	/*--------------------------------< Defines >-------------------------------------------*/
 
-#define MULTI_THREADING 1
 #define USE_ACCELERATION_STRUCTURE 1
 #define PATH_TRACE 1
 

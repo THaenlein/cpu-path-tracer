@@ -5,7 +5,7 @@
 /*--------------------------------< Includes >-------------------------------------------*/
 #include "BoundingVolume.hpp"
 
-#include "Utility\mathUtility.hpp"
+#include "Utility/mathUtility.hpp"
 
 
 namespace raytracing

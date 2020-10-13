@@ -9,12 +9,12 @@
 #include <random>
 #include <unordered_map>
 
-#include "assimp\types.h"
-#include "assimp\scene.h"
+#include "assimp/types.h"
+#include "assimp/scene.h"
 
 #include "raytracing.hpp"
-#include "Types\Material.hpp"
-#include "Textures\Texture.hpp"
+#include "Types/Material.hpp"
+#include "Textures/Texture.hpp"
 
 namespace utility
 {

@@ -8,11 +8,11 @@
 #include <memory>
 #include <vector>
 
-#include "assimp\types.h"
-#include "assimp\mesh.h"
+#include "assimp/types.h"
+#include "assimp/mesh.h"
 
 #include "raytracing.hpp"
-#include "Types\Plane.hpp"
+#include "Types/Plane.hpp"
 
 namespace raytracing
 {

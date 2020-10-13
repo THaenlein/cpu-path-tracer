@@ -6,7 +6,7 @@
 
 /*--------------------------------< Includes >-------------------------------------------*/
 
-#include "assimp\types.h"
+#include "assimp/types.h"
 
 #include "raytracing.hpp"
 

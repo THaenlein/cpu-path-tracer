@@ -5,7 +5,7 @@
 #pragma once
 
 /*--------------------------------< Includes >-------------------------------------------*/
-#include "assimp\types.h"
+#include "assimp/types.h"
 
 
 namespace raytracing

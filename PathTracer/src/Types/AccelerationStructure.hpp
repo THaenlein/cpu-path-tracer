@@ -7,7 +7,7 @@
 /*--------------------------------< Includes >-------------------------------------------*/
 #include "raytracing.hpp"
 
-#include "assimp\camera.h"
+#include "assimp/camera.h"
 
 
 namespace raytracing

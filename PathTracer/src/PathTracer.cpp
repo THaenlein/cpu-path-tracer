@@ -10,9 +10,9 @@
 #include "PathTracer.hpp"
 #include "exceptions.hpp"
 
-#include "Utility\mathUtility.hpp"
-#include "Utility\materialUtility.hpp"
-#include "Textures\ImageTexture.hpp"
+#include "Utility/mathUtility.hpp"
+#include "Utility/materialUtility.hpp"
+#include "Textures/ImageTexture.hpp"
 
 
 namespace raytracing

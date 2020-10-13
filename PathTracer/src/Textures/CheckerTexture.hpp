@@ -5,9 +5,9 @@
 #pragma once
 
 /*--------------------------------< Includes >-------------------------------------------*/
-#include "assimp\types.h"
+#include "assimp/types.h"
 
-#include "Textures\Texture.hpp"
+#include "Textures/Texture.hpp"
 
 namespace raytracing
 {

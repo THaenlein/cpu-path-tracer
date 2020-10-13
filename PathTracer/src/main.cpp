@@ -6,9 +6,9 @@
 #include <string>
 #include <filesystem>
 
-#include "assimp\Importer.hpp"
-#include "assimp\postprocess.h"
-#include "assimp\scene.h"
+#include "assimp/Importer.hpp"
+#include "assimp/postprocess.h"
+#include "assimp/scene.h"
 
 #include "SDL.h"
 
@@ -18,9 +18,9 @@
 #include "settings.hpp"
 #include "PathTracer.hpp"
 #include "Timer.hpp"
-#include "Types\BoundingVolume.hpp"
-#include "Types\KdNode.hpp"
-#include "Utility\ArgParser.hpp"
+#include "Types/BoundingVolume.hpp"
+#include "Types/KdNode.hpp"
+#include "Utility/ArgParser.hpp"
 
 namespace filesystem = std::filesystem;
 
@@ -188,7 +188,7 @@ int main(int argc, char* argv[])
 	}
 	if (!filesystem::create_directories(outputDir))
 	{
-		SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "Failed to create output directory %s. Maybe it already exists? Proceeding..", outputDir.string().c_str());
+		SDL_LogWarn(SDL_LOG_CATEGORY_APPLICATION, "Failed to create output directory %s. Maybe it already exists? Proceeding..", outputDir.string().c_str());
 	}
 	filesystem::permissions(outputDir, filesystem::perms::all);
 
@@ -349,13 +349,7 @@ int main(int argc, char* argv[])
 		return 1;
 	}
 
-#if MULTI_THREADING
-	// 4 threads render scenes generally fastet on my Intel Xeon X5675 system
 	unsigned int numberOfThreads(threadCount);
-#else
-	unsigned int numberOfThreads(1);
-#endif
-
 	std::vector<std::thread> threadPool;
 	std::atomic<uint8_t> threadsTerminated(0);
 	SDL_LogInfo(SDL_LOG_CATEGORY_APPLICATION, "Start rendering..");

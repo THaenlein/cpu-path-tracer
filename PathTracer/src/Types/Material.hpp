@@ -7,10 +7,10 @@
 /*--------------------------------< Includes >-------------------------------------------*/
 #include <memory>
 
-#include "assimp\types.h"
-#include "assimp\material.h"
+#include "assimp/types.h"
+#include "assimp/material.h"
 
-#include "Textures\Texture.hpp"
+#include "Textures/Texture.hpp"
 
 namespace raytracing
 {

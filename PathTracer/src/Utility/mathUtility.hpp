@@ -8,7 +8,7 @@
 #include <vector>
 #include <random>
 
-#include "assimp\types.h"
+#include "assimp/types.h"
 
 namespace utility
 {

@@ -157,7 +157,7 @@ namespace raytracing
 
 			if (!doneRendering)
 			{
-				if (threadsTerminated == threadPool.size())
+				if (threadsTerminated.load() == static_cast<uint8_t>(threadPool.size()))
 				{
 					doneRendering = true;
 					double renderingTime = raytracing::Timer::getInstance().stop();

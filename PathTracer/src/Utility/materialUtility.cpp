@@ -14,7 +14,7 @@
 
 #include "materialUtility.hpp"
 #include "exceptions.hpp"
-#include "Textures\ImageTexture.hpp"
+#include "Textures/ImageTexture.hpp"
 
 namespace filesystem = std::filesystem;
 

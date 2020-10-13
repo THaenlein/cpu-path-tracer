@@ -16,8 +16,8 @@
 
 #include "exceptions.hpp"
 #include "raytracing.hpp"
-#include "Types\RenderJob.hpp"
-#include "Types\SynchronizedQueue.hpp"
+#include "Types/RenderJob.hpp"
+#include "Types/SynchronizedQueue.hpp"
 #include "settings.hpp"
 
 namespace raytracing
