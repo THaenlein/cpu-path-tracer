@@ -27,6 +27,7 @@ namespace filesystem = std::filesystem;
 
 int main(int argc, char* argv[])
 {
+#ifdef DEBUG
 	char* n_argv[] = {
 		"F:\\Dokumente\\GitHub\\path-tracer\\PathTracer\\Build\\Debug\\PathTracer.exe",
 		"--use-anti-aliasing",
@@ -47,6 +48,8 @@ int main(int argc, char* argv[])
 	};
 	argc = 12; //16
 	argv = n_argv;
+#endif
+
 	utility::ArgParser options(argc, argv);
 
 	if (options.cmdOptionExists("-h"))
