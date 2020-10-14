@@ -7,6 +7,7 @@
 /*--------------------------------< Includes >-------------------------------------------*/
 #include <queue>
 #include <mutex>
+#include <contition_variable>
 
 #include "exceptions.hpp"
 
