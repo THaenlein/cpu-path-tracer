@@ -137,11 +137,11 @@ namespace raytracing
 	{
 	public:
 		
-		Renderer(const char* message = "") :
+		explicit Renderer(const char* message = "") :
 			message(message)
 		{};
 
-		virtual const char* what() const
+		virtual const char* what() const noexcept
 		{
 			return this->message;
 		}
@@ -155,11 +155,11 @@ namespace raytracing
 	{
 	public:
 
-		Utility(const char* message = "") :
+		explicit Utility(const char* message = "") :
 			message(message)
 		{};
 
-		virtual const char* what() const
+		virtual const char* what() const noexcept
 		{
 			return this->message;
 		}
@@ -173,11 +173,11 @@ namespace raytracing
 	{
 	public:
 
-		AccStructure(const char* message = "") :
+		explicit AccStructure(const char* message = "") :
 			message(message)
 		{};
 
-		virtual const char* what() const
+		virtual const char* what() const noexcept
 		{
 			return this->message;
 		}
