@@ -54,7 +54,6 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <string.h>
 #include <limits.h>
 #include <stdint.h>
-#include <algorithm>
 
 // Our compile configuration
 #include "defs.h"

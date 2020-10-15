@@ -246,12 +246,6 @@ namespace raytracing
 			const float ior = material->getRefractionIndex();
 			float fresnelResult = mathUtility::fresnel(intersectionInformation.ray.dir, smoothNormal, ior);
 
-			if (fresnelResult >= 1.f)
-			{
-				// Total internal reflection
-				return aiColor3D{ 0.f, 0.f, 0.f };
-			}
-
 			bool outside = (intersectionInformation.ray.dir * smoothNormal) < 0;
 			aiVector3D bias = this->renderSettings.getBias() * smoothNormal;
 			const float refractionPropability = mathUtility::getRandomFloat(0.f, 1.f);
@@ -270,7 +264,7 @@ namespace raytracing
 				// New ray is a reflection ray
 				newRayDirection = mathUtility::calculateReflectionDirection(intersectionInformation.ray.dir, smoothNormal);
 				newRayDirection.Normalize();
-				newRayPosition = outside ? intersectionInformation.ray.pos + bias : intersectionInformation.ray.pos - bias;
+				newRayPosition = outside ? intersectionInformation.hitPoint + bias : intersectionInformation.hitPoint - bias;
 				sampleRay = { newRayPosition, newRayDirection, RayType::REFLECTION };
 				distributionFunction = material->getReflective() / PI;
 			}
