@@ -163,7 +163,7 @@ namespace raytracing
 					double renderingTime = raytracing::Timer::getInstance().stop();
 					SDL_Log("Elapsed time for rendering scene: %.2f seconds", renderingTime);
 
-					filesystem::path outFile = outputDir / "latest.bmp";
+					filesystem::path outFile = outputDir / "latest.png";
 					if (!writeImage(outFile, viewport))
 					{
 						SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "Could not write image to: %s", outFile.string().c_str());
@@ -196,12 +196,13 @@ namespace raytracing
 
 	int Application::writeImage(filesystem::path outputDir, const void* data)
 	{
-		return stbi_write_bmp(
+		return stbi_write_png(
 			outputDir.string().c_str(),
 			this->renderSettings.getWidth(),
 			this->renderSettings.getHeight(),
-			sizeof(raytracing::Uint24),
-			data);
+			sizeof(Uint24),
+			data,
+			this->renderSettings.getWidth() * sizeof(Uint24));
 	}
 
 } // end of namespace raytracing
