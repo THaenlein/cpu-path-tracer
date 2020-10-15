@@ -195,9 +195,14 @@ int main(int argc, char* argv[])
 	}
 	filesystem::permissions(outputDir, filesystem::perms::all);
 
-	uint8_t threadCount{ 1U };
+	uint8_t threadCount{1};
 	const std::string& threadsStr(options.getCmdOption("--threading"));
-	if (threadsStr.empty())
+	if (threadsStr.empty() && options.cmdOptionExists("--threading"))
+	{
+		// Use available threads
+		threadCount = static_cast<uint8_t>(std::thread::hardware_concurrency());
+	}
+	else if (threadsStr.empty())
 	{
 		// No thread count provided
 	}
@@ -352,12 +357,11 @@ int main(int argc, char* argv[])
 		return 1;
 	}
 
-	unsigned int numberOfThreads(threadCount);
 	std::vector<std::thread> threadPool;
 	std::atomic<uint8_t> threadsTerminated(0);
 	SDL_LogInfo(SDL_LOG_CATEGORY_APPLICATION, "Start rendering..");
 	raytracing::Timer::getInstance().start();
-	for (unsigned int i = 0; i < numberOfThreads; i++)
+	for (uint8_t i = 0; i < threadCount; i++)
 	{
 		threadPool.push_back(rayTracer.createRenderThread(threadsTerminated));
 	}
