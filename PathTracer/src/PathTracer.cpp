@@ -30,9 +30,6 @@ namespace raytracing
 
 	void PathTracer::initialize(const std::string sceneDirPath)
 	{
-		this->renderWidth = this->renderSettings.getWidth();
-		this->renderHeight = this->renderSettings.getHeight();
-
 		if (!this->scene->HasCameras())
 		{
 			throw Renderer("No camera found!");
@@ -54,15 +51,15 @@ namespace raytracing
 		float halfViewportWidth = std::tan(fieldOfView / 2.0f);
 		float halfViewportHeight = halfViewportWidth * aspectRatio;
 
-		this->pixelShiftX = ((2 * halfViewportWidth) / (renderWidth)) * cameraRight;
-		this->pixelShiftY = ((2 * halfViewportHeight) / (renderHeight)) * cameraUp;
+		this->pixelShiftX = ((2 * halfViewportWidth) / (this->renderSettings.getWidth())) * cameraRight;
+		this->pixelShiftY = ((2 * halfViewportHeight) / (this->renderSettings.getHeight())) * cameraUp;
 		this->topLeftPixel = lookAt - (halfViewportWidth * cameraRight) + (halfViewportHeight * cameraUp);
 
 		this->createJobs();
 
 		std::srand(static_cast<unsigned int>(time(0)));
 
-		this->pixels = new Uint24[renderWidth * renderHeight];
+		this->pixels = new Uint24[this->renderSettings.getWidth() * this->renderSettings.getHeight()];
 
 		materialUtility::createMaterialMapping(sceneDirPath, scene, &this->materialMapping);
 	}
@@ -92,11 +89,11 @@ namespace raytracing
 
 	void PathTracer::render()
 	{
-		for (uint16_t x = 0; x < this->renderWidth; x++)
+		for (uint16_t x = 0; x < this->renderSettings.getWidth(); x++)
 		{
-			for (uint16_t y = 0; y < this->renderHeight; y++)
+			for (uint16_t y = 0; y < this->renderSettings.getHeight(); y++)
 			{
-				uint32_t currentPixel = y * renderWidth + x;
+				uint32_t currentPixel = y * this->renderSettings.getWidth() + x;
 				aiVector3D rayDirection = (this->topLeftPixel + (this->pixelShiftX * static_cast<float>(x)) + (this->pixelShiftY * static_cast<float>(y))).Normalize();
 				aiRay currentRay((*this->scene->mCameras)->mPosition, rayDirection);
 #if PATH_TRACE
@@ -119,7 +116,7 @@ namespace raytracing
 			for (uint16_t y = renderJob.getTileStartY(); y < renderJob.getTileEndY(); y++)
 			{
 				aiColor3D pixelAverage{};
-				uint32_t currentPixel = y * renderWidth + x;
+				uint32_t currentPixel = y * this->renderSettings.getWidth() + x;
 				aiVector3D nextPixelX = this->pixelShiftX * static_cast<float>(x);
 				aiVector3D nextPixelY = this->pixelShiftY * static_cast<float>(y);
 				aiVector3D rayDirection = (this->topLeftPixel + nextPixelX - nextPixelY).Normalize();
@@ -164,7 +161,7 @@ namespace raytracing
 		{
 			for (unsigned int y = renderJob.getTileStartY(); y < renderJob.getTileEndY(); y++)
 			{
-				uint32_t currentPixel = y * renderWidth + x;
+				uint32_t currentPixel = y * this->renderSettings.getWidth() + x;
 				aiColor3D pixelAverage{};
 
 				for (unsigned int p = 0; p < aa; p++)
@@ -235,6 +232,7 @@ namespace raytracing
 
 		// Calculate transformation matrix to transform sample from world space to shaded point local coordinate system later
 		mathUtility::createCoordinateSystem(smoothNormal, Nt, Nb);
+		
 		aiMatrix3x3 toLocalMatrix
 		{ Nt.x, smoothNormal.x, Nb.x,
 		  Nt.y, smoothNormal.y, Nb.y,
@@ -268,6 +266,7 @@ namespace raytracing
 				sampleRay = { newRayPosition, newRayDirection, RayType::REFLECTION };
 				distributionFunction = material->getReflective() / PI;
 			}
+
 		}
 		else if (material->getReflectivity() > 0.f)
 		{
@@ -469,7 +468,6 @@ namespace raytracing
 					// Always use first texture channel
 					textureCoordinates.push_back(&(mesh->mTextureCoords[0][face->mIndices[currentIndex]]));
 				}
-				// TODO: Collect all intersections and push them back into a collection
 				// Evaluate nearest intersection point and return
 				bool intersectsCurrentTriangle = mathUtility::rayTriangleIntersection(ray, nearestIntersectedTriangle, &intersectionPoint, &uvCoordinates);
 				// We can immediately return if the cast ray is a shadow ray
@@ -560,9 +558,9 @@ namespace raytracing
 
 	void PathTracer::createJobs()
 	{
-		for (uint16_t numberOfTileY = 0; numberOfTileY < this->renderHeight / TILE_SIZE; numberOfTileY++)
+		for (uint16_t numberOfTileY = 0; numberOfTileY < this->renderSettings.getHeight() / TILE_SIZE; numberOfTileY++)
 		{
-			for (uint16_t numberOfTileX = 0; numberOfTileX < this->renderWidth / TILE_SIZE; numberOfTileX++)
+			for (uint16_t numberOfTileX = 0; numberOfTileX < this->renderSettings.getWidth() / TILE_SIZE; numberOfTileX++)
 			{
 				RenderJob job(
 					numberOfTileX * this->TILE_SIZE,

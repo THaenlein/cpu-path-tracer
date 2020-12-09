@@ -117,7 +117,7 @@ namespace raytracing
 			}
 			return intersects;
 		}
-		return leftHit || rightHit || intersects; // This case may not exist
+		return leftHit || rightHit || intersects; // This case may not occur
 	}
 
 	/*--------------------------------< Protected members >----------------------------------*/
@@ -126,7 +126,7 @@ namespace raytracing
 
 	/*static*/ KdNode* KdNode::build(std::vector<KdTriangle>& triangles, BoundingBox& bBox, unsigned int depth/* = 1*/)
 	{
-		const ai_real EPSILON = 1e-3f;
+		const float EPSILON = 1e-3f;
 
 		if ((triangles.size() <= MAX_TRIANGLES_PER_LEAF) || (depth == MAX_DEPTH))
 		{
@@ -312,10 +312,9 @@ namespace raytracing
 			uint64_t triangleCountOverlap = 0;
 			uint64_t triangleCountRight = triangles.size(); // start with all tris on right
 
-			for (unsigned int i = 0; i < eventlist.size(); i++)
+			for (unsigned int i = 0; i < eventlist.size();)
 			{
-				Axis eventDimension = eventlist.at(i).dimension; // TODO: remove?
-				Plane p(eventlist.at(i).position, eventDimension);
+				Plane p(eventlist.at(i).position, eventlist.at(i).dimension);
 				int64_t start{ 0 };
 				int64_t end{ 0 };
 				int64_t inPlane{ 0 };
@@ -408,7 +407,7 @@ namespace raytracing
 			// Primary condition: sort by position
 			(e1.position < e2.position) ||
 			// Secondary condition: sort by type
-			((e1.position < e2.position) && (e1.type < e2.type));
+			((e1.position == e2.position) && (e1.type < e2.type));
 	}
 
 	/*static*/ bool KdNode::terminate(const unsigned int triangleCount, const float minCost)

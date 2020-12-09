@@ -155,7 +155,7 @@ namespace raytracing
 	{
 		// Evaluate longest axis
 		aiVector3D length = this->max - this->min;
-		ai_real splitAt = length[splitAxis] / 2.f;
+		float splitAt = length[splitAxis] / 2.f;
 
 		// Left box
 		aiVector3D leftMin = this->min;

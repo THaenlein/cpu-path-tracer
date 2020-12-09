@@ -35,15 +35,15 @@ namespace utility
 
 		static void createCoordinateSystem(const aiVector3D& N, aiVector3D& Nt, aiVector3D& Nb);
 
-		static ai_real fresnel(
+		static float fresnel(
 			const aiVector3D& incidenceVector,
 			const aiVector3D& incidenceNormal,
-			const ai_real ior);
+			const float ior);
 
 		static aiVector3D calculateRefractionDirection(
 			const aiVector3D& incidenceVector,
 			const aiVector3D& incidenceNormal,
-			const ai_real ior);
+			const float ior);
 
 		//     I->       N         R->
 		//      \        |        /

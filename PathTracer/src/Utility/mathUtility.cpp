@@ -3,6 +3,8 @@
  */
 
 /*--------------------------------< Includes >-------------------------------------------*/
+#include <algorithm>
+
 #include "mathUtility.hpp"
 
 
@@ -61,17 +63,17 @@ namespace utility
 		Nb = N ^ Nt;
 	}
 
-	ai_real mathUtility::fresnel(
+	float mathUtility::fresnel(
 		const aiVector3D& incidenceVector,
 		const aiVector3D& incidenceNormal,
-		const ai_real ior)
+		const float ior)
 	{
-		ai_real cosIncidence = std::clamp(incidenceVector * incidenceNormal, -1.f, 1.f);
-		ai_real etaIncidence = 1.f;
-		ai_real etaTransmission = ior;
+		float cosIncidence = std::clamp(incidenceVector * incidenceNormal, -1.f, 1.f);
+		float etaIncidence = 1.f;
+		float etaTransmission = ior;
 		if (cosIncidence > 0.f) { std::swap(etaIncidence, etaTransmission); }
 		// Snell's law
-		ai_real sinTransmission = etaIncidence / etaTransmission * sqrtf(std::max(0.f, 1.f - cosIncidence * cosIncidence));
+		float sinTransmission = etaIncidence / etaTransmission * sqrtf(std::max(0.f, 1.f - cosIncidence * cosIncidence));
 
 		if (sinTransmission >= 1.f)
 		{
@@ -80,11 +82,11 @@ namespace utility
 		}
 		else
 		{
-			ai_real cosTransmission = sqrtf(std::max(0.f, 1.f - sinTransmission * sinTransmission));
+			float cosTransmission = sqrtf(std::max(0.f, 1.f - sinTransmission * sinTransmission));
 			cosIncidence = fabsf(cosIncidence);
-			ai_real Rs = ((etaTransmission * cosIncidence) - (etaIncidence * cosTransmission)) / ((etaTransmission * cosIncidence) + (etaIncidence * cosTransmission));
-			ai_real Rp = ((etaIncidence * cosIncidence) - (etaTransmission * cosTransmission)) / ((etaIncidence * cosIncidence) + (etaTransmission * cosTransmission));
-			ai_real reflectedLight = (Rs * Rs + Rp * Rp) / 2.f;
+			float Rs = ((etaTransmission * cosIncidence) - (etaIncidence * cosTransmission)) / ((etaTransmission * cosIncidence) + (etaIncidence * cosTransmission));
+			float Rp = ((etaIncidence * cosIncidence) - (etaTransmission * cosTransmission)) / ((etaIncidence * cosIncidence) + (etaTransmission * cosTransmission));
+			float reflectedLight = (Rs * Rs + Rp * Rp) / 2.f;
 			return reflectedLight;
 		}
 	}
@@ -92,11 +94,11 @@ namespace utility
 	aiVector3D mathUtility::calculateRefractionDirection(
 		const aiVector3D& incidenceVector,
 		const aiVector3D& incidenceNormal,
-		const ai_real ior)
+		const float ior)
 	{
-		ai_real cosIncidence = std::clamp(incidenceVector * incidenceNormal, -1.0f, 1.0f);
-		ai_real etaIncidence = 1.f;
-		ai_real etaTransmission = ior;
+		float cosIncidence = std::clamp(incidenceVector * incidenceNormal, -1.0f, 1.0f);
+		float etaIncidence = 1.f;
+		float etaTransmission = ior;
 		aiVector3D nRefraction(incidenceNormal);
 		if (cosIncidence < 0.f)
 		{
@@ -109,8 +111,8 @@ namespace utility
 			std::swap(etaIncidence, etaTransmission);
 			nRefraction = -incidenceNormal;
 		}
-		ai_real eta = etaIncidence / etaTransmission;
-		ai_real criticalAngle = 1.f - eta * eta * (1.f - cosIncidence * cosIncidence);
+		float eta = etaIncidence / etaTransmission;
+		float criticalAngle = 1.f - eta * eta * (1.f - cosIncidence * cosIncidence);
 		if (criticalAngle < 0.f)
 		{
 			return { 0.f, 0.f, 0.f };
@@ -250,7 +252,7 @@ namespace utility
 		}
 		else if (value >= D)
 		{
-			return A * std::powf(value, GAMMA) + B;
+			return A * std::pow(value, GAMMA) + B;
 		}
 		else
 		{
@@ -265,11 +267,11 @@ namespace utility
 
 		if (value >= 0.f)
 		{
-			return std::powf(value, GAMMA);
+			return std::pow(value, GAMMA);
 		}
 		else
 		{
-			return -std::powf(-value, GAMMA);
+			return -std::pow(-value, GAMMA);
 		}
 	}
 	

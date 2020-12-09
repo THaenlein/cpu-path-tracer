@@ -197,12 +197,7 @@ int main(int argc, char* argv[])
 
 	uint8_t threadCount{1};
 	const std::string& threadsStr(options.getCmdOption("--threading"));
-	if (threadsStr.empty() && options.cmdOptionExists("--threading"))
-	{
-		// Use available threads
-		threadCount = static_cast<uint8_t>(std::thread::hardware_concurrency());
-	}
-	else if (threadsStr.empty())
+	if (threadsStr.empty())
 	{
 		// No thread count provided
 	}
@@ -356,7 +351,6 @@ int main(int argc, char* argv[])
 		app.cleanUp();
 		return 1;
 	}
-
 	std::vector<std::thread> threadPool;
 	std::atomic<uint8_t> threadsTerminated(0);
 	SDL_LogInfo(SDL_LOG_CATEGORY_APPLICATION, "Start rendering..");

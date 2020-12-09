@@ -112,10 +112,6 @@ namespace raytracing
 
 		SynchronizedQueue<RenderJob> renderJobs;
 
-		uint16_t renderWidth;
-
-		uint16_t renderHeight;
-
 		aiVector3D pixelShiftX;
 
 		aiVector3D pixelShiftY;
