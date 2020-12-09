@@ -236,9 +236,9 @@ namespace raytracing
 		// Calculate transformation matrix to transform sample from world space to shaded point local coordinate system later
 		mathUtility::createCoordinateSystem(smoothNormal, Nt, Nb);
 		aiMatrix3x3 toLocalMatrix
-		{ Nt.x, Nt.y, Nt.z,
-			smoothNormal.x, smoothNormal.y, smoothNormal.z,
-			Nb.x, Nb.y, Nb.z };
+		{ Nt.x, smoothNormal.x, Nb.x,
+		  Nt.y, smoothNormal.y, Nb.y,
+		  Nt.z, smoothNormal.z, Nb.z };
 
 		if (material->getOpacity() < 1.f)
 		{
