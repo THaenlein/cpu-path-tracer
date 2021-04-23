@@ -27,30 +27,7 @@ namespace filesystem = std::filesystem;
 
 int main(int argc, char* argv[])
 {
-#ifdef DEBUG
-	char* n_argv[] = {
-		"F:\\Dokumente\\GitHub\\path-tracer\\PathTracer\\Build\\Debug\\PathTracer.exe",
-		"--use-anti-aliasing",
-		"--input",
-		"F:\\Dokumente\\GitHub\\path-tracer\\PathTracer\\res\\testScene_path_trace.dae",
-		"--output",
-		"F:\\Dokumente\\GitHub\\path-tracer\\PathTracer\\out",
-		"--threading",
-		"4",
-		"--max-depth",
-		"4",
-		"--max-samples",
-		"4"
-		//"--aperture",
-		//"0.02",
-		//"--focal",
-		//"1.31191"
-	};
-	argc = 12; //16
-	argv = n_argv;
-#endif
 
-	utility::ArgParser options(argc, argv);
 
 	if (options.cmdOptionExists("-h"))
 	{
