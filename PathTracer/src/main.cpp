@@ -28,6 +28,7 @@ namespace filesystem = std::filesystem;
 int main(int argc, char* argv[])
 {
 
+	utility::ArgParser options(argc, argv);
 
 	if (options.cmdOptionExists("-h"))
 	{
