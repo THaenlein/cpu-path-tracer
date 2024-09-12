@@ -11,6 +11,9 @@ A high-performance CPU-based path tracer written in C++ with multi-threading, an
 - **K-d Tree with Surface Area Heuristic (SAH)**: Accelerates ray-scene intersection tests, improving performance for complex scenes tremendously.
 - **Global Illumination**: Simulates realistic light interactions including reflections, refractions, and shadows.
 - **Depth of Field**: Adds realistic camera effects by simulating focus on a specific distance with an adjustable aperture.
+- **Textures**: Supports UV texture mapping to add detail and realism to surfaces.
+- **Reflection**: Simulates reflective surfaces for accurate mirror-like effects.
+- **Refraction**: Handles light bending through transparent materials to simulate glass and water.
 - **Image Output**: Saves the final rendered image to a file.
 
 ## Requirements
