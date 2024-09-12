@@ -195,7 +195,7 @@ int main(int argc, char* argv[])
 	}
 	catch (raytracing::SdlException& exception)
 	{
-		SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, exception.what(), ": %s", exception.getSdlError());
+		SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "%s: %s", exception.what(), exception.getSdlError());
 		app.cleanUp();
 		return 1;
 	}
