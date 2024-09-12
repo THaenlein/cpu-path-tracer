@@ -40,7 +40,7 @@ namespace raytracing
 
 		BoundingBox(std::pair<aiFace*, aiMesh*>& triangle);
 
-		BoundingBox(aiVector3D& min, aiVector3D& max) :
+		BoundingBox(const aiVector3D& min, const aiVector3D& max) :
 			min{ min },
 			max{ max }
 		{};
