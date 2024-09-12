@@ -42,6 +42,7 @@ int main(int argc, char* argv[])
 			"[--bias <bias as float>] "
 			"[--aperture <aperture as float>] "
 			"[--focal <focal distance as float>] "
+			"[--use-anti-aliasing <randomly distribute samples for MSAA>] "
 			"[--threading <number of threads for rendering>] " << std::endl;
 		return 0;
 	}
