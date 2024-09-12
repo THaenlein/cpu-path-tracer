@@ -88,6 +88,25 @@ target_link_libraries(path_tracer PRIVATE assimp SDL2 GTest::GTest)
     ./PathTracer --input <path-to-collada-scene-file> --width <render-width> --height <render-height> --max-samples <number-of-max-samples> --max-depth <max-ray-depth> --use-anti-aliasing --threading <number-of-threads>
     ```
 
+## Configuration
+
+In `settings.hpp`, the following macros control the behavior of the path tracer:
+
+- **USE_ACCELERATION_STRUCTURE**:
+  - When defined, the path tracer will use the K-d Tree acceleration structure to optimize ray-object intersection tests.
+  - This acceleration structure is critical for improving performance, especially in complex scenes with many objects.
+  - Disabling this will fall back to a brute-force method of testing each ray against all triangles, which can significantly slow down rendering.
+  
+  ```cpp
+  #define USE_ACCELERATION_STRUCTURE 1
+  ```
+- **PATH_TRACE**:
+  - This macro enables the path tracing rendering technique, which simulates global illumination by tracing rays as they bounce through the scene, gathering light from direct and indirect sources.
+  - If disabled, the path tracer may revert to a simpler form of ray tracing, without the full global illumination effects.
+  ```cpp
+  #define PATH_TRACE 1
+  ```
+
 ## Command Line Arguments
 
 - `--input <path>`: Path to the COLLADA scene file (required). E.g: `res/testScene_path_trace_bunny.dae`
@@ -128,8 +147,14 @@ Simulates camera focus by allowing users to specify aperture size and focal dist
 ### Image Output
 The final image is saved in a standard format (e.g., PNG or JPEG) for easy viewing and sharing. Output format and path can be easily customized within the code.
 
-### Contributing
+## TODO
+- [ ] **SIMD Optimization**: Implement SIMD (Single Instruction, Multiple Data) to further optimize the math-heavy sections of the code for better performance.
+- [ ] **K-d Tree in O(n log n)**: Improve K-d Tree construction algorithm to achieve `O(n log n)` complexity for faster build times.
+- [ ] **Decouple Math from Assimp**: Separate the math utilities and structures from the Assimp library to reduce dependencies and increase flexibility.
+
+
+## Contributing
 Feel free to submit issues, fork the repository, and make pull requests. Contributions are welcome!
 
-### License
+## License
 This project is licensed under the MIT License. See the LICENSE file for details.
