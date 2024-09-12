@@ -42,6 +42,7 @@ int main(int argc, char* argv[])
 			"[--bias <bias as float>] "
 			"[--aperture <aperture as float>] "
 			"[--focal <focal distance as float>] "
+			"[--use-anti-aliasing <randomly distribute samples for MSAA>] "
 			"[--threading <number of threads for rendering>] " << std::endl;
 		return 0;
 	}
@@ -195,7 +196,7 @@ int main(int argc, char* argv[])
 	}
 	catch (raytracing::SdlException& exception)
 	{
-		SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, exception.what(), ": %s", exception.getSdlError());
+		SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "%s: %s", exception.what(), exception.getSdlError());
 		app.cleanUp();
 		return 1;
 	}
