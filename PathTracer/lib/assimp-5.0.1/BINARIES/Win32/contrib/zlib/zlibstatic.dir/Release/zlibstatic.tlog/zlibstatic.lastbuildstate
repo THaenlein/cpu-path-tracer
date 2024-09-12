@@ -1,2 +1,0 @@
-#TargetFrameworkVersion=v4.0:PlatformToolSet=v141:EnableManagedIncrementalBuild=false:VCToolArchitecture=Native32Bit:WindowsTargetPlatformVersion=10.0.16299.0
-release|Win32|F:\Dokumente\GitHub\ray-tracer\RayTracer\lib\assimp-5.0.1\BINARIES\Win32\contrib\zlib\|

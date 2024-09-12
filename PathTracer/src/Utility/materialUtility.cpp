@@ -5,7 +5,7 @@
 /*--------------------------------< Includes >-------------------------------------------*/
 #include <filesystem>
 
-#include "SDL.h"
+#include "sdl2/SDL.h"
 
 #ifndef STB_IMAGE_IMPLEMENTATION
 #define STB_IMAGE_IMPLEMENTATION

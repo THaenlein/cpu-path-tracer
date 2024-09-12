@@ -10,7 +10,7 @@
 #include "assimp/postprocess.h"
 #include "assimp/scene.h"
 
-#include "SDL.h"
+#include "sdl2/SDL.h"
 
 #include "main.hpp"
 #include "Application.hpp"

@@ -27,13 +27,13 @@ namespace raytracing
 
 	void ErrorHandler::reportError(const char* message, const char* additional)
 	{
-		SDL_Log << message << " " << additional;
+		SDL_Log("%s. %s", message, additional);
 		std::cin.get();
 	}
 
 	void ErrorHandler::reportError(SdlException& exception)
 	{
-		SDL_Log << exception.what() << " " << exception.getSdlError();
+		SDL_Log("%s. %s", exception.what(), exception.getSdlError());
 		std::cin.get();
 	}
 		

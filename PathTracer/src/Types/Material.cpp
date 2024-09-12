@@ -3,7 +3,7 @@
  */
 
 /*--------------------------------< Includes >-------------------------------------------*/
-#include "SDL.h"
+#include "sdl2/SDL.h"
 
 #include "Material.hpp"
 

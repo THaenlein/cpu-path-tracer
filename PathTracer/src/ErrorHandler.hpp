@@ -6,8 +6,9 @@
 
 /*--------------------------------< Includes >-------------------------------------------*/
 #include <string>
-#include <boost/log/trivial.hpp>
 #include <exception>
+
+#include <sdl2/SDL_log.h>
 
 #include "exceptions.hpp"
 
@@ -27,22 +28,22 @@ namespace raytracing
 
 		inline void reportTrace(const char* message, const char* additional = "")
 		{
-			SDL_Log << message << " " << additional;
+			SDL_Log("%s. %s", message, additional);
 		}
 
 		inline void reportDebug(const char* message, const char* additional = "")
 		{
-			SDL_Log << message << " " << additional;
+			SDL_Log("%s. %s", message, additional);
 		}
 
 		inline void reportInfo(const char* message, const char* additional = "")
 		{
-			SDL_Log << message << " " << additional;
+			SDL_Log("%s. %s", message, additional);
 		}
 
 		inline void reportWarning(const char* message, const char* additional = "")
 		{
-			SDL_Log << message << " " << additional;
+			SDL_Log("%s. %s", message, additional);
 		}
 
 		void reportError(const char* message, const char* additional = "");

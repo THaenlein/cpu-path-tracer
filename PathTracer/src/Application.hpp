@@ -12,7 +12,7 @@
 #include <filesystem>
 
 #define SDL_MAIN_HANDLED
-#include "SDL.h"
+#include "sdl2/SDL.h"
 
 #include "exceptions.hpp"
 #include "raytracing.hpp"
