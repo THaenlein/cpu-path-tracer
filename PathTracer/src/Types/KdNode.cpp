@@ -231,7 +231,6 @@ namespace raytracing
 		std::vector<KdTriangle> trianglesLeft;
 		std::vector<KdTriangle> trianglesRight;
 		classifyTriangles(triangles, bestPlane, &trianglesLeft, &trianglesRight);
-		triangles.~vector();
 
 		return new KdNode(
 			bestPlane.first, 

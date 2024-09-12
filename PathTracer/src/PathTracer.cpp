@@ -37,8 +37,10 @@ namespace raytracing
 		// Using first camera in scene
 		aiCamera* camera = (*this->scene->mCameras);
 
-		float aspectRatio = camera->mAspect;
-		float fieldOfView = camera->mHorizontalFOV;
+		//float aspectRatio = camera->mAspect;
+		float aspectRatio = 1.0f;
+		//float fieldOfView = camera->mHorizontalFOV;
+		float fieldOfView = 49.13434f;
 		if (aspectRatio != 1.0f)
 		{
 			SDL_LogWarn(SDL_LOG_CATEGORY_INPUT, "Aspect ratio of camera is not 1! Proceeding..");
@@ -48,7 +50,8 @@ namespace raytracing
 		const aiVector3D lookAt = camera->mLookAt.Normalize();
 		const aiVector3D cameraRight = camera->mRight.Normalize();
 
-		float halfViewportWidth = std::tan(fieldOfView / 2.0f);
+		float distance = -0.725; // Why this specific value??
+		float halfViewportWidth = distance * std::tan(fieldOfView / 2.0f);
 		float halfViewportHeight = halfViewportWidth * aspectRatio;
 
 		this->pixelShiftX = ((2 * halfViewportWidth) / (this->renderSettings.getWidth())) * cameraRight;
